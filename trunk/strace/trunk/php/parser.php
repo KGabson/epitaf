@@ -26,12 +26,12 @@ function	merge_tab($tab_args, $tab_ret)
 
 function	get_args($piece_file)
 {
-  if (ereg("struct     (.*)_args \{(.*)", $piece_file, $match))
+  if (ereg("struct +([a-zA-Z0-9_]+)_args \{(.*)", $piece_file, $match))
     {
       $syscall_name = $match[1];
       var_dump($syscall_name);
-      if (strlen($match[1]) > 20)
-	var_dump($match);
+      //if (strlen($match[1]) > 20)
+      //var_dump($match);
       $tab_proto = split("\n", $match[2]);
       foreach ($tab_proto as $k => $v)
 	{
