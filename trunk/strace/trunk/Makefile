@@ -8,8 +8,9 @@
 ## Last update Thu Feb  5 23:01:59 2009 thomas desert
 ##
 
-SRC =		strace.c \
-		errors.c
+SRC =		strace.c 	\
+		errors.c 	\
+		readmem.c
 OBJ =		$(SRC:.c=.o)
 CC =		cc
 #LIB =		-L${HOME}/rendu/lib -lmy_netbsd

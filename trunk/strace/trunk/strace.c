@@ -1,6 +1,7 @@
 #include "includes.h"
 #include "errors.h"
 #include "syscall_names.h"
+#include "readmem.h"
 
 void			analize(char *ptr)
 {
@@ -11,7 +12,8 @@ void			analize(char *ptr)
   printf("Analizing: %c...\n", ptr[0]);
   while (ptr[i] != 0)
     {
-      printf("-> %c\n", ptr[i]);
+      //printf("-> %c\n", ptr[i]);
+      write(1, &ptr[i], 1);
       i++;
     }
 }
@@ -26,8 +28,6 @@ int			main(int ac, char **av)
   char			*args[] = { "command" , 0 };
   char			*env[] = { NULL };
   char			*cmd;
-  void			*memget;
-  //caddr_t		addr;
   struct reg		regs;
   int			reg_val;
 
@@ -57,7 +57,6 @@ int			main(int ac, char **av)
 	    {
 	      ptraceX(PT_GETREGS, p_child, (caddr_t)&regs, 0);
 	      reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)regs.r_eip, 0);
-	      //printf("EIP => %x\n", reg_val);
 	      if ((reg_val & ~0xffff80cd) == 0) //We have an int 80 here
 		{
 		  if (regs.r_eax > SYS_MAXSYSCALL)
@@ -73,13 +72,13 @@ int			main(int ac, char **av)
 		      reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)(regs.r_esp + 8), 0);
 		      if (regs.r_eax == 4)
 			{
-			  //Test Write
-			  //printf("Write ! => %x, %x, %x\n", reg_val, regs.r_esp, regs.r_eip);
-			  printf("Write: ESP = [%c]\n", *(char *)reg_val);
-			  //memget = malloc(sizeof(memget) * 6 + 1);
-			  //swab((void *)reg_val, memget, 6);
-			  printf("Write: ESP = [%p]\n", (char *)reg_val);
-			  analize((char*)reg_val);
+			  //char *machin = (char *)reg_val;
+			  //printf("Write: ESP = [%s]\n", machin);
+
+			  //printf("Write: ESP = [%p]\n", (char *)reg_val);
+			  //analize((char*)reg_val);
+			  char *str = read_string(p_child, (void *)reg_val);
+			  printf("===> %s\n", str);
 			}
 		      printf("Calling %s...\n", SYSCALL_NAMES[regs.r_eax]);
 		    }

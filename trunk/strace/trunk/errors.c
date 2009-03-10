@@ -46,3 +46,13 @@ pid_t			waitX(int *status)
     ERROR("wait");
   return (ret);
 }
+
+void			*mallocX(size_t size)
+{
+  void			*ret;
+
+  ret = malloc(size);
+  if (ret == NULL)
+    ERROR("malloc");
+  return (ret);
+}

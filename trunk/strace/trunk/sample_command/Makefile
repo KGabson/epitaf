@@ -10,8 +10,8 @@
 
 SRC =		command.c
 OBJ =		$(SRC:.c=.o)
-CC =		cc -g
-CFLAGS =	-W -Wall $(INCLUDE)
+CC =		gcc
+#CFLAGS =
 NAME =		command
 
 all: $(OBJ)

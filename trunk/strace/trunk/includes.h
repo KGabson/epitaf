@@ -17,4 +17,6 @@
 # include <errno.h>
 # include <signal.h>
 
+# define MAX_STRING_SIZE 30
+
 #endif
