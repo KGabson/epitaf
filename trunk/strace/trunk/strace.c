@@ -51,7 +51,7 @@ t_opt_struct		read_opt(int ac, char **av)
   return ret;
 }
 
-int			ptrace_loop(int p_child)
+int			ptrace_loop2(int p_child)
 {
   int			keep_going = 1;
   int			status;
@@ -103,6 +103,60 @@ int			ptrace_loop(int p_child)
   return (0);
 }
 
+int			read_regs(int p_child)
+{
+  char			*strbuf;
+  struct reg		regs;
+  int			reg_val;
+
+  ptraceX(PT_GETREGS, p_child, (caddr_t)&regs, 0);
+  reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)regs.r_eip, 0);
+
+  if ((reg_val & ~0xffff80cd) != 0)
+    return (0);
+  if (regs.r_eax > SYS_MAXSYSCALL)
+    {
+      printf("Invalid registry value: %d\n", regs.r_eax);
+      return (1);
+    }
+  if (SYSCALL_NAMES[regs.r_eax] == 0)
+    {
+      printf("Syscall information not available: %d\n", regs.r_eax);
+      return (1);
+    }
+  //Reading syscall arguments
+  reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)(regs.r_esp + 8), 0);
+  if (regs.r_eax == 4)
+    {
+      strbuf = read_string(p_child, (void *)reg_val);
+      printf("===> [%s]\n", strbuf);
+      free(strbuf);
+    }
+  printf("Calling %s...\n", SYSCALL_NAMES[regs.r_eax]);
+  return (0);
+}
+
+int			ptrace_loop(int p_child)
+{
+  int			status;
+  int			start;
+
+  start = 0;
+  waitX(&status);
+  while (!WIFEXITED(status))
+    {
+      if (start)
+	{
+	  read_regs(p_child);
+	}
+      ptraceX(PT_STEP, p_child, (caddr_t)1, 0);
+      start++;
+      waitX(&status);
+    }
+  puts("Child process finished. End.");
+  return (0);
+}
+
 void			child()
 {
 
@@ -133,8 +187,6 @@ int			ptrace_fork(char *cmd)
 
 int			ptrace_attach(int pid)
 {
-  int			p_child;
-
   printf("Attaching process %d...\n", pid);
   ptraceX(PT_ATTACH, pid, NULL, 0);
   printf("PID %d attached, starting loop.", pid);
@@ -143,7 +195,6 @@ int			ptrace_attach(int pid)
 
 int			main(int ac, char **av)
 {
-  pid_t			p_child;
   t_opt_struct		options;
   int			ret = 0;
 
