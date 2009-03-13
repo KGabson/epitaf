@@ -10,7 +10,7 @@
 
 SRC =		command.c
 OBJ =		$(SRC:.c=.o)
-CC =		gcc
+CC =		gcc -g -static
 #CFLAGS =
 NAME =		command
 

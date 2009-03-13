@@ -3,21 +3,53 @@
 #include "syscall_names.h"
 #include "readmem.h"
 
-void			analize(char *ptr)
+typedef struct		s_opt_struct
 {
-  int i = 0;
+  int	attach_pid;
+  char	*command;
+}			t_opt_struct;
 
-  printf("Analizing: %c...\n", ptr[0]);
-  printf("Analizing: %c...\n", ptr[0]);
-  printf("Analizing: %c...\n", ptr[0]);
-  while (ptr[i] != 0)
-    {
-      //printf("-> %c\n", ptr[i]);
-      write(1, &ptr[i], 1);
-      i++;
-    }
+void			usage(char *filename)
+{
+  printf("Usage: %s <option>\n", filename);
+  puts("\t-h: Display this help message");
+  puts("\t-v: Display program information");
+  puts("\t-p: pid to attach");
+  puts("\t-e: Command to execute");
+  exit(0);
 }
 
+void			info()
+{
+  printf("%s - %s: %s\n", MY_NAME, VERSION, MY_DESCRIPTION);
+  exit(0);
+}
+
+t_opt_struct		read_opt(int ac, char **av)
+{
+  int			opt;
+  t_opt_struct		ret = { 0, NULL };
+
+  while ((opt = getopt(ac, av, "hvp:e:")) != -1)
+    {
+      switch (opt)
+	{
+	case 'v':
+	  info();
+	  break;
+	case 'p':
+	  ret.attach_pid = atoi(optarg);
+	  break;
+	case 'e':
+	  ret.command = optarg;
+	  break;
+	case 'h':
+	default:
+	  usage(av[0]);
+	}
+    }
+  return ret;
+}
 
 int			ptrace_loop(int p_child)
 {
@@ -25,6 +57,8 @@ int			ptrace_loop(int p_child)
   int			status;
   struct reg		regs;
   int			reg_val;
+  int			start = 0;
+  char			*strbuf;
 
   while(keep_going)
     {
@@ -46,7 +80,7 @@ int			ptrace_loop(int p_child)
       if ((reg_val & ~0xffff80cd) == 0) //We have an int 80 here
 	{
 	  if (regs.r_eax > SYS_MAXSYSCALL)
-	    printf("EAX bad value... Ignoring.\n");
+	    printf("Unknown syscall number: %d... Ignoring.\n", regs.r_eax);
 	  else if (SYSCALL_NAMES[regs.r_eax] == 0)
 	    printf("Unimplemented syscall: %d\n", regs.r_eax);
 	  else
@@ -56,7 +90,7 @@ int			ptrace_loop(int p_child)
 	      if (regs.r_eax == 4)
 		{
 		  strbuf = read_string(p_child, (void *)reg_val);
-		  printf("===> %s\n", str);
+		  printf("===> [%s]\n", strbuf);
 		  free(strbuf);
 		}
 	      printf("Calling %s...\n", SYSCALL_NAMES[regs.r_eax]);
@@ -66,22 +100,21 @@ int			ptrace_loop(int p_child)
       if (!start)
 	start = 1;
     }
+  return (0);
 }
 
-
-int			main(int ac, char **av)
+void			child()
 {
-  pid_t			p_child;
-  int			status;
-  int			start = 0;
-  int			keep_going = 1;
-  char			*args[] = { "command" , 0 };
-  char			*env[] = { NULL };
-  char			*cmd;
-  char			*strbuf;
 
-  cmd = (ac > 1) ? av[1] : "./command";
-  args[0] = cmd;
+}
+
+int			ptrace_fork(char *cmd)
+{
+   char			*args[] = { "command" , 0 };
+   char			*env[] = { NULL };
+   int			ret = -1;
+   int			p_child;
+
   printf("Command: %s\n", cmd);
   p_child = forkX();
 
@@ -93,7 +126,38 @@ int			main(int ac, char **av)
     }
   else
     {
-      ptrace_loop(p_child);
+      ret = ptrace_loop(p_child);
+    }
+  return (ret);
+}
+
+int			ptrace_attach(int pid)
+{
+  int			p_child;
+
+  printf("Attaching process %d...\n", pid);
+  ptraceX(PT_ATTACH, pid, NULL, 0);
+  printf("PID %d attached, starting loop.", pid);
+  return ptrace_loop(pid);
+}
+
+int			main(int ac, char **av)
+{
+  pid_t			p_child;
+  t_opt_struct		options;
+  int			ret = 0;
+
+  options = read_opt(ac, av);
+
+  if (options.attach_pid != 0)
+    ret = ptrace_attach(options.attach_pid);
+  else
+    {
+      if (options.command == NULL && ac < 2)
+	options.command = "./command";
+      else if (options.command == NULL)
+	options.command = av[1];
+      ret = ptrace_fork(options.command);
     }
   return (0);
 }

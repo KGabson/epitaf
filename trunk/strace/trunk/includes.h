@@ -7,9 +7,6 @@
 
 # include <machine/reg.h>
 
-//# include <sys/user.h>
-//# include <sys/syscall.h>
-
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -17,6 +14,6 @@
 # include <errno.h>
 # include <signal.h>
 
-# define MAX_STRING_SIZE 30
+# include "constants.h"
 
 #endif
