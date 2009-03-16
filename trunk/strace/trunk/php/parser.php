@@ -1,27 +1,61 @@
-#!/usr/bin/php
+#!/usr/local/bin/php
 <?php
+
+require_once("make_syscall_names.php");
+
+define("SYSPROTO_H", "/usr/include/sys/sysproto.h");
+
+
+$args = parse_syscall_args(SYSPROTO_H);
+$tab_name = getSyscallNames();
+$tab = merge_name_args($args, $tab_name);
+
 
 function	parse_syscall_args($path)
 {
   $file = file_get_contents($path);
-  $tab = split("};", $file); 
+  $tab = split("};", $file);
   foreach ($tab as $k => $v)
     {
       $tab_args[] = get_args($v);
       $tab_ret[] = get_ret_value($v);
     }
-  $args = merge_tab($tab_args, $tab_ret);
-
+  $args = merge_args_ret($tab_args, $tab_ret, $tab_name);
   return ($args);
 }
 
-function	merge_tab($tab_args, $tab_ret)
+function	merge_args_ret($tab_args, $tab_ret)
 {
-  //var_dump($tab_args);
   foreach ($tab_args as $k => $v)
     {
-      //      var_dump($v);
+      $args[$v["name"]]["proto"] = $v["proto"];
     }
+  foreach ($tab_ret as $k => $v)
+    {
+      if (is_array($v))
+	foreach ($v as $k => $v2)
+	  if ($v2["name"])
+	    $args[$v2["name"]]["return"] = $v2["return"];
+    }
+  return $args;
+}
+
+function	merge_name_args($args, $tab_name)
+{
+  foreach ($tab_name as $k => $v)
+    {
+      foreach ($args as $k2 => $v2)
+	{
+	  if ($v == $k2)
+	    {
+	      $tab[$k]["name"] = $k2;
+	      $tab[$k]["proto"] = $v2["proto"];
+	      $tab[$k]["return"] = $v2["return"];
+	    }
+	}
+    }
+  var_dump($tab);
+  return $tab;
 }
 
 function	get_args($piece_file)
@@ -29,16 +63,12 @@ function	get_args($piece_file)
   if (ereg("struct +([a-zA-Z0-9_]+)_args \{(.*)", $piece_file, $match))
     {
       $syscall_name = $match[1];
-      var_dump($syscall_name);
-      //if (strlen($match[1]) > 20)
-      //var_dump($match);
       $tab_proto = split("\n", $match[2]);
       foreach ($tab_proto as $k => $v)
 	{
 	  $tab_args = split(';', $v);
-	  //	  var_dump($tab_args);
 	  if (!empty($tab_args[1]))
-	    $proto[] = $tab_args[1];
+	    $proto[] = trim($tab_args[1]);
 	}
       $args["proto"] = $proto;
       $args["name"] = $syscall_name;
@@ -51,14 +81,15 @@ function	get_ret_value($piece_file)
   $t_line = split("\n", $piece_file);
   foreach ($t_line as $k => $v)
     {
-      if (ereg("(.*) *(.*)\(.*\);", $v, $match))
+      if (ereg("^([a-zA-Z]*)[\t\ ]*([a-zA-Z0-9_]+).*\);", $v, $match))
 	{
-	  $t_ret[$match[2]] = $match[1];
+	  $t_ret["name"] = $match[2];
+	  $t_ret["return"] = $match[1];
+	  $tab[] = $t_ret;
 	}
     }
-  return $t_ret;
+  return $tab;
 }
 
-parse_syscall_args("/usr/include/sys/sysproto.h");
-
+//var_dump($tab);
 ?>
