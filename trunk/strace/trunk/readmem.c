@@ -49,7 +49,7 @@ long			read_long(int p_child, void *child_addr)
   return (*res);
 }
 
-double			read_double(double p_child, void *child_addr)
+double			read_double(int p_child, void *child_addr)
 {
   double		*res;
 
@@ -57,7 +57,7 @@ double			read_double(double p_child, void *child_addr)
   return (*res);
 }
 
-float			read_float(float p_child, void *child_addr)
+float			read_float(int p_child, void *child_addr)
 {
   float		*res;
 

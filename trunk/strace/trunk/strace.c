@@ -51,58 +51,6 @@ t_opt_struct		read_opt(int ac, char **av)
   return ret;
 }
 
-int			ptrace_loop2(int p_child)
-{
-  int			keep_going = 1;
-  int			status;
-  struct reg		regs;
-  int			reg_val;
-  int			start = 0;
-  char			*strbuf;
-
-  while(keep_going)
-    {
-      waitX(&status);
-      if (WIFEXITED(status))
-	{
-	  puts("Child process finished. End.");
-	  return (0);
-	}
-      if (!start) //execve first instruction. Skipping...
-	{
-	  start++;
-	  ptraceX(PT_STEP, p_child, (caddr_t)1, 0);
-	  continue;
-	}
-      //Reading $eip value into registries
-      ptraceX(PT_GETREGS, p_child, (caddr_t)&regs, 0);
-      reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)regs.r_eip, 0);
-      if ((reg_val & ~0xffff80cd) == 0) //We have an int 80 here
-	{
-	  if (regs.r_eax > SYS_MAXSYSCALL)
-	    printf("Unknown syscall number: %d... Ignoring.\n", regs.r_eax);
-	  else if (SYSCALL_NAMES[regs.r_eax] == 0)
-	    printf("Unimplemented syscall: %d\n", regs.r_eax);
-	  else
-	    {
-	      //Reading syscall arguments
-	      reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)(regs.r_esp + 8), 0);
-	      if (regs.r_eax == 4)
-		{
-		  strbuf = read_string(p_child, (void *)reg_val);
-		  printf("===> [%s]\n", strbuf);
-		  free(strbuf);
-		}
-	      printf("Calling %s...\n", SYSCALL_NAMES[regs.r_eax]);
-	    }
-	}
-      ptraceX(PT_STEP, p_child, (caddr_t)1, 0);
-      if (!start)
-	start = 1;
-    }
-  return (0);
-}
-
 int			read_regs(int p_child)
 {
   char			*strbuf;
@@ -113,16 +61,16 @@ int			read_regs(int p_child)
   reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)regs.r_eip, 0);
 
   if ((reg_val & ~0xffff80cd) != 0)
-    return (0);
+    return (1);
   if (regs.r_eax > SYS_MAXSYSCALL)
     {
       printf("Invalid registry value: %d\n", regs.r_eax);
-      return (1);
+      return (4);
     }
   if (SYSCALL_NAMES[regs.r_eax] == 0)
     {
       printf("Syscall information not available: %d\n", regs.r_eax);
-      return (1);
+      return (4);
     }
   //Reading syscall arguments
   reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)(regs.r_esp + 8), 0);
@@ -133,13 +81,14 @@ int			read_regs(int p_child)
       free(strbuf);
     }
   printf("Calling %s...\n", SYSCALL_NAMES[regs.r_eax]);
-  return (0);
+  return (4);
 }
 
 int			ptrace_loop(int p_child)
 {
   int			status;
   int			start;
+  int			step = 1;
 
   start = 0;
   waitX(&status);
@@ -149,7 +98,7 @@ int			ptrace_loop(int p_child)
 	{
 	  read_regs(p_child);
 	}
-      ptraceX(PT_STEP, p_child, (caddr_t)1, 0);
+      ptraceX(PT_STEP, p_child, (caddr_t)step, 0);
       start++;
       waitX(&status);
     }
@@ -212,3 +161,55 @@ int			main(int ac, char **av)
     }
   return (0);
 }
+
+/* int			ptrace_loop2(int p_child) */
+/* { */
+/*   int			keep_going = 1; */
+/*   int			status; */
+/*   struct reg		regs; */
+/*   int			reg_val; */
+/*   int			start = 0; */
+/*   char			*strbuf; */
+
+/*   while(keep_going) */
+/*     { */
+/*       waitX(&status); */
+/*       if (WIFEXITED(status)) */
+/* 	{ */
+/* 	  puts("Child process finished. End."); */
+/* 	  return (0); */
+/* 	} */
+/*       if (!start) //execve first instruction. Skipping... */
+/* 	{ */
+/* 	  start++; */
+/* 	  ptraceX(PT_STEP, p_child, (caddr_t)1, 0); */
+/* 	  continue; */
+/* 	} */
+/*       //Reading $eip value into registries */
+/*       ptraceX(PT_GETREGS, p_child, (caddr_t)&regs, 0); */
+/*       reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)regs.r_eip, 0); */
+/*       if ((reg_val & ~0xffff80cd) == 0) //We have an int 80 here */
+/* 	{ */
+/* 	  if (regs.r_eax > SYS_MAXSYSCALL) */
+/* 	    printf("Unknown syscall number: %d... Ignoring.\n", regs.r_eax); */
+/* 	  else if (SYSCALL_NAMES[regs.r_eax] == 0) */
+/* 	    printf("Unimplemented syscall: %d\n", regs.r_eax); */
+/* 	  else */
+/* 	    { */
+/* 	      //Reading syscall arguments */
+/* 	      reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)(regs.r_esp + 8), 0); */
+/* 	      if (regs.r_eax == 4) */
+/* 		{ */
+/* 		  strbuf = read_string(p_child, (void *)reg_val); */
+/* 		  printf("===> [%s]\n", strbuf); */
+/* 		  free(strbuf); */
+/* 		} */
+/* 	      printf("Calling %s...\n", SYSCALL_NAMES[regs.r_eax]); */
+/* 	    } */
+/* 	} */
+/*       ptraceX(PT_STEP, p_child, (caddr_t)1, 0); */
+/*       if (!start) */
+/* 	start = 1; */
+/*     } */
+/*   return (0); */
+/* } */
