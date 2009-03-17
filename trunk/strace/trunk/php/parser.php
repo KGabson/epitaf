@@ -6,9 +6,9 @@ require_once("make_syscall_names.php");
 define("SYSPROTO_H", "/usr/include/sys/sysproto.h");
 
 
-$args = parse_syscall_args(SYSPROTO_H);
-$tab_name = getSyscallNames();
-$tab = merge_name_args($args, $tab_name);
+//$args = parse_syscall_args(SYSPROTO_H);
+//$tab_name = getSyscallNames();
+//$tab = merge_name_args($args, $tab_name);
 
 
 function	parse_syscall_args($path)
@@ -51,10 +51,34 @@ function	merge_name_args($args, $tab_name)
 	      $tab[$k]["name"] = $k2;
 	      $tab[$k]["proto"] = $v2["proto"];
 	      $tab[$k]["return"] = $v2["return"];
+	      $found = true;
+	      break;
 	    }
+	  else
+	    $found = false;
+	}
+      if ($found == false)
+	{
+	  $tab[$k]["name"] = $v;
+	  if ($v == "exit")
+	    {
+	      $tab[$k]["proto"] = $args["sys_exit"]["proto"];
+	      $tab[$k]["return"] = $args["sys_exit"]["return"];
+	    }
+	  else if ($v == "break")
+	    {
+	      $tab[$k]["proto"] = $args["obreak"]["proto"];
+	      $tab[$k]["return"] = $args["obreak"]["return"];
+	    }
+	  else if ($v = "vadvise")
+	    {
+	      $tab[$k]["proto"] = $args["ovadvise"]["proto"];
+	      $tab[$k]["return"] = $args["ovadvise"]["return"];
+	    }
+	  else
+	    $tab[$k]["return"] = "NULL";
 	}
     }
-  var_dump($tab);
   return $tab;
 }
 
@@ -68,7 +92,13 @@ function	get_args($piece_file)
 	{
 	  $tab_args = split(';', $v);
 	  if (!empty($tab_args[1]))
-	    $proto[] = trim($tab_args[1]);
+	    {
+	      if (ereg("(.*) \* (.*)", $tab_args[1], $prot))
+		{
+		  $tab_args[1] = $prot[1]."* ".$prot[2];
+		}
+	      $proto[] = trim($tab_args[1]);
+	    }
 	}
       $args["proto"] = $proto;
       $args["name"] = $syscall_name;
@@ -91,5 +121,4 @@ function	get_ret_value($piece_file)
   return $tab;
 }
 
-//var_dump($tab);
 ?>
