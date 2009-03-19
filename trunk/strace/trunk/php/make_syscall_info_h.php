@@ -31,10 +31,10 @@ function	get_ctab_syscall($info, $size_tab)
 	    }
 	}
       if ($nb < $size_tab)
-	$line .= format_line($k, $v["name"], $v["proto"], $v["return"]);
+	$line .= format_line(count($v["proto"]), $v["name"], $v["proto"], $v["return"]);
       else
 	{
-	  $line .= format_line($k, $v["name"], $v["proto"], $v["return"], true);
+	  $line .= format_line(count($v["proto"]), $v["name"], $v["proto"], $v["return"], true);
 	}
       $nb++;
     }
@@ -43,20 +43,36 @@ function	get_ctab_syscall($info, $size_tab)
 
 function	format_line($v1, $v2, $v3, $v4, $last_line = false)
 {
-  $tab .= "{";
-  if (is_array($v3))
-    foreach ($v3 as $k => $v)
+  $proto = get_tab_arg($v3);
+  $name = ($v2 == "NULL") ? $v2 : "\"$v2\"";
+  $ret = ($v4 == "NULL") ? $v4 : "\"$v4\"";
+  if ($last_line == false)
+    $str = "    {".$v1.", ".$name.", ".$proto['tab_type'].", ".$proto['tab_name'].", ".$ret."},\n";
+  else
+    $str = "    {".$v1.", ".$name.", ".$proto['tab_type'].", ".$proto['tab_name'].", ".$ret."}\n";
+  return $str;
+}
+
+function	get_tab_arg($proto)
+{
+  $tab_type .= "{";
+  $tab_name .= "{";
+  if (is_array($proto))
+    foreach ($proto as $k => $v)
       {
-	$tab .= ($k != count($v3) - 1) ? "\"$v\", " : "\"$v\"";
+	$tab_type .= ($k != count($proto) - 1) ? "\"".$v['argtype']."\", " : "\"".$v['argtype']."\"";
+	$tab_name .= ($k != count($proto) - 1) ? "\"".$v['argname']."\", " : "\"".$v['argtype']."\"";
       }
   else
-    $tab = "{NULL";
-  $tab .= "}";
-  if ($last_line == false)
-    $str = "    {".$v1.", \"".$v2."\", ".$tab.", \"".$v4."\"},\n";
-  else
-    $str = "    {".$v1.", \"".$v2."\", ".$tab.", \"".$v4."\"}\n";
-  return $str;
+    {
+      $tab_type = "{\"\"";
+      $tab_name = "{\"\"";
+    }
+  $tab_type .= "}";
+  $tab_name .= "}";
+  $tab['tab_type'] = $tab_type;
+  $tab['tab_name'] = $tab_name;
+  return $tab;
 }
 
 function	get_static_begin($size_tab, $max_proto)
@@ -66,7 +82,8 @@ typedef struct s_sysinfo
 {
   int   nbargs;
   char  *sysname;
-  char  sysproto[$max_proto][128];
+  char  argtype[$max_proto][128];
+  char	argname[$max_proto][128];
   char  *return_type;
 }t_sysinfo;
 

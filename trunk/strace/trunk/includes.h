@@ -15,5 +15,6 @@
 # include <signal.h>
 
 # include "constants.h"
+# include "syscall_info.h"
 
 #endif
