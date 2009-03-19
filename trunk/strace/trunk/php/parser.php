@@ -91,13 +91,11 @@ function	get_args($piece_file)
       foreach ($tab_proto as $k => $v)
 	{
 	  $tab_args = split(';', $v);
-	  if (!empty($tab_args[1]))
+	  if (!empty($tab_args[1]) && ereg("([a-zA-Z_\* ]+) +(.*)", $tab_args[1], $prot))
 	    {
-	      if (ereg("(.*) \* (.*)", $tab_args[1], $prot))
-		{
-		  $tab_args[1] = $prot[1]."* ".$prot[2];
-		}
-	      $proto[] = trim($tab_args[1]);
+	      $final_args["argtype"] = trim($prot[1]);
+	      $final_args["argname"] = trim($prot[2]);
+	      $proto[] = $final_args;
 	    }
 	}
       $args["proto"] = $proto;
