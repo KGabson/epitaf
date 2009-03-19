@@ -2,6 +2,8 @@
 #include "errors.h"
 #include "syscall_names.h"
 #include "readmem.h"
+#include "syscall_info.h"
+#include "st_print.h"
 
 typedef struct		s_opt_struct
 {
@@ -51,9 +53,71 @@ t_opt_struct		read_opt(int ac, char **av)
   return ret;
 }
 
+char			**get_type_and_name(char *arg)
+{
+  unsigned int			i, arg_len, tmp;
+  //char			res[2][MAX_STRING_SIZE];
+  char				**res;
+
+  if (arg == NULL)
+    {
+      DEBUG("get_type", "Argument is NULL");
+      return (NULL);
+    }
+  arg_len = strlen(arg);
+  i = 0;
+  while (arg[i] != 0 && arg[i] != ' ')
+    {
+      i++;
+    }
+  if (i == strlen(arg))
+    {
+      DEBUG("get_type", "Could not parse given argument :");
+      DEBUG("get_type", arg);
+      return (NULL);
+    }
+  res = mallocX(3 * sizeof(res));
+  puts("hop");
+  res[0] = mallocX(i * sizeof(res[0]) + 1);
+  res[1] = mallocX((arg_len - i) * sizeof(res[1]));
+  res[2] = 0;
+  strncpy(res[0], arg, i);
+  res[0][i + 1] = 0;
+  strcpy(res[1], &arg[i + 1]);
+  return (res);
+}
+
+//ARGS :
+//	int sysnb
+//	int nbargs
+//	char *sysname
+//	char **sysproto
+//	char *return_type
+void			display_syscall_info(int num_syscall, int p_child, void *child_addr)
+{
+  t_sysinfo		sysinfo;
+  int			i;
+  char			**arg_info;
+
+  sysinfo = SYSINFO[num_syscall];
+  printf("Calling %s :\n", sysinfo.sysname);
+  for (i = 0; i < sysinfo.nbargs; i++)
+    {
+      arg_info = get_type_and_name(sysinfo.sysproto[i]);
+      if (arg_info != NULL)
+	{
+	  printf("\t- %s %s = \n", arg_info[0], arg_info[1]);
+	  st_print(arg_info[0], p_child, child_addr);
+	  printf("\n");
+	  free(arg_info[0]);
+	  free(arg_info[1]);
+	  free(arg_info);
+	}
+    }
+}
+
 int			read_regs(int p_child)
 {
-  char			*strbuf;
   struct reg		regs;
   int			reg_val;
 
@@ -67,20 +131,21 @@ int			read_regs(int p_child)
       printf("Invalid registry value: %d\n", regs.r_eax);
       return (4);
     }
-  if (SYSCALL_NAMES[regs.r_eax] == 0)
+  if (SYSINFO[regs.r_eax].sysname == NULL)
     {
       printf("Syscall information not available: %d\n", regs.r_eax);
       return (4);
     }
+  //printf("Calling %s...\n", SYSCALL_NAMES[regs.r_eax]);
   //Reading syscall arguments
   reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)(regs.r_esp + 8), 0);
   if (regs.r_eax == 4)
     {
-      strbuf = read_string(p_child, (void *)reg_val);
-      printf("===> [%s]\n", strbuf);
-      free(strbuf);
+      //read_string(p_child, (void *)reg_val);
+      display_syscall_info(regs.r_eax, p_child, (void *)reg_val);
+      //printf("===> [%s]\n", strbuf);
+      //free(strbuf);
     }
-  printf("Calling %s...\n", SYSCALL_NAMES[regs.r_eax]);
   return (4);
 }
 
