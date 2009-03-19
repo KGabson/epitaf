@@ -10,9 +10,10 @@
 
 SRC =		strace.c 	\
 		errors.c 	\
-		readmem.c
+		readmem.c	\
+		st_print.c
 OBJ =		$(SRC:.c=.o)
-CC =		cc
+CC =		gcc -g
 #LIB =		-L${HOME}/rendu/lib -lmy_netbsd
 #INCLUDE =	-I${HOME}/rendu/include
 CFLAGS =	-W -Wall $(INCLUDE)

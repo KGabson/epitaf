@@ -6,6 +6,11 @@ void			ERROR(char *fct_name)
   exit(-1);
 }
 
+void			DEBUG(char *fct_name, char *str)
+{
+  printf("DEBUG: %s:\t%s\n", fct_name, str);
+}
+
 int			ptraceX(int request, pid_t pid, caddr_t addr, int data)
 {
   int			ret;

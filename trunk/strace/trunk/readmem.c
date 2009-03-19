@@ -16,53 +16,69 @@ void			*ptrace_read(int p_child, void *child_addr, int size)
   return (res); //Please, free me !
 }
 
-char			*read_string(int p_child, void *child_addr)
+void			read_string(int p_child, void *child_addr)
 {
-  char			*res;
+  char			*str;
 
-  res = ptrace_read(p_child, child_addr, MAX_STRING_SIZE);
-  str_limit(res, "...");
-  return (res);
+  str = ptrace_read(p_child, child_addr, MAX_STRING_SIZE);
+  str_limit(str, "...");
+  printf("%s", str);
 }
 
-char			read_char(int p_child, void *child_addr)
+void			read_ptr(int p_child, void *child_addr)
+{
+  void			*ptr;
+
+  ptr = ptrace_read(p_child, child_addr, sizeof(void *));
+  printf("%x", (unsigned int)ptr);
+}
+
+void			read_char(int p_child, void *child_addr)
 {
   char			*res;
 
   res = ptrace_read(p_child, child_addr, sizeof(char));
-  return (*res);
+  printf("%c", *res);
 }
 
-int			read_int(int p_child, void *child_addr)
+void			read_short(int p_child, void *child_addr)
+{
+  char			*res;
+
+  res = ptrace_read(p_child, child_addr, sizeof(short));
+  printf("%hd", *res);
+}
+
+void			read_int(int p_child, void *child_addr)
 {
   int			*res;
 
   res = ptrace_read(p_child, child_addr, sizeof(int));
-  return (*res);
+  printf("%d", *res);
 }
 
-long			read_long(int p_child, void *child_addr)
+void			read_long(int p_child, void *child_addr)
 {
   long			*res;
 
   res = ptrace_read(p_child, child_addr, sizeof(long));
-  return (*res);
+  printf("%ld", *res);
 }
 
-double			read_double(int p_child, void *child_addr)
+void			read_double(int p_child, void *child_addr)
 {
   double		*res;
 
   res = ptrace_read(p_child, child_addr, sizeof(double));
-  return (*res);
+  printf("%fd", *res);
 }
 
-float			read_float(int p_child, void *child_addr)
+void			read_float(int p_child, void *child_addr)
 {
   float		*res;
 
   res = ptrace_read(p_child, child_addr, sizeof(float));
-  return (*res);
+  printf("%fd", *res);
 }
 
 void			str_limit(char *str, char *end)
@@ -71,10 +87,9 @@ void			str_limit(char *str, char *end)
   int			i;
 
   end_len = strlen(end);
-  for (i = 0; (i < MAX_STRING_SIZE - 1) || (str[i] == 0); i++);
+  for (i = 0; (i < MAX_STRING_SIZE - 1) && (str[i] != 0); i++);
   if (i == MAX_STRING_SIZE - 1)
     {
-      puts("plus grand !!");
       strcpy(&str[MAX_STRING_SIZE - end_len - 1], end);
     }
 }
