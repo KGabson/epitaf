@@ -6,6 +6,7 @@ t_st_print_fct ST_PRINT[] =
     {"char *", read_string},
 
     {"void *", read_ptr},
+    //    {"const void *", read_string},
 
     {"int", read_int},
 

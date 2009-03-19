@@ -93,26 +93,30 @@ char			**get_type_and_name(char *arg)
 //	char *sysname
 //	char **sysproto
 //	char *return_type
-void			display_syscall_info(int num_syscall, int p_child, void *child_addr)
+void			display_syscall_info(int num_syscall, int p_child, caddr_t child_esp)
 {
   t_sysinfo		sysinfo;
-  int			i;
+  int			i, reg_val;
   char			**arg_info;
 
   sysinfo = SYSINFO[num_syscall];
   printf("Calling %s :\n", sysinfo.sysname);
   for (i = 0; i < sysinfo.nbargs; i++)
     {
-      arg_info = get_type_and_name(sysinfo.sysproto[i]);
-      if (arg_info != NULL)
-	{
-	  printf("\t- %s %s = \n", arg_info[0], arg_info[1]);
-	  st_print(arg_info[0], p_child, child_addr);
-	  printf("\n");
-	  free(arg_info[0]);
-	  free(arg_info[1]);
-	  free(arg_info);
-	}
+      child_esp += 4;
+      //printf("\tReading esp value at %x\n", (unsigned int)child_esp);
+      reg_val = ptraceX(PT_READ_D, p_child, child_esp, 0);
+      printf("\tReading esp value at %x\n", reg_val);
+      //arg_info = get_type_and_name(sysinfo.sysproto[i]);
+      //if (arg_info != NULL)
+      //{
+      printf("\t- %s %s = ", sysinfo.argtype[i], sysinfo.argname[i]);
+      st_print(sysinfo.argtype[i], p_child, (void *)reg_val);
+      printf("\n");
+      //free(arg_info[0]);
+      //free(arg_info[1]);
+      //free(arg_info);
+      //}
     }
 }
 
@@ -128,7 +132,7 @@ int			read_regs(int p_child)
     return (1);
   if (regs.r_eax > SYS_MAXSYSCALL)
     {
-      printf("Invalid registry value: %d\n", regs.r_eax);
+      printf("Invalid syscall value: %d\n", regs.r_eax);
       return (4);
     }
   if (SYSINFO[regs.r_eax].sysname == NULL)
@@ -136,16 +140,20 @@ int			read_regs(int p_child)
       printf("Syscall information not available: %d\n", regs.r_eax);
       return (4);
     }
+  else
+    {
+      display_syscall_info(regs.r_eax, p_child, (caddr_t)regs.r_esp);
+    }
   //printf("Calling %s...\n", SYSCALL_NAMES[regs.r_eax]);
   //Reading syscall arguments
-  reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)(regs.r_esp + 8), 0);
-  if (regs.r_eax == 4)
-    {
+  //reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)(regs.r_esp + 8), 0);
+  //if (regs.r_eax == 4)
+  //{
       //read_string(p_child, (void *)reg_val);
-      display_syscall_info(regs.r_eax, p_child, (void *)reg_val);
+      //display_syscall_info(regs.r_eax, p_child, (void *)reg_val);
       //printf("===> [%s]\n", strbuf);
       //free(strbuf);
-    }
+  //}
   return (4);
 }
 
