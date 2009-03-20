@@ -1,5 +1,6 @@
 void	*ptrace_read(int p_child, void *child_addr, int size);
 void	read_string(int p_child, unsigned int esp_value);
+void	read_ptr(int p_child, unsigned int esp_value);
 void	read_esp(int p_child, unsigned int esp_value);
 void	read_char(int p_child, unsigned int esp_value);
 void	read_short(int p_child, unsigned int esp_value);

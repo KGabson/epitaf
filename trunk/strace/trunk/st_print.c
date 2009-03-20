@@ -5,7 +5,6 @@ t_st_print_fct ST_PRINT[] =
   {
     {"char *", read_string},
 
-    {"void *", read_esp},
     {"const void *", read_string},
 
     {"char", read_char},
@@ -14,6 +13,7 @@ t_st_print_fct ST_PRINT[] =
 
     {"int", read_int},
     {"size_t", read_int},
+    {"off_t", read_int},
 
     {"long", read_long},
 
@@ -21,7 +21,7 @@ t_st_print_fct ST_PRINT[] =
 
     {"float", read_float},
 
-    {"unknown", read_esp},
+    //    {"unknown", read_ptr},
 
     {0, 0}
   };
@@ -42,5 +42,5 @@ void		st_print(char *type, int p_child, unsigned int esp_value)
       i++;
     }
   if (!ok)
-    printf("[unknown type %s] = 0x%x", type, esp_value);
+    printf("0x%x", esp_value);
 }
