@@ -1,9 +1,10 @@
 #include "includes.h"
 #include "errors.h"
-//#include "syscall_names.h"
 #include "readmem.h"
 #include "syscall_info.h"
 #include "st_print.h"
+
+extern char **environ;
 
 typedef struct		s_opt_struct
 {
@@ -27,6 +28,11 @@ void			info()
   exit(0);
 }
 
+char			**get_cmd_args(char *cmd)
+{
+
+}
+
 t_opt_struct		read_opt(int ac, char **av)
 {
   int			opt;
@@ -43,7 +49,9 @@ t_opt_struct		read_opt(int ac, char **av)
 	  ret.attach_pid = atoi(optarg);
 	  break;
 	case 'e':
+	  //printf(" ahaha => %s: %s\n", optarg, av[optind]);
 	  ret.command = optarg;
+	  //exit (0);
 	  break;
 	case 'h':
 	default:
@@ -53,39 +61,6 @@ t_opt_struct		read_opt(int ac, char **av)
   return ret;
 }
 
-char			**get_type_and_name(char *arg)
-{
-  unsigned int			i, arg_len, tmp;
-  //char			res[2][MAX_STRING_SIZE];
-  char				**res;
-
-  if (arg == NULL)
-    {
-      DEBUG("get_type", "Argument is NULL");
-      return (NULL);
-    }
-  arg_len = strlen(arg);
-  i = 0;
-  while (arg[i] != 0 && arg[i] != ' ')
-    {
-      i++;
-    }
-  if (i == strlen(arg))
-    {
-      DEBUG("get_type", "Could not parse given argument :");
-      DEBUG("get_type", arg);
-      return (NULL);
-    }
-  res = mallocX(3 * sizeof(res));
-  puts("hop");
-  res[0] = mallocX(i * sizeof(res[0]) + 1);
-  res[1] = mallocX((arg_len - i) * sizeof(res[1]));
-  res[2] = 0;
-  strncpy(res[0], arg, i);
-  res[0][i + 1] = 0;
-  strcpy(res[1], &arg[i + 1]);
-  return (res);
-}
 
 //ARGS :
 //	int sysnb
@@ -159,7 +134,7 @@ int			ptrace_loop(int p_child)
       if (is_syscall)
 	{
 	  ptraceX(PT_GETREGS, p_child, (caddr_t)&regs, 0);
-	  printf("\t");
+	  printf(" = ");
 	  st_print(SYSINFO[num_syscall].return_type, p_child, regs.r_eax);
 	  printf("\n");
 	  is_syscall = 0;
@@ -178,25 +153,90 @@ int			ptrace_loop(int p_child)
   return (0);
 }
 
-void			child()
+void			print_wordtab(char **tab)
 {
+  int			i = 0;
 
+  while (tab[i])
+    {
+      printf("=> %s\n", tab[i++]);
+    }
+}
+
+char			**str_to_wordtab(char *str)
+{
+  char			**res;
+  int			nb_args = 1;
+  int			i = 0;
+  int			j = 0;
+  int			k = 0;
+  int			wait = 0;
+
+  while (str[i] == ' ' && str[i])
+    i++;
+  if (!str[i])
+    return (NULL);
+  while (str[i])
+    {
+      if (str[i] == ' ')
+	{
+	  nb_args++;
+	  while (str[i] == ' ' && str[i])
+	    i++;
+	}
+      else
+	i++;
+    }
+  res = mallocX((nb_args + 1) * sizeof(res));
+  i = 0;
+  while (str[i] == ' ' && str[i])
+    i++;
+  res[j] = &str[i];
+  while (str[i])
+    {
+      if (str[i] == ' ')
+	{
+	  res[j++][k] = 0;
+	  i++;
+	  while(str[i] == ' ' && str[i])
+	    i++;
+	  res[j] = &str[i];
+	  k = 0;
+	}
+      else
+	{
+	  i++;
+	  k++;
+	}
+    }
+  res[j + 1] = 0;
+  return res;
 }
 
 int			ptrace_fork(char *cmd)
 {
-   char			*args[] = { "command" , 0 };
-   char			*env[] = { NULL };
-   int			ret = -1;
-   int			p_child;
+  char			*args[] = { "command" , 0 };
+  //char			*args[2];
+  char			*env[] = { NULL };
+  int			ret = -1;
+  int			p_child;
+  char			**wordtab = NULL;
 
+  wordtab = str_to_wordtab(cmd);
+  if (wordtab == NULL)
+    {
+      cmd = "./command";
+    }
   printf("Command: %s\n", cmd);
   p_child = forkX();
 
   if (!p_child)
     {
       ptraceX(PT_TRACE_ME, 0, NULL, 0);
-      execve(cmd, args, env);
+      if (wordtab)
+	execve(wordtab[0], wordtab, environ);
+      else
+	execve(cmd, args, environ);
       ERROR("execve");
     }
   else
@@ -233,55 +273,3 @@ int			main(int ac, char **av)
     }
   return (0);
 }
-
-/* int			ptrace_loop2(int p_child) */
-/* { */
-/*   int			keep_going = 1; */
-/*   int			status; */
-/*   struct reg		regs; */
-/*   int			reg_val; */
-/*   int			start = 0; */
-/*   char			*strbuf; */
-
-/*   while(keep_going) */
-/*     { */
-/*       waitX(&status); */
-/*       if (WIFEXITED(status)) */
-/* 	{ */
-/* 	  puts("Child process finished. End."); */
-/* 	  return (0); */
-/* 	} */
-/*       if (!start) //execve first instruction. Skipping... */
-/* 	{ */
-/* 	  start++; */
-/* 	  ptraceX(PT_STEP, p_child, (caddr_t)1, 0); */
-/* 	  continue; */
-/* 	} */
-/*       //Reading $eip value into registries */
-/*       ptraceX(PT_GETREGS, p_child, (caddr_t)&regs, 0); */
-/*       reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)regs.r_eip, 0); */
-/*       if ((reg_val & ~0xffff80cd) == 0) //We have an int 80 here */
-/* 	{ */
-/* 	  if (regs.r_eax > SYS_MAXSYSCALL) */
-/* 	    printf("Unknown syscall number: %d... Ignoring.\n", regs.r_eax); */
-/* 	  else if (SYSCALL_NAMES[regs.r_eax] == 0) */
-/* 	    printf("Unimplemented syscall: %d\n", regs.r_eax); */
-/* 	  else */
-/* 	    { */
-/* 	      //Reading syscall arguments */
-/* 	      reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)(regs.r_esp + 8), 0); */
-/* 	      if (regs.r_eax == 4) */
-/* 		{ */
-/* 		  strbuf = read_string(p_child, (void *)reg_val); */
-/* 		  printf("===> [%s]\n", strbuf); */
-/* 		  free(strbuf); */
-/* 		} */
-/* 	      printf("Calling %s...\n", SYSCALL_NAMES[regs.r_eax]); */
-/* 	    } */
-/* 	} */
-/*       ptraceX(PT_STEP, p_child, (caddr_t)1, 0); */
-/*       if (!start) */
-/* 	start = 1; */
-/*     } */
-/*   return (0); */
-/* } */
