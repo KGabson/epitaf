@@ -16,13 +16,36 @@ void			*ptrace_read(int p_child, void *child_addr, int size)
   return (res); //Please, free me !
 }
 
+void			print_all(char *str)
+{
+  int			i;
+
+  i = 0;
+  while (str[i] != '\0')
+    {
+      switch (str[i])
+	{
+	case '\n':
+	  printf("\\n");
+	  break;
+	case '\t':
+	  printf("\\t");
+	  break;
+	default:
+	  printf("%c", str[i]);
+	}
+      i++;
+    }
+  printf("\\0");
+}
+
 void			read_string(int p_child, unsigned int esp_value)
 {
   char			*str;
 
   str = ptrace_read(p_child, (void *)esp_value, MAX_STRING_SIZE);
   str_limit(str, "...");
-  printf("%s", str);
+  print_all(str);
   free(str);
 }
 

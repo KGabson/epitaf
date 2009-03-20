@@ -108,7 +108,7 @@ void			display_syscall_info(int num_syscall, int p_child, unsigned int child_esp
       reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)(child_esp), 0);
       //printf("0x%x\n", reg_val);
       printf("(%s) ", sysinfo.argtype[i]);
-      st_print(sysinfo.argtype[i], p_child, (void *)reg_val);
+      st_print(sysinfo.argtype[i], p_child, reg_val);
       if (i < sysinfo.nbargs - 1)
 	printf(", ");
     }
@@ -128,12 +128,12 @@ int			read_regs(int p_child)
   if (regs.r_eax > SYS_MAXSYSCALL)
     {
       printf("Invalid syscall value: %d\n", regs.r_eax);
-      return (4);
+      return (-1);
     }
   if (SYSINFO[regs.r_eax].sysname == NULL)
     {
       printf("Syscall information not available: %d\n", regs.r_eax);
-      return (4);
+      return (0);
     }
   else
     {
@@ -149,7 +149,7 @@ int			read_regs(int p_child)
       //printf("===> [%s]\n", strbuf);
       //free(strbuf);
   //}
-  return (4);
+  return (0);
 }
 
 int			ptrace_loop(int p_child)
