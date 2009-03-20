@@ -1,4 +1,3 @@
-#!/usr/local/bin/php
 <?php
 define("SYSCALLS_H", "/usr/include/sys/syscall.h");
 

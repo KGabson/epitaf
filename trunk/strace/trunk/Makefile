@@ -16,15 +16,14 @@ SRC =		strace.c 	\
 
 OBJ =		$(SRC:.c=.o)
 CC =		gcc -g
-#LIB =		-L${HOME}/rendu/lib -lmy_netbsd
-#INCLUDE =	-I${HOME}/rendu/include
 CFLAGS =	-W -Wall $(INCLUDE)
 NAME =		strace
 
-all: $(OBJ)
+all: syscall_info $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
 
 syscall_info:
+		chmod +x php/make_syscall_info_h.php
 		php/make_syscall_info_h.php
 clean:
 	rm -f *.o
@@ -32,5 +31,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -r ./syscall_info.h
 
 re: fclean all
