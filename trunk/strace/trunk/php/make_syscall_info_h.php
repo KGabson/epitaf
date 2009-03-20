@@ -62,7 +62,7 @@ function	get_tab_arg($proto)
     foreach ($proto as $k => $v)
       {
 	$tab_type .= ($k != count($proto) - 1) ? "\"".$v['argtype']."\", " : "\"".$v['argtype']."\"";
-	$tab_name .= ($k != count($proto) - 1) ? "\"".$v['argname']."\", " : "\"".$v['argtype']."\"";
+	$tab_name .= ($k != count($proto) - 1) ? "\"".$v['argname']."\", " : "\"".$v['argname']."\"";
       }
   else
     {
@@ -73,6 +73,7 @@ function	get_tab_arg($proto)
   $tab_name .= "}";
   $tab['tab_type'] = $tab_type;
   $tab['tab_name'] = $tab_name;
+  //  echo "func name = ".$tab['tab_name']."\n";
   return $tab;
 }
 

@@ -67,8 +67,8 @@ function	merge_name_args($args, $tab_name)
 	    }
 	  else if ($v == "break")
 	    {
-	      $tab[$k]["proto"] = $args["obreak"]["proto"];
-	      $tab[$k]["return"] = $args["obreak"]["return"];
+	      $tab[$k]["proto"][] = array("argtype" => "unknow", "argname" => "unknow");
+	      $tab[$k]["return"] = "int";
 	    }
 	  else if ($v = "vadvise")
 	    {
@@ -94,7 +94,7 @@ function	get_args($piece_file)
 	  if (!empty($tab_args[1]) && ereg("([a-zA-Z_\* ]+) +(.*)", $tab_args[1], $prot))
 	    {
 	      $final_args["argtype"] = trim($prot[1]);
-	      $final_args["argname"] = trim($prot[2]);
+	      $final_args["argname"] = $prot[2];
 	      $proto[] = $final_args;
 	    }
 	}
