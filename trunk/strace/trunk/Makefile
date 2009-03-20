@@ -22,6 +22,8 @@ NAME =		strace
 all: $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
 
+syscall_info:
+		php/make_syscall_info_h.php
 clean:
 	rm -f *.o
 	rm -f *~

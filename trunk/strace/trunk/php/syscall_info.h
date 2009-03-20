@@ -480,7 +480,7 @@ t_sysinfo       SYSINFO[483] =
     {0, NULL, {""}, {""}, NULL},
     {0, NULL, {""}, {""}, NULL},
     {0, NULL, {""}, {""}, NULL},
-    {0, NULL, {""}, {""}, NULL},
+    {0, "", {""}, {""}, NULL},
     {2, "sctp_peeloff", {"int", "_t"}, {"sd", "_t"}, "int"},
     {7, "sctp_generic_sendmsg", {"int", "caddr_t", "int", "caddr_t", "__socklen_t", "struct sctp_sndrcvinfo *", "int"}, {"sd", "msg", "mlen", "to", "tolen", "sinfo", "int"}, "int"},
     {7, "sctp_generic_sendmsg_iov", {"int", "struct iovec *", "int", "caddr_t", "__socklen_t", "struct sctp_sndrcvinfo *", "int"}, {"sd", "iov", "iovlen", "to", "tolen", "sinfo", "int"}, "int"},
