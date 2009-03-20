@@ -1,3 +1,13 @@
+/*
+ ************************************************************
+ **
+ ** STRACE: Tracing system calls for a given process
+ ** ************************************************
+ ** Authors: Gregory MOULIN, Thomas DESERT
+ ** System: FreeBSD
+ **
+ ************************************************************
+*/
 #include "includes.h"
 #include "errors.h"
 #include "readmem.h"
