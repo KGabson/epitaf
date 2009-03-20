@@ -67,7 +67,7 @@ function	merge_name_args($args, $tab_name)
 	    }
 	  else if ($v == "break")
 	    {
-	      $tab[$k]["proto"][] = array("argtype" => "unknow", "argname" => "unknow");
+	      $tab[$k]["proto"][] = array("argtype" => "unknown", "argname" => "unknown");
 	      $tab[$k]["return"] = "int";
 	    }
 	  else if ($v = "vadvise")
