@@ -1,6 +1,6 @@
 #include "includes.h"
 #include "errors.h"
-#include "syscall_names.h"
+//#include "syscall_names.h"
 #include "readmem.h"
 #include "syscall_info.h"
 #include "st_print.h"
@@ -93,31 +93,26 @@ char			**get_type_and_name(char *arg)
 //	char *sysname
 //	char **sysproto
 //	char *return_type
-void			display_syscall_info(int num_syscall, int p_child, caddr_t child_esp)
+void			display_syscall_info(int num_syscall, int p_child, unsigned int child_esp)
 {
   t_sysinfo		sysinfo;
   int			i, reg_val;
   char			**arg_info;
 
   sysinfo = SYSINFO[num_syscall];
-  printf("Calling %s :\n", sysinfo.sysname);
+  printf("%s(", sysinfo.sysname);
   for (i = 0; i < sysinfo.nbargs; i++)
     {
       child_esp += 4;
-      //printf("\tReading esp value at %x\n", (unsigned int)child_esp);
-      reg_val = ptraceX(PT_READ_D, p_child, child_esp, 0);
-      printf("\tReading esp value at %x\n", reg_val);
-      //arg_info = get_type_and_name(sysinfo.sysproto[i]);
-      //if (arg_info != NULL)
-      //{
-      printf("\t- %s %s = ", sysinfo.argtype[i], sysinfo.argname[i]);
+      //printf("\tESP : 0x%x = ", child_esp);
+      reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)(child_esp), 0);
+      //printf("0x%x\n", reg_val);
+      printf("(%s) ", sysinfo.argtype[i]);
       st_print(sysinfo.argtype[i], p_child, (void *)reg_val);
-      printf("\n");
-      //free(arg_info[0]);
-      //free(arg_info[1]);
-      //free(arg_info);
-      //}
+      if (i < sysinfo.nbargs - 1)
+	printf(", ");
     }
+  printf(")\n");
 }
 
 int			read_regs(int p_child)
@@ -142,7 +137,7 @@ int			read_regs(int p_child)
     }
   else
     {
-      display_syscall_info(regs.r_eax, p_child, (caddr_t)regs.r_esp);
+      display_syscall_info(regs.r_eax, p_child, regs.r_esp);
     }
   //printf("Calling %s...\n", SYSCALL_NAMES[regs.r_eax]);
   //Reading syscall arguments
