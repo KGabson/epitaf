@@ -16,69 +16,49 @@ void			*ptrace_read(int p_child, void *child_addr, int size)
   return (res); //Please, free me !
 }
 
-void			read_string(int p_child, void *child_addr)
+void			read_string(int p_child, unsigned int esp_value)
 {
   char			*str;
 
-  str = ptrace_read(p_child, child_addr, MAX_STRING_SIZE);
+  str = ptrace_read(p_child, (void *)esp_value, MAX_STRING_SIZE);
   str_limit(str, "...");
   printf("%s", str);
+  free(str);
 }
 
-void			read_ptr(int p_child, void *child_addr)
+void			read_esp(int p_child, unsigned int esp_value)
 {
-  void			*ptr;
-
-  ptr = ptrace_read(p_child, child_addr, sizeof(void *));
-  printf("%x", (unsigned int)ptr);
+  printf("0x%x", esp_value);
 }
 
-void			read_char(int p_child, void *child_addr)
+void			read_char(int p_child, unsigned int esp_value)
 {
-  char			*res;
-
-  res = ptrace_read(p_child, child_addr, sizeof(char));
-  printf("%c", *res);
+  printf("%d", (char)esp_value);
 }
 
-void			read_short(int p_child, void *child_addr)
+void			read_short(int p_child, unsigned int esp_value)
 {
-  char			*res;
-
-  res = ptrace_read(p_child, child_addr, sizeof(short));
-  printf("%hd", *res);
+  printf("%hd", (short)esp_value);
 }
 
-void			read_int(int p_child, void *child_addr)
+void			read_int(int p_child, unsigned int esp_value)
 {
-  int			*res;
-
-  res = ptrace_read(p_child, child_addr, sizeof(int));
-  printf("%d", *res);
+  printf("%d", (int)esp_value);
 }
 
-void			read_long(int p_child, void *child_addr)
+void			read_long(int p_child, unsigned int esp_value)
 {
-  long			*res;
-
-  res = ptrace_read(p_child, child_addr, sizeof(long));
-  printf("%ld", *res);
+  printf("%ld", (long)esp_value);
 }
 
-void			read_double(int p_child, void *child_addr)
+void			read_double(int p_child, unsigned int esp_value)
 {
-  double		*res;
-
-  res = ptrace_read(p_child, child_addr, sizeof(double));
-  printf("%fd", *res);
+  printf("%fd", (double)esp_value);
 }
 
-void			read_float(int p_child, void *child_addr)
+void			read_float(int p_child, unsigned int esp_value)
 {
-  float		*res;
-
-  res = ptrace_read(p_child, child_addr, sizeof(float));
-  printf("%fd", *res);
+  printf("%fd", (float)esp_value);
 }
 
 void			str_limit(char *str, char *end)

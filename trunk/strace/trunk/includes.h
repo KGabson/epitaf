@@ -4,6 +4,7 @@
 # include <sys/types.h>
 # include <sys/ptrace.h>
 # include <sys/wait.h>
+# include <sys/syscall.h>
 
 # include <machine/reg.h>
 
@@ -15,6 +16,5 @@
 # include <signal.h>
 
 # include "constants.h"
-# include "syscall_info.h"
 
 #endif

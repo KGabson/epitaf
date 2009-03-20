@@ -5,21 +5,28 @@ t_st_print_fct ST_PRINT[] =
   {
     {"char *", read_string},
 
-    {"void *", read_ptr},
-    //    {"const void *", read_string},
+    {"void *", read_esp},
+    {"const void *", read_string},
+
+    {"char", read_char},
+
+    {"short", read_short},
 
     {"int", read_int},
-
-    {"double", read_double},
+    {"size_t", read_int},
 
     {"long", read_long},
 
     {"double", read_double},
 
+    {"float", read_float},
+
+    {"unknown", read_esp},
+
     {0, 0}
   };
 
-void		st_print(char *type, int p_child, void *child_addr)
+void		st_print(char *type, int p_child, unsigned int esp_value)
 {
   int		i, ok;
 
@@ -29,12 +36,11 @@ void		st_print(char *type, int p_child, void *child_addr)
     {
       if (!strcmp(ST_PRINT[i].type, type))
 	{
-	  ST_PRINT[i].fct_read(p_child, child_addr);
+	  ST_PRINT[i].fct_read(p_child, esp_value);
 	  ok = 1;
 	}
       i++;
     }
   if (!ok)
-    printf("[Could not read value for type %s]", type);
-
+    printf("[unknown type %s] = 0x%x", type, esp_value);
 }
