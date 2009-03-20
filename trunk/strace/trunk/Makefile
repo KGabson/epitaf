@@ -11,7 +11,9 @@
 SRC =		strace.c 	\
 		errors.c 	\
 		readmem.c	\
-		st_print.c
+		st_print.c	\
+		tools.c
+
 OBJ =		$(SRC:.c=.o)
 CC =		gcc -g
 #LIB =		-L${HOME}/rendu/lib -lmy_netbsd

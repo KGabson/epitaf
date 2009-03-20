@@ -54,48 +54,50 @@ void			read_string(int p_child, unsigned int esp_value)
 
 void			read_ptr(int p_child, unsigned int esp_value)
 {
-  void			*ptr;
-
-  //ptr = ptrace_read(p_child, (void *)esp_value, 1);
   printf("%p", (void *)esp_value);
-  //str_limit(str, "...");
-  //print_all(str);
-  //free(str);
+  p_child = 0;
 }
 
 void			read_esp(int p_child, unsigned int esp_value)
 {
   printf("0x%x", esp_value);
+  p_child = 0;
 }
 
 void			read_char(int p_child, unsigned int esp_value)
 {
   printf("%d", (char)esp_value);
+  p_child = 0;
 }
 
 void			read_short(int p_child, unsigned int esp_value)
 {
   printf("%hd", (short)esp_value);
+  p_child = 0;
 }
 
 void			read_int(int p_child, unsigned int esp_value)
 {
   printf("%d", (int)esp_value);
+  p_child = 0;
 }
 
 void			read_long(int p_child, unsigned int esp_value)
 {
   printf("%ld", (long)esp_value);
+  p_child = 0;
 }
 
 void			read_double(int p_child, unsigned int esp_value)
 {
   printf("%fd", (double)esp_value);
+  p_child = 0;
 }
 
 void			read_float(int p_child, unsigned int esp_value)
 {
   printf("%fd", (float)esp_value);
+  p_child = 0;
 }
 
 void			str_limit(char *str, char *end)

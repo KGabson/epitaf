@@ -3,8 +3,10 @@
 #include "readmem.h"
 #include "syscall_info.h"
 #include "st_print.h"
+#include "tools.h"
 
 extern char **environ;
+int attached_pid = 0;
 
 typedef struct		s_opt_struct
 {
@@ -28,11 +30,9 @@ void			info()
   exit(0);
 }
 
-char			**get_cmd_args(char *cmd)
-{
-
-}
-
+/**
+ * reading program arguments
+ **/
 t_opt_struct		read_opt(int ac, char **av)
 {
   int			opt;
@@ -49,9 +49,7 @@ t_opt_struct		read_opt(int ac, char **av)
 	  ret.attach_pid = atoi(optarg);
 	  break;
 	case 'e':
-	  //printf(" ahaha => %s: %s\n", optarg, av[optind]);
 	  ret.command = optarg;
-	  //exit (0);
 	  break;
 	case 'h':
 	default:
@@ -61,27 +59,21 @@ t_opt_struct		read_opt(int ac, char **av)
   return ret;
 }
 
-
-//ARGS :
-//	int sysnb
-//	int nbargs
-//	char *sysname
-//	char **sysproto
-//	char *return_type
+/**
+ * Will read each argument passed to a syscall
+ * at $esp + 4, + 8, ...
+ **/
 void			display_syscall_info(int num_syscall, int p_child, unsigned int child_esp)
 {
   t_sysinfo		sysinfo;
   int			i, reg_val;
-  char			**arg_info;
 
   sysinfo = SYSINFO[num_syscall];
   printf("%s(", sysinfo.sysname);
   for (i = 0; i < sysinfo.nbargs; i++)
     {
       child_esp += 4;
-      //printf("\tESP : 0x%x = ", child_esp);
       reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)(child_esp), 0);
-      //printf("0x%x\n", reg_val);
       printf("(%s) ", sysinfo.argtype[i]);
       st_print(sysinfo.argtype[i], p_child, reg_val);
       if (i < sysinfo.nbargs - 1)
@@ -90,6 +82,10 @@ void			display_syscall_info(int num_syscall, int p_child, unsigned int child_esp
   printf(")");
 }
 
+/**
+ * Reading registries for a step,
+ * and testing if it's an interuption 80 (a system call)
+ **/
 int			read_regs(int p_child)
 {
   struct reg		regs;
@@ -117,7 +113,10 @@ int			read_regs(int p_child)
   return (regs.r_eax);
 }
 
-int			ptrace_loop(int p_child)
+/**
+ * Looping and watching the traced process
+ **/
+int			ptrace_loop(int p_child, int attached)
 {
   int			status;
   int			start, is_syscall;
@@ -125,7 +124,7 @@ int			ptrace_loop(int p_child)
   int			num_syscall;
   struct reg		regs;
 
-  start = 0;
+  start = (attached) ? 1 : 0;
   is_syscall = 0;
   num_syscall = 0;
   waitX(&status);
@@ -153,80 +152,17 @@ int			ptrace_loop(int p_child)
   return (0);
 }
 
-void			print_wordtab(char **tab)
-{
-  int			i = 0;
-
-  while (tab[i])
-    {
-      printf("=> %s\n", tab[i++]);
-    }
-}
-
-char			**str_to_wordtab(char *str)
-{
-  char			**res;
-  int			nb_args = 1;
-  int			i = 0;
-  int			j = 0;
-  int			k = 0;
-  int			wait = 0;
-
-  while (str[i] == ' ' && str[i])
-    i++;
-  if (!str[i])
-    return (NULL);
-  while (str[i])
-    {
-      if (str[i] == ' ')
-	{
-	  nb_args++;
-	  while (str[i] == ' ' && str[i])
-	    i++;
-	}
-      else
-	i++;
-    }
-  res = mallocX((nb_args + 1) * sizeof(res));
-  i = 0;
-  while (str[i] == ' ' && str[i])
-    i++;
-  res[j] = &str[i];
-  while (str[i])
-    {
-      if (str[i] == ' ')
-	{
-	  res[j++][k] = 0;
-	  i++;
-	  while(str[i] == ' ' && str[i])
-	    i++;
-	  res[j] = &str[i];
-	  k = 0;
-	}
-      else
-	{
-	  i++;
-	  k++;
-	}
-    }
-  res[j + 1] = 0;
-  return res;
-}
-
+/**
+ * Will fork current process and launch ptrace_loop for the child process
+ **/
 int			ptrace_fork(char *cmd)
 {
   char			*args[] = { "command" , 0 };
-  //char			*args[2];
-  char			*env[] = { NULL };
   int			ret = -1;
   int			p_child;
   char			**wordtab = NULL;
 
   wordtab = str_to_wordtab(cmd);
-  if (wordtab == NULL)
-    {
-      cmd = "./command";
-    }
   printf("Command: %s\n", cmd);
   p_child = forkX();
 
@@ -241,17 +177,40 @@ int			ptrace_fork(char *cmd)
     }
   else
     {
-      ret = ptrace_loop(p_child);
+      ret = ptrace_loop(p_child, 0);
     }
   return (ret);
 }
 
+/**
+ * Detaching child process
+ * TODO: Make it work, ptrace fails here !!!
+ */
+void			ptrace_detach(int pid)
+{
+  ptraceX(PT_DETACH, pid, 0, 0);
+}
+
+/**
+ * Watching SIGINT if we attached a process
+ **/
+void			catch_signal(int s)
+{
+  printf("Recieved SIGINT(%d). Detaching process %d...\n", s, attached_pid);
+  ptrace_detach(attached_pid);
+}
+
+/**
+ * Attaching process for given PID
+ **/
 int			ptrace_attach(int pid)
 {
   printf("Attaching process %d...\n", pid);
   ptraceX(PT_ATTACH, pid, NULL, 0);
-  printf("PID %d attached, starting loop.", pid);
-  return ptrace_loop(pid);
+  printf("PID %d attached, starting loop.\n", pid);
+  attached_pid = pid;
+  signal(SIGINT, catch_signal);
+  return ptrace_loop(pid, 1);
 }
 
 int			main(int ac, char **av)
