@@ -27,7 +27,7 @@ function	get_ctab_syscall($info, $size_tab)
 	  while ($nb < $k)
 	    {
 	      $nb++;
-	      $line .= format_line("NULL", "NULL", "NULL", "NULL");
+	      $line .= format_line(0, "NULL", "NULL", "NULL");
 	    }
 	}
       if ($nb < $size_tab)
@@ -46,6 +46,7 @@ function	format_line($v1, $v2, $v3, $v4, $last_line = false)
   $proto = get_tab_arg($v3);
   $name = ($v2 == "NULL") ? $v2 : "\"$v2\"";
   $ret = ($v4 == "NULL") ? $v4 : "\"$v4\"";
+  $nb_args = ($v1 == "NULL") ? 0 : $v1;
   if ($last_line == false)
     $str = "    {".$v1.", ".$name.", ".$proto['tab_type'].", ".$proto['tab_name'].", ".$ret."},\n";
   else
