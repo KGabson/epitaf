@@ -21,8 +21,6 @@ t_st_print_fct ST_PRINT[] =
 
     {"float", read_float},
 
-    //    {"unknown", read_ptr},
-
     {0, 0}
   };
 
