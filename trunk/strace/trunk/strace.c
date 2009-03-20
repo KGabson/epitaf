@@ -112,7 +112,7 @@ void			display_syscall_info(int num_syscall, int p_child, unsigned int child_esp
       if (i < sysinfo.nbargs - 1)
 	printf(", ");
     }
-  printf(")\n");
+  printf(")");
 }
 
 int			read_regs(int p_child)
@@ -124,7 +124,7 @@ int			read_regs(int p_child)
   reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)regs.r_eip, 0);
 
   if ((reg_val & ~0xffff80cd) != 0)
-    return (1);
+    return (-1);
   if (regs.r_eax > SYS_MAXSYSCALL)
     {
       printf("Invalid syscall value: %d\n", regs.r_eax);
@@ -133,38 +133,42 @@ int			read_regs(int p_child)
   if (SYSINFO[regs.r_eax].sysname == NULL)
     {
       printf("Syscall information not available: %d\n", regs.r_eax);
-      return (0);
+      return (SYS_MAXSYSCALL);
     }
   else
     {
       display_syscall_info(regs.r_eax, p_child, regs.r_esp);
     }
-  //printf("Calling %s...\n", SYSCALL_NAMES[regs.r_eax]);
-  //Reading syscall arguments
-  //reg_val = ptraceX(PT_READ_D, p_child, (caddr_t)(regs.r_esp + 8), 0);
-  //if (regs.r_eax == 4)
-  //{
-      //read_string(p_child, (void *)reg_val);
-      //display_syscall_info(regs.r_eax, p_child, (void *)reg_val);
-      //printf("===> [%s]\n", strbuf);
-      //free(strbuf);
-  //}
-  return (0);
+  return (regs.r_eax);
 }
 
 int			ptrace_loop(int p_child)
 {
   int			status;
-  int			start;
+  int			start, is_syscall;
   int			step = 1;
+  int			num_syscall;
+  struct reg		regs;
 
   start = 0;
+  is_syscall = 0;
+  num_syscall = 0;
   waitX(&status);
   while (!WIFEXITED(status))
     {
+      if (is_syscall)
+	{
+	  ptraceX(PT_GETREGS, p_child, (caddr_t)&regs, 0);
+	  printf("\t");
+	  st_print(SYSINFO[num_syscall].return_type, p_child, regs.r_eax);
+	  printf("\n");
+	  is_syscall = 0;
+	}
       if (start)
 	{
-	  read_regs(p_child);
+	  num_syscall = read_regs(p_child);
+	  if (num_syscall >= 0 && num_syscall < SYS_MAXSYSCALL)
+	    is_syscall = 1;
 	}
       ptraceX(PT_STEP, p_child, (caddr_t)step, 0);
       start++;
