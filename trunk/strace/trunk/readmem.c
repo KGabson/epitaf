@@ -7,7 +7,9 @@ void			*ptrace_read(int p_child, void *child_addr, int size)
   struct ptrace_io_desc io_desc;
   void			*res;
 
-  res = mallocX(size * sizeof(res));
+
+  if (size > 1)
+    res = mallocX(size * sizeof(res));
   io_desc.piod_op = PIOD_READ_D;
   io_desc.piod_offs = child_addr;
   io_desc.piod_addr = res;
@@ -21,6 +23,7 @@ void			print_all(char *str)
   int			i;
 
   i = 0;
+  printf("\"");
   while (str[i] != '\0')
     {
       switch (str[i])
@@ -36,7 +39,7 @@ void			print_all(char *str)
 	}
       i++;
     }
-  printf("\\0");
+  printf("\\0\"");
 }
 
 void			read_string(int p_child, unsigned int esp_value)
@@ -47,6 +50,17 @@ void			read_string(int p_child, unsigned int esp_value)
   str_limit(str, "...");
   print_all(str);
   free(str);
+}
+
+void			read_ptr(int p_child, unsigned int esp_value)
+{
+  void			*ptr;
+
+  //ptr = ptrace_read(p_child, (void *)esp_value, 1);
+  printf("%p", (void *)esp_value);
+  //str_limit(str, "...");
+  //print_all(str);
+  //free(str);
 }
 
 void			read_esp(int p_child, unsigned int esp_value)
