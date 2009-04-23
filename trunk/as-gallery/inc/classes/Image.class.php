@@ -9,6 +9,18 @@ class 				Image extends XMLNode implements ICreator
 	
 	public function 	__construct($date, $title, $desc, $thumb, $img)
 	{
+		if (!$title)
+		{
+			Errors::Warning("Missing title parameter for image. Using \"Untitled\".");
+			$title = "Untitled";
+		}
+		if (!$date)
+			Errors::Warning("Missing date parameter for image $title");
+		if (!$thumb)
+			Errors::Warning("Missing thumb parameter for image $title");
+		if (!$img)
+			Errors::Warning("Missing img parameter for image $title");
+
 		$this->date = $date;
 		$this->title = $title;
 		$this->desc = $desc;
@@ -21,6 +33,11 @@ class 				Image extends XMLNode implements ICreator
 		if (!isset($this->$var))
 			return false;
 		return $this->$var;
+	}
+	
+	public function 	create(array $values = null)
+	{
+		
 	}
 }
 ?>
