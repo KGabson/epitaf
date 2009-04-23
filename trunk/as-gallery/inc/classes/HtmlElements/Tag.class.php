@@ -21,13 +21,13 @@ class					Tag
 		$this->attributes[$key] = $value;
 	}
 	
-	public function		append($child)
+	public function		append(&$child)
 	{
 		$this->checkChild($child);
 		$this->children[$this->num_children++] = $child;
 	}
 	
-	public function		insert($child)
+	public function		insert(&$child)
 	{
 		$this->checkChild($child);
 		array_unshift($this->children, $child);
@@ -50,6 +50,19 @@ class					Tag
 	public function		children()
 	{
 		return $this->children;
+	}
+	
+	public function 	getFirstChild($tagname)
+	{
+		$res = false;
+		if ($this->tagname == $tagname)
+			return $this;
+		foreach ($this->children as $child)
+		{
+			if (($child instanceof Tag) && ($res = $child->getFirstChild($tagname)))
+				return $res;
+		}
+		return false;
 	}
 	
 	public function		toHTML($indent = 0)

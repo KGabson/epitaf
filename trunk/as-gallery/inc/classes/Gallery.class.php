@@ -14,9 +14,9 @@ class					Gallery extends XMLNode implements ICreator
 	private 			$categories = array();
 
 	
-	public function 	__construct($name, $dir)
+	public function 	__construct($filename_whithout_exension, $dir)
 	{
-		$this->name = $name;
+		$this->name = $filename_whithout_exension;
 		$this->dir = $dir;
 		$this->file = $this->name.".xml";
 		$this->exists = file_exists($this->dir."/".$this->file);
@@ -60,17 +60,15 @@ class					Gallery extends XMLNode implements ICreator
 			return false;
 		if (($this->root = simplexml_load_file($this->dir."/".$this->file)) === FALSE)
 			throw new ErrorException("Could not load ".$this->dir."/".$this->file);
-		foreach ($this->root->children() as $node_name => $category)
+		foreach ($this->root->category as $category)
 		{
-			if ($node_name != "category")
-				continue;
 			if (!$category["name"])
 			{
-				Errors::Warning("Could not find a name for category_".$n);
+				Errors::Warning("Could not find a name for category ".$this->dir."/".$this->file);
 				continue;
 			}
-			$cat_name = strval($category['name']);
-			$this->categories[$cat_name] = new Category($category['name']);
+			$cat_name = strval($category["name"]);
+			$this->categories[$cat_name] = new Category($cat_name);
 			$this->categories[$cat_name]->loadFromXML($category);
 		}
 		return true;

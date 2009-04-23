@@ -24,7 +24,7 @@ require_once("../inc/autoload.php");
 //Errors::Debug("TEST TAGS");
 
 $tag = new Tag("div", "toto");
-$tag->append("Hello !");
+//$tag->append("Hello !");
 
 $child = new Tag("ul", "hop");
 for ($i = 0; $i < 5; $i++)
