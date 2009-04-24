@@ -5,8 +5,8 @@ class					Gallery extends XMLNode implements ICreator
 	private 			$file;
 	private 			$dir;
 	private 			$exists = false;
+	private				$title = false;
 	
-	public 				$title = false;
 	public 				$img_dir = false;
 	public 				$thumb_dir = false;
 	public				$random = false;
@@ -25,6 +25,43 @@ class					Gallery extends XMLNode implements ICreator
 	public function 	getCategories()
 	{
 		return $this->categories;
+	}
+	
+	public function  	getCategory($category_name)
+	{
+		if (isset($this->categories[$category_name]))
+			return $this->categories[$category_name];
+		return false;
+	}
+	
+	public function 	getTitle()
+	{
+		return $this->title;
+	}
+	
+	public function 	getName()
+	{
+		return $this->name;
+	}
+	
+	public function 	getDir()
+	{
+		return $this->dir;
+	}
+	
+	public function 	getRandomImages()
+	{
+		$aImages = array();
+		foreach ($this->categories as $cat)
+		{
+			$aImages[] = $cat->getRandomImage();
+		}
+		return $aImages;
+	}
+	
+	public function 	getLink()
+	{
+		$url = Page::getLink(urlencode($this->name));
 	}
 	
 	public function 	init($title, $img_dir, $thumb_dir, $random = true)
@@ -60,6 +97,9 @@ class					Gallery extends XMLNode implements ICreator
 			return false;
 		if (($this->root = simplexml_load_file($this->dir."/".$this->file)) === FALSE)
 			throw new ErrorException("Could not load ".$this->dir."/".$this->file);
+		if (!$this->root["title"])
+			throw new ErrorException("No title for gallery ".$this->dir."/".$this->file);
+		$this->title = strval($this->root["title"]);
 		foreach ($this->root->category as $category)
 		{
 			if (!$category["name"])

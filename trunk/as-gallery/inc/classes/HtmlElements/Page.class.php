@@ -6,15 +6,45 @@ class						Page
 	private					$root;
 	private					$head;
 	private					$body;
+	private 				$file;
+	private 				$get;
 	
 	private function		__construct()
 	{
 		$this->root = new Tag("html");
 		$this->head = new Tag("head");
 		$this->body = new Tag("body");
+		$this->file = basename($_SERVER['PHP_SELF']);
+		$this->doGet();
 		
 		$this->root->append($this->head);
 		$this->root->append($this->body);
+	}
+	
+	private function 		doGet()
+	{
+		foreach ($_GET as $key => $value)
+			$this->get[$key] = $value;
+	}
+	
+	public static function 	getLink($gallery = "", $category = "", $image = "", $file = "")
+	{
+		$file = (empty($file)) ? self::instance()->file : $file;
+		$url = $file;
+		$url .= (!empty($gallery) || !empty($category) || !empty($image)) ? "?" : "";
+		$url .= (!empty($gallery)) ? "gallery=".$gallery."&" : "";
+		$url .= (!empty($category)) ? "category=".$category."&" : "";
+		$url .= (!empty($image)) ? "image=".$image."&" : "";
+		$url = ((!empty($gallery) || !empty($category) || !empty($image))) ? substr($url, 0, strlen($url) - 1) : $url;
+		return $url;
+	}
+	
+	public static function 	getURL($append_string = "")
+	{
+		$url = self::instance()->file;
+		$vars = (empty($_SERVER['QUERY_STRING'])) ? "" : $_SERVER['QUERY_STRING'];
+		$vars .= (empty($append_string)) ? $vars : ((empty($vars)) ? "&".$append_string : $append_string);
+		$url = (empty($vars)) ? $url : $url."?".$vars;
 	}
 	
 	public static function	instance()

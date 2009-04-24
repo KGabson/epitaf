@@ -3,6 +3,7 @@ class 						Category extends XMLNode implements ICreator
 {
 	private 				$name;
 	private 				$images = array();
+	private 				$nb_images = 0;
 	
 	public function 		__construct($name)
 	{
@@ -19,6 +20,17 @@ class 						Category extends XMLNode implements ICreator
 	{
 		return $this->images;
 	}
+	
+	public function 		getRandomImage()
+	{
+		if (!$this->nb_images)
+			return false;
+		if ($this->nb_images == 1)
+			return $this->images[0];
+		$n = rand(0, $this->nb_images - 1);
+		return ($this->images[$n]);
+	}
+
 
 	public function 		create(array $values = null)
 	{
@@ -33,7 +45,7 @@ class 						Category extends XMLNode implements ICreator
 		foreach ($this->root->image as $image)
 		{
 			$a_img = array();
-			$this->images[] = new Image($image->date, $image->title, $image->desc, $image->thumb, $image->img);
+			$this->images[$this->nb_images++] = new Image($image->date, $image->title, $image->desc, $image->thumb, $image->img);
 		}
 		
 	}

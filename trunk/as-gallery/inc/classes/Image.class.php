@@ -39,5 +39,6 @@ class 				Image extends XMLNode implements ICreator
 	{
 		
 	}
+	
 }
 ?>

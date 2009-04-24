@@ -68,8 +68,10 @@ class					Tag
 	public function		toHTML($indent = 0)
 	{
 		$str = '';
+		$indent_str = (__COMPRESS_CODE === true) ? "" : "\t";
+		$newline = (__COMPRESS_CODE === true) ? "" : "\n";
 		
-		$str .= str_repeat("\t", $indent);
+		$str .= str_repeat($indent_str, $indent);
 		$str .= '<';
 		$str .= $this->tagname;
 		foreach ($this->attributes as $key => $value)
@@ -78,18 +80,20 @@ class					Tag
 		}
 		if ($this->inline)
 		{
-			$str .= ' />'."\n";
+			$str .= ' />'.$newline;
 			return $str;
 		}
-		$str .= '>'."\n";
-		foreach ($this->children as $child)
+		//$str .= '>'.$newline;
+		$str .= '>';
+		//$do_indent = false;
+		foreach ($this->children as $key => $child)
 		{
 			if (is_string($child))
-				$str .= str_repeat("\t", $indent + 1).$child."\n";
+				$str .= $child;
 			else
-				$str .= $child->toHTML($indent + 1);
+				$str .= $newline.$child->toHTML($indent + 1).str_repeat($indent_str, ($key < $this->num_children - 1) ? $indent + 1 : $indent);
 		}
-		$str .= str_repeat("\t", $indent).'</'.$this->tagname.'>'."\n";
+		$str .= '</'.$this->tagname.'>'.$newline;
 		return $str;
 	}
 }
