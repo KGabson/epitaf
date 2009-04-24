@@ -15,12 +15,20 @@ class					Menu extends Tag
 		$this->append($this->htmlroot);
 	}
 	
-	public function		addGalleryLink($title, $href)
+	public function		addGalleryLink($name, $title, $href)
 	{
-		$elm = new TagBlock("li", new LinkTag($title, $href));
+		$elm = new TagBlock(
+			"li",
+			new LinkTag(
+				$title,
+				$href,
+				(isset($_GET['gallery']) && urldecode($_GET['gallery']) == $name) ?
+					"selected" : ""
+			)
+		);
 		$elm->getFirstChild("toto");
-		$this->galleries_tags[$title] = $elm;
-		$this->htmlroot->append($this->galleries_tags[$title]);
+		$this->galleries_tags[$name] = $elm;
+		$this->htmlroot->append($this->galleries_tags[$name]);
 	}
 	
 	public function 	addCategoryLink($gallery_name, Category $category, $href)
@@ -36,10 +44,29 @@ class					Menu extends Tag
 			$catroot = new Tag("ul", "category");
 			$this->galleries_tags[$gallery_name]->append($catroot);
 		}
-		$elm = new TagBlock("li", new LinkTag($category->getName(), $href));
+		$elm = new TagBlock(
+			"li", 
+			new LinkTag(
+				$category->getName(),
+				$href,
+				(isset($_GET["category"]) && urldecode($_GET["category"]) == $category->getName()) ?
+					"selected" : ""
+				)
+			);
 		$catroot->append($elm);
-		//$this->galleries_tags[$gallery_name]->append();
 		return true;
+	}
+	
+	public function 	getGalleries()
+	{
+		return $this->xmltree;
+	}
+	
+	public function 	getGallery($gallery_name)
+	{
+		if (isset($this->xmltree[$gallery_name]))
+			return $this->xmltree[$gallery_name];
+		return false;
 	}
 	
 	public function		scanDir($path)
@@ -57,10 +84,11 @@ class					Menu extends Tag
 			$gallery = new Gallery($matches[1], $path);
 			$gallery->load();
 			$this->xmltree[$matches[1]] = $gallery;
-			$this->addGalleryLink($matches[1], "#");
+			$this->addGalleryLink($matches[1], $gallery->getTitle(), Page::getLink(urlencode($matches[1])));
 			foreach ($gallery->getCategories() as $category)
 			{
-				$this->addCategoryLink($matches[1], $category, "#");
+				//echo $matches[1]."==";
+				$this->addCategoryLink($matches[1], $category, Page::getLink(urlencode($matches[1]), urlencode($category->getName())));
 			}
 		}
 	}

@@ -14,6 +14,12 @@ class						Errors
 			echo "(DEBUG) >> ".$msg."<br />\n";
 	}
 	
+	public static function 	Dump($obj)
+	{
+		$str = var_export($obj, true);
+		self::ShowCode($str);
+	}
+	
 	public static function 	ShowCode($msg)
 	{
 		echo "<pre>".htmlentities($msg)."</pre>";
