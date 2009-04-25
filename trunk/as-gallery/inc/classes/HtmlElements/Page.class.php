@@ -27,7 +27,7 @@ class						Page
 			$this->get[$key] = $value;
 	}
 	
-	public static function 	getLink($gallery = "", $category = "", $image = "", $file = "")
+	public static function 	getLink($gallery = "", $category = "", $image = "", $action = "", $file = "")
 	{
 		$file = (empty($file)) ? self::instance()->file : $file;
 		$url = $file;
@@ -35,17 +35,46 @@ class						Page
 		$url .= (!empty($gallery)) ? "gallery=".$gallery."&" : "";
 		$url .= (!empty($category)) ? "category=".$category."&" : "";
 		$url .= (!empty($image)) ? "image=".$image."&" : "";
-		$url = ((!empty($gallery) || !empty($category) || !empty($image))) ? substr($url, 0, strlen($url) - 1) : $url;
+		$url .= (!empty($action)) ? $action."&" : "";
+		$url = ((!empty($gallery) || !empty($category) || !empty($image) || !empty($action))) ? substr($url, 0, strlen($url) - 1) : $url;
 		return $url;
 	}
 	
-	public static function 	getURL($append_string = "")
+	public static function 	getURL($append_vars = array())
 	{
 		$url = self::instance()->file;
 		$vars = (empty($_SERVER['QUERY_STRING'])) ? "" : $_SERVER['QUERY_STRING'];
-		$vars .= (empty($append_string)) ? $vars : ((empty($vars)) ? "&".$append_string : $append_string);
+		$vars .= (empty($append_vars)) ? "" : "&";
+		foreach ($append_vars as $key => $var)
+		{
+			if (empty($key))
+				$vars .= $var."&";
+			else if (empty($var))
+				$vars .= $key."&";
+			else
+				$vars .= $key."=".$var."&";
+		}
+		if (!empty($append_vars))
+			$vars = substr($vars, 0, strlen($vars) - 1);
+		//$vars .= (empty($append_string)) ? $vars : ((empty($vars)) ? "&".$append_string : $append_string);
 		$url = (empty($vars)) ? $url : $url."?".$vars;
+		return $url;
 	}
+	
+	/*public static function 	makeURL($orig_url_str, array $append_var)
+	{
+		$vars = "";
+		if ()
+		foreach ($append_vars as $key => $var)
+		{
+			if (empty($key))
+				$vars .= $var."&";
+			else if (empty($var))
+				$vars .= $key."&";
+			else
+				$vars .= $key."=".$var."&";
+		}
+	}*/
 	
 	public static function	instance()
 	{

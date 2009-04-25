@@ -35,6 +35,12 @@ class 				Image extends XMLNode implements ICreator
 		return $this->$var;
 	}
 	
+	public function 	getLink()
+	{
+		$url = Page::getURL(array("image" => File::Basename($this->img, true)));
+		return $url;
+	}
+	
 	public function 	create(array $values = null)
 	{
 		

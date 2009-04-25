@@ -21,6 +21,13 @@ class					Tag
 		$this->attributes[$key] = $value;
 	}
 	
+	public function 	getAttribute($key)
+	{
+		if (isset($this->attributes[$key]))
+			return $this->attributes[$key];
+		return false;
+	}
+	
 	public function		append(&$child)
 	{
 		$this->checkChild($child);
@@ -83,9 +90,7 @@ class					Tag
 			$str .= ' />'.$newline;
 			return $str;
 		}
-		//$str .= '>'.$newline;
 		$str .= '>';
-		//$do_indent = false;
 		foreach ($this->children as $key => $child)
 		{
 			if (is_string($child))
