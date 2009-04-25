@@ -31,7 +31,7 @@ class					Menu extends Tag
 		$this->htmlroot->append($this->galleries_tags[$name]);
 	}
 	
-	public function 	addCategoryLink($gallery_name, Category $category, $href)
+	public function 	addCategoryLink($gallery_name, Category $category)
 	{
 		if (!isset($this->galleries_tags[$gallery_name]))
 		{
@@ -39,7 +39,7 @@ class					Menu extends Tag
 			return false;
 		}
 		$catroot = $this->galleries_tags[$gallery_name]->getFirstChild("ul");
-		if (!$existing)
+		if (!$catroot)
 		{
 			$catroot = new Tag("ul", "category");
 			$this->galleries_tags[$gallery_name]->append($catroot);
@@ -48,7 +48,7 @@ class					Menu extends Tag
 			"li", 
 			new LinkTag(
 				$category->getName(),
-				$href,
+				$category->getLink(),
 				(isset($_GET["category"]) && urldecode($_GET["category"]) == $category->getName()) ?
 					"selected" : ""
 				)
@@ -88,7 +88,7 @@ class					Menu extends Tag
 			foreach ($gallery->getCategories() as $category)
 			{
 				//echo $matches[1]."==";
-				$this->addCategoryLink($matches[1], $category, Page::getLink(urlencode($matches[1]), urlencode($category->getName())));
+				$this->addCategoryLink($matches[1], $category);
 			}
 		}
 	}

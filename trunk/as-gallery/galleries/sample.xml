@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<gallery title="Sample Photo Gallery" thumbDir="/work/sites/elodie/galleries/sample/thumbs/" imageDir="/work/sites/elodie/galleries/sample/" random="true">
+<gallery title="Sample Photo Gallery" thumbDir="sample/thumbs" imageDir="sample" random="true">
 	<category name="Introducing Seattle">
 		<image>
 			<date>03.31.06</date>

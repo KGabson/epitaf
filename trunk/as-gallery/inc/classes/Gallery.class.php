@@ -49,6 +49,16 @@ class					Gallery extends XMLNode implements ICreator
 		return $this->dir;
 	}
 	
+	public function 	getImageDir()
+	{
+		return $this->img_dir;
+	}
+	
+	public function 	getThumbDir()
+	{
+		return $this->thumb_dir;
+	}
+	
 	public function 	getRandomImages()
 	{
 		$aImages = array();
@@ -59,9 +69,10 @@ class					Gallery extends XMLNode implements ICreator
 		return $aImages;
 	}
 	
-	public function 	getLink()
+	public function 	getLink($action = "")
 	{
-		$url = Page::getLink(urlencode($this->name));
+		$url = Page::getLink(urlencode($this->name), "", "", $action);
+		return $url;
 	}
 	
 	public function 	init($title, $img_dir, $thumb_dir, $random = true)
@@ -99,7 +110,18 @@ class					Gallery extends XMLNode implements ICreator
 			throw new ErrorException("Could not load ".$this->dir."/".$this->file);
 		if (!$this->root["title"])
 			throw new ErrorException("No title for gallery ".$this->dir."/".$this->file);
+		if (!$this->root["imageDir"])
+			throw new ErrorException("No imageDir for gallery ".$this->dir."/".$this->file);
+		if (!$this->root["thumbDir"])
+			throw new ErrorException("No thumbDir for gallery ".$this->dir."/".$this->file);
+		if (!$this->root["random"])
+			$this->random = false;
+		else
+			$this->random = $this->root["random"];
 		$this->title = strval($this->root["title"]);
+		$this->img_dir = strval($this->root["imageDir"]);
+		$this->thumb_dir = strval($this->root["thumbDir"]);
+		//Errors::Debug($this->thumb_dir);
 		foreach ($this->root->category as $category)
 		{
 			if (!$category["name"])
@@ -108,7 +130,7 @@ class					Gallery extends XMLNode implements ICreator
 				continue;
 			}
 			$cat_name = strval($category["name"]);
-			$this->categories[$cat_name] = new Category($cat_name);
+			$this->categories[$cat_name] = new Category($cat_name, $this);
 			$this->categories[$cat_name]->loadFromXML($category);
 		}
 		return true;
