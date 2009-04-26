@@ -6,10 +6,9 @@ class					Gallery extends XMLNode implements ICreator
 	private 			$dir;
 	private 			$exists = false;
 	private				$title = false;
-	
-	public 				$img_dir = false;
-	public 				$thumb_dir = false;
-	public				$random = false;
+	private				$imageDir = false;
+	private				$thumbDir = false;
+	private				$random = false;
 
 	private 			$categories = array();
 
@@ -51,12 +50,17 @@ class					Gallery extends XMLNode implements ICreator
 	
 	public function 	getImageDir()
 	{
-		return $this->img_dir;
+		return $this->imageDir;
 	}
 	
 	public function 	getThumbDir()
 	{
-		return $this->thumb_dir;
+		return $this->thumbDir;
+	}
+	
+	public function 	getRandom()
+	{
+		return $this->random;
 	}
 	
 	public function 	getRandomImages()
@@ -75,20 +79,20 @@ class					Gallery extends XMLNode implements ICreator
 		return $url;
 	}
 	
-	public function 	init($title, $img_dir, $thumb_dir, $random = true)
+	public function 	init($title, $imageDir, $thumbDir, $random = true)
 	{
 		if ($this->exists)
 			throw new ErrorException("Could not create gallery named ".$this->file.". Gallery already exists.");
 		$this->title = $title;
-		$this->img_dir = $img_dir;
-		$this->thumb_dir = $thumb_dir;
+		$this->imageDir = $imageDir;
+		$this->thumbDir = $thumbDir;
 		$this->random = $random;
 		
 		//Creating XML root node
 		$this->root = new SimpleXMLElement("<gallery></gallery>");
 		$this->root->addAttribute("title", $this->title);
-		$this->root->addAttribute("thumbDir", $this->thumb_dir);
-		$this->root->addAttribute("imageDir", $this->img_dir);
+		$this->root->addAttribute("thumbDir", $this->thumbDir);
+		$this->root->addAttribute("imageDir", $this->imageDir);
 		$this->root->addAttribute("random", $this->random);
 	}
 
@@ -119,9 +123,9 @@ class					Gallery extends XMLNode implements ICreator
 		else
 			$this->random = $this->root["random"];
 		$this->title = strval($this->root["title"]);
-		$this->img_dir = strval($this->root["imageDir"]);
-		$this->thumb_dir = strval($this->root["thumbDir"]);
-		//Errors::Debug($this->thumb_dir);
+		$this->imageDir = strval($this->root["imageDir"]);
+		$this->thumbDir = strval($this->root["thumbDir"]);
+		//Errors::Debug($this->thumbDir);
 		foreach ($this->root->category as $category)
 		{
 			if (!$category["name"])

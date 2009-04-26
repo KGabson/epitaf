@@ -28,6 +28,16 @@ class					Tag
 		return false;
 	}
 	
+	public function 	setClassName($classname)
+	{
+		$this->setAttribute("class", $classname);
+	}
+	
+	public function 	getClassName()
+	{
+		return $this->getAttribute("class");
+	}
+	
 	public function		append(&$child)
 	{
 		$this->checkChild($child);
