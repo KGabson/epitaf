@@ -6,6 +6,7 @@ class 						FormInput extends Tag
 	protected 				$value;
 	protected 				$type;
 	protected 				$form_type;
+	protected 				$check_callback;
 	
 	public function 		__construct($type, $name, $mandatory = false, $tagname = "input", $classname = "", $inline = true)
 	{
@@ -15,6 +16,7 @@ class 						FormInput extends Tag
 		$this->mandatory = $mandatory;
 		$this->form_type = FormTypes::STRING;
 		$this->setAttribute("type", $this->type);
+		$this->setAttribute("name", $name);
 	}
 	
 	public function 		setFormType($form_type)
@@ -24,7 +26,7 @@ class 						FormInput extends Tag
 	
 	public function 		getFormType()
 	{
-		return $this->getFormType();
+		return $this->form_type;
 	}
 	
 	public function 		setValue($value)
@@ -47,8 +49,27 @@ class 						FormInput extends Tag
 		return $this->type;
 	}
 	
-	public function			check(&$value, &$error)
+	/**
+	 * Set a callback function that will be called by check()
+	 * Must be prototyped like this :
+	 * 		function callback(&$value, &$error);
+	 *
+	 * @param unknown_type $fct
+	 */
+	public function 		setCheckCallback($fct)
 	{
+		$this->check_callback = $fct;
+	}
+	
+	public function			check($value, &$error)
+	{
+		if ($this->check_callback && $this->check_callback($value, $error) === false)
+			return false;
+		if ($this->mandatory && empty($value))
+		{
+			$error = "Mandatory field";
+			return false;
+		}
 		if (FormTypes::check($this->form_type, $value, $error) === false)
 			return false;
 		$this->value = $value;

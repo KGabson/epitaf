@@ -31,11 +31,19 @@ class 							View extends Tag
 	private function 			init()
 	{
 		$this->addToolbarAction(new LinkTag("Add a Gallery", Page::getURL(array("add_gallery"))));
+		if (isset($_GET['add_gallery']))
+		{
+			/**
+			 * Gallery Form
+			 */
+			$g_form = new GalleryForm("add_gallery");
+		}
 		if (isset($_GET["gallery"]))
 		{
 			$gallery_name = urldecode($_GET["gallery"]);
 			if (!$gallery = $this->menu->getGallery($gallery_name))
 				return ;
+			var_dump(get_class_methods(get_class($gallery)));
 			$this->nav[$this->nav_lvl++] = new LinkTag($gallery->getTitle(), Page::getLink(urlencode($gallery->getName())));
 			$this->addToolbarAction(new LinkTag("Add a Category", $gallery->getLink("add_category")));
 			/**
