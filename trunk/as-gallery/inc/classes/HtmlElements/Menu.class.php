@@ -57,6 +57,18 @@ class					Menu extends Tag
 		return true;
 	}
 	
+	public function 	addGallery(Gallery &$gallery)
+	{
+		if (!$gallery->getName())
+			throw new ErrorException("Given gallery has no name");
+		if (!$gallery->getTitle())
+			throw new ErrorException("Gallery '".$gallery->getName()."' has no title");
+		$this->xmltree[$gallery->getName()] = $gallery;
+		$this->addGalleryLink($gallery->getName(), $gallery->getTitle(), $gallery->getLink());
+		foreach ($gallery->getCategories() as $category)
+			$this->addCategoryLink($gallery->getName(), $category);
+	}
+	
 	public function 	getGalleries()
 	{
 		return $this->xmltree;
@@ -83,13 +95,16 @@ class					Menu extends Tag
 				continue;
 			$gallery = new Gallery($matches[1], $path);
 			$gallery->load();
-			$this->xmltree[$matches[1]] = $gallery;
+			$this->addGallery($gallery);
+			/*$this->xmltree[$matches[1]] = $gallery;
 			$this->addGalleryLink($matches[1], $gallery->getTitle(), Page::getLink(urlencode($matches[1])));
+			//echo "ok => ".$gallery->getTitle();
 			foreach ($gallery->getCategories() as $category)
 			{
 				//echo $matches[1]."==";
+				//echo "lala";
 				$this->addCategoryLink($matches[1], $category);
-			}
+			}*/
 		}
 	}
 }

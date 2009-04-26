@@ -18,8 +18,9 @@ class 						FormBean extends FormView
 	
 	public function 	 	bindValue(FormInput &$input, $obj_var, $title = "")
 	{
-		if (!in_array($obj_var, $this->bean_properties))
-			throw new ErrorException("Undefined property $obj_var for class ".$this->bean_classname);
+		//var_dump($this->bean_methods);
+		//if (!in_array($obj_var, $this->bean_properties))
+			//throw new ErrorException("Undefined property '$obj_var' for class ".$this->bean_classname);
 		$tmp = strtoupper(substr($obj_var, 0, 1)).substr($obj_var, 1, strlen($obj_var));
 		$getter = "get".$tmp;
 		$setter = "set".$tmp;
