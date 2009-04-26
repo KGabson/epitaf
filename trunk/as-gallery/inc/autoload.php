@@ -28,6 +28,7 @@ function findClass_r($dir, $className)
 		}
 		else if ($file == $className.".class.php")
 		{
+			//echo "Including => ".$dir."/".$className.".class.php"."<br />";
 			require_once($dir."/".$className.".class.php");
 			$ret = true;
 			break;

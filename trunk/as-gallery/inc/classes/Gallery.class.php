@@ -1,10 +1,11 @@
 <?php
-class					Gallery extends XMLNode implements ICreator 
+class					Gallery extends XMLNode
 {
 	private 			$name;
 	private 			$file;
 	private 			$dir;
 	private 			$exists = false;
+	private 			$created = false;
 	private				$title = false;
 	private				$imageDir = false;
 	private				$thumbDir = false;
@@ -13,12 +14,15 @@ class					Gallery extends XMLNode implements ICreator
 	private 			$categories = array();
 
 	
-	public function 	__construct($filename_whithout_exension, $dir)
+	public function 	__construct($filename_whithout_exension = "", $dir = "")
 	{
 		$this->name = $filename_whithout_exension;
 		$this->dir = $dir;
-		$this->file = $this->name.".xml";
-		$this->exists = file_exists($this->dir."/".$this->file);
+		if ($this->name)
+		{
+			$this->file = $this->name.".xml";
+			$this->exists = file_exists($this->dir."/".$this->file);
+		}
 	}
 	
 	public function 	getCategories()
@@ -38,9 +42,23 @@ class					Gallery extends XMLNode implements ICreator
 		return $this->title;
 	}
 	
+	public function 	setTitle($title)
+	{
+		$this->title = $title;
+		$this->root["title"] = $title;
+	}
+	
 	public function 	getName()
 	{
 		return $this->name;
+	}
+	
+	public function 	setName($name)
+	{
+		$this->name = $name;
+		$this->file = $this->name.".xml";
+		$this->exists = file_exists($this->dir."/".$this->name);
+		//Errors::Debug("setting name: $name => $this->file => $this->exists");
 	}
 	
 	public function 	getDir()
@@ -63,6 +81,16 @@ class					Gallery extends XMLNode implements ICreator
 		return $this->random;
 	}
 	
+	public function 	setRandom($random)
+	{
+		$this->random = $random;
+	}
+	
+	public function 	exists()
+	{
+		return $this->exists;
+	}
+	
 	public function 	getRandomImages()
 	{
 		$aImages = array();
@@ -81,29 +109,40 @@ class					Gallery extends XMLNode implements ICreator
 	
 	public function 	init($title, $imageDir, $thumbDir, $random = true)
 	{
-		if ($this->exists)
-			throw new ErrorException("Could not create gallery named ".$this->file.". Gallery already exists.");
+		//if ($this->exists)
+			//throw new ErrorException("Could not create gallery named ".$this->file.". Gallery already exists.");
 		$this->title = $title;
 		$this->imageDir = $imageDir;
 		$this->thumbDir = $thumbDir;
 		$this->random = $random;
+		if (!$this->file)
+			$this->file = $this->name.".xml";
 		
 		//Creating XML root node
-		$this->root = new SimpleXMLElement("<gallery></gallery>");
-		$this->root->addAttribute("title", $this->title);
-		$this->root->addAttribute("thumbDir", $this->thumbDir);
-		$this->root->addAttribute("imageDir", $this->imageDir);
-		$this->root->addAttribute("random", $this->random);
+		if (!$this->root)
+		{
+			$this->root = new SimpleXMLElement("<gallery></gallery>");
+			$this->root->addAttribute("title", $this->title);
+			$this->root->addAttribute("thumbDir", $this->thumbDir);
+			$this->root->addAttribute("imageDir", $this->imageDir);
+			$this->root->addAttribute("random", $this->random);
+		}
+		$this->created = true;
 	}
 
-	public function 	create(array $values = null)
+	public function 	create()
 	{
-		if ($values == null)
-			throw new ErrorException("Missing \$values parameter in create() function");
-		if ($this->exists)
-			throw new ErrorException("Could not create gallery named ".$this->file.". Gallery already exists.");
-		
-		$this->init($values['title'], $values['imageDir'], $values['thumbDir'], $values['random']);
+		if (!$this->name)
+			throw new ErrorException("Could not create this gallery, it has no name");
+		if (!$this->title)
+			Errors::Warning("Gallery named '".$this->name."' has no title");
+		if (!$this->imageDir)
+			$this->imageDir = $this->name;
+		if (!$this->thumbDir)
+			$this->thumbDir = $this->imageDir."/thumbs";
+		$this->init($this->title, $this->imageDir, $this->thumbDir, $this->random);
+		if (file_exists($this->dir."/".$this->file))
+			throw new ErrorException("Could not create gallery named ".$this->file.". Gallery of the same name already exists.");
 	}
 	
 	public function 	load()
@@ -118,14 +157,12 @@ class					Gallery extends XMLNode implements ICreator
 			throw new ErrorException("No imageDir for gallery ".$this->dir."/".$this->file);
 		if (!$this->root["thumbDir"])
 			throw new ErrorException("No thumbDir for gallery ".$this->dir."/".$this->file);
+		$random = true;
 		if (!$this->root["random"])
-			$this->random = false;
+			$random = false;
 		else
 			$this->random = $this->root["random"];
-		$this->title = strval($this->root["title"]);
-		$this->imageDir = strval($this->root["imageDir"]);
-		$this->thumbDir = strval($this->root["thumbDir"]);
-		//Errors::Debug($this->thumbDir);
+		$this->init(strval($this->root["title"]), strval($this->root["imageDir"]), strval($this->root["thumbDir"]), $random);
 		foreach ($this->root->category as $category)
 		{
 			if (!$category["name"])
@@ -140,16 +177,62 @@ class					Gallery extends XMLNode implements ICreator
 		return true;
 	}
 	
-	public function 	addCategory(Category $cat)
+	public function 	save()
 	{
-		if (isset($this->categories[$cat->getName()]))
-			throw new ErrorException("Category [".$cat->getName()."] already exists for gallery ".$this->name);
-		$this->categories[$cat->getName()] = $cat;
-		$xmlcat = $this->root->addChild("category");
-		$xmlcat->addAttribute("name", $cat->getName());
+		if (!$this->created)
+			$this->create();
+			
+		/**
+		 * Creating directories
+		 */
+		if (!is_dir($this->dir))
+			Directory::Make($this->dir, 0755);
+		if (!is_dir($this->dir."/".$this->imageDir))
+		{
+			Dir::Make($this->dir."/".$this->imageDir, 0755);
+			Dir::Make($this->dir."/".$this->thumbDir, 0755);
+		}
+		/**
+		 * Creating or updating XML file
+		 */
+		$str = $this->toXML();
+		File::PutContents($this->dir."/".$this->file, $str);
 	}
 	
-	public static function		getTitleFromFilename($filename)
+	public function 	addCategory(Category $cat)
+	{
+		if (!$cat->getName())
+			throw new ErrorException("Given Category has no name");
+		if (isset($this->categories[$cat->getName()]))
+			throw new ErrorException("Category [".$cat->getName()."] already exists for gallery ".$this->name);
+		if (!$this->created)
+			$this->create();
+		$this->categories[$cat->getName()] = $cat;
+		//$xmlcat = $this->root->addChild("category");
+		//$xmlcat->addAttribute("name", $cat->getName());
+	}
+	
+	public function		updateCategory($category_name, Category &$category)
+	{
+		if (!isset($this->categories[$category_name]))
+			return false;
+		if (!$this->created)
+			return false;
+		if (!$category->getName())
+			throw new ErrorException("Given Category as no name");
+		if ($category_name != $category->getName())
+		{
+			unset($this->categories[$category_name]);
+		}
+		$this->categories[$category->getName()] = $category;
+		/*foreach ($this->root->categories as $cat)
+		{
+			if (strval($cat["name"]) == $category->getName())
+				$cat->setAttribute
+		}*/
+	}
+	
+	/*public static function		getTitleFromFilename($filename)
 	{
 		$filename = trim($filename);
 		$filename = preg_replace("!(.*)\.xml!", "$1", $filename);
@@ -158,7 +241,7 @@ class					Gallery extends XMLNode implements ICreator
 		foreach ($a as $key => $str)
 			$a[$key] = strtoupper($str[0]).substr($str, 1);
 		return (implode(" ", $a));
-	}
+	}*/
 	
 }
 ?>

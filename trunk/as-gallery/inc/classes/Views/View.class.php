@@ -34,18 +34,37 @@ class 							View extends Tag
 		if (isset($_GET['add_gallery']))
 		{
 			/**
-			 * Gallery Form
+			 * Gallery creation Form
 			 */
-			$g_form = new GalleryForm("add_gallery");
+			$this->makeGalleryForm();
+			return ;
 		}
 		if (isset($_GET["gallery"]))
 		{
 			$gallery_name = urldecode($_GET["gallery"]);
 			if (!$gallery = $this->menu->getGallery($gallery_name))
 				return ;
-			var_dump(get_class_methods(get_class($gallery)));
 			$this->nav[$this->nav_lvl++] = new LinkTag($gallery->getTitle(), Page::getLink(urlencode($gallery->getName())));
 			$this->addToolbarAction(new LinkTag("Add a Category", $gallery->getLink("add_category")));
+			
+			/**
+			 * Gallery edition Form
+			 */
+			if (isset($_GET["edit"]))
+			{
+				$this->makeGalleryForm($gallery);
+				return ;
+			}
+			
+			/**
+			 * Category creation Form
+			 */
+			if (isset($_GET['add_category']))
+			{
+				$this->makeCategoryForm($gallery);
+				return ;
+			}
+			
 			/**
 			 * Listing Categories
 			 */
@@ -65,6 +84,14 @@ class 							View extends Tag
 				$cat_name = urldecode($_GET['category']);
 				if (!$category = $gallery->getCategory($cat_name))
 					return ;
+				if (isset($_GET['edit']))
+				{
+					/**
+					 * Category edition Form
+					 */
+					$this->makeCategoryForm($gallery, $category);
+					return ;
+				}
 				$this->addToolbarAction(new LinkTag("Add an Image", $category->getLink("add_image")));
 				$this->nav[$this->nav_lvl++] = new LinkTag(
 					$category->getName(),
@@ -91,6 +118,51 @@ class 							View extends Tag
 				$this->right->append($toolblock);
 			}
 		}
+	}
+	
+	private function 			makeGalleryForm(Gallery &$gallery = null)
+	{
+		$new = ($gallery == null) ? true : false;
+		$gallery = ($gallery == null) ? new Gallery("", __ROOT."/galleries") : $gallery;
+		$g_form = new FormBean("gallery", $gallery);
+		$name_input = new FormString("name", true);
+		$name_input->setFormType(FormTypes::FILENAME);
+		if (!$new)
+			$name_input->setAttribute("disabled", "disabled");
+		$g_form->bindValue($name_input, "name", "Identifier");
+		$g_form->bindValue(new FormString("title", true), "title", "Title");
+		$g_form->bindValue(new FormCheck("random", "random", "", true), "random", "Randomize pictures ?");
+		if ($g_form->check())
+		{
+			if ($new && $gallery->exists())
+				$g_form->addError("There is already a gallery named '".$gallery->getName()."'. Please choose another identifier.");
+			else
+			{
+				$gallery->save();
+				Page::redirect(Page::getURL());
+			}
+		}
+		$this->right->append($g_form);
+	}
+	
+	private function 			makeCategoryForm(Gallery &$gallery, Category $category = null)
+	{
+		$new = ($category == null) ? true : false;
+		$category = ($category == null) ? new Category("", $category) : $category;
+		$c_form = new FormBean("category", $category);
+		$c_form->bindValue(new FormString("name", true), "name", "Name");
+		if ($c_form->check())
+		{
+			if ($new && $gallery->getCategory($category->getName()))
+				$c_form->addError("Category of the same name already exists");
+			else
+			{
+				
+				$gallery->save();
+				Page::redirect(Page::getURL());
+			}
+		}
+		$this->right->append($c_form);
 	}
 	
 	private function 			addToolbarAction(LinkTag $link)

@@ -2,6 +2,11 @@
 require_once("../inc/config.php");
 require_once("../inc/autoload.php");
 
+//$gal = new Gallery("hop", "hop");
+//$gal->addCategory(new Category("toto", $gal));
+//Errors::ShowCode($gal->toXML());
+//var_dump($gal->toXML());
+//echo "lala";
 //Errors::Dump(get_class("FormTypes"));
 //$t = ;
 //Errors::Debug();

@@ -95,6 +95,12 @@ class						Page
 		print $me->root->toHTML();
 	}
 	
+	public static function 	redirect($url)
+	{
+		header("location:".$url);
+		exit(0);
+	}
+	
 	public static function	append($child)
 	{
 		$me = self::instance();

@@ -3,6 +3,7 @@ class 							FormTypes
 {
 	const 						STRING = 1;
 	const 						ESCAPED_STRING = 2;
+	const 						FILENAME = 3;
 	
 	const 						NUMBER = 10;
 	const 						BOOL = 11;
@@ -16,10 +17,20 @@ class 							FormTypes
 	);
 	
 	private static 				$checkRegexp = array (
-		self::NUMBER =>			"![0-9]+!"
+		self::NUMBER =>			"![0-9]+!",
+	);
+	
+	private static 				$failRegexp = array (
+		self::FILENAME =>		"![^a-zA-Z0-9\.\_\-]!"
 	);
 	
 	private static 				$replaceRegexp = array (
+		self::FILENAME =>		array(
+			//Search pattern
+			"!\s!",
+			//Replace pattern
+			"_"
+		)
 	);
 	
 	private static function 	checkString(&$value, &$error)
@@ -49,8 +60,18 @@ class 							FormTypes
 			$error = "Bad format";
 			return false;
 		}
-		if (isset(self::$checkFunctions[$form_type]) && (self::$checkFunctions[$form_type]($value, $error) === false))
+		if (isset(self::$failRegexp[$form_type]) && preg_match(self::$failRegexp[$form_type], $value))
+		{
+			$error = "Bad format";
 			return false;
+		}
+		
+		if (isset(self::$checkFunctions[$form_type]))
+		{
+			$fct = self::$checkFunctions[$form_type];
+			if (self::$fct($value, $error) === false)
+				return false;
+		}
 		return true;
 	}
 	}

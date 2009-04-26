@@ -8,5 +8,11 @@ class						File
 		$filepath = basename($filepath, ($remove_extension) ? $ext : null);
 		return $filepath;
 	}
+	
+	public static function PutContents($filename, $data)
+	{
+		if (!file_put_contents($filename, $data))
+			throw new ErrorException("Could not add content to ".$filename);
+	}
 }
 ?>

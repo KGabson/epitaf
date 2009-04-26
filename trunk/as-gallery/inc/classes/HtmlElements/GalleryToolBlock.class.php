@@ -26,6 +26,12 @@ class 					GalleryToolBlock extends Tag
 		$this->toolbar->append(
 			new TagBlock(
 				"li", 
+				new LinkTag("Edit", $gallery->getLink("edit"))
+			)
+		);
+		$this->toolbar->append(
+			new TagBlock(
+				"li", 
 				new LinkTag("Delete", $gallery->getLink("delete"))
 			)
 		);

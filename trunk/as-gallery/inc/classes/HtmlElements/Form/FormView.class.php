@@ -8,6 +8,7 @@ class 							FormView extends Tag
 	protected 					$submit;
 	protected 					$has_files = false;
 	protected 					$submited = false;
+	protected 					$form_errors = array();
 	protected 					$num_errors = 0;
 	
 	public function 			__construct($name, $action = "", $method = "post")
@@ -38,6 +39,11 @@ class 							FormView extends Tag
 		$this->append($this->elements[$field->getInput()->getName()]);
 	}
 	
+	public function 			addError($msg)
+	{
+		$this->form_errors[] = $msg;
+	}
+	
 	public function 			isSubmitted()
 	{
 		return $this->submited;
@@ -51,8 +57,10 @@ class 							FormView extends Tag
 		$this->num_errors = 0;
 		foreach ($this->elements as $name => $field)
 		{
+			if ($field->getInput()->getAttribute("disabled") == "disabled")
+				continue;
 			$error = "";
-			if ($field->getInput()->check($_POST[$name], $error) === false)
+			if (isset ($_POST[$name]) && ($field->getInput()->check(trim($_POST[$name]), $error) === false))
 			{
 				$field->setError($error);
 				$this->num_errors++;
@@ -62,6 +70,19 @@ class 							FormView extends Tag
 		if ($this->num_errors == 0)
 			return true;
 		return false;
+	}
+	
+	public function 			toHTML($indent = 0)
+	{
+		$this->append(new FormSubmit($this->name, "Submit"));
+		if (!empty($this->form_errors))
+		{
+			$errorTag = new Tag("div", "error");
+			foreach ($this->form_errors as $msg)
+				$errorTag->append(new TagBlock("p", $msg));
+			$this->insert($errorTag);
+		}
+		return parent::toHTML($indent);
 	}
 }
 ?>

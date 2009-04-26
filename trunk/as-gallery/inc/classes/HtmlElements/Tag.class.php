@@ -5,8 +5,8 @@ class					Tag
 	private				$children = array();
 	private				$num_children = 0;
 	
-	private				$inline;
-	private				$tagname;
+	protected 			$inline;
+	protected 			$tagname;
 	
 	public function		__construct($tagname, $classname = "", $inline = false)
 	{
@@ -38,6 +38,12 @@ class					Tag
 		return $this->getAttribute("class");
 	}
 	
+	/**
+	 * TODO: Prototype append and insert with mixed args such as :
+	 * 		append(list $children)
+	 * so we can append many Tags at a time
+	 *
+	 */
 	public function		append(&$child)
 	{
 		$this->checkChild($child);

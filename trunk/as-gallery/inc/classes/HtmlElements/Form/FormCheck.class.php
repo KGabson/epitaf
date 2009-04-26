@@ -26,11 +26,19 @@ class 						FormCheck extends FormInput
 		return $this->checked;
 	}
 	
+	public function 		check(&$value, &$error)
+	{
+		if (parent::check($value, $error) === false)
+			return false;
+		$this->checked = true;
+		return true;
+	}
+	
 	public function 		toHTML($indent = 0)
 	{
 		if ($this->checked)
 			$this->setAttribute("checked", "checked");
-		parent::toHtml($indent);
+		return parent::toHtml($indent);
 	}
 }
 ?>

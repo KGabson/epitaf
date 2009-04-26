@@ -6,7 +6,7 @@ class 						Category extends XMLNode implements ICreator
 	private 				$nb_images = 0;
 	private 				$gallery;
 	
-	public function 		__construct($name, Gallery &$gallery = null)
+	public function 		__construct($name = "", Gallery &$gallery = null)
 	{
 		$this->name = $name;
 		$this->gallery = ($gallery == null) ? new Gallery("none", "") : $gallery;
@@ -16,6 +16,11 @@ class 						Category extends XMLNode implements ICreator
 	public function 		getName()
 	{
 		return $this->name;
+	}
+	
+	public function 		setName($name)
+	{
+		$this->name = $name;
 	}
 	
 	public function 		getImages()
