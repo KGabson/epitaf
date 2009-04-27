@@ -1,5 +1,5 @@
 <?php
-class					Gallery extends XMLNode
+class					Gallery extends XMLRoot
 {
 	private 			$name;
 	private 			$file;
@@ -12,17 +12,20 @@ class					Gallery extends XMLNode
 	private				$random = false;
 
 	private 			$categories = array();
+	private 			$num_categories = 0;
 
 	
 	public function 	__construct($filename_whithout_exension = "", $dir = "")
 	{
-		$this->name = $filename_whithout_exension;
+		parent::__construct("gallery");
+		//$this->name = $filename_whithout_exension;
 		$this->dir = $dir;
-		if ($this->name)
+		$this->setName($filename_whithout_exension);
+		/*if ($this->name)
 		{
 			$this->file = $this->name.".xml";
 			$this->exists = file_exists($this->dir."/".$this->file);
-		}
+		}*/
 	}
 	
 	public function 	getCategories()
@@ -45,7 +48,8 @@ class					Gallery extends XMLNode
 	public function 	setTitle($title)
 	{
 		$this->title = $title;
-		$this->root["title"] = $title;
+		//$root["title"] = $title;
+		$this->setAttribute("title", $this->title);
 	}
 	
 	public function 	getName()
@@ -58,7 +62,7 @@ class					Gallery extends XMLNode
 		$this->name = $name;
 		$this->file = $this->name.".xml";
 		$this->exists = file_exists($this->dir."/".$this->name);
-		//Errors::Debug("setting name: $name => $this->file => $this->exists");
+		$this->setAttribute("name", $this->name);
 	}
 	
 	public function 	getDir()
@@ -71,9 +75,21 @@ class					Gallery extends XMLNode
 		return $this->imageDir;
 	}
 	
+	public function 	setImageDir($img_dir)
+	{
+		$this->imageDir = $img_dir;
+		$this->setAttribute("imageDir", $this->imageDir);
+	}
+	
 	public function 	getThumbDir()
 	{
 		return $this->thumbDir;
+	}
+	
+	public function 	setThumbDir($thumb_dir)
+	{
+		$this->thumbDir = $thumb_dir;
+		$this->setAttribute("thumbDir", $this->thumbDir);
 	}
 	
 	public function 	getRandom()
@@ -83,7 +99,8 @@ class					Gallery extends XMLNode
 	
 	public function 	setRandom($random)
 	{
-		$this->random = $random;
+		$this->random = ($random) ? true : false;
+		$this->setAttribute("random", strval($this->random));
 	}
 	
 	public function 	exists()
@@ -96,37 +113,42 @@ class					Gallery extends XMLNode
 		$aImages = array();
 		foreach ($this->categories as $cat)
 		{
-			$aImages[] = $cat->getRandomImage();
+			if ($img = $cat->getRandomImage())
+				$aImages[] = $img;
 		}
 		return $aImages;
 	}
 	
 	public function 	getLink($action = "")
 	{
-		$url = Page::getLink(urlencode($this->name), "", "", $action);
+		$url = Page::getLink($this->name, "", "", $action);
 		return $url;
 	}
 	
 	public function 	init($title, $imageDir, $thumbDir, $random = true)
 	{
+		$this->setTitle($title);
+		$this->setImageDir($imageDir);
+		$this->setThumbDir($thumbDir);
+		$this->setRandom($random);
 		//if ($this->exists)
 			//throw new ErrorException("Could not create gallery named ".$this->file.". Gallery already exists.");
-		$this->title = $title;
-		$this->imageDir = $imageDir;
-		$this->thumbDir = $thumbDir;
-		$this->random = $random;
-		if (!$this->file)
-			$this->file = $this->name.".xml";
+		//$this->title = $title;
+		//$this->imageDir = $imageDir;
+		//$this->thumbDir = $thumbDir;
+		//$this->random = $random;
+		//if (!$this->file)
+			//$this->file = $this->name.".xml";
 		
 		//Creating XML root node
-		if (!$this->root)
-		{
-			$this->root = new SimpleXMLElement("<gallery></gallery>");
-			$this->root->addAttribute("title", $this->title);
-			$this->root->addAttribute("thumbDir", $this->thumbDir);
-			$this->root->addAttribute("imageDir", $this->imageDir);
-			$this->root->addAttribute("random", $this->random);
-		}
+		//if (!$this->root)
+		//{
+			//$this->root = new SimpleXMLElement("<gallery></gallery>");
+		//$this->setAttribute("title", $this->title);
+		//$this->setAttribute("thumbDir", $this->thumbDir);
+		//$this->setAttribute("imageDir", $this->imageDir);
+		//$this->setAttribute("random", $this->random);
+		//}
 		$this->created = true;
 	}
 
@@ -149,27 +171,28 @@ class					Gallery extends XMLNode
 	{
 		if (!$this->exists)
 			return false;
-		if (($this->root = simplexml_load_file($this->dir."/".$this->file)) === FALSE)
+		if (($root = simplexml_load_file($this->dir."/".$this->file)) === FALSE)
 			throw new ErrorException("Could not load ".$this->dir."/".$this->file);
-		if (!$this->root["title"])
+		if (!$root["title"])
 			throw new ErrorException("No title for gallery ".$this->dir."/".$this->file);
-		if (!$this->root["imageDir"])
+		if (!$root["imageDir"])
 			throw new ErrorException("No imageDir for gallery ".$this->dir."/".$this->file);
-		if (!$this->root["thumbDir"])
+		if (!$root["thumbDir"])
 			throw new ErrorException("No thumbDir for gallery ".$this->dir."/".$this->file);
 		$random = true;
-		if (!$this->root["random"])
+		if (!$root["random"])
 			$random = false;
 		else
-			$this->random = $this->root["random"];
-		$this->init(strval($this->root["title"]), strval($this->root["imageDir"]), strval($this->root["thumbDir"]), $random);
-		foreach ($this->root->category as $category)
+			$this->random = $root["random"];
+		$this->init(strval($root["title"]), strval($root["imageDir"]), strval($root["thumbDir"]), $random);
+		foreach ($root->category as $category)
 		{
 			if (!$category["name"])
 			{
 				Errors::Warning("Could not find a name for category ".$this->dir."/".$this->file);
 				continue;
 			}
+			//Errors::Debug("Found category: ".$category["name"]);
 			$cat_name = strval($category["name"]);
 			$this->categories[$cat_name] = new Category($cat_name, $this);
 			$this->categories[$cat_name]->loadFromXML($category);
@@ -208,7 +231,7 @@ class					Gallery extends XMLNode
 		if (!$this->created)
 			$this->create();
 		$this->categories[$cat->getName()] = $cat;
-		//$xmlcat = $this->root->addChild("category");
+		//$xmlcat = $root->addChild("category");
 		//$xmlcat->addAttribute("name", $cat->getName());
 	}
 	
@@ -222,14 +245,26 @@ class					Gallery extends XMLNode
 			throw new ErrorException("Given Category as no name");
 		if ($category_name != $category->getName())
 		{
+			//$pos = array_search($category_name, $this->categories);
+			
+			$keys = array_keys($this->categories);
+			$pos = array_search($category_name, $keys);
+			Tools::array_insert($this->categories, $pos, array($category->getName(), $category));
 			unset($this->categories[$category_name]);
 		}
 		$this->categories[$category->getName()] = $category;
-		/*foreach ($this->root->categories as $cat)
+		/*foreach ($root->categories as $cat)
 		{
 			if (strval($cat["name"]) == $category->getName())
 				$cat->setAttribute
 		}*/
+	}
+	
+	public function 	toXML()
+	{
+		foreach ($this->categories as $category)
+			$this->append($category);
+		return parent::toXML();
 	}
 	
 	/*public static function		getTitleFromFilename($filename)

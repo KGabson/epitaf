@@ -17,7 +17,7 @@ class 					ImageToolBlock extends Tag
 		 */
 		$this->title = new TagBlock(
 			"h4",
-			new LinkTag($image->title, Page::getURL(array("image=".urlencode($image->title))), "title")
+			new LinkTag($image->getTitle(), $image->getLink(), "title")
 		);
 		
 		/**
@@ -38,9 +38,9 @@ class 					ImageToolBlock extends Tag
 		$this->image_tag->append(
 			new LinkTag(
 				new ImageTag(
-					$category->getDir()."/".$category->getThumbDir()."/".$image->img,
-					$image->img,
-					$image->title
+					$category->getDir()."/".$category->getThumbDir()."/".$image->getImg(),
+					$image->getImg(),
+					$image->getTitle()
 				),
 				$image->getLink()
 			)

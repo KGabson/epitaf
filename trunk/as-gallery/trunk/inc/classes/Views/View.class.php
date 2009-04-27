@@ -44,13 +44,15 @@ class 							View extends Tag
 			$gallery_name = urldecode($_GET["gallery"]);
 			if (!$gallery = $this->menu->getGallery($gallery_name))
 				return ;
-			$this->nav[$this->nav_lvl++] = new LinkTag($gallery->getTitle(), Page::getLink(urlencode($gallery->getName())));
+			//Errors::ShowCode($gallery->toXML());
+			$this->nav[$this->nav_lvl++] = new LinkTag($gallery->getTitle(), Page::getLink($gallery->getName()));
+			$this->addToolbarAction(new LinkTag("Edit this gallery", $gallery->getLink("edit")));
 			$this->addToolbarAction(new LinkTag("Add a Category", $gallery->getLink("add_category")));
 			
 			/**
 			 * Gallery edition Form
 			 */
-			if (isset($_GET["edit"]))
+			if (isset($_GET["edit"]) && !isset($_GET["category"]) && !isset($_GET["image"]))
 			{
 				$this->makeGalleryForm($gallery);
 				return ;
@@ -82,16 +84,19 @@ class 							View extends Tag
 			else
 			{
 				$cat_name = urldecode($_GET['category']);
+				//echo "hop => $cat_name";
 				if (!$category = $gallery->getCategory($cat_name))
 					return ;
-				if (isset($_GET['edit']))
+				if (isset($_GET['edit']) && !isset($_GET["image"]))
 				{
 					/**
 					 * Category edition Form
 					 */
+					//echo "lalala";
 					$this->makeCategoryForm($gallery, $category);
 					return ;
 				}
+				$this->addToolbarAction(new LinkTag("Edit this category", $category->getLink("edit")));
 				$this->addToolbarAction(new LinkTag("Add an Image", $category->getLink("add_image")));
 				$this->nav[$this->nav_lvl++] = new LinkTag(
 					$category->getName(),
@@ -139,7 +144,7 @@ class 							View extends Tag
 			else
 			{
 				$gallery->save();
-				Page::redirect(Page::getURL());
+				Page::redirect(Page::getLink($gallery->getName(), "", "", "edit"));
 			}
 		}
 		$this->right->append($g_form);
@@ -148,6 +153,7 @@ class 							View extends Tag
 	private function 			makeCategoryForm(Gallery &$gallery, Category $category = null)
 	{
 		$new = ($category == null) ? true : false;
+		$old_name = ($category == null) ? false : $category->getName();
 		$category = ($category == null) ? new Category("", $category) : $category;
 		$c_form = new FormBean("category", $category);
 		$c_form->bindValue(new FormString("name", true), "name", "Name");
@@ -157,9 +163,13 @@ class 							View extends Tag
 				$c_form->addError("Category of the same name already exists");
 			else
 			{
-				
+				//$gallery->updateCategory()
+				if ($new)
+					$gallery->addCategory($category);
+				else
+					$gallery->updateCategory($old_name, $category);
 				$gallery->save();
-				Page::redirect(Page::getURL());
+				Page::redirect(Page::getLink($gallery->getName(), $category->getName(), "", "edit"));
 			}
 		}
 		$this->right->append($c_form);

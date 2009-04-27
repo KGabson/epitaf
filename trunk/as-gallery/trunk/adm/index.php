@@ -2,6 +2,18 @@
 require_once("../inc/config.php");
 require_once("../inc/autoload.php");
 
+/*$a = array(
+	"toto" => "hoho",
+	"titi" => "hihi",
+	"tata" => "haha"
+);*/
+
+//var_dump($a);
+//array_splice($a, 1, 1, array("tutu" => "huhu"));
+//Tools::array_insert($a, 1, array("tutu" => "huhu"));
+//unset($a["titi"]);
+//var_dump($a);
+
 //$gal = new Gallery("hop", "hop");
 //$gal->addCategory(new Category("toto", $gal));
 //Errors::ShowCode($gal->toXML());

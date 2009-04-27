@@ -101,7 +101,7 @@ class					Tag
 		{
 			$str .= ' '.$key.'="'.$value.'"';
 		}
-		if ($this->inline)
+		if ($this->inline || empty($this->children))
 		{
 			$str .= ' />'.$newline;
 			return $str;
