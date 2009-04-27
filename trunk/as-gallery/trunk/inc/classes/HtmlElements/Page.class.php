@@ -32,9 +32,9 @@ class						Page
 		$file = (empty($file)) ? self::instance()->file : $file;
 		$url = $file;
 		$url .= (!empty($gallery) || !empty($category) || !empty($image)) ? "?" : "";
-		$url .= (!empty($gallery)) ? "gallery=".$gallery."&" : "";
-		$url .= (!empty($category)) ? "category=".$category."&" : "";
-		$url .= (!empty($image)) ? "image=".$image."&" : "";
+		$url .= (!empty($gallery)) ? "gallery=".urlencode($gallery)."&" : "";
+		$url .= (!empty($category)) ? "category=".urlencode($category)."&" : "";
+		$url .= (!empty($image)) ? "image=".urlencode($image)."&" : "";
 		$url .= (!empty($action)) ? $action."&" : "";
 		$url = ((!empty($gallery) || !empty($category) || !empty($image) || !empty($action))) ? substr($url, 0, strlen($url) - 1) : $url;
 		return $url;

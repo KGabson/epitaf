@@ -47,9 +47,9 @@ class 					GalleryToolBlock extends Tag
 				new TagBlock(
 					"li",
 					new ImageTag(
-						$gallery->getDir()."/".$gallery->getThumbDir()."/".$image->img,
-						$image->title,
-						$image->title
+						$gallery->getDir()."/".$gallery->getThumbDir()."/".$image->getImg(),
+						$image->getTitle(),
+						$image->getTitle()
 					) //ImageTag
 				) //TagBlock
 			); //append
