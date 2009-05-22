@@ -1,0 +1,24 @@
+------------------------
+DORIAN :::::::::::::::::
+------------------------
+
+
+- multi-narrateur
+- Super admin cree le voyage
+- 
+
+Front Office (Utilisateur)
+- 2 menus, un a droite, un a gauche
+- La navigation se fait en suivant l'itineraire sur la droite
+- L'utilisateur selectionne une etape
+- Pour chaque etape, l'utilisateur choisit une vue a gauche: recit, images, videos, carte
+- chacun de ces liens dependent de l'etape selectionnee a droite, leur contenu s'adapte selon l'etape selectionnee
+- 3 autres liens restent independants: conseils / impressions - liens utiles - Accueil
+
+- Page d'accueil:
+	- Image aleatoire
+	- resume des rubriques disponibles (chaque vue)
+	- Apres avoir clique sur une vue, on arrive sur la premiere etape du voyage
+
+
+Back Office (Redacteur & Admin)
