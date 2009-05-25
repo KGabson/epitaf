@@ -22,3 +22,14 @@ Front Office (Utilisateur)
 
 
 Back Office (Redacteur & Admin)
+
+Utilisateur accede a une map
+Il peut definir des points
+
+sur chaque point, il a l'option "definir une etape"
+l'ordre dans lequel il insere les etapes par defaut est l'ordre chronologique
+il peut cependant changer l'ordre des etapes par la suite
+un trace est affiche sur la carte selon l'ordre definit
+il est possible de desactiver l'affichage de ce trace (ex: visite d'une ville, pas dans un ordre precis)
+
+images gerees dans une base d'images ou on peut tout uploader d'un coup
