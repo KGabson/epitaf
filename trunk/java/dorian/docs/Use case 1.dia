@@ -170,7 +170,7 @@
         <dia:point val="5.34,-299.51"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.25319,-302.26;7.4075,-296.76"/>
+        <dia:rectangle val="3.2725,-302.26;7.4075,-296.76"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -782,7 +782,7 @@ Saisir un ou plusieurs points sur la carte#</dia:string>
         <dia:point val="18.7025,-326.75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="18.6525,-326.862;18.8025,-325.262"/>
+        <dia:rectangle val="18.6525,-326.863;18.8025,-325.262"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1191,7 +1191,7 @@ un redacteur#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="18.7025,-314.71"/>
+            <dia:point val="18.7026,-314.71"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -1207,7 +1207,7 @@ un redacteur#</dia:string>
         <dia:point val="6.61,-320.61"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="6.54091,-320.679;15.4903,-314.881"/>
+        <dia:rectangle val="6.54091,-320.679;15.4904,-314.881"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="6.61,-320.61"/>
@@ -1258,7 +1258,7 @@ un redacteur#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="18.7112,-311.96"/>
+            <dia:point val="18.7113,-311.96"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
