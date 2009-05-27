@@ -13,7 +13,6 @@ CREATE  TABLE IF NOT EXISTS `dorian`.`step` (
   `begin_date` DATE NULL ,
   `end_date` DATE NULL ,
   `title` VARCHAR(45) NULL ,
-  `id_coordinate` INT NULL ,
   `resume` TEXT NULL ,
   PRIMARY KEY (`id_step`) )
 ENGINE = InnoDB;
