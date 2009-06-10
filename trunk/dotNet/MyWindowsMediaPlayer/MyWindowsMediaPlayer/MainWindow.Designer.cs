@@ -1,4 +1,5 @@
-﻿namespace MyWindowsMediaPlayer
+﻿using MyWindowsMediaPlayer.View;
+namespace MyWindowsMediaPlayer
 {
     partial class MainWindow
     {
@@ -31,7 +32,7 @@
             this.leftPanel = new System.Windows.Forms.Panel();
             this.topPanel = new System.Windows.Forms.Panel();
             this.rightPanel = new System.Windows.Forms.Panel();
-            this.playerControlView1 = new MyWindowsMediaPlayer.PlayerControlView();
+            this.playerControlView1 = new MyWindowsMediaPlayer.View.PlayerControlView();
             this.rightPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,7 +64,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.playerControlView1.Location = new System.Drawing.Point(3, 384);
             this.playerControlView1.Name = "playerControlView1";
-            this.playerControlView1.Size = new System.Drawing.Size(368, 70);
+            this.playerControlView1.Size = new System.Drawing.Size(553, 70);
             this.playerControlView1.TabIndex = 0;
             // 
             // MainWindow
@@ -86,7 +87,7 @@
         private System.Windows.Forms.Panel leftPanel;
         private System.Windows.Forms.Panel topPanel;
         private System.Windows.Forms.Panel rightPanel;
-        private PlayerControlView playerControlView1;
+        private MyWindowsMediaPlayer.View.PlayerControlView playerControlView1;
     }
 }
 

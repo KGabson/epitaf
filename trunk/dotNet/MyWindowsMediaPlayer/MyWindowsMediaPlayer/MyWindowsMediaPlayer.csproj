@@ -48,10 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FilterSelectionView.cs">
+    <Compile Include="ViewModel\PlayerControlViewModel.cs" />
+    <Compile Include="View\FilterSelectionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FilterSelectionView.Designer.cs">
+    <Compile Include="View\FilterSelectionView.Designer.cs">
       <DependentUpon>FilterSelectionView.cs</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.cs">
@@ -60,30 +61,30 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="MovieProgressBar.cs">
+    <Compile Include="View\MovieProgressBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MovieProgressBar.Designer.cs">
+    <Compile Include="View\MovieProgressBar.Designer.cs">
       <DependentUpon>MovieProgressBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="PlayerControlView.cs">
+    <Compile Include="View\PlayerControlView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PlayerControlView.Designer.cs">
+    <Compile Include="View\PlayerControlView.Designer.cs">
       <DependentUpon>PlayerControlView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FilterSelectionView.resx">
+    <EmbeddedResource Include="View\FilterSelectionView.resx">
       <DependentUpon>FilterSelectionView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MovieProgressBar.resx">
+    <EmbeddedResource Include="View\MovieProgressBar.resx">
       <DependentUpon>MovieProgressBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PlayerControlView.resx">
+    <EmbeddedResource Include="View\PlayerControlView.resx">
       <DependentUpon>PlayerControlView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -91,7 +92,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TreeView.resx">
+    <EmbeddedResource Include="View\TreeView.resx">
       <DependentUpon>TreeView.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -107,12 +108,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="TreeView.cs">
+    <Compile Include="View\TreeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TreeView.Designer.cs">
+    <Compile Include="View\TreeView.Designer.cs">
       <DependentUpon>TreeView.cs</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

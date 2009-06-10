@@ -1,4 +1,4 @@
-﻿namespace MyWindowsMediaPlayer
+﻿namespace MyWindowsMediaPlayer.View
 {
     partial class PlayerControlView
     {
@@ -32,7 +32,7 @@
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
-            this.movieProgressBar1 = new MyWindowsMediaPlayer.MovieProgressBar();
+            this.movieProgressBar1 = new MyWindowsMediaPlayer.View.MovieProgressBar();
             this.SuspendLayout();
             // 
             // btnPlay
@@ -74,6 +74,8 @@
             // 
             // movieProgressBar1
             // 
+            this.movieProgressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.movieProgressBar1.BackColor = System.Drawing.SystemColors.ControlText;
             this.movieProgressBar1.Location = new System.Drawing.Point(4, 4);
             this.movieProgressBar1.Name = "movieProgressBar1";
