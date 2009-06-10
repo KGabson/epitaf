@@ -35,6 +35,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -48,7 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\DirectoryReader.cs" />
+    <Compile Include="ViewModel\IViewModel.cs" />
+    <Compile Include="ViewModel\LibraryPathSelectorViewModel.cs" />
     <Compile Include="ViewModel\PlayerControlViewModel.cs" />
+    <Compile Include="ViewModel\TreeViewViewModel.cs" />
+    <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="View\FilterSelectionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -60,6 +66,12 @@
     </Compile>
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\LibraryPathSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\LibraryPathSelector.Designer.cs">
+      <DependentUpon>LibraryPathSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MovieProgressBar.cs">
       <SubType>UserControl</SubType>
@@ -81,6 +93,9 @@
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\LibraryPathSelector.resx">
+      <DependentUpon>LibraryPathSelector.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\MovieProgressBar.resx">
       <DependentUpon>MovieProgressBar.cs</DependentUpon>
     </EmbeddedResource>
@@ -99,6 +114,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\MyWindowsMediaPlayer.Model.DirectoryReader.datasource" />
+    <None Include="Properties\DataSources\MyWindowsMediaPlayer.ViewModel.TreeViewViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -114,9 +131,6 @@
     <Compile Include="View\TreeView.Designer.cs">
       <DependentUpon>TreeView.cs</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
