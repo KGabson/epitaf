@@ -30,21 +30,35 @@ namespace MyWindowsMediaPlayer
         private void InitializeComponent()
         {
             this.leftPanel = new System.Windows.Forms.Panel();
+            this.treeView1 = new MyWindowsMediaPlayer.View.TreeView();
             this.topPanel = new System.Windows.Forms.Panel();
             this.rightPanel = new System.Windows.Forms.Panel();
             this.playerControlView1 = new MyWindowsMediaPlayer.View.PlayerControlView();
+            this.libraryPathSelector1 = new MyWindowsMediaPlayer.View.LibraryPathSelector();
+            this.leftPanel.SuspendLayout();
+            this.topPanel.SuspendLayout();
             this.rightPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // leftPanel
             // 
+            this.leftPanel.Controls.Add(this.treeView1);
             this.leftPanel.Location = new System.Drawing.Point(13, 104);
             this.leftPanel.Name = "leftPanel";
             this.leftPanel.Size = new System.Drawing.Size(200, 457);
             this.leftPanel.TabIndex = 0;
             // 
+            // treeView1
+            // 
+            this.treeView1.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.treeView1.Location = new System.Drawing.Point(0, 3);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(197, 457);
+            this.treeView1.TabIndex = 0;
+            // 
             // topPanel
             // 
+            this.topPanel.Controls.Add(this.libraryPathSelector1);
             this.topPanel.Location = new System.Drawing.Point(13, 13);
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(767, 85);
@@ -67,6 +81,13 @@ namespace MyWindowsMediaPlayer
             this.playerControlView1.Size = new System.Drawing.Size(553, 70);
             this.playerControlView1.TabIndex = 0;
             // 
+            // libraryPathSelector1
+            // 
+            this.libraryPathSelector1.Location = new System.Drawing.Point(3, 48);
+            this.libraryPathSelector1.Name = "libraryPathSelector1";
+            this.libraryPathSelector1.Size = new System.Drawing.Size(316, 34);
+            this.libraryPathSelector1.TabIndex = 0;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -77,6 +98,8 @@ namespace MyWindowsMediaPlayer
             this.Controls.Add(this.leftPanel);
             this.Name = "MainWindow";
             this.Text = "MyWindowsMediaPlayer";
+            this.leftPanel.ResumeLayout(false);
+            this.topPanel.ResumeLayout(false);
             this.rightPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -88,6 +111,8 @@ namespace MyWindowsMediaPlayer
         private System.Windows.Forms.Panel topPanel;
         private System.Windows.Forms.Panel rightPanel;
         private MyWindowsMediaPlayer.View.PlayerControlView playerControlView1;
+        private TreeView treeView1;
+        private LibraryPathSelector libraryPathSelector1;
     }
 }
 

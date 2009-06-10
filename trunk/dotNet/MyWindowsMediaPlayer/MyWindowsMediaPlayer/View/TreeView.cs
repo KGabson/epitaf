@@ -6,14 +6,23 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MyWindowsMediaPlayer.ViewModel;
 
 namespace MyWindowsMediaPlayer.View
 {
     public partial class TreeView : UserControl
     {
+        MyWindowsMediaPlayer.ViewModel.TreeViewViewModel viewModel;
+
         public TreeView()
         {
+            viewModel = new MyWindowsMediaPlayer.ViewModel.TreeViewViewModel();
             InitializeComponent();
+//            treeViewViewModelBindingSource.Add(this.viewModel);
+            this.treeView1.Nodes.Add(viewModel.mainNode);
+            
+
         }
+
     }
 }
