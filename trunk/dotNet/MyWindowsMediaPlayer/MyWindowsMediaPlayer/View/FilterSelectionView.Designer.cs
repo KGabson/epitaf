@@ -1,6 +1,6 @@
-﻿namespace MyWindowsMediaPlayer
+﻿namespace MyWindowsMediaPlayer.View
 {
-    partial class MovieProgressBar
+    partial class FilterSelectionView
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,31 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Location = new System.Drawing.Point(167, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(13, 17);
-            this.panel1.TabIndex = 0;
-            // 
-            // MovieProgressBar
+            // FilterSelectionView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlText;
-            this.Controls.Add(this.panel1);
-            this.Name = "MovieProgressBar";
-            this.Size = new System.Drawing.Size(251, 17);
+            this.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.Name = "FilterSelectionView";
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel1;
     }
 }

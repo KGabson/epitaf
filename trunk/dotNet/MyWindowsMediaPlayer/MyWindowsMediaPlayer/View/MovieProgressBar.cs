@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace MyWindowsMediaPlayer
+namespace MyWindowsMediaPlayer.View
 {
     public partial class MovieProgressBar : UserControl
     {

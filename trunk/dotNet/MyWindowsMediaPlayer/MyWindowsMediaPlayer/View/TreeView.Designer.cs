@@ -1,4 +1,4 @@
-﻿namespace MyWindowsMediaPlayer
+﻿namespace MyWindowsMediaPlayer.View
 {
     partial class TreeView
     {

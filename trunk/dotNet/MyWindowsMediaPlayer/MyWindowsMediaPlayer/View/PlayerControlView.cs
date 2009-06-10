@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace MyWindowsMediaPlayer
+namespace MyWindowsMediaPlayer.View
 {
-    public partial class FilterSelectionView : UserControl
+    public partial class PlayerControlView : UserControl
     {
-        public FilterSelectionView()
+        public PlayerControlView()
         {
             InitializeComponent();
         }
