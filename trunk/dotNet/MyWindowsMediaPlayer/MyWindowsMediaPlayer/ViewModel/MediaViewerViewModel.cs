@@ -44,6 +44,7 @@ namespace MyWindowsMediaPlayer.ViewModel
             this.selectedPath = e.Node.Name;
             model.path = e.Node.Name;
             model.fillTags();
+            this.cptRow = 0;
             try
             {
                 foreach (KeyValuePair<string, TagLib.Id3v2.Tag> t in model.tags)
@@ -53,7 +54,7 @@ namespace MyWindowsMediaPlayer.ViewModel
                     this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["Title"], t.Value.Title);
                     this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["Artist"], t.Value.AlbumArtists[0]);
                     this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["Album"], t.Value.Album);
-                    this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["Path"], e.Node.Name);
+                    this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["Path"], t.Key);
                     this.cptRow++;
                 }
 

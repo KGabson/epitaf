@@ -31,6 +31,7 @@ namespace MyWindowsMediaPlayer.Model
         {
             String[] files = DirectoryReader.getInstance().getListMusicForPath(this.path);
 
+            tags.Clear();
             if (files.Length > 0)
                 foreach (string file in files)
                 {
@@ -45,6 +46,7 @@ namespace MyWindowsMediaPlayer.Model
             TagLib.Id3v2.Tag tag =
                                  file.GetTag(TagTypes.Id3v2, true)
                                  as TagLib.Id3v2.Tag;
+
             return tag;
         }
     }
