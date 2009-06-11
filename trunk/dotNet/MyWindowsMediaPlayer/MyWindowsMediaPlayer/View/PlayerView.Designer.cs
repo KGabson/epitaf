@@ -120,8 +120,8 @@
         public Screen screen;
         public PlayerControlView control;
         public System.Windows.Forms.Timer refreshTimer;
-        private MediaViewer mediaViewer1;
-        private PaylistView paylistView1;
+        public MediaViewer mediaViewer1;
+        public PaylistView paylistView1;
 
     }
 }
