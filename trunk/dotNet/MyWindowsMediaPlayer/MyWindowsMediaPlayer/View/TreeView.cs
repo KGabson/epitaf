@@ -17,11 +17,17 @@ namespace MyWindowsMediaPlayer.View
         public TreeView()
         {
             viewModel = new MyWindowsMediaPlayer.ViewModel.TreeViewViewModel();
-            InitializeComponent();
-//            treeViewViewModelBindingSource.Add(this.viewModel);
-            this.treeView1.Nodes.Add(viewModel.mainNode);
             
+            InitializeComponent();
+            this.viewModel.PropertyChanged += this.updateTreeView;
+            //treeViewViewModelBindingSource.Add(this.viewModel);
+            this.treeView1.Nodes.Add(viewModel.MainNode);
+        }
 
+        public void updateTreeView(Object sender, EventArgs e)
+        {
+            this.treeView1.Nodes.Clear();
+            this.treeView1.Nodes.Add(viewModel.MainNode);
         }
 
     }
