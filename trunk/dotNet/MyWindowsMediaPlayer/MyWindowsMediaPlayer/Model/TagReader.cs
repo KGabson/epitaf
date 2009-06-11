@@ -9,6 +9,8 @@ namespace MyWindowsMediaPlayer.Model
     public class TagReader
     {
         private static TagReader instance = null;
+        public Dictionary<string, TagLib.Id3v2.Tag> tags;
+        public string path;
 
         public static TagReader getInstance()
         {
@@ -19,16 +21,22 @@ namespace MyWindowsMediaPlayer.Model
             return instance;
         }
 
-        public TagLib.Id3v2.Tag[] getTagsForPath(string path)
+        private TagReader()
         {
-            List<TagLib.Id3v2.Tag> tags = new List<TagLib.Id3v2.Tag>();
-            String[] files = DirectoryReader.getInstance().getListMusicForPath(path);
+            this.tags = new Dictionary<string, TagLib.Id3v2.Tag>();
+            path = DirectoryReader.getInstance().MediaPath;
+        }
 
-            foreach (string file in files)
-            {
-                tags.Add(this.getTagForTrack(file));
-            }
-            return tags.ToArray();
+        public void fillTags()
+        {
+            String[] files = DirectoryReader.getInstance().getListMusicForPath(this.path);
+
+            if (files.Length > 0)
+                foreach (string file in files)
+                {
+                    tags.Add(file, this.getTagForTrack(file));
+                }
+
         }
 
         public TagLib.Id3v2.Tag getTagForTrack(string path)
