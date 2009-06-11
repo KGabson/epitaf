@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MyWindowsMediaPlayer.ViewModel;
 
 namespace MyWindowsMediaPlayer.View
 {
@@ -18,11 +19,7 @@ namespace MyWindowsMediaPlayer.View
             this.viewModel = MyWindowsMediaPlayer.ViewModel.MediaViewerViewModel.getInstance();
             InitializeComponent();
             this.dataGridView1.DataSource = this.viewModel.mediasInfo;
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            this.dataGridView1.CellContentClick += PlaylistViewModel.getInstance().addToPlaylist;
         }
     }
 }

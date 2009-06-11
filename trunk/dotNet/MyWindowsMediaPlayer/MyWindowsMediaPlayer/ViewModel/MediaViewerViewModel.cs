@@ -8,11 +8,13 @@ using System.Data;
 
 namespace MyWindowsMediaPlayer.ViewModel
 {
-    public class MediaViewerViewModel
+    public class MediaViewerViewModel : IViewModel
     {
         private static MediaViewerViewModel instance = null;
+        
         public TagReader model;
         public DataTable mediasInfo;
+        public string selectedPath;
         private int cptRow;
 
         public static MediaViewerViewModel getInstance()
@@ -26,6 +28,7 @@ namespace MyWindowsMediaPlayer.ViewModel
 
         private MediaViewerViewModel()
         {
+            this.cptRow = 0;
             this.mediasInfo = new DataTable();
             model = TagReader.getInstance();
             mediasInfo.Columns.Add("N°");
@@ -33,30 +36,36 @@ namespace MyWindowsMediaPlayer.ViewModel
             mediasInfo.Columns.Add("Artist");
             mediasInfo.Columns.Add("Album");
             mediasInfo.Columns.Add("Path");
-            this.cptRow = 0;
         }
 
         public void updateList(object sender, TreeViewEventArgs e)
         {
-            this.cptRow = 0;
             this.mediasInfo.Clear();
+            this.selectedPath = e.Node.Name;
+            model.path = e.Node.Name;
+            model.fillTags();
             try
             {
-                foreach (TagLib.Id3v2.Tag tag in TagReader.getInstance().getTagsForPath(e.Node.Name))
+                foreach (KeyValuePair<string, TagLib.Id3v2.Tag> t in model.tags)
                 {
                     this.mediasInfo.Rows.Add();
-                    this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["N°"], tag.Track);
-                    this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["Title"], tag.Title);
-                    this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["Artist"], tag.Artists[0]);
-                    this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["Album"], tag.Album);
+                    this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["N°"], t.Value.Track);
+                    this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["Title"], t.Value.Title);
+                    this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["Artist"], t.Value.AlbumArtists[0]);
+                    this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["Album"], t.Value.Album);
                     this.mediasInfo.Rows[this.cptRow].SetField(this.mediasInfo.Columns["Path"], e.Node.Name);
                     this.cptRow++;
                 }
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public void addToPlaylist(object sender, DataGridViewCellEventArgs e)
+        {
         }
     }
 }
