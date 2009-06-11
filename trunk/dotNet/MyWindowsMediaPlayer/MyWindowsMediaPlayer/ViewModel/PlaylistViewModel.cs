@@ -27,7 +27,6 @@ namespace MyWindowsMediaPlayer.ViewModel
             mediaList.Columns.Add("Title");
             mediaList.Columns.Add("Artist");
             mediaList.Columns.Add("Album");
-  //          mediaList.Columns.Add("Time");
             this.cptRow = 0;
         }
 
@@ -40,7 +39,6 @@ namespace MyWindowsMediaPlayer.ViewModel
             this.mediaList.Rows[this.cptRow].SetField(this.mediaList.Columns["Title"], tag.Title);
             this.mediaList.Rows[this.cptRow].SetField(this.mediaList.Columns["Artist"], tag.Artists[0]);
             this.mediaList.Rows[this.cptRow].SetField(this.mediaList.Columns["Album"], tag.Album);
-//            this.mediaList.Rows[this.cptRow].SetField(this.mediaList.Columns["Time"], tag.t);
             this.cptRow++;
          
         }

@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.DirectX.AudioVideoPlayback, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -57,11 +58,12 @@
     <Compile Include="Model\TagReader.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
     <Compile Include="ViewModel\LibraryPathSelectorViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MediaViewerViewModel.cs" />
     <Compile Include="ViewModel\PlayerControlViewModel.cs" />
+    <Compile Include="ViewModel\PlayerViewModel.cs" />
+    <Compile Include="ViewModel\PlaylistViewModel.cs" />
     <Compile Include="ViewModel\TreeViewViewModel.cs" />
-    <Compile Include="ViewModel.cs" />
+    <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="View\FilterSelectionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -92,6 +94,12 @@
     <Compile Include="View\MovieProgressBar.Designer.cs">
       <DependentUpon>MovieProgressBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PaylistView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\PaylistView.designer.cs">
+      <DependentUpon>PaylistView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\PlayerControlView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -115,6 +123,9 @@
     <EmbeddedResource Include="View\MovieProgressBar.resx">
       <DependentUpon>MovieProgressBar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\PaylistView.resx">
+      <DependentUpon>PaylistView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\PlayerControlView.resx">
       <DependentUpon>PlayerControlView.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,6 +133,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PlayerView.resx">
+      <DependentUpon>PlayerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Screen.resx">
+      <DependentUpon>Screen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\TreeView.resx">
       <DependentUpon>TreeView.cs</DependentUpon>
@@ -140,6 +157,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="View\PlayerView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\PlayerView.Designer.cs">
+      <DependentUpon>PlayerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Screen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Screen.designer.cs">
+      <DependentUpon>Screen.cs</DependentUpon>
     </Compile>
     <Compile Include="View\TreeView.cs">
       <SubType>UserControl</SubType>
