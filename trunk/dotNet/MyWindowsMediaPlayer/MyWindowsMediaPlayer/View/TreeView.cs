@@ -12,16 +12,17 @@ namespace MyWindowsMediaPlayer.View
 {
     public partial class TreeView : UserControl
     {
-        MyWindowsMediaPlayer.ViewModel.TreeViewViewModel viewModel;
+        public MyWindowsMediaPlayer.ViewModel.TreeViewViewModel viewModel;
 
         public TreeView()
         {
-            viewModel = new MyWindowsMediaPlayer.ViewModel.TreeViewViewModel();
-            
+            viewModel = MyWindowsMediaPlayer.ViewModel.TreeViewViewModel.getInstance();
+         
             InitializeComponent();
             this.viewModel.PropertyChanged += this.updateTreeView;
             //treeViewViewModelBindingSource.Add(this.viewModel);
             this.treeView1.Nodes.Add(viewModel.MainNode);
+            this.treeView1.AfterSelect += this.viewModel.updateMediaViewer;
         }
 
         public void updateTreeView(Object sender, EventArgs e)

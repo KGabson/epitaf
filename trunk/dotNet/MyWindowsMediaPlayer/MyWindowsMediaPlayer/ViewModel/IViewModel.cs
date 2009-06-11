@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace MyWindowsMediaPlayer.ViewModel
 {
-    class IViewModel : INotifyPropertyChanged
+    public class IViewModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged Members
 
