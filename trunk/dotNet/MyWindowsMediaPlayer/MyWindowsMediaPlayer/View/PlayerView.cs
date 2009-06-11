@@ -29,6 +29,7 @@ namespace MyWindowsMediaPlayer.View
             this.btnVideoMode.Click += new EventHandler(this.viewModel.setVideoModeAction);
             this.control.progressBar.Click += new EventHandler(this.viewModel.setCurrentPositionAction);
             this.refreshTimer.Tick += new EventHandler(this.viewModel.updatePositionAction);
+            this.paylistView1.DoubleClick += new EventHandler(this.viewModel.playDoubleClickPlaylistAction);
         }
     }
 }

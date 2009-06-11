@@ -6,6 +6,7 @@ using MyWindowsMediaPlayer.View;
 using Microsoft.DirectX.AudioVideoPlayback;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Data;
 
 namespace MyWindowsMediaPlayer.ViewModel
 {
@@ -19,6 +20,9 @@ namespace MyWindowsMediaPlayer.ViewModel
 
         private bool pause = false;
         private bool playing = false;
+
+        private int currentTrackIndex = 0;
+        private string playingIn = "";
 
         private string currentPlayedFile;
         public string CurrentPlayedFile
@@ -82,8 +86,10 @@ namespace MyWindowsMediaPlayer.ViewModel
                     this.playVideo(filename);
 
                 this.view.control.btnPlay.Text = "Pause";
+                this.currentPlayedFile = filename;
                 this.playing = true;
                 this.pause = false;
+                
             }
             else if (this.playing)
             {
@@ -126,6 +132,42 @@ namespace MyWindowsMediaPlayer.ViewModel
                 this.vplayer.Pause();
             else
                 this.mplayer.Pause();
+        }
+
+        private void Next()
+        {
+            DataRowCollection list = null;
+            int column_index = 0;
+
+            if (PlaylistViewModel.getInstance().mediaList.Rows.Count > 0)
+            {
+                list = PlaylistViewModel.getInstance().mediaList.Rows;
+                currentTrackIndex = (this.playingIn == "media_explorer") ? 0 : currentTrackIndex;
+                column_index = 3;
+                playingIn = "playlist";
+            }
+            else if (MediaViewerViewModel.getInstance().mediasInfo.Rows.Count > 0)
+            {
+                list = MediaViewerViewModel.getInstance().mediasInfo.Rows;
+                currentTrackIndex = (this.playingIn == "playlist") ? 0 : currentTrackIndex;
+                column_index = 4;
+                playingIn = "media_explorer";
+            }
+            if (list == null)
+                return;
+            //if (list.Count < currentTrackIndex)
+                //Play(list[currentTrackIndex]);
+            //MediaViewerViewModel.getInstance().mediasInfo.Rows.Count;
+        }
+
+        private void emptyCurrentTrackInfo()
+        {
+            //this.
+        }
+
+        private void setCurrentTrackInfo(string file, string total_time)
+        {
+            this.view.control.currentTrackLabel.Text = "Current Track: " + file + " - " + total_time;
         }
 
         #region Handlers
@@ -210,6 +252,14 @@ namespace MyWindowsMediaPlayer.ViewModel
             Stop();
             this.currentMode = "video";
             this.currentPlayedFile = "F:/Films/Soul Eater (En cours)/[K`N`T]_Soul_Eater_21_vostfr_Upload_by_Jyg!.avi";
+        }
+
+        public void playDoubleClickPlaylistAction(object sender, EventArgs e)
+        {
+            DataGridViewCellEventArgs args = (e as DataGridViewCellEventArgs);
+            int x = args.ColumnIndex;
+            int y = args.RowIndex;
+            Console.WriteLine("==> Clicked element: " + PlaylistViewModel.getInstance().mediaList.Rows[y].Field<string>(3));
         }
         #endregion
 

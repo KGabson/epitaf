@@ -33,6 +33,7 @@
             this.btnPlay = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.progressBar = new MyWindowsMediaPlayer.View.MovieProgressBar();
+            this.currentTrackLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnStop
@@ -80,14 +81,24 @@
             this.progressBar.BackColor = System.Drawing.SystemColors.ControlText;
             this.progressBar.Location = new System.Drawing.Point(3, 0);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Position = 77;
+            this.progressBar.Position = 65;
             this.progressBar.Size = new System.Drawing.Size(397, 17);
             this.progressBar.TabIndex = 4;
+            // 
+            // currentTrackLabel
+            // 
+            this.currentTrackLabel.AutoSize = true;
+            this.currentTrackLabel.Location = new System.Drawing.Point(3, 20);
+            this.currentTrackLabel.Name = "currentTrackLabel";
+            this.currentTrackLabel.Size = new System.Drawing.Size(70, 13);
+            this.currentTrackLabel.TabIndex = 5;
+            this.currentTrackLabel.Text = "current_track";
             // 
             // PlayerControlView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.currentTrackLabel);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPlay);
@@ -96,6 +107,7 @@
             this.Name = "PlayerControlView";
             this.Size = new System.Drawing.Size(400, 64);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -106,5 +118,6 @@
         public System.Windows.Forms.Button btnNext;
         public System.Windows.Forms.Button btnPlay;
         public System.Windows.Forms.Button btnPrevious;
+        public System.Windows.Forms.Label currentTrackLabel;
     }
 }
