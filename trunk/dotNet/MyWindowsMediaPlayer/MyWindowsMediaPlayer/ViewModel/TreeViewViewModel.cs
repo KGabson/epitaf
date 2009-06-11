@@ -8,12 +8,30 @@ using MyWindowsMediaPlayer.Model;
 
 namespace MyWindowsMediaPlayer.ViewModel
 {
-    class TreeViewViewModel : IViewModel
+    public class TreeViewViewModel : IViewModel
     {
         //ATTRIBUTS
+        private static TreeViewViewModel instance = null;
         private MyWindowsMediaPlayer.Model.DirectoryReader model;
         private TreeNode mainNode;
-        public TreeNode MainNode 
+
+        public static TreeViewViewModel getInstance()
+        {
+            if (instance == null)
+            {
+                instance = new TreeViewViewModel();
+            }
+            return instance;
+        }
+
+        private TreeViewViewModel()
+        {
+            model = DirectoryReader.getInstance();
+            this.fillViewWithModel();
+            model.PropertyChanged += this.updateView;
+        }
+
+        public TreeNode MainNode
         {
             get
             {
@@ -24,13 +42,6 @@ namespace MyWindowsMediaPlayer.ViewModel
                 this.mainNode = value;
                 this.onPropertyChanged("MainNode");
             }
-        }
-
-        public TreeViewViewModel()
-        {
-            model = DirectoryReader.getInstance();
-            this.fillViewWithModel();
-            model.PropertyChanged += this.updateView;
         }
 
         public void fillViewWithModel()
@@ -66,5 +77,9 @@ namespace MyWindowsMediaPlayer.ViewModel
             return node;
         }
 
+        public void updateMediaViewer(Object sender, TreeViewEventArgs e)
+        {
+            MediaViewerViewModel.getInstance().updateList(sender, e);
+        }
     }
 }

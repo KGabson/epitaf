@@ -47,14 +47,21 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="taglib-sharp, Version=2.0.3.2, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Download\taglib-sharp-2.0.3.2\taglib-sharp-2.0.3.2\bin\Debug\taglib-sharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\DirectoryReader.cs" />
+    <Compile Include="Model\TagReader.cs" />
     <Compile Include="ViewModel\IViewModel.cs" />
     <Compile Include="ViewModel\LibraryPathSelectorViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MediaViewerViewModel.cs" />
     <Compile Include="ViewModel\PlayerControlViewModel.cs" />
     <Compile Include="ViewModel\TreeViewViewModel.cs" />
-    <Compile Include="ViewModel\ViewModel.cs" />
+    <Compile Include="ViewModel.cs" />
     <Compile Include="View\FilterSelectionView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -72,6 +79,12 @@
     </Compile>
     <Compile Include="View\LibraryPathSelector.Designer.cs">
       <DependentUpon>LibraryPathSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MediaViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\MediaViewer.Designer.cs">
+      <DependentUpon>MediaViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MovieProgressBar.cs">
       <SubType>UserControl</SubType>
@@ -95,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\LibraryPathSelector.resx">
       <DependentUpon>LibraryPathSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MediaViewer.resx">
+      <DependentUpon>MediaViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MovieProgressBar.resx">
       <DependentUpon>MovieProgressBar.cs</DependentUpon>

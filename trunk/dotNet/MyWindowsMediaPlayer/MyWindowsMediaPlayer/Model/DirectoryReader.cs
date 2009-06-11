@@ -38,6 +38,21 @@ namespace MyWindowsMediaPlayer.Model
             mediaPath = "I:/Ma musique";
         }
 
+        public string[] getListMusicForPath(string path)
+        {
+            List<FileInfo> files = new List<FileInfo>();
+            List<string> listPath = new List<string>();
+
+            files.AddRange(new DirectoryInfo(path).GetFiles("*.mp3"));
+            files.AddRange(new DirectoryInfo(path).GetFiles("*.wma"));
+            files.AddRange(new DirectoryInfo(path).GetFiles("*.ogg"));
+            foreach (FileInfo file in files)
+            {
+                listPath.Add(file.FullName);
+            }
+            return listPath.ToArray();
+        }
+
         public string[] getDirs(string path)
         {
             DirectoryInfo[] dirs = new DirectoryInfo(path).GetDirectories();
