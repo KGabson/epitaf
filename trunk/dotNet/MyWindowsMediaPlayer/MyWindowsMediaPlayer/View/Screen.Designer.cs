@@ -1,6 +1,6 @@
 ﻿namespace MyWindowsMediaPlayer.View
 {
-    partial class MovieProgressBar
+    partial class Screen
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,31 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.timeCursor = new System.Windows.Forms.Panel();
+            this.videoContainer = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // timeCursor
+            // videoContainer
             // 
-            this.timeCursor.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.timeCursor.Location = new System.Drawing.Point(167, 0);
-            this.timeCursor.Name = "timeCursor";
-            this.timeCursor.Size = new System.Drawing.Size(13, 17);
-            this.timeCursor.TabIndex = 0;
+            this.videoContainer.Location = new System.Drawing.Point(0, 0);
+            this.videoContainer.Name = "videoContainer";
+            this.videoContainer.Size = new System.Drawing.Size(345, 292);
+            this.videoContainer.TabIndex = 0;
+            this.videoContainer.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // MovieProgressBar
+            // Screen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlText;
-            this.Controls.Add(this.timeCursor);
-            this.Name = "MovieProgressBar";
-            this.Size = new System.Drawing.Size(251, 17);
+            this.BackColor = System.Drawing.Color.DimGray;
+            this.Controls.Add(this.videoContainer);
+            this.Name = "Screen";
+            this.Size = new System.Drawing.Size(345, 292);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        public System.Windows.Forms.Panel timeCursor;
+        private System.Windows.Forms.Panel videoContainer;
     }
 }

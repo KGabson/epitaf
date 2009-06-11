@@ -12,14 +12,12 @@ namespace MyWindowsMediaPlayer
 {
     public partial class MainWindow : Form
     {
-        private MyWindowsMediaPlayer.ViewModel.MainViewModel viewModel;
 
         public MainWindow()
         {
-            viewModel = new MainViewModel();
 
             InitializeComponent();
-            this.treeView1.treeView1.AfterSelect += this.update;
+            //this.treeView2.treeView1.AfterSelect += this.update;
         }
 
         private void update(object sender, TreeViewEventArgs e)
