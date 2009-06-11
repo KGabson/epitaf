@@ -10,6 +10,8 @@ namespace MyWindowsMediaPlayer.Model
     {
         //ATTRIBUTS
         private string mediaPath;
+        
+
         public string MediaPath 
         {
             get
@@ -35,7 +37,7 @@ namespace MyWindowsMediaPlayer.Model
 
         private DirectoryReader()
         {
-            mediaPath = "F:/Musique";
+            mediaPath = "I:/Ma musique";
         }
 
         public string[] getListMusicForPath(string path)
