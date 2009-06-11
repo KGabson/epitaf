@@ -8,18 +8,40 @@ using MyWindowsMediaPlayer.Model;
 
 namespace MyWindowsMediaPlayer.ViewModel
 {
-    class TreeViewViewModel
+    class TreeViewViewModel : IViewModel
     {
         //ATTRIBUTS
         private MyWindowsMediaPlayer.Model.DirectoryReader model;
-        public TreeNode mainNode { get; set; }
+        private TreeNode mainNode;
+        public TreeNode MainNode 
+        {
+            get
+            {
+                return this.mainNode;
+            }
+            set
+            {
+                this.mainNode = value;
+                this.onPropertyChanged("MainNode");
+            }
+        }
 
         public TreeViewViewModel()
         {
             model = DirectoryReader.getInstance();
-            model.MediaPath = "I:/Ma musique/Pink Floyd";
-            this.mainNode = initNode(this.model.MediaPath);
-            this.getNodes(this.mainNode);
+            this.fillViewWithModel();
+            model.PropertyChanged += this.updateView;
+        }
+
+        public void fillViewWithModel()
+        {
+            this.MainNode = initNode(this.model.MediaPath);
+            this.getNodes(this.MainNode);
+        }
+
+        public void updateView(object sender, EventArgs e)
+        {
+            this.fillViewWithModel();
         }
 
         public TreeNode initNode(string path)
