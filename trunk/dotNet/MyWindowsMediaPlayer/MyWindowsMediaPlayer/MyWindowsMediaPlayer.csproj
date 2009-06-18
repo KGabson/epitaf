@@ -148,6 +148,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="Properties\DataSources\MyWindowsMediaPlayer.Model.DirectoryReader.datasource" />
+    <None Include="Properties\DataSources\MyWindowsMediaPlayer.Model.TagReader.datasource" />
     <None Include="Properties\DataSources\MyWindowsMediaPlayer.ViewModel.TreeViewViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
