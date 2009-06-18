@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
-namespace SLCommandingDemo.Commanding
+namespace MyLiveMesh.Commanding
 {
     /// <summary>
     /// Maintains a mapping between ICommand and ButtonBase

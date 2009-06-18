@@ -3,8 +3,9 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cmd="clr-namespace:MyLiveMesh.Commanding"
 	mc:Ignorable="d"
-	x:Class="MyLiveMesh.LoginView"
+	x:Class="MyLiveMesh.View.LoginView"
 	d:DesignWidth="640" d:DesignHeight="480" HorizontalAlignment="Stretch">
 
 	<Grid x:Name="LayoutRoot">
@@ -13,8 +14,14 @@
 		<TextBlock Height="31" Margin="95,96,95,0" VerticalAlignment="Top" Text="Welcome to MyLiveMesh" TextWrapping="Wrap" TextAlignment="Center" FontSize="24"/>
 		<TextBlock Height="24" HorizontalAlignment="Left" Margin="95,195,0,0" VerticalAlignment="Top" Width="66" Text="Login :" TextWrapping="Wrap" TextAlignment="Right" FontSize="16"/>
 		<TextBlock HorizontalAlignment="Left" Margin="95,0,0,216" Width="99" FontSize="16" TextAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="24"><Run Text="Password"/><Run Text=" :"/></TextBlock>
-		<TextBox Height="24" Margin="206,195,95,0" VerticalAlignment="Top" Text="" TextWrapping="Wrap" x:Name="loginBox"/>
-		<Button Height="28" Margin="214,0,214,109" VerticalAlignment="Bottom" Content="Login" x:Name="btnLogin"/>
-		<PasswordBox Height="24" Margin="206,0,95,216" VerticalAlignment="Bottom" x:Name="passwordBox"/>
+		<TextBox Height="24" Margin="206,195,95,0" VerticalAlignment="Top" Text="{Binding Path=Login, Mode=TwoWay}" TextWrapping="Wrap" x:Name="loginBox"/>
+		<Button
+            Height="28"
+            Margin="214,0,214,109"
+            VerticalAlignment="Bottom"
+            Content="Login"
+            cmd:ButtonBaseExtensions.Command="{Binding AuthentifyCommand}"
+            x:Name="btnLogin"/>
+		<PasswordBox Height="24" Margin="206,0,95,216" VerticalAlignment="Bottom" x:Name="passwordBox" Password=""/>
 	</Grid>
 </UserControl>
