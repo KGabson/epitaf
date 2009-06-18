@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace SLCommandingDemo.Commanding
+namespace MyLiveMesh.Commanding
 {
     /// <summary>
     /// A command whose sole purpose is to 

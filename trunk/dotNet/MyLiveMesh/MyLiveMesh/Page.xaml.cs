@@ -10,21 +10,35 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using MyLiveMesh.View;
 
 namespace MyLiveMesh
 {
     public partial class Page : UserControl
     {
+        public UserControl currentMainView { get; private set; }
+
         public Page()
         {
             InitializeComponent();
-            Debug.WriteLine("Hello !");
+            currentMainView = null;
             this.Loaded += new RoutedEventHandler(Page_Loaded);
         }
 
         void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("====> " + App.Current.RootVisual.ToString());
+            loadView(new LoginView());
         }
+
+        public void loadView(UserControl view)
+        {
+            if (currentMainView != null)
+            {
+                this.RootContent.Children.Remove(currentMainView);
+            }
+            this.RootContent.Children.Add(view);
+            currentMainView = view;
+        }
+
     }
 }
