@@ -1,9 +1,6 @@
 ﻿<UserControl x:Class="MyLiveMesh.Page"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-    Width="400" Height="300">
-    <Grid x:Name="LayoutRoot" Background="White">
-    	<TextBlock Height="30" Margin="57,55,69,0" VerticalAlignment="Top" Text="Hello !" TextWrapping="Wrap"/>
-
-    </Grid>
+    Width="800" Height="600" Margin="-7,0,0,0">
+    <Grid x:Name="LayoutRoot" Background="White"/>
 </UserControl>

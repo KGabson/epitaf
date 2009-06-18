@@ -1,7 +1,7 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ProjectExtensions>
     <VisualStudio>
-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" xmlns="">
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <StartPageUrl>MyLiveMeshTestPage.aspx</StartPageUrl>
           <StartAction>SpecificPage</StartAction>
@@ -26,8 +26,7 @@
           <AlwaysStartWebServerOnDebug>True</AlwaysStartWebServerOnDebug>
           <EnableWcfTestClientForSVC>False</EnableWcfTestClientForSVC>
           <ProjectOutputReferences>
-            <Ref Project="{DF1F0E04-8DFA-4465-8AE0-E1F5DCA8C684}" Folder="ClientBin">
-            </Ref>
+            <Ref Project="{DF1F0E04-8DFA-4465-8AE0-E1F5DCA8C684}" Folder="ClientBin">MyLiveMesh.xap</Ref>
           </ProjectOutputReferences>
         </WebProjectProperties>
       </FlavorProperties>
