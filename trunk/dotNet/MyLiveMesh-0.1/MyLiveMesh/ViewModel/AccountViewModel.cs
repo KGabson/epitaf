@@ -12,6 +12,8 @@ using MyLiveMesh.Commanding;
 using System.Diagnostics;
 using MyLiveMesh.View;
 using MyLiveMesh.DBServiceReference;
+using System.Security.Cryptography;
+using Shared;
 
 namespace MyLiveMesh.ViewModel
 {
