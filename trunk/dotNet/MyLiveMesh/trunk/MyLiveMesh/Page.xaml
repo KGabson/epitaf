@@ -1,8 +1,41 @@
 ﻿<UserControl x:Class="MyLiveMesh.Page"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-    Width="400" Height="300">
-    <Grid x:Name="LayoutRoot" Background="White">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Data="clr-namespace:SLExtensions.Data;assembly=SLExtensions"
+             xmlns:Controls="clr-namespace:SLExtensions.Controls;assembly=SLExtensions.Controls"
+             xmlns:Views="clr-namespace:MyLiveMesh.View">
+    <UserControl.Resources>
+
+        <!-- The ResourceSelector is a value conveter that returns a resource based on a binded type 
+             specified in the 'Key' of it's resource dictionary -->
+        <Data:ResourceSelector x:Key="resourceSelector">
+            <Data:ResourceSelector.Resources>
+                <ResourceDictionary>
+                    <DataTemplate x:Key="AccountViewModel">
+                        <Views:LoginView />
+                    </DataTemplate>
+                </ResourceDictionary>
+            </Data:ResourceSelector.Resources>
+        </Data:ResourceSelector>
+
+        <!-- The data template we use for our ContentTemplate -->
+        <DataTemplate x:Key="controlTemplate">
+            <ContentControl Content="{Binding}"
+                            ContentTemplate="{Binding Converter={StaticResource resourceSelector}}" />
+        </DataTemplate>
+
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+
+        <!-- SwappableContentControl gives us stylable transition effects -->
+        <Controls:SwappableContentControl Content="{Binding CurrentViewModel, Mode=TwoWay}"
+                                          ContentTemplate="{StaticResource controlTemplate}"
+                                          VerticalAlignment="Stretch"
+                                          HorizontalAlignment="Stretch" />
+        <!-- For no transition effects
+        <ContentControl Content="{Binding CurrentViewModel, Mode=TwoWay}"
+                        ContentTemplate="{StaticResource controlTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        -->
 
     </Grid>
 </UserControl>
