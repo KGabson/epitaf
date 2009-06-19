@@ -1,0 +1,17 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="BasicHttpBinding_AccountService" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:54164/Services/AccountService.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_AccountService"
+                contract="AccountServiceReference.AccountService" name="BasicHttpBinding_AccountService" />
+        </client>
+    </system.serviceModel>
+</configuration>
