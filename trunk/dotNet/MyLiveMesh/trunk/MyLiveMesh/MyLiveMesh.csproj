@@ -92,6 +92,9 @@
     <Compile Include="ViewModel\DesktopViewModel.cs" />
     <Compile Include="ViewModel\PageViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\Desktop.xaml.cs">
+      <DependentUpon>Desktop.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -99,6 +102,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Page.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Desktop.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>

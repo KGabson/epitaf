@@ -14,6 +14,9 @@
                     <DataTemplate x:Key="AccountViewModel">
                         <Views:LoginView />
                     </DataTemplate>
+                    <DataTemplate x:Key="DesktopViewModel">
+                        <Views:Desktop />
+                    </DataTemplate>
                 </ResourceDictionary>
             </Data:ResourceSelector.Resources>
         </Data:ResourceSelector>

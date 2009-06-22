@@ -15,7 +15,8 @@ namespace MyLiveMesh.ViewModel
     public class PageViewModel : ViewModelBase
     {
         private ViewModelBase currentViewModel;
-        private AccountServiceReference.AccountServiceClient acctSrv = new MyLiveMesh.AccountServiceReference.AccountServiceClient();
+        private ViewModelBase desktopViewModel;
+        private ViewModelBase accountViewModel;
 
         public ViewModelBase CurrentViewModel
         {
@@ -27,14 +28,11 @@ namespace MyLiveMesh.ViewModel
             }
         }
 
-        private AccountViewModel accountViewModel;
-
         public PageViewModel()
         {
             accountViewModel = new AccountViewModel();
-
+            desktopViewModel = new DesktopViewModel();
             Services.Services.AuthService.AuthentifyCompleted += new EventHandler<MyLiveMesh.AccountServiceReference.AuthentifyCompletedEventArgs>(AuthService_AuthentifyCompleted);
-
             currentViewModel = accountViewModel;
         }
 
