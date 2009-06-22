@@ -17,5 +17,10 @@ namespace MyLiveMesh.View
 			// Required to initialize variables
 			InitializeComponent();
 		}
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
 	}
 }
