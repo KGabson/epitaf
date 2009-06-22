@@ -26,7 +26,20 @@ namespace MyLiveMesh.ViewModel
         #region Bindable fields
         public String Login { get; set; }
         public String Password { get; set; }
-        public String ErrorMsg { get; set; }
+
+        private String errorMsg;
+        public String ErrorMsg 
+        {
+            get
+            {
+                return errorMsg;
+            }
+            set
+            {
+                errorMsg = value;
+                InvokePropertyChanged("ErrorMsg");
+            }
+        }
         #endregion
 
         #region Command management
