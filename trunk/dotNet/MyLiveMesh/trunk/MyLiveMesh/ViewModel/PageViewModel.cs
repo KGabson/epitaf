@@ -38,6 +38,12 @@ namespace MyLiveMesh.ViewModel
 
         void AuthService_AuthentifyCompleted(object sender, MyLiveMesh.AccountServiceReference.AuthentifyCompletedEventArgs e)
         {
+            if (e.Result == false)
+            {
+                (accountViewModel as AccountViewModel).ErrorMsg = "Wrong login or password";
+                return;
+            }
+            CurrentViewModel = desktopViewModel;
             //Debug.WriteLine("===> " + e.Result);
         }
     }
