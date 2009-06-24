@@ -16,7 +16,8 @@ namespace MyLiveMesh.ViewModel
     {
         private ViewModelBase currentViewModel;
         private ViewModelBase desktopViewModel;
-        private ViewModelBase accountViewModel;
+        private ViewModelBase loginViewModel;
+        private ViewModelBase createAccountViewModel;
 
         public ViewModelBase CurrentViewModel
         {
@@ -30,21 +31,37 @@ namespace MyLiveMesh.ViewModel
 
         public PageViewModel()
         {
-            accountViewModel = new AccountViewModel();
+            loginViewModel = new LoginViewModel();
             desktopViewModel = new DesktopViewModel();
+            createAccountViewModel = new CreateAccountViewModel();
+
             Services.Services.AuthService.AuthentifyCompleted += new EventHandler<MyLiveMesh.AccountServiceReference.AuthentifyCompletedEventArgs>(AuthService_AuthentifyCompleted);
-            currentViewModel = accountViewModel;
+            Services.Services.AuthService.CreateAccountCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(AuthService_CreateAccountCompleted);
+
+            Commands.LoginCommands.CreateAccountCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(CreateAccountCommand_Executed);
+            currentViewModel = loginViewModel;
+        }
+
+        void AuthService_CreateAccountCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            (loginViewModel as LoginViewModel).ErrorMsg = "Account created successfully";
+            CurrentViewModel = loginViewModel;
+        }
+
+        void CreateAccountCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
+        {
+            Debug.WriteLine("Create Account !!!");
+            CurrentViewModel = createAccountViewModel;
         }
 
         void AuthService_AuthentifyCompleted(object sender, MyLiveMesh.AccountServiceReference.AuthentifyCompletedEventArgs e)
         {
             if (e.Result == false)
             {
-                (accountViewModel as AccountViewModel).ErrorMsg = "Wrong login or password";
+                (loginViewModel as LoginViewModel).ErrorMsg = "Wrong login or password";
                 return;
             }
             CurrentViewModel = desktopViewModel;
-            //Debug.WriteLine("===> " + e.Result);
         }
     }
 }

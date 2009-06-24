@@ -64,12 +64,19 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Windows.Browser" />
-    <Page Include="View\LoginView.xaml">
+    <Page Include="View\CreateAccount.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="View\LoginView.xaml.cs">
-      <DependentUpon>LoginView.xaml</DependentUpon>
+    <Page Include="View\Login.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="View\CreateAccount.xaml.cs">
+      <DependentUpon>CreateAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -88,7 +95,8 @@
     </Compile>
     <Compile Include="Services\Services.cs" />
     <Compile Include="Tools\PasswordHelper.cs" />
-    <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\CreateAccountViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\DesktopViewModel.cs" />
     <Compile Include="ViewModel\PageViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />

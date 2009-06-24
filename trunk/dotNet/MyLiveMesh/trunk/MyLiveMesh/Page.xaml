@@ -11,8 +11,11 @@
         <Data:ResourceSelector x:Key="resourceSelector">
             <Data:ResourceSelector.Resources>
                 <ResourceDictionary>
-                    <DataTemplate x:Key="AccountViewModel">
-                        <Views:LoginView />
+                    <DataTemplate x:Key="LoginViewModel">
+                        <Views:Login />
+                    </DataTemplate>
+                    <DataTemplate x:Key="CreateAccountViewModel">
+                        <Views:CreateAccount />
                     </DataTemplate>
                     <DataTemplate x:Key="DesktopViewModel">
                         <Views:Desktop />
