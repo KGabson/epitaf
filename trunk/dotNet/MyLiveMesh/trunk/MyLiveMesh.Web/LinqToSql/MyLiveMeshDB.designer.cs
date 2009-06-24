@@ -30,6 +30,9 @@ namespace MyLiveMesh.Web.LinqToSql
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void Insertuser(user instance);
+    partial void Updateuser(user instance);
+    partial void Deleteuser(user instance);
     #endregion
 		
 		public MyLiveMeshDBDataContext() : 
@@ -72,8 +75,10 @@ namespace MyLiveMesh.Web.LinqToSql
 	}
 	
 	[Table(Name="dbo.[user]")]
-	public partial class user
+	public partial class user : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _id;
 		
@@ -81,11 +86,28 @@ namespace MyLiveMesh.Web.LinqToSql
 		
 		private string _password;
 		
+		private string _email;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnloginChanging(string value);
+    partial void OnloginChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    #endregion
+		
 		public user()
 		{
+			OnCreated();
 		}
 		
-		[Column(Storage="_id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		[Column(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -96,7 +118,11 @@ namespace MyLiveMesh.Web.LinqToSql
 			{
 				if ((this._id != value))
 				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
 					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
 				}
 			}
 		}
@@ -112,7 +138,11 @@ namespace MyLiveMesh.Web.LinqToSql
 			{
 				if ((this._login != value))
 				{
+					this.OnloginChanging(value);
+					this.SendPropertyChanging();
 					this._login = value;
+					this.SendPropertyChanged("login");
+					this.OnloginChanged();
 				}
 			}
 		}
@@ -128,8 +158,52 @@ namespace MyLiveMesh.Web.LinqToSql
 			{
 				if ((this._password != value))
 				{
+					this.OnpasswordChanging(value);
+					this.SendPropertyChanging();
 					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
 				}
+			}
+		}
+		
+		[Column(Storage="_email", DbType="NVarChar(150)")]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
