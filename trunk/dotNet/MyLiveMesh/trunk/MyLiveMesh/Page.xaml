@@ -40,7 +40,9 @@
                                           HorizontalAlignment="Stretch" />
         <!-- For no transition effects
         <ContentControl Content="{Binding CurrentViewModel, Mode=TwoWay}"
-                        ContentTemplate="{StaticResource controlTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        ContentTemplate="{StaticResource controlTemplate}" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch" />
         -->
 
     </Grid>

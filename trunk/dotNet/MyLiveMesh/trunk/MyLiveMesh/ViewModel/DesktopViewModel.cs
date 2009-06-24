@@ -16,32 +16,43 @@ namespace MyLiveMesh.ViewModel
 {
     public class DesktopViewModel : ViewModelBase
     {
-        private List<String> icones;
+        private List<FileViewModel> files;
 
         public DesktopViewModel()
         {
-            Icones = new List<String>();
-            String but = "mais putain";
-            Icones.Add(but);
-            Icones.Add("tamere elle suce");
-            Icones.Add("mais putain");
-            Icones.Add("c quoi ce bordel");
-            Icones.Add("jean naipleinlcul");
-            InvokePropertyChanged("Icones");           
+            files = new List<FileViewModel>();
+            FileViewModel but = new FileViewModel();
+            but.Title = "Le directory!";
+            files.Add(but);
+            files.Add(new FileViewModel());
+            files.Add(new FileViewModel());
+            files.Add(new FileViewModel());
+            files.Add(new FileViewModel());
+            InvokePropertyChanged("Files");
+            Commands.DesktopCommands.FileCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(FileCommand_Executed);
         }
 
-        public List<String> Icones
+        public List<FileViewModel> Files
         {
-            get
-            {
-                return icones;
-            }
+            get { return files; }
 
-            set
-            {
-                icones = value;
-                InvokePropertyChanged("Icones");
+            set 
+            { 
+                files = value;
+                InvokePropertyChanged("Files");
             }
+        }
+
+        public void test(object sender, MouseButtonEventArgs e)
+        {
+            Debug.WriteLine("Ca serait trop rebeeeeeel");
+        }
+
+        public void FileCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
+        {
+            ListBox list = (ListBox)e.Source;
+            FileViewModel selectedFile = (FileViewModel)list.SelectedItem;
+            Debug.WriteLine("youpi mon con !!!!!" + selectedFile.Title);
         }
     }
 }

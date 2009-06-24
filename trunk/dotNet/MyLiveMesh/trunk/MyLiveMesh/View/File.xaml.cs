@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
-using System.Net;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Ink;
@@ -12,12 +10,12 @@ using System.Windows.Shapes;
 
 namespace MyLiveMesh.View
 {
-	public partial class Desktop : UserControl
+	public partial class File : UserControl
 	{
-		public Desktop()
+		public File()
 		{
 			// Required to initialize variables
 			InitializeComponent();
-		}
+ 		}
 	}
 }
