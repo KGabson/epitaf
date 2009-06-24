@@ -12,16 +12,6 @@
 			<ListBox 
                 Margin="0,0,8,8"
                 ItemsSource="{Binding Icones, Mode=TwoWay}" >
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Icones}" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
     </Grid>
