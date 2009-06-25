@@ -5,6 +5,10 @@
     xmlns:Data="clr-namespace:SLExtensions.Data;assembly=SLExtensions"
     xmlns:Views="clr-namespace:MyLiveMesh.View"
     xmlns:Controls="clr-namespace:SLExtensions.Controls;assembly=SLExtensions.Controls"
+    
+    xmlns:liquidPopup="clr-namespace:Liquid;assembly=Liquid.Popup"
+    xmlns:liquid="clr-namespace:Liquid;assembly=Liquid" 
+    
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Input="clr-namespace:SLExtensions.Input;assembly=SLExtensions"
     xmlns:tools="clr-namespace:MyLiveMesh.Tools"
@@ -33,8 +37,16 @@
             <ListBox 
                 ItemsSource="{Binding Files}"
                 ItemTemplate="{StaticResource controlTemplate}"
-                Input:CommandService.Command="FileCommand">
+                Input:CommandService.Command="FileCommand" Margin="0,30,0,0">
             </ListBox>
+            <Button Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="116" Content="Upload Files" x:Name="FileUploadBtn"/>
+            
+            <liquidPopup:Dialog x:Name="viewerPopup" Width="300" Height="330" Buttons="None" Title="Viewer Control: The Great Barrier Reef" IsResizable="True">
+                <liquid:Viewer Zoom="0.20">
+                    <Image Source="../Data/folder.jpg" />
+                </liquid:Viewer>
+            </liquidPopup:Dialog>
+            
         </Grid>
     </Grid>
 </UserControl>
