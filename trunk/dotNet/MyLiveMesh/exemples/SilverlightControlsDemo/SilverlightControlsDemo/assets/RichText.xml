@@ -1,0 +1,286 @@
+﻿<LiquidRichText xmlns:liquid="clr-namespace:Liquid;assembly=Liquid.RichText">
+  <Style ID="Default" FontFamily="Arial" FontSize="14" />
+  <Style ID="Normal" FontFamily="Arial" FontSize="14" Margin="0" VerticalAlignment="Center" />
+  <Style ID="H1" FontFamily="Arial" FontSize="28" FontWeight="Bold" Shadow="Slight" Margin="0,12,0,3" />
+  <Style ID="H2" FontFamily="Arial" FontSize="24" FontWeight="Bold" Foreground="#ff000044" Shadow="Slight" Margin="0,12,0,3" />
+  <Style ID="H3" FontFamily="Arial" FontSize="22" FontWeight="Bold" Foreground="#ff000044" Shadow="Slight" Margin="0,12,0,3" />
+  <Style ID="Bold" FontFamily="Arial" FontSize="14" FontWeight="Bold" />
+  <Style ID="Italic" FontFamily="Arial" FontSize="14" FontStyle="Italic" />
+  <Style ID="Underline" FontFamily="Arial" FontSize="14" Decoration="Underline" />
+  <Style ID="Superscript" FontFamily="Arial" FontSize="14" Special="Superscript" />
+  <Style ID="Subscript" FontFamily="Arial" FontSize="14" Special="Subscript" />
+  <Style ID="CenteredNormal" FontFamily="Arial" FontSize="14" Alignment="Center" />
+  <Style ID="CenteredBold" FontFamily="Arial" FontSize="14" FontWeight="Bold" Alignment="Center" />
+  <Style ID="License" FontFamily="Arial" FontSize="10" FontStyle="Italic" FontWeight="Bold" />
+  <Style ID="TimesNewRoman" FontFamily="Times New Roman" FontSize="18" Alignment="Center" Foreground="#ffff0000" Shadow="Slight" />
+  <Style ID="ComicSans" FontFamily="Comic Sans MS" FontSize="18" Alignment="Center" Foreground="#ff00ff00" Shadow="Slight" />
+  <Style ID="Courier" FontFamily="Courier New" FontSize="18" Alignment="Center" Foreground="#ff00ffff" Shadow="Slight" />
+  <Style ID="Lucida" FontFamily="Lucida Grande" FontSize="18" Alignment="Center" Foreground="#ffff00ff" Shadow="Slight" />
+  <Style ID="Trebuchet" FontFamily="Trebuchet MS" FontSize="18" Alignment="Center" Foreground="#ffffff00" Shadow="Slight" />
+  <Style ID="Verdana" FontFamily="Verdana" FontSize="18" Alignment="Center" Shadow="Slight" />
+  <Style ID="Link" FontFamily="Arial" FontSize="14" Decoration="Underline" Link="http://www.vectorlight.net" />
+  <Style ID="SilverlightLink" FontFamily="Arial" FontSize="14" Decoration="Underline" Link="http://www.silverlight.net" />
+  <Style ID="Strike" FontFamily="Arial" FontSize="14" Foreground="#FF000000" Alignment="Left" Effect="Strike" />
+  <Style ID="SmallRed" FontFamily="Arial" FontSize="14" Foreground="#FFFF0000" Alignment="Left" />
+  <Style ID="MagentaBack" FontFamily="Arial" FontSize="14" Foreground="#FFFFFFFF" Background="#FFFF00FF" Alignment="Left" />
+  <Style ID="DottedSmall" FontFamily="Arial" FontSize="14" Foreground="#FF000000" Alignment="Left" Border="Dotted" />
+  <Style ID="DashedSmall" FontFamily="Arial" FontSize="14" Foreground="#FF000000" Alignment="Left" Border="Dashed" />
+  <Style ID="Shadowed" FontFamily="Arial" FontSize="14" Shadow="Normal" />
+  <Style ID="SlightShadowed" FontFamily="Arial" FontSize="14" Shadow="Slight" />
+  <TableStyle ID="TableBlue" CellPadding="3" BorderBrush="#d7e5ed" BorderThickness="1,1,1,1" CellBorderBrush="#d7e5ed" CellBorderThickness="1,1,1,1">
+    <Background>
+      <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#f8f8f8" Offset="0" />
+        <GradientStop Color="#ffffff" Offset="1" />
+      </LinearGradientBrush>
+    </Background>
+    <HeaderFill>
+      <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#f6fbfd" Offset="0.0" />
+        <GradientStop Color="#d5effc" Offset="0.9" />
+        <GradientStop Color="#e7f5fd" Offset="0.9" />
+        <GradientStop Color="#e7f5fd" Offset="1.0" />
+      </LinearGradientBrush>
+    </HeaderFill>
+  </TableStyle>
+  <Text Style="H1"><![CDATA[Liquid Rich TextBox]]></Text>
+  <Newline />
+  <Text Style="Normal"><![CDATA[This is a demo of the Rich Textbox available now with the Liquid Controls library for Silverlight 2 created by ]]></Text>
+  <Text Style="Link"><![CDATA[www.vectorlight.net]]></Text>
+  <Text Style="Normal"><![CDATA[.]]></Text>
+  <Newline />
+  <Text Style="H2"><![CDATA[Applying Formatting]]></Text>
+  <Newline />
+  <Text Style="Normal"><![CDATA[The Liquid Controls multi-line rich textbox supports many features of standard rich text formatting such as ]]></Text>
+  <Text Style="Bold"><![CDATA[Bold]]></Text>
+  <Text Style="Normal"><![CDATA[, ]]></Text>
+  <Text Style="Italic"><![CDATA[Italic]]></Text>
+  <Text Style="Normal"><![CDATA[ and ]]></Text>
+  <Text Style="Underline"><![CDATA[Underline]]></Text>
+  <Text Style="Normal"><![CDATA[.  You can also use superscript and subscript: H]]></Text>
+  <Text Style="Superscript"><![CDATA[2]]></Text>
+  <Text Style="Normal"><![CDATA[O and X]]></Text>
+  <Text Style="Subscript"><![CDATA[2]]></Text>
+  <Text Style="Normal"><![CDATA[.  And what ]]></Text>
+  <Text Style="Normal"><![CDATA[about ]]></Text>
+  <Text Style="Strike"><![CDATA[strike through]]></Text>
+  <Text Style="Normal"><![CDATA[?]]></Text>
+  <Newline />
+  <Text Style="TimesNewRoman"><![CDATA[Times New Roman]]></Text>
+  <Newline />
+  <Text Style="ComicSans"><![CDATA[Comic Sans]]></Text>
+  <Newline />
+  <Text Style="Courier"><![CDATA[Courier]]></Text>
+  <Newline />
+  <Text Style="Lucida"><![CDATA[Lucida Grande]]></Text>
+  <Newline />
+  <Text Style="Trebuchet"><![CDATA[Trebuchet]]></Text>
+  <Newline />
+  <Newline />
+  <Text Style="CenteredNormal"><![CDATA[Applying alignment formatting ]]></Text>
+  <Text Style="CenteredNormal"><![CDATA[to your text is standard too.]]></Text>
+  <Newline />
+  <Text Style="CenteredBold"><![CDATA[Left]]></Text>
+  <Text Style="CenteredNormal"><![CDATA[, ]]></Text>
+  <Text Style="CenteredBold"><![CDATA[Center]]></Text>
+  <Text Style="CenteredNormal"><![CDATA[ and ]]></Text>
+  <Text Style="CenteredBold"><![CDATA[Right]]></Text>
+  <Newline />
+  <Text Style="CenteredNormal"><![CDATA[alignment is currently supported.]]></Text>
+  <Newline />
+  <Text Style="H2"><![CDATA[Including Tables]]></Text>
+  <Newline />
+  <Text Style="Normal"><![CDATA[With the Liquid Rich TextBox you can now insert tables, the three example styles are just a tiny selection of possible table styles.  Try hovering the mouse over the cell lines and re-sizing the rows and columns.]]></Text>
+  <Newline />
+  <Newline />
+  <Xaml>
+    <liquid:Table HeaderRows="1" HeaderColumns="0" AutoWidth="True" Tag="TableBlue">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*" />
+        <ColumnDefinition Width="1*" />
+        <ColumnDefinition Width="1*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="1*"/>
+        <RowDefinition Height="1*"/>
+        <RowDefinition Height="1*"/>
+      </Grid.RowDefinitions>
+      <Border Grid.Column="0" Grid.Row="0">
+        <liquid:RichTextBlock Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,0,0" IsReadOnly="False">
+          <liquid:RichTextBlock.DirectRichText>
+            <TextBlock>
+              &lt;LiquidRichText xmlns:liquid="clr-namespace:Liquid;assembly=Liquid"&gt;
+              &lt;Text Style="Bold"&gt;&lt;![CDATA[Control Name]]&gt;&lt;/Text&gt;
+              &lt;/LiquidRichText&gt;
+            </TextBlock>
+          </liquid:RichTextBlock.DirectRichText>
+        </liquid:RichTextBlock>
+      </Border>
+      <Border Grid.Column="1" Grid.Row="0">
+        <liquid:RichTextBlock VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,0,0" IsReadOnly="False">
+          <liquid:RichTextBlock.DirectRichText>
+            <TextBlock>
+              &lt;LiquidRichText xmlns:liquid="clr-namespace:Liquid;assembly=Liquid"&gt;
+              &lt;Text Style="Bold"&gt;&lt;![CDATA[Description]]&gt;&lt;/Text&gt;
+              &lt;/LiquidRichText&gt;
+            </TextBlock>
+          </liquid:RichTextBlock.DirectRichText>
+        </liquid:RichTextBlock>
+      </Border>
+      <Border Grid.Column="2" Grid.Row="0">
+        <liquid:RichTextBlock VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,0,0" IsReadOnly="False">
+          <liquid:RichTextBlock.DirectRichText>
+            <TextBlock>
+              &lt;LiquidRichText xmlns:liquid="clr-namespace:Liquid;assembly=Liquid"&gt;
+              &lt;Text Style="Bold"&gt;&lt;![CDATA[Usage]]&gt;&lt;/Text&gt;
+              &lt;/LiquidRichText&gt;
+            </TextBlock>
+          </liquid:RichTextBlock.DirectRichText>
+        </liquid:RichTextBlock>
+      </Border>
+      <Border Grid.Column="0" Grid.Row="1">
+        <liquid:RichTextBlock VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,0,0" IsReadOnly="False">
+          <liquid:RichTextBlock.DirectRichText>
+            <TextBlock>
+              &lt;LiquidRichText xmlns:liquid="clr-namespace:Liquid;assembly=Liquid"&gt;
+              &lt;Text Style="Default"&gt;&lt;![CDATA[Liquid.RichTextBox]]&gt;&lt;/Text&gt;
+              &lt;/LiquidRichText&gt;
+            </TextBlock>
+          </liquid:RichTextBlock.DirectRichText>
+        </liquid:RichTextBlock>
+      </Border>
+      <Border Grid.Column="1" Grid.Row="1">
+        <liquid:RichTextBlock VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,0,0" IsReadOnly="False">
+          <liquid:RichTextBlock.DirectRichText>
+            <TextBlock>
+              &lt;LiquidRichText xmlns:liquid="clr-namespace:Liquid;assembly=Liquid"&gt;
+              &lt;Text Style="Default"&gt;&lt;![CDATA[A Rich TextBox.]]&gt;&lt;/Text&gt;
+              &lt;/LiquidRichText&gt;
+            </TextBlock>
+          </liquid:RichTextBlock.DirectRichText>
+        </liquid:RichTextBlock>
+      </Border>
+      <Border Grid.Column="2" Grid.Row="1">
+        <liquid:RichTextBlock VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,0,0" IsReadOnly="False">
+          <liquid:RichTextBlock.DirectRichText>
+            <TextBlock>
+              &lt;LiquidRichText xmlns:liquid="clr-namespace:Liquid;assembly=Liquid"&gt;
+              &lt;Text Style="Default"&gt;&lt;![CDATA[Can be used in Forum and CMS applications.]]&gt;&lt;/Text&gt;
+              &lt;/LiquidRichText&gt;
+            </TextBlock>
+          </liquid:RichTextBlock.DirectRichText>
+        </liquid:RichTextBlock>
+      </Border>
+      <Border Grid.Column="0" Grid.Row="2">
+        <liquid:RichTextBlock VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,0,0" IsReadOnly="False">
+          <liquid:RichTextBlock.DirectRichText>
+            <TextBlock>
+              &lt;LiquidRichText xmlns:liquid="clr-namespace:Liquid;assembly=Liquid"&gt;
+              &lt;Text Style="Default"&gt;&lt;![CDATA[Liquid.Tree]]&gt;&lt;/Text&gt;
+              &lt;/LiquidRichText&gt;
+            </TextBlock>
+          </liquid:RichTextBlock.DirectRichText>
+        </liquid:RichTextBlock>
+      </Border>
+      <Border Grid.Column="1" Grid.Row="2">
+        <liquid:RichTextBlock VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,0,0" IsReadOnly="False">
+          <liquid:RichTextBlock.DirectRichText>
+            <TextBlock>
+              &lt;LiquidRichText xmlns:liquid="clr-namespace:Liquid;assembly=Liquid"&gt;
+              &lt;Text Style="Default"&gt;&lt;![CDATA[A dynamic TreeView.]]&gt;&lt;/Text&gt;
+              &lt;/LiquidRichText&gt;
+            </TextBlock>
+          </liquid:RichTextBlock.DirectRichText>
+        </liquid:RichTextBlock>
+      </Border>
+      <Border Grid.Column="2" Grid.Row="2">
+        <liquid:RichTextBlock VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,0,0,0" IsReadOnly="False">
+          <liquid:RichTextBlock.DirectRichText>
+            <TextBlock>
+              &lt;LiquidRichText xmlns:liquid="clr-namespace:Liquid;assembly=Liquid"&gt;
+              &lt;Text Style="Default"&gt;&lt;![CDATA[Provides all the functionality you would expect from a TreeView including multiple node selection, checkboxes and vast API.]]&gt;&lt;/Text&gt;
+              &lt;/LiquidRichText&gt;
+            </TextBlock>
+          </liquid:RichTextBlock.DirectRichText>
+        </liquid:RichTextBlock>
+      </Border>
+    </liquid:Table>
+  </Xaml>
+  <Newline />
+  <Text Style="H2"><![CDATA[Colors, Shadows and Text Borders]]></Text>
+  <Newline />
+  <Text Style="Normal"><![CDATA[Setting text ]]></Text>
+  <Text Style="SmallRed"><![CDATA[color]]></Text>
+  <Text Style="Normal"><![CDATA[ is easy, but what about the text ]]></Text>
+  <Text Style="MagentaBack"><![CDATA[ background ]]></Text>
+  <Text Style="Normal"><![CDATA[ color?  And how about a ]]></Text>
+  <Text Style="DottedSmall"><![CDATA[ dotted border ]]></Text>
+  <Text Style="Normal"><![CDATA[ around your ]]></Text>
+  <Text Style="Normal"><![CDATA[text or maybe ]]></Text>
+  <Text Style="DashedSmall"><![CDATA[ dashed ]]></Text>
+  <Text Style="Normal"><![CDATA[ and no Rich TextBox would be complete without easy to use ]]></Text>
+  <Text Style="Shadowed"><![CDATA[shadows!]]></Text>
+  <Text Style="Normal"><![CDATA[ or perhaps a more ]]></Text>
+  <Text Style="SlightShadowed"><![CDATA[subtle shadow]]></Text>
+  <Text Style="Normal"><![CDATA[.  This nifty free control can do it all!  ]]></Text>
+  <Text Style="SilverlightLink"><![CDATA[www.silverlight.net]]></Text>
+  <Text Style="Normal"><![CDATA[ ... Some of you have requested automatic URL recognition, thats here too just type your URL and watch it be auto-formatted!]]></Text>
+  <Newline />
+  <Text Style="H2"><![CDATA[Spell Checking]]></Text>
+  <Newline />
+  <Text Style="Normal"><![CDATA[Typing the corrcet text is important, that is why the Liquid Rich TextBox can be connected to the Liquid Spell Checker component for fast spell checking.  Please feel free to correct any mistakes in this demo txet by clicking on an incorrect word and selecting a suggested alternative.]]></Text>
+  <Newline />
+  <Text Style="H2"><![CDATA[Using Images and XAML Objects]]></Text>
+  <Newline />
+  <Text Style="Normal"><![CDATA[You can insert images too... ]]></Text>
+  <Text Style="Normal"><![CDATA[ or any other Silverlight object such as a checkbox ]]></Text>
+  <Xaml>
+    <CheckBox />
+  </Xaml>
+  <Text Style="Normal"><![CDATA[ it's as easy as that!]]></Text>
+  <Newline />
+  <Text Style="H2"><![CDATA[Bulleted and Numbered Lists]]></Text>
+  <Newline />
+  <Text Style="Normal"><![CDATA[Creating a bulleted list is easy:]]></Text>
+  <Newline />
+  <Newline />
+  <Xaml>
+    <liquid:Bullet Type="Bullet" />
+  </Xaml>
+  <Text Style="Default"><![CDATA[List item 1]]></Text>
+  <Newline />
+  <Xaml>
+    <liquid:Bullet Type="Bullet" />
+  </Xaml>
+  <Text Style="Default"><![CDATA[List item 2]]></Text>
+  <Newline />
+  <Xaml>
+    <liquid:Bullet Type="Bullet" />
+  </Xaml>
+  <Text Style="Default"><![CDATA[List item 3]]></Text>
+  <Newline />
+  <Newline />
+  <Text Style="Normal"><![CDATA[Or maybe you like your lists numbered:]]></Text>
+  <Newline />
+  <Newline />
+  <Xaml>
+    <liquid:Bullet Type="Number" Number="1" />
+  </Xaml>
+  <Text Style="Default"><![CDATA[Numbered item 1]]></Text>
+  <Newline />
+  <Xaml>
+    <liquid:Bullet Type="Number" Number="2" />
+  </Xaml>
+  <Text Style="Default"><![CDATA[Numbered item 2]]></Text>
+  <Newline />
+  <Xaml>
+    <liquid:Bullet Type="Number" Number="3" />
+  </Xaml>
+  <Text Style="Default"><![CDATA[Numbered item 3]]></Text>
+  <Newline />
+  <Newline />
+  <Text Style="Normal"><![CDATA[Download the Liquid Controls Library today for free and use them in your own site for free*!]]></Text>
+  <Newline />
+  <Newline />
+  <Text Style="License"><![CDATA[* Please read the conditions of use for full details of how these controls can be used under the basic license.]]></Text>
+</LiquidRichText>
