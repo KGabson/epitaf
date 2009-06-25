@@ -1,0 +1,173 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CF61F4F7-6B83-4A04-A6DC-547728FF996E}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SilverlightControlsDemo</RootNamespace>
+    <AssemblyName>SilverlightControlsDemo</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>SilverlightControlsDemo.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>SilverlightControlsDemo.App</SilverlightAppEntry>
+    <TestPageFileName>TestPage.html</TestPageFileName>
+    <CreateTestPage>true</CreateTestPage>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>false</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Liquid, Version=5.2.0.26386, Culture=neutral, PublicKeyToken=7fbdd25c3fcc3919, processorArchitecture=MSIL" />
+    <Reference Include="Liquid.Components, Version=5.2.0.26385, Culture=neutral, PublicKeyToken=7fbdd25c3fcc3919, processorArchitecture=MSIL" />
+    <Reference Include="Liquid.Menu, Version=5.2.0.26379, Culture=neutral, PublicKeyToken=7fbdd25c3fcc3919, processorArchitecture=MSIL" />
+    <Reference Include="Liquid.Popup, Version=5.2.0.26381, Culture=neutral, PublicKeyToken=7fbdd25c3fcc3919, processorArchitecture=MSIL" />
+    <Reference Include="Liquid.RichText, Version=5.2.0.26382, Culture=neutral, PublicKeyToken=7fbdd25c3fcc3919, processorArchitecture=MSIL" />
+    <Reference Include="Liquid.TreeView, Version=5.2.0.26384, Culture=neutral, PublicKeyToken=7fbdd25c3fcc3919, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows" />
+    <Reference Include="mscorlib" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Controls, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page.xaml.cs">
+      <DependentUpon>Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Page.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\large\Thumbs.db" />
+    <None Include="images\Thumbs.db" />
+    <None Include="Properties\AppManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\reef.jpg" />
+    <Content Include="assets\RichText.xml" />
+    <Resource Include="images\bullets.png" />
+    <Resource Include="images\cat.png" />
+    <Resource Include="images\center.png" />
+    <Resource Include="images\copy.png" />
+    <Resource Include="images\cut.png" />
+    <Resource Include="images\dedent.png" />
+    <Resource Include="images\dialog.png" />
+    <Resource Include="images\doc.png" />
+    <Resource Include="images\document.png" />
+    <Resource Include="images\edit.png" />
+    <Resource Include="images\fieldset.png" />
+    <Resource Include="images\find.png" />
+    <Resource Include="images\folder.png" />
+    <Resource Include="images\folderOpen.png" />
+    <Resource Include="images\gif.png" />
+    <Resource Include="images\glass.png" />
+    <Resource Include="images\home.png" />
+    <Resource Include="images\indent.png" />
+    <Resource Include="images\info.png" />
+    <Resource Include="images\large\ascx.png" />
+    <Resource Include="images\large\asmx.png" />
+    <Resource Include="images\large\aspx.png" />
+    <Resource Include="images\large\avi.png" />
+    <Resource Include="images\large\config.png" />
+    <Resource Include="images\large\cs.png" />
+    <Resource Include="images\large\css.png" />
+    <Resource Include="images\large\doc.png" />
+    <Resource Include="images\large\exe.png" />
+    <Resource Include="images\large\folder.png" />
+    <Resource Include="images\large\gif.png" />
+    <Resource Include="images\large\htm.png" />
+    <Resource Include="images\large\html.png" />
+    <Resource Include="images\large\jpg.png" />
+    <Resource Include="images\large\js.png" />
+    <Resource Include="images\large\mp3.png" />
+    <Resource Include="images\large\mp4.png" />
+    <Resource Include="images\large\pdf.png" />
+    <Resource Include="images\large\png.png" />
+    <Resource Include="images\large\txt.png" />
+    <Resource Include="images\large\unknown.png" />
+    <Resource Include="images\large\xaml.png" />
+    <Resource Include="images\large\xls.png" />
+    <Resource Include="images\large\xml.png" />
+    <Resource Include="images\large\zip.png" />
+    <Resource Include="images\left.png" />
+    <Resource Include="images\menu.png" />
+    <Resource Include="images\numbers.png" />
+    <Resource Include="images\paste.png" />
+    <Resource Include="images\pdf.png" />
+    <Resource Include="images\progress.png" />
+    <Resource Include="images\redo.png" />
+    <Resource Include="images\right.png" />
+    <Resource Include="images\rollerBlind.png" />
+    <Resource Include="images\save.png" />
+    <Resource Include="images\scroller.png" />
+    <Resource Include="images\tree.png" />
+    <Resource Include="images\treeview.png" />
+    <Resource Include="images\undo.png" />
+    <Resource Include="images\upload.png" />
+    <Resource Include="images\xls.png" />
+    <Content Include="lib\Liquid.Components.dll" />
+    <Content Include="lib\Liquid.dll" />
+    <Content Include="lib\Liquid.Menu.dll" />
+    <Content Include="lib\Liquid.Popup.dll" />
+    <Content Include="lib\Liquid.RichText.dll" />
+    <Content Include="lib\Liquid.TreeView.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v2.0\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
