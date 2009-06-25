@@ -46,6 +46,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Liquid, Version=5.2.0.26386, Culture=neutral, PublicKeyToken=7fbdd25c3fcc3919, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Liquid.dll</HintPath>
+    </Reference>
+    <Reference Include="Liquid.Components, Version=5.2.0.26385, Culture=neutral, PublicKeyToken=7fbdd25c3fcc3919, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Liquid.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="Liquid.Menu, Version=5.2.0.26379, Culture=neutral, PublicKeyToken=7fbdd25c3fcc3919, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Liquid.Menu.dll</HintPath>
+    </Reference>
+    <Reference Include="Liquid.Popup, Version=5.2.0.26381, Culture=neutral, PublicKeyToken=7fbdd25c3fcc3919, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Liquid.Popup.dll</HintPath>
+    </Reference>
+    <Reference Include="Liquid.RichText, Version=5.2.0.26382, Culture=neutral, PublicKeyToken=7fbdd25c3fcc3919, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Liquid.RichText.dll</HintPath>
+    </Reference>
+    <Reference Include="Liquid.TreeView, Version=5.2.0.26384, Culture=neutral, PublicKeyToken=7fbdd25c3fcc3919, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Liquid.TreeView.dll</HintPath>
+    </Reference>
     <Reference Include="SLExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\SLExtensions.dll</HintPath>
@@ -68,12 +92,19 @@
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\FileUploader.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Login.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="View\CreateAccount.xaml.cs">
       <DependentUpon>CreateAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FileUploader.xaml.cs">
+      <DependentUpon>FileUploader.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>

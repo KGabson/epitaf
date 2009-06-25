@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
+using Liquid;
+
 namespace MyLiveMesh.View
 {
 	public partial class Desktop : UserControl
@@ -18,6 +20,11 @@ namespace MyLiveMesh.View
 		{
 			// Required to initialize variables
 			InitializeComponent();
+            this.viewerPopup.Show();
+            //Dialog test = new Dialog();
+            //test.Show();
+            //this.LayoutRoot.Children.Add(test);
+            //test.Show();
 		}
 	}
 }
