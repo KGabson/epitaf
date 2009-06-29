@@ -11,24 +11,25 @@ using System.Windows.Shapes;
 using System.ServiceModel.Syndication;
 using System.Collections.Generic;
 using System.Diagnostics;
+using MyLiveMesh.View;
 
 namespace MyLiveMesh.ViewModel
 {
     public class DesktopViewModel : ViewModelBase
     {
         private List<FileViewModel> files;
+        private ExplorerViewModel explorer;
+        private List<ExplorerViewModel> explorers;
 
         public DesktopViewModel()
         {
             files = new List<FileViewModel>();
+            explorers = new List<ExplorerViewModel>();
+            //explorers.Add(new ExplorerViewModel());
             FileViewModel but = new FileViewModel();
-            but.Title = "Le directory!";
+            but.Title = "My Files";
             files.Add(but);
             files.Add(new FileViewModel());
-            files.Add(new FileViewModel());
-            files.Add(new FileViewModel());
-            files.Add(new FileViewModel());
-            InvokePropertyChanged("Files");
             Commands.DesktopCommands.FileCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(FileCommand_Executed);
         }
 
@@ -43,16 +44,39 @@ namespace MyLiveMesh.ViewModel
             }
         }
 
-        public void test(object sender, MouseButtonEventArgs e)
+        public ExplorerViewModel Explorer
         {
-            Debug.WriteLine("Ca serait trop rebeeeeeel");
+            get { return explorer; }
+
+            set
+            {
+                explorer = value;
+                InvokePropertyChanged("Explorer");
+            }
+        }
+                                       
+        public List<ExplorerViewModel> Explorers
+        {
+            get { return explorers; }
+            set
+            {
+                explorers = value;
+                InvokePropertyChanged("Explorers");
+            }
         }
 
         public void FileCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
         {
-            ListBox list = (ListBox)e.Source;
-            FileViewModel selectedFile = (FileViewModel)list.SelectedItem;
-            Debug.WriteLine("youpi mon con !!!!!" + selectedFile.Title);
+            FileViewModel selectedFile = (FileViewModel)((ListBox)e.Source).SelectedItem;
+            Debug.WriteLine(selectedFile.Title + " clicked et aussi => " + sender.GetType());
+            if (explorer == null)
+            {
+                ExplorerViewModel ex = new ExplorerViewModel();
+                ex.RootPath = selectedFile.Title;
+                explorer = ex;
+            }
+            explorer.IsEnabled = true;
+            InvokePropertyChanged("Explorer");
         }
     }
 }

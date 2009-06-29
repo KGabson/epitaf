@@ -11,6 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 using Liquid;
+using MyLiveMesh.ViewModel;
 
 namespace MyLiveMesh.View
 {
@@ -19,12 +20,7 @@ namespace MyLiveMesh.View
 		public Desktop()
 		{
 			// Required to initialize variables
-			InitializeComponent();
-            this.viewerPopup.Show();
-            //Dialog test = new Dialog();
-            //test.Show();
-            //this.LayoutRoot.Children.Add(test);
-            //test.Show();
-		}
+			InitializeComponent();  
+        }
 	}
 }

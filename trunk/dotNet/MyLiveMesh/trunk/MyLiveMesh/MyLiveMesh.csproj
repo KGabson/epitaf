@@ -86,9 +86,14 @@
     <Reference Include="system" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Controls, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Windows.Browser" />
     <Page Include="View\CreateAccount.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Explorer.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -102,6 +107,9 @@
     </Page>
     <Compile Include="View\CreateAccount.xaml.cs">
       <DependentUpon>CreateAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Explorer.xaml.cs">
+      <DependentUpon>Explorer.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FileUploader.xaml.cs">
       <DependentUpon>FileUploader.xaml</DependentUpon>
@@ -128,6 +136,7 @@
     <Compile Include="Services\Services.cs" />
     <Compile Include="Tools\PasswordHelper.cs" />
     <Compile Include="ViewModel\CreateAccountViewModel.cs" />
+    <Compile Include="ViewModel\ExplorerViewModel.cs" />
     <Compile Include="ViewModel\FileViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\DesktopViewModel.cs" />
@@ -162,7 +171,33 @@
     <None Include="Properties\AppManifest.xml" />
     <None Include="Service References\AccountServiceReference\AccountService.wsdl" />
     <Resource Include="Data\directory.png" />
-    <Resource Include="Data\folder.jpg" />
+    <Resource Include="Data\folder.png" />
+    <Resource Include="Data\folderOpen.png" />
+    <Resource Include="Data\Large\ascx.png" />
+    <Resource Include="Data\Large\asmx.png" />
+    <Resource Include="Data\Large\aspx.png" />
+    <Resource Include="Data\Large\avi.png" />
+    <Resource Include="Data\Large\config.png" />
+    <Resource Include="Data\Large\cs.png" />
+    <Resource Include="Data\Large\css.png" />
+    <Resource Include="Data\Large\doc.png" />
+    <Resource Include="Data\Large\exe.png" />
+    <Resource Include="Data\Large\folder.png" />
+    <Resource Include="Data\Large\gif.png" />
+    <Resource Include="Data\Large\htm.png" />
+    <Resource Include="Data\Large\html.png" />
+    <Resource Include="Data\Large\jpg.png" />
+    <Resource Include="Data\Large\js.png" />
+    <Resource Include="Data\Large\mp3.png" />
+    <Resource Include="Data\Large\mp4.png" />
+    <Resource Include="Data\Large\pdf.png" />
+    <Resource Include="Data\Large\png.png" />
+    <Resource Include="Data\Large\txt.png" />
+    <Resource Include="Data\Large\unknown.png" />
+    <Resource Include="Data\Large\xaml.png" />
+    <Resource Include="Data\Large\xls.png" />
+    <Resource Include="Data\Large\xml.png" />
+    <Resource Include="Data\Large\zip.png" />
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>

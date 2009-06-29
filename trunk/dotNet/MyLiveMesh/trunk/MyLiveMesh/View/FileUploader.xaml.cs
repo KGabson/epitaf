@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace MyLiveMesh
 {
@@ -16,6 +17,6 @@ namespace MyLiveMesh
 		{
 			// Required to initialize variables
 			InitializeComponent();
-		}
+        }
 	}
 }
