@@ -39,7 +39,8 @@ namespace MyLiveMesh.ViewModel
             Services.Services.AuthService.CreateAccountCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(AuthService_CreateAccountCompleted);
 
             Commands.LoginCommands.CreateAccountCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(CreateAccountCommand_Executed);
-            currentViewModel = loginViewModel;
+            currentViewModel = desktopViewModel;
+            //currentViewModel = loginViewModel;
         }
 
         void AuthService_CreateAccountCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)

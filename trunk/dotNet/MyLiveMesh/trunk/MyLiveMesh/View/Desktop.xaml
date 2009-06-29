@@ -22,6 +22,9 @@
                     <DataTemplate x:Key="FileViewModel">
                         <Views:File />
                     </DataTemplate>
+                    <DataTemplate x:Key="ExplorerViewModel">
+                        <Views:Explorer />
+                    </DataTemplate>
                 </ResourceDictionary>
             </Data:ResourceSelector.Resources>
         </Data:ResourceSelector>
@@ -32,21 +35,38 @@
         </DataTemplate>
     </UserControl.Resources>
     
-    <Grid x:Name="LayoutRoot">
+    <Grid 
+        x:Name="LayoutRoot"
+        Width="Auto"
+        Height="Auto">
 		<Grid Margin="1,0,0,8">
             <ListBox 
                 ItemsSource="{Binding Files}"
                 ItemTemplate="{StaticResource controlTemplate}"
-                Input:CommandService.Command="FileCommand" Margin="0,30,0,0">
+                Input:CommandService.Command="FileCommand"
+                Margin="0,30,0,0">
             </ListBox>
-            <Button Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="116" Content="Upload Files" x:Name="FileUploadBtn"/>
-            
-            <liquidPopup:Dialog x:Name="viewerPopup" Width="300" Height="330" Buttons="None" Title="Viewer Control: The Great Barrier Reef" IsResizable="True">
-                <liquid:Viewer Zoom="0.20">
-                    <Image Source="../Data/folder.jpg" />
-                </liquid:Viewer>
-            </liquidPopup:Dialog>
-            
+            <Button 
+                Height="30" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Width="116" 
+                Content="Upload Files" 
+                x:Name="FileUploadBtn"/>
         </Grid>
+        <Canvas
+            x:Name="explorerLayout"
+            Width="Auto"
+            Height="Auto">
+            <!--<ListBox 
+                ItemsSource="{Binding Explorers}"
+                ItemTemplate="{StaticResource controlTemplate}">
+            </ListBox>-->
+            
+            <ContentControl
+                Content="{Binding Explorer}"
+                ContentTemplate="{StaticResource controlTemplate}" />  
+        </Canvas>
+       
     </Grid>
 </UserControl>

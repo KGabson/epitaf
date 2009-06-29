@@ -1,0 +1,72 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:liquid="clr-namespace:Liquid;assembly=Liquid" 
+    xmlns:liquidTreeView="clr-namespace:Liquid;assembly=Liquid.TreeView"
+    xmlns:liquidPopup="clr-namespace:Liquid;assembly=Liquid.Popup" 
+    xmlns:extended="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+	mc:Ignorable="d"
+	x:Class="MyLiveMesh.View.Explorer"
+	d:DesignWidth="640" d:DesignHeight="480">
+
+    <Grid>
+    <StackPanel 
+        x:Name="dockPanel" 
+        Margin="2 0 0 32" 
+        Orientation="Vertical" 
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Bottom" />
+        <Canvas x:Name="dialogCanvas" Width="770" Height="500">
+            <liquidPopup:Dialog 
+                x:Name="itemViewerPopup" 
+                Width="550" 
+                Height="330" 
+                Buttons="None" 
+                Title="Item Viewer Control: File Explorer" 
+                IsResizable="True"
+                IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <liquidTreeView:Tree 
+                        x:Name="fileTree" 
+                        Grid.Column="0" 
+                        Width="Auto" 
+                        Height="Auto" 
+                        EnableLines="True"
+                        NodeClick="fileTree_NodeClick">
+                        <!--<liquidTreeView:Tree.Nodes>
+                            <liquidTreeView:Node 
+                                ID="0" 
+                                Title="My files" 
+                                Icon="../Data/folder.png" 
+                                IconExpanded="../Data/folderOpen.png" 
+                                IsExpanded="True"
+                                Name="listNode"
+                                Content="{Binding DirList}" >
+                            </liquidTreeView:Node>
+                        </liquidTreeView:Tree.Nodes>-->
+                    </liquidTreeView:Tree>
+                    <extended:GridSplitter
+                        x:Name="grsplSplitter" 
+                        Grid.Column="1" 
+                        HorizontalAlignment="Center" 
+                        Width="4" 
+                        Background="#00ffffff" />
+                    <liquid:ItemViewer 
+                        x:Name="fileItems"
+                        Grid.Column="2" 
+                        Width="Auto" 
+                        Height="Auto"
+                        Background="White" />
+                </Grid>
+            </liquidPopup:Dialog>
+        </Canvas>
+   </Grid>
+</UserControl>
