@@ -22,7 +22,7 @@ namespace MyLiveMesh.Web.LinqToSql
 	using System;
 	
 	
-	[System.Data.Linq.Mapping.DatabaseAttribute(Name="MyLiveMesh")]
+	[System.Data.Linq.Mapping.DatabaseAttribute(Name="mylivemesh-tmp-tom")]
 	public partial class MyLiveMeshDBDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -36,7 +36,7 @@ namespace MyLiveMesh.Web.LinqToSql
     #endregion
 		
 		public MyLiveMeshDBDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["MyLiveMeshConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["mylivemesh_tmp_tomConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -127,7 +127,7 @@ namespace MyLiveMesh.Web.LinqToSql
 			}
 		}
 		
-		[Column(Storage="_login", DbType="NVarChar(50)")]
+		[Column(Storage="_login", DbType="NChar(50)")]
 		public string login
 		{
 			get
@@ -147,7 +147,7 @@ namespace MyLiveMesh.Web.LinqToSql
 			}
 		}
 		
-		[Column(Storage="_password", DbType="NVarChar(50)")]
+		[Column(Storage="_password", DbType="NChar(50)")]
 		public string password
 		{
 			get
@@ -167,7 +167,7 @@ namespace MyLiveMesh.Web.LinqToSql
 			}
 		}
 		
-		[Column(Storage="_email", DbType="NVarChar(150)")]
+		[Column(Storage="_email", DbType="NChar(50)")]
 		public string email
 		{
 			get
