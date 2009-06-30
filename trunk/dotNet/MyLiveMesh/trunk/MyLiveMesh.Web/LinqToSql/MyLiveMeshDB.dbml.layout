@@ -2,10 +2,10 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="MyLiveMeshDB">
   <DataContextMoniker Name="/MyLiveMeshDBDataContext" />
   <nestedChildShapes>
-    <classShape Id="88f5afe0-70c5-4841-a9b0-3ea23553f6a6" absoluteBounds="3.25, 2.875, 2, 1.4248478190104168">
+    <classShape Id="18dd8b8b-d12d-4f25-9502-57da785859bf" absoluteBounds="2.5, 1.875, 2, 1.4248478190104168">
       <DataClassMoniker Name="/MyLiveMeshDBDataContext/user" />
       <nestedChildShapes>
-        <elementListCompartment Id="87e28d12-c694-4d94-af02-0e441b54e5b6" absoluteBounds="3.265, 3.335, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="30361394-dce6-436f-821c-0555261f2c38" absoluteBounds="2.5149999999999997, 2.335, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
