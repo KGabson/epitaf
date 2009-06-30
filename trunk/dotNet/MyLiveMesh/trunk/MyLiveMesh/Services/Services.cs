@@ -14,12 +14,10 @@ namespace MyLiveMesh.Services
     public static class Services
     {
         public static AccountServiceReference.AccountServiceClient AuthService { get; set; }
-        public static FileUploaderServiceReference.FileUploaderServiceClient FileUpService { get; set; }
 
         static Services()
         {
             AuthService = new MyLiveMesh.AccountServiceReference.AccountServiceClient();
-            FileUpService = new MyLiveMesh.FileUploaderServiceReference.FileUploaderServiceClient();
         }
     }
 }
