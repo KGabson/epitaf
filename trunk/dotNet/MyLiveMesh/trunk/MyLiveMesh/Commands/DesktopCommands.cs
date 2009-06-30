@@ -7,8 +7,11 @@ namespace MyLiveMesh.Commands
         static DesktopCommands()
         {
             FileCommand = new Command("FileCommand");
+            FileUploaderCommand = new Command("FileUploaderCommand");
         }
 
         public static Command FileCommand { get; private set; }
+        public static Command FileUploaderCommand { get; private set; }
+
     }
 }

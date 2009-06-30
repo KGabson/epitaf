@@ -9,7 +9,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 
-namespace MyLiveMesh
+namespace MyLiveMesh.View
 {
 	public partial class FileUploader : UserControl
 	{

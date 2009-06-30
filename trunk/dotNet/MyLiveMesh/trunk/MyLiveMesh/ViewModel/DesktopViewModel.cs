@@ -12,6 +12,7 @@ using System.ServiceModel.Syndication;
 using System.Collections.Generic;
 using System.Diagnostics;
 using MyLiveMesh.View;
+using Liquid.Components;
 
 namespace MyLiveMesh.ViewModel
 {
@@ -19,18 +20,20 @@ namespace MyLiveMesh.ViewModel
     {
         private List<FileViewModel> files;
         private ExplorerViewModel explorer;
-        private List<ExplorerViewModel> explorers;
+        private FileUploaderViewModel fileUploader;
+        public Uploader uploader;
+
 
         public DesktopViewModel()
         {
             files = new List<FileViewModel>();
-            explorers = new List<ExplorerViewModel>();
-            //explorers.Add(new ExplorerViewModel());
             FileViewModel but = new FileViewModel();
+            uploader = new Uploader("http://localhost:54164/Services/FileUp.asmx");
             but.Title = "My Files";
             files.Add(but);
             files.Add(new FileViewModel());
             Commands.DesktopCommands.FileCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(FileCommand_Executed);
+            Commands.DesktopCommands.FileUploaderCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(FileUploaderCommand_Executed);
         }
 
         public List<FileViewModel> Files
@@ -54,14 +57,14 @@ namespace MyLiveMesh.ViewModel
                 InvokePropertyChanged("Explorer");
             }
         }
-                                       
-        public List<ExplorerViewModel> Explorers
+
+        public FileUploaderViewModel FileUploader
         {
-            get { return explorers; }
-            set
+            get { return fileUploader; }
+            set 
             {
-                explorers = value;
-                InvokePropertyChanged("Explorers");
+                fileUploader = value;
+                InvokePropertyChanged("FileUploader");
             }
         }
 
@@ -77,6 +80,24 @@ namespace MyLiveMesh.ViewModel
             }
             explorer.IsEnabled = true;
             InvokePropertyChanged("Explorer");
+        }
+
+        public void FileUploaderCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
+        {
+//          this.fileUploader = new FileUploaderViewModel();
+//          InvokePropertyChanged("FileUploader");
+            OpenFileDialog dialog = new OpenFileDialog();
+//          dialog.Filter = "Image files (*.gif;*.jpg;*.png)|*.gif;*.jpg;*.png";
+            dialog.Multiselect = true;
+            if (dialog.ShowDialog() == true)
+            {
+                Debug.WriteLine("files to upload " + dialog.Files.ToString());
+                uploader.UploadFiles(dialog.Files, "/ClientDocs/", true);
+                if (uploader.WebserviceMethod != null)
+                {
+                    Debug.WriteLine("vla les methodes du webservice : " + uploader.WebserviceMethod);
+                }
+            } 
         }
     }
 }
