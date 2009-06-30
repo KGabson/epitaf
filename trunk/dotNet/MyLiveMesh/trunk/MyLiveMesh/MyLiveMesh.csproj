@@ -134,11 +134,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\FileUploaderServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Service References\FileUp\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -210,13 +205,6 @@
     <Resource Include="Data\Large\xls.png" />
     <Resource Include="Data\Large\xml.png" />
     <Resource Include="Data\Large\zip.png" />
-    <None Include="Service References\FileUploaderServiceReference\FileUploaderService.disco" />
-    <None Include="Service References\FileUploaderServiceReference\configuration91.svcinfo" />
-    <None Include="Service References\FileUploaderServiceReference\configuration.svcinfo" />
-    <None Include="Service References\FileUploaderServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <None Include="Service References\FileUp\FileUp.disco" />
     <None Include="Service References\FileUp\configuration91.svcinfo" />
     <None Include="Service References\FileUp\configuration.svcinfo" />
@@ -231,7 +219,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\AccountServiceReference\" />
-    <WCFMetadataStorage Include="Service References\FileUploaderServiceReference\" />
     <WCFMetadataStorage Include="Service References\FileUp\" />
   </ItemGroup>
   <ItemGroup>
@@ -251,10 +238,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\FileUploaderServiceReference\FileUploaderService.wsdl" />
-    <None Include="Service References\FileUploaderServiceReference\FileUploaderService.xsd" />
-    <None Include="Service References\FileUploaderServiceReference\FileUploaderService1.wsdl" />
-    <None Include="Service References\FileUploaderServiceReference\FileUploaderService1.xsd" />
     <None Include="Service References\FileUp\FileUp.wsdl" />
     <None Include="Service References\FileUp\MyLiveMesh.FileUp.UploadResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

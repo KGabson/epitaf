@@ -70,7 +70,6 @@
     <Content Include="MyLiveMeshTestPage.html" />
     <Content Include="Services\AccountService.svc" />
     <Content Include="Services\FileUp.asmx" />
-    <Content Include="Services\FileUploaderService.svc" />
     <Content Include="Silverlight.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -96,10 +95,6 @@
     </Compile>
     <Compile Include="Services\FileUp.asmx.cs">
       <DependentUpon>FileUp.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Services\FileUploaderService.svc.cs">
-      <DependentUpon>FileUploaderService.svc</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
