@@ -27,9 +27,9 @@ namespace MyLiveMesh.ViewModel
             //visibility = System.Windows.Visibility.Visible;
             IsEnabled = true;
             dirList = new ObservableCollection<Node>();
-            dirList.Add(new Node("1", "first node", true));
-            dirList.Add(new Node("2", "Second node", false));
-            dirList.Add(new Node("3", "Third node", false));
+            dirList.Add(new Node("1", "first node", true, "../Data/folder.png", "../Data/folderOpen.png"));
+            dirList.Add(new Node("2", "Second node", false, "../Data/folder.png", "../Data/folderOpen.png"));
+            dirList.Add(new Node("3", "Third node", false, "../Data/folder.png", "../Data/folderOpen.png"));
         }
 
         public string RootPath

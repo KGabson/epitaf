@@ -5,12 +5,12 @@
     xmlns:Data="clr-namespace:SLExtensions.Data;assembly=SLExtensions"
     xmlns:Views="clr-namespace:MyLiveMesh.View"
     xmlns:Controls="clr-namespace:SLExtensions.Controls;assembly=SLExtensions.Controls"
-    
+    xmlns:Input="clr-namespace:SLExtensions.Input;assembly=SLExtensions"
+
     xmlns:liquidPopup="clr-namespace:Liquid;assembly=Liquid.Popup"
     xmlns:liquid="clr-namespace:Liquid;assembly=Liquid" 
     
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Input="clr-namespace:SLExtensions.Input;assembly=SLExtensions"
     xmlns:tools="clr-namespace:MyLiveMesh.Tools"
 	mc:Ignorable="d"
 	x:Class="MyLiveMesh.View.Desktop"
@@ -24,6 +24,9 @@
                     </DataTemplate>
                     <DataTemplate x:Key="ExplorerViewModel">
                         <Views:Explorer />
+                    </DataTemplate>
+                    <DataTemplate x:Key="FileUploaderViewModel">
+                        <Views:FileUploader />
                     </DataTemplate>
                 </ResourceDictionary>
             </Data:ResourceSelector.Resources>
@@ -52,7 +55,8 @@
                 VerticalAlignment="Top" 
                 Width="116" 
                 Content="Upload Files" 
-                x:Name="FileUploadBtn"/>
+                x:Name="FileUploadBtn"
+                Input:CommandService.Command="FileUploaderCommand"/>
         </Grid>
         <Canvas
             x:Name="explorerLayout"
@@ -66,6 +70,14 @@
             <ContentControl
                 Content="{Binding Explorer}"
                 ContentTemplate="{StaticResource controlTemplate}" />  
+        </Canvas>
+        <Canvas
+            x:Name="fileUploaderLayout"
+            Width="Auto"
+            Height="Auto">
+            <ContentControl
+                Content="{Binding FileUploader}"
+                ContentTemplate="{StaticResource controlTemplate}" />
         </Canvas>
        
     </Grid>

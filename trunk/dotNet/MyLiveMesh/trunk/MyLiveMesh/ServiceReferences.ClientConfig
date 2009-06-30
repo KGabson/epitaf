@@ -6,12 +6,44 @@
                     maxReceivedMessageSize="2147483647">
                     <security mode="None" />
                 </binding>
+                <binding name="BasicHttpBinding_FileUploaderService" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+                <binding name="FileUpSoap" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+                <binding name="FileUpSoap1" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+                <binding name="FileUpSoap2" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+                <binding name="FileUpSoap3" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
             </basicHttpBinding>
         </bindings>
         <client>
             <endpoint address="http://localhost:54164/Services/AccountService.svc"
                 binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_AccountService"
                 contract="AccountServiceReference.AccountService" name="BasicHttpBinding_AccountService" />
+            <endpoint address="http://localhost:54164/Services/FileUploaderService.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_FileUploaderService"
+                contract="FileUploaderServiceReference.FileUploaderService"
+                name="BasicHttpBinding_FileUploaderService" />
+            <endpoint address="http://localhost:54164/Services/FileUp.asmx"
+                binding="basicHttpBinding" bindingConfiguration="FileUpSoap"
+                contract="ServiceReference1.FileUpSoap" name="FileUpSoap" />
+            <endpoint address="http://localhost:54164/Services/FileUp.asmx"
+                binding="basicHttpBinding" bindingConfiguration="FileUpSoap1"
+                contract="FileUpService.FileUpSoap" name="FileUpSoap1" />
+            <endpoint address="http://localhost:54164/Services/FileUp.asmx"
+                binding="basicHttpBinding" bindingConfiguration="FileUpSoap2"
+                contract="FileUpService.FileUpSoap" name="FileUpSoap2" />
+            <endpoint address="http://localhost:54164/Services/FileUp.asmx"
+                binding="basicHttpBinding" bindingConfiguration="FileUpSoap3"
+                contract="FileUp.FileUpSoap" name="FileUpSoap3" />
         </client>
     </system.serviceModel>
 </configuration>

@@ -123,6 +123,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\DesktopCommands.cs" />
+    <Compile Include="Commands\FileUploaderCommand.cs" />
     <Compile Include="Commands\LoginCommands.cs" />
     <Compile Include="Page.xaml.cs">
       <DependentUpon>Page.xaml</DependentUpon>
@@ -133,10 +134,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\FileUploaderServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\FileUp\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Services\Services.cs" />
     <Compile Include="Tools\PasswordHelper.cs" />
     <Compile Include="ViewModel\CreateAccountViewModel.cs" />
     <Compile Include="ViewModel\ExplorerViewModel.cs" />
+    <Compile Include="ViewModel\FileUploaderViewModel.cs" />
     <Compile Include="ViewModel\FileViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\DesktopViewModel.cs" />
@@ -198,6 +210,20 @@
     <Resource Include="Data\Large\xls.png" />
     <Resource Include="Data\Large\xml.png" />
     <Resource Include="Data\Large\zip.png" />
+    <None Include="Service References\FileUploaderServiceReference\FileUploaderService.disco" />
+    <None Include="Service References\FileUploaderServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\FileUploaderServiceReference\configuration.svcinfo" />
+    <None Include="Service References\FileUploaderServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\FileUp\FileUp.disco" />
+    <None Include="Service References\FileUp\configuration91.svcinfo" />
+    <None Include="Service References\FileUp\configuration.svcinfo" />
+    <None Include="Service References\FileUp\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +231,8 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\AccountServiceReference\" />
+    <WCFMetadataStorage Include="Service References\FileUploaderServiceReference\" />
+    <WCFMetadataStorage Include="Service References\FileUp\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\AccountServiceReference\AccountService.disco" />
@@ -222,6 +250,14 @@
     <None Include="Service References\AccountServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\FileUploaderServiceReference\FileUploaderService.wsdl" />
+    <None Include="Service References\FileUploaderServiceReference\FileUploaderService.xsd" />
+    <None Include="Service References\FileUploaderServiceReference\FileUploaderService1.wsdl" />
+    <None Include="Service References\FileUploaderServiceReference\FileUploaderService1.xsd" />
+    <None Include="Service References\FileUp\FileUp.wsdl" />
+    <None Include="Service References\FileUp\MyLiveMesh.FileUp.UploadResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
