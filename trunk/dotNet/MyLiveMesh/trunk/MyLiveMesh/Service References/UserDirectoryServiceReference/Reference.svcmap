@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="bf314ee9-1b1e-461e-a2a9-0dfa131da256" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:54164/Services/UserDirectory.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="UserDirectory.xsd" MetadataType="Schema" ID="6de8f286-192c-4d13-b40e-1eb12dc353ec" SourceId="1" SourceUrl="http://localhost:54164/Services/UserDirectory.svc?xsd=xsd1" />
+    <MetadataFile FileName="UserDirectory.disco" MetadataType="Disco" ID="28c62fa7-5d2c-47af-b6ed-78b6425a82cc" SourceId="1" SourceUrl="http://localhost:54164/Services/UserDirectory.svc?disco" />
+    <MetadataFile FileName="UserDirectory.wsdl" MetadataType="Wsdl" ID="904d1a40-0c5e-48c4-a028-b6c7fffbf934" SourceId="1" SourceUrl="http://localhost:54164/Services/UserDirectory.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="UserDirectory1.xsd" MetadataType="Schema" ID="e2f35da6-28e2-4a82-b710-0a8316ee53d1" SourceId="1" SourceUrl="http://localhost:54164/Services/UserDirectory.svc?xsd=xsd0" />
+    <MetadataFile FileName="UserDirectory1.wsdl" MetadataType="Wsdl" ID="5c960c90-5f97-479c-bfd7-23796080886b" SourceId="1" SourceUrl="http://localhost:54164/Services/UserDirectory.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

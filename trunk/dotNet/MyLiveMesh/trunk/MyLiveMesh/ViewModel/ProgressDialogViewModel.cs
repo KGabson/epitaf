@@ -82,14 +82,15 @@ namespace MyLiveMesh.ViewModel
 
         void uploader_UploadProgressChange(object sender, UploadEventArgs e)
         {
-            int itemsUploaded = uploader.ItemsUploaded + 1;
-
+            int itemsUploaded;
+            
+            itemsUploaded = uploader.ItemsUploaded + 1;
             if (itemsUploaded > uploader.ItemsTotal)
                 itemsUploaded = uploader.ItemsTotal;
             ProgressText = "Uploading " + e.Text + "...";
             ItemsCopied = "Copying file " + itemsUploaded.ToString() + " of " + uploader.ItemsTotal.ToString();
             Progress.Text = "Uploading " + Math.Round(e.Progress) + "% (" + e.Text + ")";
-            Progress.Complete = e.Progress;
+            Progress.Complete = e.Progress % 100;
         }
 
         void uploader_UploadFinished(object sender, UploadEventArgs e)

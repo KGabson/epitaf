@@ -21,11 +21,18 @@ namespace MyLiveMesh.View
 			// Required to initialize variables
 			InitializeComponent();
 
-            this.itemViewerPopup.Show(); //to del and manage the display only with IsEnabled
+            this.itemViewerPopup.Show();
             //Events Controls
             this.itemViewerPopup.Closed += new DialogEventHandler(itemViewerPopup_Closed);
             this.itemViewerPopup.IsEnabledChanged += new DependencyPropertyChangedEventHandler(itemViewerPopup_IsEnabledChanged);
+            this.newFolder.Closed += new DialogEventHandler(newFolder_Closed);
             this.Loaded += new RoutedEventHandler(Explorer_Loaded);
+        }
+
+        void newFolder_Closed(object sender, DialogEventArgs e)
+        {
+            if (e.Cancel == false)
+                (this.DataContext as ExplorerViewModel).createDirectory(this.folderName.Text);
         }
 
         void Explorer_Loaded(object sender, RoutedEventArgs e)
@@ -34,11 +41,9 @@ namespace MyLiveMesh.View
             {
                 this.fileTree.Nodes = ((ExplorerViewModel)this.DataContext).DirList;
                 this.fileTree.OnApplyTemplate();
+                (this.DataContext as ExplorerViewModel).newFolderPopup = this.newFolder;
             }
-            else
-            {
-                Debug.WriteLine("la non plus le datacontext il est pas init");
-            }
+            
        }
 
         //Events
@@ -52,14 +57,13 @@ namespace MyLiveMesh.View
 
         void itemViewerPopup_Closed(object sender, DialogEventArgs e)
         {
-            Debug.WriteLine("je close la fenetre");
-            Debug.WriteLine("visibility = " + this.itemViewerPopup.Visibility);
             this.itemViewerPopup.IsEnabled = false;
         }
 
         private void fileTree_NodeClick(object sender, TreeEventArgs e)
         {
             Node n = (Node)sender;
+            (this.DataContext as ExplorerViewModel).selectedNode = n;
             List<ItemViewerItem> toAdd = new List<ItemViewerItem>();
             fileItems.Clear();
             if (n.ID == "1")

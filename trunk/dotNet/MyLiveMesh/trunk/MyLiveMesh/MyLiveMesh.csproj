@@ -130,6 +130,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Commands\DesktopCommands.cs" />
+    <Compile Include="Commands\ExplorerCommands.cs" />
     <Compile Include="Commands\FileUploaderCommand.cs" />
     <Compile Include="Commands\LoginCommands.cs" />
     <Compile Include="Page.xaml.cs">
@@ -144,6 +145,11 @@
     <Compile Include="Service References\FileUp\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Service References\UserDirectoryServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Services\Services.cs" />
     <Compile Include="Tools\PasswordHelper.cs" />
@@ -219,6 +225,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\UserDirectoryServiceReference\UserDirectory.disco" />
+    <None Include="Service References\UserDirectoryServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\UserDirectoryServiceReference\configuration.svcinfo" />
+    <None Include="Service References\UserDirectoryServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
@@ -227,6 +240,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\AccountServiceReference\" />
     <WCFMetadataStorage Include="Service References\FileUp\" />
+    <WCFMetadataStorage Include="Service References\UserDirectoryServiceReference\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\AccountServiceReference\AccountService.disco" />
@@ -249,6 +263,10 @@
     <None Include="Service References\FileUp\MyLiveMesh.FileUp.UploadResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\UserDirectoryServiceReference\UserDirectory.wsdl" />
+    <None Include="Service References\UserDirectoryServiceReference\UserDirectory.xsd" />
+    <None Include="Service References\UserDirectoryServiceReference\UserDirectory1.wsdl" />
+    <None Include="Service References\UserDirectoryServiceReference\UserDirectory1.xsd" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v2.0\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

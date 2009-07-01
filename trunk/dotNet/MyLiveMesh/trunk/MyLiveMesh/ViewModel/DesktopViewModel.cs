@@ -91,15 +91,20 @@ namespace MyLiveMesh.ViewModel
 
         public void FileUploaderCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-
-            dialog.Multiselect = true;
-            if (dialog.ShowDialog() == true)
+            if (ProgressDialog.IsEnabled == false)
             {
-                Debug.WriteLine("files to upload " + dialog.Files.ToString());
-                progressDialog.uploader.UploadFiles(dialog.Files, "/ClientDocs/", true);              
-                progressDialog.IsEnabled = true;
-            } 
+                OpenFileDialog dialog = new OpenFileDialog();
+
+                dialog.Multiselect = true;
+                if (dialog.ShowDialog() == true)
+                {
+                    progressDialog.Progress.Complete = 0;
+                    progressDialog.Progress.Text = "0 %";
+                    Debug.WriteLine("files to upload " + dialog.Files.ToString());
+                    progressDialog.uploader.UploadFiles(dialog.Files, "/ClientDocs/", true);
+                    progressDialog.IsEnabled = true;
+                }
+            }
         }
 
         void uploader_UploadFinished(object sender, UploadEventArgs e)

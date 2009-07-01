@@ -45,40 +45,44 @@
         x:Name="LayoutRoot"
         Width="Auto"
         Height="Auto">
-		<Grid Margin="1,0,0,8">
+        <Canvas
+            Width="Auto"
+            Height="Auto">
             <ListBox 
+                VerticalAlignment="Top"
                 ItemsSource="{Binding Files}"
                 ItemTemplate="{StaticResource controlTemplate}"
-                Input:CommandService.Command="FileCommand"
-                Margin="0,30,0,0">
-            </ListBox>
+                Input:CommandService.Command="FileCommand" Canvas.Top="22" />
             <Button 
-                Height="30" 
+                Height="Auto"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Width="116" 
                 Content="Upload Files" 
                 x:Name="FileUploadBtn"
                 Input:CommandService.Command="FileUploaderCommand"/>
-        </Grid>
-        <Canvas
+        </Canvas>
+        <Canvas>
+            <Canvas
             x:Name="explorerLayout"
             Width="Auto"
-            Height="Auto">
-            
-            <ContentControl
-                Content="{Binding Explorer}"
-                ContentTemplate="{StaticResource controlTemplate}" />  
-        </Canvas>
+            Height="Auto" d:IsHidden="True">
 
-        <Canvas
+                <ContentControl
+                Content="{Binding Explorer}"
+                ContentTemplate="{StaticResource controlTemplate}" />
+            </Canvas>
+
+            <Canvas
             x:Name="fileUploaderLayout"
-            Width="Auto"
-            Height="Auto">
-            <ContentControl
+            Height="480"
+            Width="640"
+            Margin="317,0,8,8"
+            VerticalAlignment="Bottom">
+                <ContentControl
                 Content="{Binding ProgressDialog}"
                 ContentTemplate="{StaticResource controlTemplate}" />
+            </Canvas>
         </Canvas>
-       
     </Grid>
 </UserControl>
