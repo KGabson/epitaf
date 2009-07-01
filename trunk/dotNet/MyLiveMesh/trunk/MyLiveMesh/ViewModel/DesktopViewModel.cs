@@ -111,6 +111,5 @@ namespace MyLiveMesh.ViewModel
         {
             this.progressDialog.IsEnabled = false;
         }
-
     }
 }
