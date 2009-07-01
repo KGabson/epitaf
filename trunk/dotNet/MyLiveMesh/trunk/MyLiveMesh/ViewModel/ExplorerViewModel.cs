@@ -19,13 +19,11 @@ namespace MyLiveMesh.ViewModel
     {
         private string      rootPath;
         private Visibility  visibility;
-        private bool        isEnabled;
+        private bool        isEnabled = false;
         private ObservableCollection<Node>  dirList;
 
         public ExplorerViewModel()
         {
-            //visibility = System.Windows.Visibility.Visible;
-            IsEnabled = true;
             dirList = new ObservableCollection<Node>();
             dirList.Add(new Node("1", "first node", true, "../Data/folder.png", "../Data/folderOpen.png"));
             dirList.Add(new Node("2", "Second node", false, "../Data/folder.png", "../Data/folderOpen.png"));

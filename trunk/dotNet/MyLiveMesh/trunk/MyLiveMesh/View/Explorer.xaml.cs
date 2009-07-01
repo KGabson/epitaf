@@ -34,7 +34,6 @@ namespace MyLiveMesh.View
             {
                 this.fileTree.Nodes = ((ExplorerViewModel)this.DataContext).DirList;
                 this.fileTree.OnApplyTemplate();
-                this.itemViewerPopup.Show();
             }
             else
             {

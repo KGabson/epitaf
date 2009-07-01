@@ -105,6 +105,10 @@
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\ProgressDialog.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Compile Include="View\CreateAccount.xaml.cs">
       <DependentUpon>CreateAccount.xaml</DependentUpon>
     </Compile>
@@ -116,6 +120,9 @@
     </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProgressDialog.xaml.cs">
+      <DependentUpon>ProgressDialog.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -137,7 +144,6 @@
     <Compile Include="Service References\FileUp\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Services\Services.cs" />
     <Compile Include="Tools\PasswordHelper.cs" />
@@ -148,6 +154,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\DesktopViewModel.cs" />
     <Compile Include="ViewModel\PageViewModel.cs" />
+    <Compile Include="ViewModel\ProgressDialogViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\Desktop.xaml.cs">
       <DependentUpon>Desktop.xaml</DependentUpon>
@@ -242,9 +249,6 @@
     <None Include="Service References\FileUp\MyLiveMesh.FileUp.UploadResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v2.0\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

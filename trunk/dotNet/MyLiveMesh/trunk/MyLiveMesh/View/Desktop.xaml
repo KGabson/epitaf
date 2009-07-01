@@ -28,6 +28,9 @@
                     <DataTemplate x:Key="FileUploaderViewModel">
                         <Views:FileUploader />
                     </DataTemplate>
+                    <DataTemplate x:Key="ProgressDialogViewModel">
+                        <Views:ProgressDialog />
+                    </DataTemplate>
                 </ResourceDictionary>
             </Data:ResourceSelector.Resources>
         </Data:ResourceSelector>
@@ -62,21 +65,18 @@
             x:Name="explorerLayout"
             Width="Auto"
             Height="Auto">
-            <!--<ListBox 
-                ItemsSource="{Binding Explorers}"
-                ItemTemplate="{StaticResource controlTemplate}">
-            </ListBox>-->
             
             <ContentControl
                 Content="{Binding Explorer}"
                 ContentTemplate="{StaticResource controlTemplate}" />  
         </Canvas>
+
         <Canvas
             x:Name="fileUploaderLayout"
             Width="Auto"
             Height="Auto">
             <ContentControl
-                Content="{Binding FileUploader}"
+                Content="{Binding ProgressDialog}"
                 ContentTemplate="{StaticResource controlTemplate}" />
         </Canvas>
        

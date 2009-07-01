@@ -26,10 +26,15 @@ namespace MyLiveMesh.ViewModel
             title = "Default Directory";
         }
 
-        public FileViewModel(string _type)
+        public FileViewModel(string _title, string _type, string _path)
         {
+            this.title = _title;
+            this.path = _path;
             this.type = _type;
+            if (type == "dir")
+                imageUrl = "../Data/directory.png";
         }
+
 
         public string ImageUrl
         {
