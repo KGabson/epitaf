@@ -24,6 +24,11 @@ namespace MyLiveMesh.ViewModel
         }
         #endregion
 
+        public void DoSomething(object sender, EventArgs e)
+        {
+            Debug.WriteLine("hop hop hop");
+        }
+
         #region Bindable fields
         public String Login { get; set; }
         public String Password { get; set; }
