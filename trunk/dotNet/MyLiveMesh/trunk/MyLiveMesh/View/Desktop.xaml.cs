@@ -20,7 +20,7 @@ namespace MyLiveMesh.View
 		public Desktop()
 		{
 			// Required to initialize variables
-			InitializeComponent();  
+			InitializeComponent();
         }
 	}
 }

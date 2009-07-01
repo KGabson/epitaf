@@ -41,17 +41,6 @@
                         Height="Auto" 
                         EnableLines="True"
                         NodeClick="fileTree_NodeClick">
-                        <!--<liquidTreeView:Tree.Nodes>
-                            <liquidTreeView:Node 
-                                ID="0" 
-                                Title="My files" 
-                                Icon="../Data/folder.png" 
-                                IconExpanded="../Data/folderOpen.png" 
-                                IsExpanded="True"
-                                Name="listNode"
-                                Content="{Binding DirList}" >
-                            </liquidTreeView:Node>
-                        </liquidTreeView:Tree.Nodes>-->
                     </liquidTreeView:Tree>
                     <extended:GridSplitter
                         x:Name="grsplSplitter" 
