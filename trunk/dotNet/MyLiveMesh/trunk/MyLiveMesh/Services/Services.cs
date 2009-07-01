@@ -14,10 +14,12 @@ namespace MyLiveMesh.Services
     public static class Services
     {
         public static AccountServiceReference.AccountServiceClient AuthService { get; set; }
+        public static UserDirectoryServiceReference.UserDirectoryClient UserDirectory { get; set; }
 
         static Services()
         {
             AuthService = new MyLiveMesh.AccountServiceReference.AccountServiceClient();
+            UserDirectory = new MyLiveMesh.UserDirectoryServiceReference.UserDirectoryClient();
         }
     }
 }

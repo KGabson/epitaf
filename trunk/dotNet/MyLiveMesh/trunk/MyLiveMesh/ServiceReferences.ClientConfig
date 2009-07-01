@@ -18,6 +18,10 @@
                 <binding name="FileUpSoap3" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
                     <security mode="None" />
                 </binding>
+                <binding name="BasicHttpBinding_UserDirectory" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
             </basicHttpBinding>
         </bindings>
         <client>
@@ -36,6 +40,9 @@
             <endpoint address="http://localhost:54164/Services/FileUp.asmx"
                 binding="basicHttpBinding" bindingConfiguration="FileUpSoap3"
                 contract="FileUp.FileUpSoap" name="FileUpSoap3" />
+            <endpoint address="http://localhost:54164/Services/UserDirectory.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_UserDirectory"
+                contract="UserDirectoryServiceReference.UserDirectory" name="BasicHttpBinding_UserDirectory" />
         </client>
     </system.serviceModel>
 </configuration>

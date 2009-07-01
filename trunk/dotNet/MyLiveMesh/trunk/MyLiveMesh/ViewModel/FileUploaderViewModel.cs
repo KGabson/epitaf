@@ -16,9 +16,11 @@ namespace MyLiveMesh.ViewModel
     public class FileUploaderViewModel : ViewModelBase
     {
         public Uploader uploader;
+        public string serverPath;
 
         public FileUploaderViewModel()
         {
+            serverPath = "/ClientDocs/";
             Commands.FileUploaderCommand.selectFoldersButton.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(selectFoldersButton_Executed);
             uploader = new Uploader("http://localhost/MyLiveMesh/FileUploadService.svc");
         }
@@ -31,7 +33,7 @@ namespace MyLiveMesh.ViewModel
             if (dialog.ShowDialog() == true)
             {
                 Debug.WriteLine("files to upload " + dialog.Files.ToString());
-                uploader.UploadFiles(dialog.Files, "/", true);
+                uploader.UploadFiles(dialog.Files, serverPath, true);
                 if (uploader.WebserviceMethod != null)
                 {
                     Debug.WriteLine("vla les methodes du webservice : " + uploader.WebserviceMethod);
