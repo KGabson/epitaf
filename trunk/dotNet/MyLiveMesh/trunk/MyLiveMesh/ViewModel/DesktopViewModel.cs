@@ -104,7 +104,7 @@ namespace MyLiveMesh.ViewModel
                     progressDialog.Progress.Complete = 0;
                     progressDialog.Progress.Text = "0 %";
                     Debug.WriteLine("files to upload " + dialog.Files.ToString());
-                    progressDialog.uploader.UploadFiles(dialog.Files, "/ClientDocs/", true);
+                    progressDialog.uploader.UploadFiles(dialog.Files, this.explorer.selectedNode.ID + "/", true);
                     progressDialog.IsEnabled = true;
                 }
             }
@@ -113,6 +113,7 @@ namespace MyLiveMesh.ViewModel
         void uploader_UploadFinished(object sender, UploadEventArgs e)
         {
             this.progressDialog.IsEnabled = false;
+            this.explorer.fillItemsFromServerPath();
         }
     }
 }
