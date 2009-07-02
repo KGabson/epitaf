@@ -283,6 +283,7 @@
     <None Include="Service References\UserDirectoryServiceReference\UserDirectory.xsd" />
     <None Include="Service References\UserDirectoryServiceReference\UserDirectory1.wsdl" />
     <None Include="Service References\UserDirectoryServiceReference\UserDirectory1.xsd" />
+    <None Include="Service References\UserDirectoryServiceReference\UserDirectory2.xsd" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v2.0\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

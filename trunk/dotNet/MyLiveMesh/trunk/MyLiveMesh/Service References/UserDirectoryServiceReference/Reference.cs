@@ -22,6 +22,11 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
         System.IAsyncResult BeginCreateDirectoryOnServer(string path, System.AsyncCallback callback, object asyncState);
         
         bool EndCreateDirectoryOnServer(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:UserDirectory/getDirectoryTreeFromPath", ReplyAction="urn:UserDirectory/getDirectoryTreeFromPathResponse")]
+        System.IAsyncResult BegingetDirectoryTreeFromPath(string path, System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.ObjectModel.ObservableCollection<string> EndgetDirectoryTreeFromPath(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -49,6 +54,25 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    public partial class getDirectoryTreeFromPathCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public getDirectoryTreeFromPathCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<string> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<string>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     public partial class UserDirectoryClient : System.ServiceModel.ClientBase<MyLiveMesh.UserDirectoryServiceReference.UserDirectory>, MyLiveMesh.UserDirectoryServiceReference.UserDirectory {
         
         private BeginOperationDelegate onBeginCreateDirectoryOnServerDelegate;
@@ -56,6 +80,12 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
         private EndOperationDelegate onEndCreateDirectoryOnServerDelegate;
         
         private System.Threading.SendOrPostCallback onCreateDirectoryOnServerCompletedDelegate;
+        
+        private BeginOperationDelegate onBegingetDirectoryTreeFromPathDelegate;
+        
+        private EndOperationDelegate onEndgetDirectoryTreeFromPathDelegate;
+        
+        private System.Threading.SendOrPostCallback ongetDirectoryTreeFromPathCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -89,6 +119,8 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
         }
         
         public event System.EventHandler<CreateDirectoryOnServerCompletedEventArgs> CreateDirectoryOnServerCompleted;
+        
+        public event System.EventHandler<getDirectoryTreeFromPathCompletedEventArgs> getDirectoryTreeFromPathCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -138,6 +170,52 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
             }
             base.InvokeAsync(this.onBeginCreateDirectoryOnServerDelegate, new object[] {
                         path}, this.onEndCreateDirectoryOnServerDelegate, this.onCreateDirectoryOnServerCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult MyLiveMesh.UserDirectoryServiceReference.UserDirectory.BegingetDirectoryTreeFromPath(string path, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BegingetDirectoryTreeFromPath(path, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.ObjectModel.ObservableCollection<string> MyLiveMesh.UserDirectoryServiceReference.UserDirectory.EndgetDirectoryTreeFromPath(System.IAsyncResult result) {
+            return base.Channel.EndgetDirectoryTreeFromPath(result);
+        }
+        
+        private System.IAsyncResult OnBegingetDirectoryTreeFromPath(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string path = ((string)(inValues[0]));
+            return ((MyLiveMesh.UserDirectoryServiceReference.UserDirectory)(this)).BegingetDirectoryTreeFromPath(path, callback, asyncState);
+        }
+        
+        private object[] OnEndgetDirectoryTreeFromPath(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<string> retVal = ((MyLiveMesh.UserDirectoryServiceReference.UserDirectory)(this)).EndgetDirectoryTreeFromPath(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OngetDirectoryTreeFromPathCompleted(object state) {
+            if ((this.getDirectoryTreeFromPathCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.getDirectoryTreeFromPathCompleted(this, new getDirectoryTreeFromPathCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void getDirectoryTreeFromPathAsync(string path) {
+            this.getDirectoryTreeFromPathAsync(path, null);
+        }
+        
+        public void getDirectoryTreeFromPathAsync(string path, object userState) {
+            if ((this.onBegingetDirectoryTreeFromPathDelegate == null)) {
+                this.onBegingetDirectoryTreeFromPathDelegate = new BeginOperationDelegate(this.OnBegingetDirectoryTreeFromPath);
+            }
+            if ((this.onEndgetDirectoryTreeFromPathDelegate == null)) {
+                this.onEndgetDirectoryTreeFromPathDelegate = new EndOperationDelegate(this.OnEndgetDirectoryTreeFromPath);
+            }
+            if ((this.ongetDirectoryTreeFromPathCompletedDelegate == null)) {
+                this.ongetDirectoryTreeFromPathCompletedDelegate = new System.Threading.SendOrPostCallback(this.OngetDirectoryTreeFromPathCompleted);
+            }
+            base.InvokeAsync(this.onBegingetDirectoryTreeFromPathDelegate, new object[] {
+                        path}, this.onEndgetDirectoryTreeFromPathDelegate, this.ongetDirectoryTreeFromPathCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -226,6 +304,19 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
             public bool EndCreateDirectoryOnServer(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 bool _result = ((bool)(base.EndInvoke("CreateDirectoryOnServer", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BegingetDirectoryTreeFromPath(string path, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = path;
+                System.IAsyncResult _result = base.BeginInvoke("getDirectoryTreeFromPath", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.ObjectModel.ObservableCollection<string> EndgetDirectoryTreeFromPath(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.ObjectModel.ObservableCollection<string> _result = ((System.Collections.ObjectModel.ObservableCollection<string>)(base.EndInvoke("getDirectoryTreeFromPath", _args, result)));
                 return _result;
             }
         }
