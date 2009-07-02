@@ -18,6 +18,8 @@ namespace MyLiveMesh.ViewModel
         private string title;
         private string path;
         private string type;
+        private string ownerName;
+        private bool isOwner;
 
         public FileViewModel()
         {
@@ -27,25 +29,27 @@ namespace MyLiveMesh.ViewModel
             title = "Default Directory";
         }
 
-        public FileViewModel(string _title, string _type, string _path, UserInfo _owner_info)
+        public FileViewModel(string _title, string _type, string _path, UserInfo _owner_info, bool _is_owner)
         {
-            init(_title, _type, _path, _owner_info);
+            init(_title, _type, _path, _owner_info, _is_owner);
         }
 
         public FileViewModel(SharedFolder folder)
         {
-            init(folder.FolderName, "shared", folder.RootPath, folder.Owner);
+            init(folder.FolderName, "shared", folder.RootPath, folder.Owner, folder.IsOwner);
         }
 
-        void init(string _title, string _type, string _path, UserInfo _owner_info)
+        void init(string _title, string _type, string _path, UserInfo _owner_info, bool _is_owner)
         {
             this.title = _title;
             this.path = _path;
             this.type = _type;
+            this.isOwner = _is_owner;
             if (type == "dir")
                 imageUrl = "../Data/directory.png";
             else if (type == "shared")
                 imageUrl = "../Data/shared_directory.png";
+            ownerName = "@" + _owner_info.Login;
         }
 
         public bool Equals(SharedFolder folder)
@@ -55,6 +59,7 @@ namespace MyLiveMesh.ViewModel
                 && type == "shared");
         }
 
+        #region Fields
         public string ImageUrl
         {
             get { return imageUrl; }
@@ -84,6 +89,27 @@ namespace MyLiveMesh.ViewModel
                 InvokePropertyChanged("Path");
             }
         }
+
+        public string OwnerName
+        {
+            get { return ownerName; }
+            set
+            {
+                ownerName = value;
+                InvokePropertyChanged("OwnerName");
+            }
+        }
+
+        public bool IsOwner
+        {
+            get { return isOwner; }
+            set
+            {
+                isOwner = value;
+                InvokePropertyChanged("IsOwner");
+            }
+        }
+        #endregion
 
         public UserInfo OwnerInfo { get; set; }
     }
