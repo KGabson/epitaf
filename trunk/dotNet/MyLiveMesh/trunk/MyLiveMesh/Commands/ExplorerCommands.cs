@@ -16,7 +16,7 @@ namespace MyLiveMesh.Commands
     {
         static ExplorerCommands()
         {
-            AddFolderCommand = new Command("addFolderCommand");
+            AddFolderCommand = new Command("AddFolderCommand");
         }
 
         public static Command AddFolderCommand {get; set;}

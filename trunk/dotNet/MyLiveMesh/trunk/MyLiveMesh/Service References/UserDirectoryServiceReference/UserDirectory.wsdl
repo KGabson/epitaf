@@ -19,6 +19,12 @@
   <wsdl:message name="UserDirectory_getDirectoryTreeFromPath_OutputMessage">
     <wsdl:part name="parameters" element="getDirectoryTreeFromPathResponse" />
   </wsdl:message>
+  <wsdl:message name="UserDirectory_getFilesFromPath_InputMessage">
+    <wsdl:part name="parameters" element="getFilesFromPath" />
+  </wsdl:message>
+  <wsdl:message name="UserDirectory_getFilesFromPath_OutputMessage">
+    <wsdl:part name="parameters" element="getFilesFromPathResponse" />
+  </wsdl:message>
   <wsdl:portType name="UserDirectory">
     <wsdl:operation name="CreateDirectoryOnServer">
       <wsdl:input wsaw:Action="urn:UserDirectory/CreateDirectoryOnServer" message="UserDirectory_CreateDirectoryOnServer_InputMessage" />
@@ -27,6 +33,10 @@
     <wsdl:operation name="getDirectoryTreeFromPath">
       <wsdl:input wsaw:Action="urn:UserDirectory/getDirectoryTreeFromPath" message="UserDirectory_getDirectoryTreeFromPath_InputMessage" />
       <wsdl:output wsaw:Action="urn:UserDirectory/getDirectoryTreeFromPathResponse" message="UserDirectory_getDirectoryTreeFromPath_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getFilesFromPath">
+      <wsdl:input wsaw:Action="urn:UserDirectory/getFilesFromPath" message="UserDirectory_getFilesFromPath_InputMessage" />
+      <wsdl:output wsaw:Action="urn:UserDirectory/getFilesFromPathResponse" message="UserDirectory_getFilesFromPath_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>
