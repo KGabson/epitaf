@@ -5,6 +5,7 @@
       <xsd:import schemaLocation="http://localhost:54164/Services/UserDirectory.svc?xsd=xsd0" />
       <xsd:import schemaLocation="http://localhost:54164/Services/UserDirectory.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:54164/Services/UserDirectory.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:54164/Services/UserDirectory.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Common.BusinessObjects" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="UserDirectory_CreateDirectoryOnServer_InputMessage">
@@ -25,6 +26,18 @@
   <wsdl:message name="UserDirectory_getFilesFromPath_OutputMessage">
     <wsdl:part name="parameters" element="getFilesFromPathResponse" />
   </wsdl:message>
+  <wsdl:message name="UserDirectory_ShareFolder_InputMessage">
+    <wsdl:part name="parameters" element="ShareFolder" />
+  </wsdl:message>
+  <wsdl:message name="UserDirectory_ShareFolder_OutputMessage">
+    <wsdl:part name="parameters" element="ShareFolderResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserDirectory_GetSharedFolders_InputMessage">
+    <wsdl:part name="parameters" element="GetSharedFolders" />
+  </wsdl:message>
+  <wsdl:message name="UserDirectory_GetSharedFolders_OutputMessage">
+    <wsdl:part name="parameters" element="GetSharedFoldersResponse" />
+  </wsdl:message>
   <wsdl:portType name="UserDirectory">
     <wsdl:operation name="CreateDirectoryOnServer">
       <wsdl:input wsaw:Action="urn:UserDirectory/CreateDirectoryOnServer" message="UserDirectory_CreateDirectoryOnServer_InputMessage" />
@@ -37,6 +50,14 @@
     <wsdl:operation name="getFilesFromPath">
       <wsdl:input wsaw:Action="urn:UserDirectory/getFilesFromPath" message="UserDirectory_getFilesFromPath_InputMessage" />
       <wsdl:output wsaw:Action="urn:UserDirectory/getFilesFromPathResponse" message="UserDirectory_getFilesFromPath_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ShareFolder">
+      <wsdl:input wsaw:Action="urn:UserDirectory/ShareFolder" message="UserDirectory_ShareFolder_InputMessage" />
+      <wsdl:output wsaw:Action="urn:UserDirectory/ShareFolderResponse" message="UserDirectory_ShareFolder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSharedFolders">
+      <wsdl:input wsaw:Action="urn:UserDirectory/GetSharedFolders" message="UserDirectory_GetSharedFolders_InputMessage" />
+      <wsdl:output wsaw:Action="urn:UserDirectory/GetSharedFoldersResponse" message="UserDirectory_GetSharedFolders_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

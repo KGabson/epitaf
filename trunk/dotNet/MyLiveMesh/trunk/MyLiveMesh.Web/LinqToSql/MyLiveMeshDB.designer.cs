@@ -33,6 +33,9 @@ namespace MyLiveMesh.Web.LinqToSql
     partial void Insertuser(user instance);
     partial void Updateuser(user instance);
     partial void Deleteuser(user instance);
+    partial void Insertsharing(sharing instance);
+    partial void Updatesharing(sharing instance);
+    partial void Deletesharing(sharing instance);
     #endregion
 		
 		public MyLiveMeshDBDataContext() : 
@@ -70,6 +73,14 @@ namespace MyLiveMesh.Web.LinqToSql
 			get
 			{
 				return this.GetTable<user>();
+			}
+		}
+		
+		public System.Data.Linq.Table<sharing> sharings
+		{
+			get
+			{
+				return this.GetTable<sharing>();
 			}
 		}
 	}
@@ -183,6 +194,164 @@ namespace MyLiveMesh.Web.LinqToSql
 					this._email = value;
 					this.SendPropertyChanged("email");
 					this.OnemailChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.sharing")]
+	public partial class sharing : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private System.Nullable<int> _owner_id;
+		
+		private System.Nullable<int> _friend_id;
+		
+		private System.Nullable<int> _friend_is_owner;
+		
+		private string _folder_path;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onowner_idChanging(System.Nullable<int> value);
+    partial void Onowner_idChanged();
+    partial void Onfriend_idChanging(System.Nullable<int> value);
+    partial void Onfriend_idChanged();
+    partial void Onfriend_is_ownerChanging(System.Nullable<int> value);
+    partial void Onfriend_is_ownerChanged();
+    partial void Onfolder_pathChanging(string value);
+    partial void Onfolder_pathChanged();
+    #endregion
+		
+		public sharing()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_owner_id", DbType="Int")]
+		public System.Nullable<int> owner_id
+		{
+			get
+			{
+				return this._owner_id;
+			}
+			set
+			{
+				if ((this._owner_id != value))
+				{
+					this.Onowner_idChanging(value);
+					this.SendPropertyChanging();
+					this._owner_id = value;
+					this.SendPropertyChanged("owner_id");
+					this.Onowner_idChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_friend_id", DbType="Int")]
+		public System.Nullable<int> friend_id
+		{
+			get
+			{
+				return this._friend_id;
+			}
+			set
+			{
+				if ((this._friend_id != value))
+				{
+					this.Onfriend_idChanging(value);
+					this.SendPropertyChanging();
+					this._friend_id = value;
+					this.SendPropertyChanged("friend_id");
+					this.Onfriend_idChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_friend_is_owner", DbType="Int")]
+		public System.Nullable<int> friend_is_owner
+		{
+			get
+			{
+				return this._friend_is_owner;
+			}
+			set
+			{
+				if ((this._friend_is_owner != value))
+				{
+					this.Onfriend_is_ownerChanging(value);
+					this.SendPropertyChanging();
+					this._friend_is_owner = value;
+					this.SendPropertyChanged("friend_is_owner");
+					this.Onfriend_is_ownerChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_folder_path", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string folder_path
+		{
+			get
+			{
+				return this._folder_path;
+			}
+			set
+			{
+				if ((this._folder_path != value))
+				{
+					this.Onfolder_pathChanging(value);
+					this.SendPropertyChanging();
+					this._folder_path = value;
+					this.SendPropertyChanged("folder_path");
+					this.Onfolder_pathChanged();
 				}
 			}
 		}

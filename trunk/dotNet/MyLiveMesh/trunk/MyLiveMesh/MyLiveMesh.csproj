@@ -160,6 +160,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Services\Services.cs" />
+    <Compile Include="Tools\Colors.cs" />
     <Compile Include="Tools\PasswordHelper.cs" />
     <Compile Include="ViewModel\ShareFolderViewModel.cs" />
     <Compile Include="ViewModel\CreateAccountViewModel.cs" />
@@ -279,6 +280,8 @@
     <None Include="Service References\AccountServiceReference\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\Common.BusinessObjects.ServiceResult.datasource" />
+    <None Include="Properties\DataSources\Common.BusinessObjects.SharedFolder.datasource" />
     <None Include="Properties\DataSources\Common.BusinessObjects.UserInfo.datasource" />
     <None Include="Service References\AccountServiceReference\AccountService2.xsd" />
     <None Include="Service References\AccountServiceReference\Reference.svcmap">
@@ -294,6 +297,7 @@
     <None Include="Service References\UserDirectoryServiceReference\UserDirectory1.wsdl" />
     <None Include="Service References\UserDirectoryServiceReference\UserDirectory1.xsd" />
     <None Include="Service References\UserDirectoryServiceReference\UserDirectory2.xsd" />
+    <None Include="Service References\UserDirectoryServiceReference\UserDirectory3.xsd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

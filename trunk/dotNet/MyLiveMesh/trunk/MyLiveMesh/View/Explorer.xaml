@@ -76,8 +76,30 @@
                     
                    
                     <Canvas Grid.Column="2">
-                        <!-- New folder popup -->
-                        <liquidPopup:Dialog 
+                        
+                    </Canvas>
+                </Grid>
+            </liquidPopup:Dialog>
+        </Canvas>
+        <!-- Share folder popup -->
+        <liquidPopup:Dialog
+            x:Name="shareFolderPopup"
+            Canvas.Left="250"
+            Canvas.Top="250"
+            Width="254"
+            Height="254"
+            IsResizable="False"
+            Title="Share this folder"
+            Buttons="Cancel"
+            IsMaximizeEnabled="False"
+            Canvas.ZIndex="10">
+
+            <views:ShareDirectory x:Name="ShareDirectoryControl" />
+
+        </liquidPopup:Dialog>
+
+        <!-- New folder popup -->
+        <liquidPopup:Dialog 
                         x:Name="newFolder"
                         Canvas.Left="250"
                         Canvas.Top="250"
@@ -86,8 +108,8 @@
                         IsResizable="False"
                         Title="Create new folder"
                         Canvas.ZIndex="10">
-                            <Canvas>
-                                <TextBox 
+            <Canvas>
+                <TextBox 
                                 x:Name="folderName" 
                                 Canvas.Left="5"
                                 Canvas.Top="8"
@@ -95,28 +117,7 @@
                                 FontFamily="Arial"
                                 FontSize="14"
                                 Text="{Binding NewFolderName, Mode=TwoWay}" />
-                            </Canvas>
-                        </liquidPopup:Dialog>
-                        
-                        <!-- Share folder popup -->
-                        <liquidPopup:Dialog
-                            x:Name="shareFolderPopup"
-                            Canvas.Left="250"
-                            Canvas.Top="250"
-                            Width="254"
-                            Height="254"
-                            IsResizable="False"
-                            Title="Share this folder"
-                            Buttons="Cancel"
-                            IsMaximizeEnabled="False"
-                            Canvas.ZIndex="10">
-                            
-                            <views:ShareDirectory x:Name="ShareDirectoryControl" />
-                            
-                        </liquidPopup:Dialog>
-                    </Canvas>
-                </Grid>
-            </liquidPopup:Dialog>
-        </Canvas>
-   </Grid>
+            </Canvas>
+        </liquidPopup:Dialog>
+    </Grid>
 </UserControl>

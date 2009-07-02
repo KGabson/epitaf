@@ -9,4 +9,13 @@
       <Column Name="email" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.sharing" Member="sharings">
+    <Type Name="sharing">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="owner_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="friend_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="friend_is_owner" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="folder_path" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
 </Database>

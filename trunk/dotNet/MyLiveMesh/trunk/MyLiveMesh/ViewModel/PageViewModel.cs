@@ -68,6 +68,7 @@ namespace MyLiveMesh.ViewModel
             }
             Debug.WriteLine((e.Result as UserInfo).Email);
             (desktopViewModel as DesktopViewModel).userInfo = (e.Result as UserInfo);
+            //(desktopViewModel as DesktopViewModel).GetMySharedFolders();
             CurrentViewModel = desktopViewModel;
         }
     }
