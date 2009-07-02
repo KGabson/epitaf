@@ -31,6 +31,9 @@
                     <DataTemplate x:Key="ProgressDialogViewModel">
                         <Views:ProgressDialog />
                     </DataTemplate>
+                    <DataTemplate x:Key="VideoPlayerViewModel">
+                        <Views:MediaPlayerPopup />
+                    </DataTemplate>
                 </ResourceDictionary>
             </Data:ResourceSelector.Resources>
         </Data:ResourceSelector>
@@ -50,19 +53,11 @@
         <Canvas
             Width="Auto"
             Height="Auto">
-            <ListBox 
-                VerticalAlignment="Top"
+            <ListBox
                 x:Name="FolderList"
+                VerticalAlignment="Top"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 Input:CommandService.Command="FileCommand" Canvas.Top="22" />
-                <Button 
-                    Height="Auto"
-                    HorizontalAlignment="Left" 
-                    VerticalAlignment="Top" 
-                    Width="116" 
-                    Content="Upload Files" 
-                    x:Name="FileUploadBtn"
-                    Input:CommandService.Command="FileUploaderCommand"/>
         </Canvas>
         <Canvas>
             <Canvas
@@ -85,6 +80,11 @@
                 Content="{Binding ProgressDialog}"
                 ContentTemplate="{StaticResource controlTemplate}" />
             </Canvas>
+        </Canvas>
+        <Canvas>
+            <ContentControl
+                Content="{Binding MediaPlayer}"
+                ContentTemplate="{StaticResource controlTemplate}" />
         </Canvas>
     </Grid>
 </UserControl>

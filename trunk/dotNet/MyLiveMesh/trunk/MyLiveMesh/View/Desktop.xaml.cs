@@ -65,7 +65,6 @@ namespace MyLiveMesh.View
                     itemList.Add(existing_file);
                 }
             }
-
             foreach (SharedFolder folder in e.Result)
             {
                 contains = false;
