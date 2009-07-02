@@ -53,6 +53,7 @@
             <ListBox 
                 VerticalAlignment="Top"
                 x:Name="FolderList"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
                 Input:CommandService.Command="FileCommand" Canvas.Top="22" />
                 <Button 
                     Height="Auto"

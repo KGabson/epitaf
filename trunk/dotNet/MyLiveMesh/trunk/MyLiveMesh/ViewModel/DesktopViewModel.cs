@@ -23,7 +23,7 @@ namespace MyLiveMesh.ViewModel
         private ExplorerViewModel explorer;
         private FileUploaderViewModel fileUploader = new FileUploaderViewModel();
         private List<FileViewModel> files = new List<FileViewModel>();
-        public ObservableCollection<SharedFolder> MySharedFolders;
+        public ObservableCollection<SharedFolder> MySharedFolders = new ObservableCollection<SharedFolder>();
         private ProgressDialogViewModel progressDialog = new ProgressDialogViewModel();
         public UserInfo userInfo;
 
