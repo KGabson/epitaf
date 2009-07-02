@@ -18,6 +18,7 @@ namespace MyLiveMesh.View
         {
             InitializeComponent();
             this.itemViewerPopup.Show();
+            //this.MediaPlayer.MediaElement.Source = ;
         }
 
         private void itemViewerPopup_Closed(object sender, Liquid.DialogEventArgs e)

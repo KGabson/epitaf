@@ -25,11 +25,11 @@ namespace MyLiveMesh.ViewModel
         private string              newFolderName;
         public Node                 selectedNode;
         public Dialog               newFolderPopup;
-		public Dialog shareFolderPopup;
+		public Dialog               shareFolderPopup;
         public string               userId;
         public string               serverRootPath;
         public Node                 expandedNode;
-        public ItemViewer           itemViewer;
+        public ItemViewer           itemViewer = new ItemViewer();
 
 
         public ExplorerViewModel()
@@ -41,19 +41,19 @@ namespace MyLiveMesh.ViewModel
             newFolderName = "New Folder";
             selectedNode = new Node(serverRootPath, "My Files", true, "../Data/folder.png", "../Data/folderOpen.png");
             expandedNode = selectedNode;
-            //items = new List<ItemViewerItem>();
             updateDirListFromServer(serverRootPath);            
             dirList.Add(selectedNode);
-
-            //Dictionary<string name, List<> children> tree;
-            
+        
             //Command
             Commands.ExplorerCommands.AddFolderCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(AddFolderCommand_Executed);
             Commands.ExplorerCommands.ShareFolderCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(ShareFolderCommand_Executed);
+            //Delegate
             Services.Services.UserDirectory.getDirectoryTreeFromPathCompleted += new EventHandler<MyLiveMesh.UserDirectoryServiceReference.getDirectoryTreeFromPathCompletedEventArgs>(UserDirectory_getDirectoryTreeFromPathCompleted);
             Services.Services.UserDirectory.getFilesFromPathCompleted += new EventHandler<MyLiveMesh.UserDirectoryServiceReference.getFilesFromPathCompletedEventArgs>(UserDirectory_getFilesFromPathCompleted);
+        
         }
 
+        #region Attributs
 
         public string RootPath
         {
@@ -104,6 +104,9 @@ namespace MyLiveMesh.ViewModel
                 InvokePropertyChanged("NewFolderName");
             }
         }
+#endregion
+
+        #region Commands
 
         public void AddFolderCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
         {
@@ -115,6 +118,9 @@ namespace MyLiveMesh.ViewModel
             shareFolderPopup.Show();
         }
 
+        #endregion
+
+        #region ToolsFunctions
         public void createDirectory(string dirname)
         {
             if (selectedNode != null)
@@ -154,7 +160,9 @@ namespace MyLiveMesh.ViewModel
                 Services.Services.UserDirectory.getFilesFromPathAsync(selectedNode.ID);
             }
         }
+        #endregion
 
+        #region Delegate
         void UserDirectory_getDirectoryTreeFromPathCompleted(object sender, MyLiveMesh.UserDirectoryServiceReference.getDirectoryTreeFromPathCompletedEventArgs e)
         {
             if (e.Result != null)
@@ -191,6 +199,7 @@ namespace MyLiveMesh.ViewModel
             }
             itemViewer.Add(items);
         }
+        #endregion
 
     }
 }
