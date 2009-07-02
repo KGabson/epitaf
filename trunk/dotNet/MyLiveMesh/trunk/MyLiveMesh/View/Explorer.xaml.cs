@@ -63,7 +63,11 @@ namespace MyLiveMesh.View
         private void fileTree_NodeClick(object sender, TreeEventArgs e)
         {
             Node n = (Node)sender;
+            Debug.WriteLine("node " + n.ID + " haschildren " + n.HasChildren);
             (this.DataContext as ExplorerViewModel).selectedNode = n;
+            if (n.HasChildren == false)
+                (this.DataContext as ExplorerViewModel).updateDirListFromServer(n.ID);
+
             List<ItemViewerItem> toAdd = new List<ItemViewerItem>();
             fileItems.Clear();
             if (n.ID == "1")
@@ -83,6 +87,19 @@ namespace MyLiveMesh.View
         {
             return new FileItem() { Icon = "../Data/Large/" + type + ".png", Text = filename, OtherText = desc };
         }
+
+        private void fileTree_NodeExpanded(object sender, TreeEventArgs e)
+        {
+             Node result = ((Node)sender);
+
+             if (result.ID != null)
+             {
+                 Debug.WriteLine("le expanded nod: " + result.ID);
+                 //(this.DataContext as ExplorerViewModel).expandedNode = result;
+                 //(this.DataContext as ExplorerViewModel).updateDirListFromServer(result.ID);
+             }
+        }
+            
 
 	}
 }

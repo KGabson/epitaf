@@ -82,11 +82,14 @@ namespace MyLiveMesh.ViewModel
         {
             FileViewModel selectedFile = (FileViewModel)((ListBox)e.Source).SelectedItem;
 
-            Debug.WriteLine(selectedFile.Title + " clicked");
-            if (explorer == null)
-                explorer = new ExplorerViewModel();
-            explorer.IsEnabled = true;
-            InvokePropertyChanged("Explorer");
+            if (selectedFile != null)
+            {
+                Debug.WriteLine(selectedFile.Title + " clicked");
+                if (explorer == null)
+                    explorer = new ExplorerViewModel();
+                explorer.IsEnabled = true;
+                InvokePropertyChanged("Explorer");
+            }
         }
 
         public void FileUploaderCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)

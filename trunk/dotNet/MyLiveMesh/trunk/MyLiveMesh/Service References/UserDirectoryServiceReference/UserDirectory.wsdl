@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="/Imports">
       <xsd:import schemaLocation="http://localhost:54164/Services/UserDirectory.svc?xsd=xsd0" />
       <xsd:import schemaLocation="http://localhost:54164/Services/UserDirectory.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:54164/Services/UserDirectory.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="UserDirectory_CreateDirectoryOnServer_InputMessage">
@@ -12,10 +13,20 @@
   <wsdl:message name="UserDirectory_CreateDirectoryOnServer_OutputMessage">
     <wsdl:part name="parameters" element="CreateDirectoryOnServerResponse" />
   </wsdl:message>
+  <wsdl:message name="UserDirectory_getDirectoryTreeFromPath_InputMessage">
+    <wsdl:part name="parameters" element="getDirectoryTreeFromPath" />
+  </wsdl:message>
+  <wsdl:message name="UserDirectory_getDirectoryTreeFromPath_OutputMessage">
+    <wsdl:part name="parameters" element="getDirectoryTreeFromPathResponse" />
+  </wsdl:message>
   <wsdl:portType name="UserDirectory">
     <wsdl:operation name="CreateDirectoryOnServer">
       <wsdl:input wsaw:Action="urn:UserDirectory/CreateDirectoryOnServer" message="UserDirectory_CreateDirectoryOnServer_InputMessage" />
       <wsdl:output wsaw:Action="urn:UserDirectory/CreateDirectoryOnServerResponse" message="UserDirectory_CreateDirectoryOnServer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getDirectoryTreeFromPath">
+      <wsdl:input wsaw:Action="urn:UserDirectory/getDirectoryTreeFromPath" message="UserDirectory_getDirectoryTreeFromPath_InputMessage" />
+      <wsdl:output wsaw:Action="urn:UserDirectory/getDirectoryTreeFromPathResponse" message="UserDirectory_getDirectoryTreeFromPath_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>
