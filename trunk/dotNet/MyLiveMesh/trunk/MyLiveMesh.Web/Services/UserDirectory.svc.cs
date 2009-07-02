@@ -8,6 +8,7 @@ using System.Collections;
 using System.Text;
 using System.Diagnostics;
 using System.IO;
+using System.Web.UI.WebControls;
 
 namespace MyLiveMesh.Web.Services
 {
@@ -29,23 +30,51 @@ namespace MyLiveMesh.Web.Services
         [OperationContract]
         public List<string> getDirectoryTreeFromPath(string path)
         {
+            TreeNode node = new TreeNode();
             string fullpath = Server.MapPath("~") + @"\" + path.Replace("/", @"\");
             List<DirectoryInfo> dirs = new List<DirectoryInfo>();
             List<string> listdirs = new List<string>();
             if (Directory.Exists(fullpath))
             {
-                Debug.WriteLine("je vais chercher dans " + fullpath);
                 DirectoryInfo dirInfo = new DirectoryInfo(fullpath);
                 dirs = new List<DirectoryInfo>(dirInfo.GetDirectories());
+                listdirs.Add(path);
                 foreach (DirectoryInfo dir in dirs)
                 {
-                    Debug.WriteLine("dir = " + dir.Name);
                     listdirs.Add(dir.Name);
                 }
             }
             return listdirs;
         }
 
+        [OperationContract]
+        public List<List<string>> getFilesFromPath(string path)
+        {
+            List<List<string>> listFiles = new List<List<string>>();
+            string fullpath = Server.MapPath("~") + @"\" + path.Replace("/", @"\");
+            if (Directory.Exists(fullpath))
+            {
+                int i = 0;
+                DirectoryInfo dirinfo = new DirectoryInfo(fullpath);
+                foreach (DirectoryInfo dir in dirinfo.GetDirectories())
+                {
+                    listFiles.Add(new List<string>());
+                    listFiles[i].Add(dir.Name);
+                    listFiles[i].Add(".folder");
+                    listFiles[i].Add("");
+                    ++i;
+                }
+                foreach (FileInfo file in dirinfo.GetFiles())
+                {
+                    listFiles.Add(new List<string>());
+                    listFiles[i].Add(file.Name);
+                    listFiles[i].Add(file.Extension);
+                    listFiles[i].Add(file.Length.ToString());
+                    ++i;
+                }
+            }
+            return listFiles;
+        }
         // Ajoutez des opérations supplémentaires ici et marquez-les avec [OperationContract]
     }
 }

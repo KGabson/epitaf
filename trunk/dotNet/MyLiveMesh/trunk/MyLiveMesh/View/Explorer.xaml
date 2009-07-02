@@ -69,7 +69,7 @@
                         <Button
                                 Content="New Folder"
                                 x:Name="addFolder" Canvas.Left="280" Height="33.992" Width="110" Canvas.Top="0.004" 
-                                Input:CommandService.Command="addFolderCommand"/>
+                                Input:CommandService.Command="AddFolderCommand"/>
                     </Canvas>
                     <Canvas Grid.Column="2">
                         <liquidPopup:Dialog 

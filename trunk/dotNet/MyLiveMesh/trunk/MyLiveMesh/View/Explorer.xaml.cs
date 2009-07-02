@@ -42,6 +42,7 @@ namespace MyLiveMesh.View
                 this.fileTree.Nodes = ((ExplorerViewModel)this.DataContext).DirList;
                 this.fileTree.OnApplyTemplate();
                 (this.DataContext as ExplorerViewModel).newFolderPopup = this.newFolder;
+                (this.DataContext as ExplorerViewModel).itemViewer = this.fileItems;
             }
             
        }
@@ -63,24 +64,13 @@ namespace MyLiveMesh.View
         private void fileTree_NodeClick(object sender, TreeEventArgs e)
         {
             Node n = (Node)sender;
-            Debug.WriteLine("node " + n.ID + " haschildren " + n.HasChildren);
             (this.DataContext as ExplorerViewModel).selectedNode = n;
             if (n.HasChildren == false)
                 (this.DataContext as ExplorerViewModel).updateDirListFromServer(n.ID);
+            (this.DataContext as ExplorerViewModel).fillItemsFromServerPath();
 
-            List<ItemViewerItem> toAdd = new List<ItemViewerItem>();
-            fileItems.Clear();
-            if (n.ID == "1")
-            {
-                toAdd.Add(CreateItem("xls", "tableur.xls", "456.3KB"));
-                toAdd.Add(CreateItem("xls", "facture.xls", "456.3KB"));
-            }
-            else if (n.ID == "2")
-            {
-                toAdd.Add(CreateItem("avi", "Joseph a la montagne.avi", "700.0MB"));
-                toAdd.Add(CreateItem("mp4", "Freakazoid.mp4", "548.6MB"));
-            }
-            fileItems.Add(toAdd);
+            //fileItems.Clear();
+            //fileItems.Add((this.DataContext as ExplorerViewModel).items);
         }
 
         private FileItem CreateItem(string type, string filename, string desc)
@@ -94,7 +84,6 @@ namespace MyLiveMesh.View
 
              if (result.ID != null)
              {
-                 Debug.WriteLine("le expanded nod: " + result.ID);
                  //(this.DataContext as ExplorerViewModel).expandedNode = result;
                  //(this.DataContext as ExplorerViewModel).updateDirListFromServer(result.ID);
              }

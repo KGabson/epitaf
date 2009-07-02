@@ -27,6 +27,11 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
         System.IAsyncResult BegingetDirectoryTreeFromPath(string path, System.AsyncCallback callback, object asyncState);
         
         System.Collections.ObjectModel.ObservableCollection<string> EndgetDirectoryTreeFromPath(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:UserDirectory/getFilesFromPath", ReplyAction="urn:UserDirectory/getFilesFromPathResponse")]
+        System.IAsyncResult BegingetFilesFromPath(string path, System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.ObjectModel.ObservableCollection<System.Collections.ObjectModel.ObservableCollection<string>> EndgetFilesFromPath(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -73,6 +78,25 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    public partial class getFilesFromPathCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public getFilesFromPathCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<System.Collections.ObjectModel.ObservableCollection<string>> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<System.Collections.ObjectModel.ObservableCollection<string>>)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     public partial class UserDirectoryClient : System.ServiceModel.ClientBase<MyLiveMesh.UserDirectoryServiceReference.UserDirectory>, MyLiveMesh.UserDirectoryServiceReference.UserDirectory {
         
         private BeginOperationDelegate onBeginCreateDirectoryOnServerDelegate;
@@ -86,6 +110,12 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
         private EndOperationDelegate onEndgetDirectoryTreeFromPathDelegate;
         
         private System.Threading.SendOrPostCallback ongetDirectoryTreeFromPathCompletedDelegate;
+        
+        private BeginOperationDelegate onBegingetFilesFromPathDelegate;
+        
+        private EndOperationDelegate onEndgetFilesFromPathDelegate;
+        
+        private System.Threading.SendOrPostCallback ongetFilesFromPathCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -121,6 +151,8 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
         public event System.EventHandler<CreateDirectoryOnServerCompletedEventArgs> CreateDirectoryOnServerCompleted;
         
         public event System.EventHandler<getDirectoryTreeFromPathCompletedEventArgs> getDirectoryTreeFromPathCompleted;
+        
+        public event System.EventHandler<getFilesFromPathCompletedEventArgs> getFilesFromPathCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -216,6 +248,52 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
             }
             base.InvokeAsync(this.onBegingetDirectoryTreeFromPathDelegate, new object[] {
                         path}, this.onEndgetDirectoryTreeFromPathDelegate, this.ongetDirectoryTreeFromPathCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult MyLiveMesh.UserDirectoryServiceReference.UserDirectory.BegingetFilesFromPath(string path, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BegingetFilesFromPath(path, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.ObjectModel.ObservableCollection<System.Collections.ObjectModel.ObservableCollection<string>> MyLiveMesh.UserDirectoryServiceReference.UserDirectory.EndgetFilesFromPath(System.IAsyncResult result) {
+            return base.Channel.EndgetFilesFromPath(result);
+        }
+        
+        private System.IAsyncResult OnBegingetFilesFromPath(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            string path = ((string)(inValues[0]));
+            return ((MyLiveMesh.UserDirectoryServiceReference.UserDirectory)(this)).BegingetFilesFromPath(path, callback, asyncState);
+        }
+        
+        private object[] OnEndgetFilesFromPath(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<System.Collections.ObjectModel.ObservableCollection<string>> retVal = ((MyLiveMesh.UserDirectoryServiceReference.UserDirectory)(this)).EndgetFilesFromPath(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OngetFilesFromPathCompleted(object state) {
+            if ((this.getFilesFromPathCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.getFilesFromPathCompleted(this, new getFilesFromPathCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void getFilesFromPathAsync(string path) {
+            this.getFilesFromPathAsync(path, null);
+        }
+        
+        public void getFilesFromPathAsync(string path, object userState) {
+            if ((this.onBegingetFilesFromPathDelegate == null)) {
+                this.onBegingetFilesFromPathDelegate = new BeginOperationDelegate(this.OnBegingetFilesFromPath);
+            }
+            if ((this.onEndgetFilesFromPathDelegate == null)) {
+                this.onEndgetFilesFromPathDelegate = new EndOperationDelegate(this.OnEndgetFilesFromPath);
+            }
+            if ((this.ongetFilesFromPathCompletedDelegate == null)) {
+                this.ongetFilesFromPathCompletedDelegate = new System.Threading.SendOrPostCallback(this.OngetFilesFromPathCompleted);
+            }
+            base.InvokeAsync(this.onBegingetFilesFromPathDelegate, new object[] {
+                        path}, this.onEndgetFilesFromPathDelegate, this.ongetFilesFromPathCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -317,6 +395,19 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
             public System.Collections.ObjectModel.ObservableCollection<string> EndgetDirectoryTreeFromPath(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 System.Collections.ObjectModel.ObservableCollection<string> _result = ((System.Collections.ObjectModel.ObservableCollection<string>)(base.EndInvoke("getDirectoryTreeFromPath", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BegingetFilesFromPath(string path, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = path;
+                System.IAsyncResult _result = base.BeginInvoke("getFilesFromPath", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.ObjectModel.ObservableCollection<System.Collections.ObjectModel.ObservableCollection<string>> EndgetFilesFromPath(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.ObjectModel.ObservableCollection<System.Collections.ObjectModel.ObservableCollection<string>> _result = ((System.Collections.ObjectModel.ObservableCollection<System.Collections.ObjectModel.ObservableCollection<string>>)(base.EndInvoke("getFilesFromPath", _args, result)));
                 return _result;
             }
         }
