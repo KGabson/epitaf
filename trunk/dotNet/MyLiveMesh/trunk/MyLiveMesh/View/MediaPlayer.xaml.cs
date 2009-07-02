@@ -9,6 +9,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Windows.Threading;
+using System.Net;
 
 namespace MyLiveMesh.View
 {
@@ -24,18 +25,23 @@ namespace MyLiveMesh.View
 
             timer.Interval = TimeSpan.FromMilliseconds(50);
             timer.Tick += new EventHandler(timer_Tick);
-            //timer.Start();
-
-            this.MediaElement.Source = new Uri("http://localhost:" + Application.Current.Host.Source.Port + "/Videos_test/Bear.wmv");
+            timer.Start();
 
             this.MediaElement.MediaOpened += new RoutedEventHandler(MediaElement_MediaOpened);
-
             this.Slider.MouseLeftButtonDown += new MouseButtonEventHandler(Slider_MouseLeftButtonDown);
             this.Slider.MouseLeftButtonUp += new MouseButtonEventHandler(Slider_MouseLeftButtonUp);
+        }
 
-            //this.itemViewerPopup.Show();
-		}
+        public void Stop()
+        {
+            MediaElement.Stop();
+            isPlaying = false;
+            timer.Stop();
+            btnPlayPause.Content = "Play";
+            Slider.Value = 0;
+        }
 
+        #region Handlers
         void MediaElement_MediaOpened(object sender, RoutedEventArgs e)
         {
             Slider.Maximum = this.MediaElement.NaturalDuration.TimeSpan.TotalSeconds;
@@ -71,11 +77,7 @@ namespace MyLiveMesh.View
 
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
-            MediaElement.Stop();
-            isPlaying = false;
-            timer.Stop();
-            btnPlayPause.Content = "Play";
-            Slider.Value = 0;
+            Stop();
         }
 
         private void Slider_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -91,5 +93,6 @@ namespace MyLiveMesh.View
         private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
         }
-	}
+        #endregion
+    }
 }

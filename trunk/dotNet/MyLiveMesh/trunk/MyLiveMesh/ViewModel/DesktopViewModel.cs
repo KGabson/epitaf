@@ -14,6 +14,7 @@ using System.Diagnostics;
 using MyLiveMesh.View;
 using Liquid.Components;
 using Common.BusinessObjects;
+using Liquid;
 using System.Collections.ObjectModel;
 
 namespace MyLiveMesh.ViewModel
@@ -25,12 +26,13 @@ namespace MyLiveMesh.ViewModel
         private List<FileViewModel> files = new List<FileViewModel>();
         public ObservableCollection<SharedFolder> MySharedFolders = new ObservableCollection<SharedFolder>();
         private ProgressDialogViewModel progressDialog = new ProgressDialogViewModel();
+        private VideoPlayerViewModel mediaPlayer = new VideoPlayerViewModel();
         public UserInfo userInfo;
 
-        public DesktopViewModel()
+        public DesktopViewModel(UserInfo _user)
         {
             //Init attributs
-            //files.Add(new FileViewModel("My Files", "dir", "ClientDocs"));
+            userInfo = _user;
 
             //Commands bindings
             Commands.DesktopCommands.FileCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(FileCommand_Executed);
@@ -82,18 +84,41 @@ namespace MyLiveMesh.ViewModel
                 InvokePropertyChanged("ProgressDialog");
             }
         }
+
+        public VideoPlayerViewModel MediaPlayer
+        {
+            get { return mediaPlayer; }
+            set
+            {
+                mediaPlayer = value;
+                InvokePropertyChanged("MediaPlayer");
+            }
+        }
+
         #endregion
 
         #region Commands
         public void FileCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
         {
             FileViewModel selectedFile = (FileViewModel)(((ListBox)e.Source).SelectedItem as File).DataContext;
-
+            
             if (selectedFile != null)
             {
                 Debug.WriteLine(selectedFile.Title + " clicked");
                 if (explorer == null)
-                    explorer = new ExplorerViewModel();
+                {
+                    explorer = new ExplorerViewModel(selectedFile.Path);
+                }
+                else if (selectedFile.Path != explorer.DirList[0].Title)
+                {
+                    Debug.WriteLine("nouveau explorer " + selectedFile.Path);
+                    explorer.serverRootPath = selectedFile.Path;
+                    explorer.DirList.Clear();
+                    explorer.selectedNode = new Node(selectedFile.Path, selectedFile.Title, true, "../Data/folder.png", "../Data/folderOpen.png");
+                    explorer.DirList.Add(explorer.selectedNode);
+                    explorer.itemViewer.Clear();
+                    explorer.updateDirListFromServer(selectedFile.Path);
+                }
                 explorer.IsEnabled = true;
                 InvokePropertyChanged("Explorer");
             }

@@ -46,6 +46,7 @@ namespace MyLiveMesh.View
                 this.ShareDirectoryControl.DataContext = new ShareFolderViewModel(this.DataContext as ExplorerViewModel);
                 (this.DataContext as ExplorerViewModel).shareFolderPopup = this.shareFolderPopup;
                 (this.DataContext as ExplorerViewModel).itemViewer = this.fileItems;
+                (this.DataContext as ExplorerViewModel).fileTree = fileTree;
             }
             
        }
@@ -56,6 +57,7 @@ namespace MyLiveMesh.View
             if ((bool)e.NewValue == true)
             {
                 this.itemViewerPopup.Show();
+                this.fileTree.OnApplyTemplate();
             }
         }
 
@@ -71,15 +73,12 @@ namespace MyLiveMesh.View
             if (n.HasChildren == false)
                 (this.DataContext as ExplorerViewModel).updateDirListFromServer(n.ID);
             (this.DataContext as ExplorerViewModel).fillItemsFromServerPath();
-
-            //fileItems.Clear();
-            //fileItems.Add((this.DataContext as ExplorerViewModel).items);
         }
 
         void fileItems_DoubleClick(object sender, ItemViewerEventArgs e)
         {
-            Debug.WriteLine("nihaaahoué " + sender.GetType());
-            Debug.WriteLine("title  " + e.Title);
+            Debug.WriteLine("What is the sender " + sender.GetType());
+            (this.DataContext as ExplorerViewModel).launchFile(e.Title);
         }
 
 

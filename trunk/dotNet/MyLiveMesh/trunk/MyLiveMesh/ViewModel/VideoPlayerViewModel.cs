@@ -10,18 +10,19 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using MyLiveMesh.View;
+using Liquid;
 
 namespace MyLiveMesh.ViewModel
 {
     public class VideoPlayerViewModel : ViewModelBase
     {
-        //private bool isEnabled = false;
-        //private UIElement.Visibility visibility = new Visibility();
-
         private String btnPlayPauseText;
+        public Dialog  popup;
+        public MediaElement media;
 
         public VideoPlayerViewModel()
         {
+            Debug.WriteLine("VideoPlayerViewModel ctor");
             btnPlayPauseText = "Play";
             //Commands.FileCommands.PlayVideoCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(PlayVideoCommand_Executed);
         }
@@ -39,6 +40,21 @@ namespace MyLiveMesh.ViewModel
                 btnPlayPauseText = value;
                 InvokePropertyChanged("BtnPlayPauseText");
             }
+        }
+
+        public Uri MediaSource
+        {
+            get { return this.media.Source; }
+            set
+            {
+                this.media.Source = new Uri("http://localhost:" + Application.Current.Host.Source.Port + value);
+            }
+        }
+
+        public void setMediaSource(string uri)
+        {
+            this.media.Source = new Uri("http://localhost:" + Application.Current.Host.Source.Port + uri);
+            Debug.WriteLine("source settter a : " + this.media.Source);
         }
     }
 }

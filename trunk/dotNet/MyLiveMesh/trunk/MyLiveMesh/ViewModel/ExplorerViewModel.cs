@@ -18,52 +18,32 @@ namespace MyLiveMesh.ViewModel
 {
     public class ExplorerViewModel : ViewModelBase
     {
-        private ObservableCollection<Node> dirList;
-        private string              rootPath;
+        private ObservableCollection<Node> dirList = new ObservableCollection<Node>();
         private Visibility          visibility;
         private bool                isEnabled = false;
-        private string              newFolderName;
+        private string              newFolderName = "New Folder";
         public Node                 selectedNode;
         public Dialog               newFolderPopup;
 		public Dialog               shareFolderPopup;
         public string               userId;
         public string               serverRootPath;
-        public Node                 expandedNode;
         public ItemViewer           itemViewer = new ItemViewer();
-
+        public DesktopViewModel     parentDestop;
+        public List<string>         handleExtension = new List<string>();
+        public Tree                 fileTree;
 
         public ExplorerViewModel()
         {
-            dirList = new ObservableCollection<Node>();
-            userId = (((App.Current.RootVisual as Page).DataContext as PageViewModel).CurrentViewModel as DesktopViewModel).userInfo.Id.ToString();
-            userId = (userId == "") ? "0" : userId;
-            serverRootPath = "/ClientDocs/" + userId + "/";
-            newFolderName = "New Folder";
-            selectedNode = new Node(serverRootPath, "My Files", true, "../Data/folder.png", "../Data/folderOpen.png");
-            expandedNode = selectedNode;
-            updateDirListFromServer(serverRootPath);            
-            dirList.Add(selectedNode);
-        
-            //Command
-            Commands.ExplorerCommands.AddFolderCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(AddFolderCommand_Executed);
-            Commands.ExplorerCommands.ShareFolderCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(ShareFolderCommand_Executed);
-            //Delegate
-            Services.Services.UserDirectory.getDirectoryTreeFromPathCompleted += new EventHandler<MyLiveMesh.UserDirectoryServiceReference.getDirectoryTreeFromPathCompletedEventArgs>(UserDirectory_getDirectoryTreeFromPathCompleted);
-            Services.Services.UserDirectory.getFilesFromPathCompleted += new EventHandler<MyLiveMesh.UserDirectoryServiceReference.getFilesFromPathCompletedEventArgs>(UserDirectory_getFilesFromPathCompleted);
-        
+            init();
+        }
+
+        public ExplorerViewModel(string _rootPath)
+        {
+            serverRootPath = _rootPath;
+            init();
         }
 
         #region Attributs
-
-        public string RootPath
-        {
-            get { return rootPath; }
-            set
-            {
-                rootPath = value;
-                InvokePropertyChanged("RootPath");
-            }
-        }
 
         public System.Windows.Visibility Visibility
         {
@@ -104,6 +84,7 @@ namespace MyLiveMesh.ViewModel
                 InvokePropertyChanged("NewFolderName");
             }
         }
+
 #endregion
 
         #region Commands
@@ -121,6 +102,29 @@ namespace MyLiveMesh.ViewModel
         #endregion
 
         #region ToolsFunctions
+        private void init()
+        {
+            parentDestop = (((App.Current.RootVisual as Page).DataContext as PageViewModel).CurrentViewModel as DesktopViewModel);
+            //userId = (parentDestop.userInfo.Id.ToString() == "") ? "0" : userId;
+            //serverRootPath = rootPath + userId;           
+            if (serverRootPath != null)
+            {
+                selectedNode = new Node(serverRootPath, "My Files", true, "../Data/folder.png", "../Data/folderOpen.png");
+                updateDirListFromServer(serverRootPath);
+                dirList.Add(selectedNode);
+            }
+            handleExtension.Add("wmv");
+            handleExtension.Add("wma");
+            handleExtension.Add("mp3");
+
+            //Command
+            Commands.ExplorerCommands.AddFolderCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(AddFolderCommand_Executed);
+            Commands.ExplorerCommands.ShareFolderCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(ShareFolderCommand_Executed);
+            //Delegate
+            Services.Services.UserDirectory.getDirectoryTreeFromPathCompleted += new EventHandler<MyLiveMesh.UserDirectoryServiceReference.getDirectoryTreeFromPathCompletedEventArgs>(UserDirectory_getDirectoryTreeFromPathCompleted);
+            Services.Services.UserDirectory.getFilesFromPathCompleted += new EventHandler<MyLiveMesh.UserDirectoryServiceReference.getFilesFromPathCompletedEventArgs>(UserDirectory_getFilesFromPathCompleted);
+        }
+
         public void createDirectory(string dirname)
         {
             if (selectedNode != null)
@@ -160,6 +164,35 @@ namespace MyLiveMesh.ViewModel
                 Services.Services.UserDirectory.getFilesFromPathAsync(selectedNode.ID);
             }
         }
+
+        public void launchFile(string filename)
+        {
+            Debug.WriteLine("Launching File: " + this.selectedNode.ID + "/" + filename);
+            String file = filename;
+            int pos = file.LastIndexOf('.');
+            Debug.WriteLine("la pos " + pos);
+            if (pos > 0)
+            {
+                parentDestop.MediaPlayer.setMediaSource(this.selectedNode.ID + "/" + filename);
+                if (handleExtension.Contains(filename.Substring(pos)))
+                    parentDestop.MediaPlayer.popup.Show();
+                else
+                    System.Windows.Browser.HtmlPage.Window.Navigate(parentDestop.MediaPlayer.media.Source, "_blank");
+            }
+            else
+            {
+                Debug.WriteLine("ben merde " + this.selectedNode.ID + "/" + filename);
+                Node clickedNode = selectedNode.GetChild(this.selectedNode.ID + "/" + filename);
+                if (clickedNode != null)
+                {
+                    selectedNode.Expand();
+                    selectedNode = clickedNode;
+                    this.fileTree.SetSelected(selectedNode);
+                    this.fillItemsFromServerPath();
+                }
+            }
+                
+        }
         #endregion
 
         #region Delegate
@@ -169,6 +202,7 @@ namespace MyLiveMesh.ViewModel
             {
                 int nb = 0;
                 List<String> dirlist = new List<string>(e.Result as ObservableCollection<string>);
+                Debug.WriteLine("le selected Node " + selectedNode.ID + " == " + dirlist[0]);
                 if (dirlist.Count > 1 && selectedNode.ID == dirlist[0])
                 {
                     selectedNode.HasChildren = true;
@@ -176,6 +210,7 @@ namespace MyLiveMesh.ViewModel
                     {
                         if (nb != 0)
                         {
+                            Debug.WriteLine("je add " + dirname);
                             Node newnode = CreateNewNodeFromSelectedNode(dirname);
                             selectedNode.Nodes.Add(newnode);
                         }

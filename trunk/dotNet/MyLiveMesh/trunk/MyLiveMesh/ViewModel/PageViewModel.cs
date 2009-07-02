@@ -34,7 +34,7 @@ namespace MyLiveMesh.ViewModel
         public PageViewModel()
         {
             loginViewModel = new LoginViewModel();
-            desktopViewModel = new DesktopViewModel();
+            //desktopViewModel = new DesktopViewModel();
             createAccountViewModel = new CreateAccountViewModel();
             videoPlayerViewModel = new VideoPlayerViewModel();
 
@@ -67,7 +67,7 @@ namespace MyLiveMesh.ViewModel
                 return;
             }
             Debug.WriteLine((e.Result as UserInfo).Email);
-            (desktopViewModel as DesktopViewModel).userInfo = (e.Result as UserInfo);
+            desktopViewModel = new DesktopViewModel((e.Result as UserInfo));
             //(desktopViewModel as DesktopViewModel).GetMySharedFolders();
             CurrentViewModel = desktopViewModel;
         }
