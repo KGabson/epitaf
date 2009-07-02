@@ -6,6 +6,7 @@ using System.ServiceModel.Activation;
 using System.Collections.Generic;
 using System.Text;
 using MyLiveMesh.Web.LinqToSql;
+using Common.BusinessObjects;
 
 namespace MyLiveMesh.Web.Services
 {
@@ -16,12 +17,19 @@ namespace MyLiveMesh.Web.Services
         private MyLiveMeshDBDataContext dbm = new MyLiveMeshDBDataContext();
 
         [OperationContract]
-        public bool Authentify(string login, string password)
+        public UserInfo Authentify(string login, string password)
         {
-            //MyLiveMeshDBDataContext dbm = new MyLiveMeshDBDataContext();
-
-            var user_count = (from q in dbm.users where q.login == login && q.password == password select q).Count();
-            return (user_count == 1);
+            var users = from q in dbm.users where q.login == login && q.password == password select q;
+            UserInfo uInfo = null;
+            foreach (user u in users)
+            {
+                uInfo = new UserInfo();
+                uInfo.Id = u.id;
+                uInfo.Login = u.login;
+                uInfo.Email = u.email;
+                break;
+            }
+            return uInfo;
         }
 
         [OperationContract]

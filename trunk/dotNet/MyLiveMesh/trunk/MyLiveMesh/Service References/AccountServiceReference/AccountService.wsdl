@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="/Imports">
       <xsd:import schemaLocation="http://localhost:54164/Services/AccountService.svc?xsd=xsd0" />
       <xsd:import schemaLocation="http://localhost:54164/Services/AccountService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:54164/Services/AccountService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Common.BusinessObjects" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="AccountService_Authentify_InputMessage">

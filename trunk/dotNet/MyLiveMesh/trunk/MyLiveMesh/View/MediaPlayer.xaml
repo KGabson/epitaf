@@ -9,7 +9,7 @@
 
     
     <Grid Width="auto" Height="auto">
-                <Rectangle Margin="45,8,45,99" Fill="#FF000000" Stroke="#FF000000"/>
+                <Rectangle MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" Margin="45,8,45,99" Fill="#FF000000" Stroke="#FF000000"/>
                 <MediaElement x:Name="MediaElement" Width="550" Margin="45,8,45,99"/>
                 <Button x:Name="btnPlayPause" Content="Pause" Click="btnPlayPause_Click" Canvas.Top="300" Canvas.Left="8" Width="92" Height="30" VerticalAlignment="Bottom" d:LayoutOverrides="Height" HorizontalAlignment="Left" Margin="45,0,0,43" />
                 <Button x:Name="btnStop" Content="Stop" Click="btnStop_Click" Width="92" Height="30" Canvas.Left="104" Canvas.Top="300" VerticalAlignment="Bottom" d:LayoutOverrides="Width" HorizontalAlignment="Left" Margin="141,0,0,43" />

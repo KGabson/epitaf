@@ -20,6 +20,9 @@
                     <DataTemplate x:Key="DesktopViewModel">
                         <Views:Desktop />
                     </DataTemplate>
+                    <DataTemplate x:Key="VideoPlayerViewModel">
+                        <Views:MediaPlayerPopup />
+                    </DataTemplate>
                 </ResourceDictionary>
             </Data:ResourceSelector.Resources>
         </Data:ResourceSelector>

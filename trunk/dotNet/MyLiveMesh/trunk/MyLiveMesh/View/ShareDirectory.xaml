@@ -1,0 +1,27 @@
+﻿
+<UserControl x:Class="MyLiveMesh.View.ShareDirectory"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Input="clr-namespace:SLExtensions.Input;assembly=SLExtensions"
+    Width="400" Height="153" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+
+    <Grid Background="White" Height="153">
+    	<Grid Margin="8,65,8,61">
+       
+    		<TextBox 
+                Margin="0,0,36,0" 
+                Text="{Binding Path=ShareLogin, Mode=TwoWay}" 
+                TextWrapping="Wrap"/>
+    		<Button 
+    			HorizontalAlignment="Right" 
+    			Width="32" 
+    			Content="OK" 
+    			Input:CommandService.Command="SubmitSharingCommand"
+            />
+    	</Grid>
+    	<TextBlock Height="53" Margin="8,8,8,0" VerticalAlignment="Top" Text="Please give the user name which you want to share your folder with" TextWrapping="Wrap" TextAlignment="Center"/>
+    	<TextBlock Margin="8,114,8,0" Text="{Binding Mode=TwoWay, Path=ErrorMsg}" TextWrapping="Wrap" Foreground="#FF900000" TextAlignment="Center" VerticalAlignment="Top" Height="39"/>
+    	<CheckBox Margin="8,96,8,0" Content="Add as folder owner" VerticalAlignment="Top" Height="18"  IsChecked="{Binding Path=IsOwner}"/>
+        
+    </Grid>
+</UserControl>

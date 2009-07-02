@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLiveMesh", "MyLiveMesh.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyLiveMesh.Web", "..\MyLiveMesh.Web\MyLiveMesh.Web.csproj", "{AC5C97B7-8936-4EA6-96A1-68446192639D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\Common\Common.csproj", "{0B6FCDE1-6230-4D09-B338-6160B7651434}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{AC5C97B7-8936-4EA6-96A1-68446192639D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC5C97B7-8936-4EA6-96A1-68446192639D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC5C97B7-8936-4EA6-96A1-68446192639D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B6FCDE1-6230-4D09-B338-6160B7651434}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B6FCDE1-6230-4D09-B338-6160B7651434}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B6FCDE1-6230-4D09-B338-6160B7651434}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B6FCDE1-6230-4D09-B338-6160B7651434}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
