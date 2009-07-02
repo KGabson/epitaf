@@ -25,10 +25,12 @@ namespace MyLiveMesh.ViewModel
         private string              newFolderName;
         public Node                 selectedNode;
         public Dialog               newFolderPopup;
+		public Dialog shareFolderPopup;
         public string               userId;
         public string               serverRootPath;
         public Node                 expandedNode;
         public ItemViewer           itemViewer;
+
 
         public ExplorerViewModel()
         {
@@ -41,12 +43,16 @@ namespace MyLiveMesh.ViewModel
             //items = new List<ItemViewerItem>();
             updateDirListFromServer(serverRootPath);            
             dirList.Add(selectedNode);
+
+            //Dictionary<string name, List<> children> tree;
             
             //Command
             Commands.ExplorerCommands.AddFolderCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(AddFolderCommand_Executed);
+            Commands.ExplorerCommands.ShareFolderCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(ShareFolderCommand_Executed);
             Services.Services.UserDirectory.getDirectoryTreeFromPathCompleted += new EventHandler<MyLiveMesh.UserDirectoryServiceReference.getDirectoryTreeFromPathCompletedEventArgs>(UserDirectory_getDirectoryTreeFromPathCompleted);
             Services.Services.UserDirectory.getFilesFromPathCompleted += new EventHandler<MyLiveMesh.UserDirectoryServiceReference.getFilesFromPathCompletedEventArgs>(UserDirectory_getFilesFromPathCompleted);
         }
+
 
         public string RootPath
         {
@@ -101,6 +107,11 @@ namespace MyLiveMesh.ViewModel
         public void AddFolderCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
         {
             newFolderPopup.Show();
+        }
+
+        void ShareFolderCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
+        {
+            shareFolderPopup.Show();
         }
 
         public void createDirectory(string dirname)

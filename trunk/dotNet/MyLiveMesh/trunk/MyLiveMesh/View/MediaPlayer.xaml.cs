@@ -87,5 +87,9 @@ namespace MyLiveMesh.View
         {
             Debug.WriteLine("ok");
         }
+
+        private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+        }
 	}
 }

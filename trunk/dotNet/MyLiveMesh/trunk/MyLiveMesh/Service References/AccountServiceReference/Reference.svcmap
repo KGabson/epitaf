@@ -22,6 +22,7 @@
     <MetadataSource Address="http://localhost:54164/Services/AccountService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
+    <MetadataFile FileName="AccountService2.xsd" MetadataType="Schema" ID="02ef3fc3-729c-4f68-bb88-3271da7c52d2" SourceId="1" SourceUrl="http://localhost:54164/Services/AccountService.svc?xsd=xsd2" />
     <MetadataFile FileName="AccountService.wsdl" MetadataType="Wsdl" ID="105ef0f4-f74a-4323-a37b-3ffb16208527" SourceId="1" SourceUrl="http://localhost:54164/Services/AccountService.svc?wsdl=wsdl0" />
     <MetadataFile FileName="AccountService.disco" MetadataType="Disco" ID="24bb1a65-0edd-4a8b-9bdd-ffa9fd4c2f95" SourceId="1" SourceUrl="http://localhost:54164/Services/AccountService.svc?disco" />
     <MetadataFile FileName="AccountService1.wsdl" MetadataType="Wsdl" ID="bcd7fae2-31d9-4149-8f57-8f559c66e347" SourceId="1" SourceUrl="http://localhost:54164/Services/AccountService.svc?wsdl" />

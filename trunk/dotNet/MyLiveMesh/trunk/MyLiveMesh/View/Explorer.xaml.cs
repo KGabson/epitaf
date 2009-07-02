@@ -42,6 +42,8 @@ namespace MyLiveMesh.View
                 this.fileTree.Nodes = ((ExplorerViewModel)this.DataContext).DirList;
                 this.fileTree.OnApplyTemplate();
                 (this.DataContext as ExplorerViewModel).newFolderPopup = this.newFolder;
+                this.ShareDirectoryControl.DataContext = new ShareFolderViewModel(this.DataContext as ExplorerViewModel);
+                (this.DataContext as ExplorerViewModel).shareFolderPopup = this.shareFolderPopup;
                 (this.DataContext as ExplorerViewModel).itemViewer = this.fileItems;
             }
             

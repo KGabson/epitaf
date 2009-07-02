@@ -161,6 +161,7 @@
     </Compile>
     <Compile Include="Services\Services.cs" />
     <Compile Include="Tools\PasswordHelper.cs" />
+    <Compile Include="ViewModel\ShareFolderViewModel.cs" />
     <Compile Include="ViewModel\CreateAccountViewModel.cs" />
     <Compile Include="ViewModel\ExplorerViewModel.cs" />
     <Compile Include="ViewModel\FileUploaderViewModel.cs" />
@@ -179,6 +180,9 @@
     </Compile>
     <Compile Include="View\MediaPlayerPopup.xaml.cs">
       <DependentUpon>MediaPlayerPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShareDirectory.xaml.cs">
+      <DependentUpon>ShareDirectory.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +203,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\MediaPlayerPopup.xaml">
+      <SubType>Page</SubType>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+    </Page>
+    <Page Include="View\ShareDirectory.xaml">
       <SubType>Page</SubType>
       <Generator>MSBuild:MarkupCompilePass1</Generator>
     </Page>
@@ -271,6 +279,8 @@
     <None Include="Service References\AccountServiceReference\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\Common.BusinessObjects.UserInfo.datasource" />
+    <None Include="Service References\AccountServiceReference\AccountService2.xsd" />
     <None Include="Service References\AccountServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -284,6 +294,12 @@
     <None Include="Service References\UserDirectoryServiceReference\UserDirectory1.wsdl" />
     <None Include="Service References\UserDirectoryServiceReference\UserDirectory1.xsd" />
     <None Include="Service References\UserDirectoryServiceReference\UserDirectory2.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{0B6FCDE1-6230-4D09-B338-6160B7651434}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\v2.0\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

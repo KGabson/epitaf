@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using Common.BusinessObjects;
 
 namespace MyLiveMesh.ViewModel
 {
@@ -18,6 +19,7 @@ namespace MyLiveMesh.ViewModel
         private ViewModelBase desktopViewModel;
         private ViewModelBase loginViewModel;
         private ViewModelBase createAccountViewModel;
+        private ViewModelBase videoPlayerViewModel;
 
         public ViewModelBase CurrentViewModel
         {
@@ -34,6 +36,7 @@ namespace MyLiveMesh.ViewModel
             loginViewModel = new LoginViewModel();
             desktopViewModel = new DesktopViewModel();
             createAccountViewModel = new CreateAccountViewModel();
+            videoPlayerViewModel = new VideoPlayerViewModel();
 
             Services.Services.AuthService.AuthentifyCompleted += new EventHandler<MyLiveMesh.AccountServiceReference.AuthentifyCompletedEventArgs>(AuthService_AuthentifyCompleted);
             Services.Services.AuthService.CreateAccountCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(AuthService_CreateAccountCompleted);
@@ -41,6 +44,7 @@ namespace MyLiveMesh.ViewModel
             Commands.LoginCommands.CreateAccountCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(CreateAccountCommand_Executed);
             currentViewModel = desktopViewModel;
             //currentViewModel = loginViewModel;
+            //currentViewModel = videoPlayerViewModel;
         }
 
         void AuthService_CreateAccountCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
@@ -57,11 +61,12 @@ namespace MyLiveMesh.ViewModel
 
         void AuthService_AuthentifyCompleted(object sender, MyLiveMesh.AccountServiceReference.AuthentifyCompletedEventArgs e)
         {
-            if (e.Result == false)
+            if (e.Result == null)
             {
                 (loginViewModel as LoginViewModel).ErrorMsg = "Wrong login or password";
                 return;
             }
+            Debug.WriteLine((e.Result as UserInfo).Email);
             CurrentViewModel = desktopViewModel;
         }
     }

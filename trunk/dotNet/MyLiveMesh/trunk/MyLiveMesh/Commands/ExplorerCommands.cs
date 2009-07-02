@@ -17,8 +17,12 @@ namespace MyLiveMesh.Commands
         static ExplorerCommands()
         {
             AddFolderCommand = new Command("AddFolderCommand");
+            ShareFolderCommand = new Command("ShareFolderCommand");
+            SubmitSharingCommand = new Command("SubmitSharingCommand");
         }
 
         public static Command AddFolderCommand {get; set;}
+        public static Command ShareFolderCommand { get; set; }
+        public static Command SubmitSharingCommand { get; set; }
     }
 }
