@@ -46,6 +46,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Blacklight.Controls, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Blacklight.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="Liquid, Version=5.2.0.26386, Culture=neutral, PublicKeyToken=7fbdd25c3fcc3919, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Liquid.dll</HintPath>

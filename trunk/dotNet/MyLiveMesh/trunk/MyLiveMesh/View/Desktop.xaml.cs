@@ -15,6 +15,8 @@ using MyLiveMesh.ViewModel;
 using Common.BusinessObjects;
 using System.Windows.Threading;
 
+using Blacklight.Controls;
+
 namespace MyLiveMesh.View
 {
 	public partial class Desktop : UserControl
@@ -55,7 +57,7 @@ namespace MyLiveMesh.View
             if (begin)
             {
                 f = new File();
-                f.DataContext = new FileViewModel("My Files", "dir", "/ClientDocs/" + uInfo.Id, uInfo);
+                f.DataContext = new FileViewModel("My Files", "dir", "/ClientDocs/" + uInfo.Id, uInfo, true);
                 itemList.Add(f);
             }
             else

@@ -57,7 +57,7 @@
                 x:Name="FolderList"
                 VerticalAlignment="Top"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                Input:CommandService.Command="FileCommand" Canvas.Top="22" />
+                Input:CommandService.Command="FileCommand" Canvas.Top="22" Width="1280" Height="600" />
         </Canvas>
         <Canvas>
             <Canvas

@@ -140,6 +140,8 @@ namespace MyLiveMesh.Web.Services
                 SharedFolder sf = new SharedFolder();
                 sf.RootPath = share.folder_path;
                 sf.FolderName = share.folder_path.Substring(share.folder_path.LastIndexOf('/'));
+                if (sf.FolderName != "/" && sf.FolderName.Length > 1)
+                    sf.FolderName = sf.FolderName.Substring(1);
                 sf.IsOwner = (share.friend_is_owner == 1) ? true : false;
                 user u = dbm.users.First(f => f.id == share.owner_id);
                 sf.Owner = new UserInfo(u.id, u.login, u.email);
