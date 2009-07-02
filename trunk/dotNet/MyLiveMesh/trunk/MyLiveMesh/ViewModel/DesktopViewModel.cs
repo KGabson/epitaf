@@ -14,6 +14,7 @@ using System.Diagnostics;
 using MyLiveMesh.View;
 using Liquid.Components;
 using Common.BusinessObjects;
+using System.Collections.ObjectModel;
 
 namespace MyLiveMesh.ViewModel
 {
@@ -22,13 +23,14 @@ namespace MyLiveMesh.ViewModel
         private ExplorerViewModel explorer;
         private FileUploaderViewModel fileUploader = new FileUploaderViewModel();
         private List<FileViewModel> files = new List<FileViewModel>();
+        public ObservableCollection<SharedFolder> MySharedFolders;
         private ProgressDialogViewModel progressDialog = new ProgressDialogViewModel();
         public UserInfo userInfo;
 
         public DesktopViewModel()
         {
             //Init attributs
-            files.Add(new FileViewModel("My Files", "dir", "ClientDocs"));
+            //files.Add(new FileViewModel("My Files", "dir", "ClientDocs"));
 
             //Commands bindings
             Commands.DesktopCommands.FileCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(FileCommand_Executed);
@@ -37,6 +39,8 @@ namespace MyLiveMesh.ViewModel
             this.progressDialog.uploader.UploadFinished += new UploadEventHandler(uploader_UploadFinished);
         }
 
+
+        #region Fields
         public List<FileViewModel> Files
         {
             get { return files; }
@@ -78,10 +82,12 @@ namespace MyLiveMesh.ViewModel
                 InvokePropertyChanged("ProgressDialog");
             }
         }
-        
+        #endregion
+
+        #region Commands
         public void FileCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
         {
-            FileViewModel selectedFile = (FileViewModel)((ListBox)e.Source).SelectedItem;
+            FileViewModel selectedFile = (FileViewModel)(((ListBox)e.Source).SelectedItem as File).DataContext;
 
             if (selectedFile != null)
             {
@@ -110,11 +116,13 @@ namespace MyLiveMesh.ViewModel
                 }
             }
         }
+        #endregion
 
         void uploader_UploadFinished(object sender, UploadEventArgs e)
         {
             this.progressDialog.IsEnabled = false;
             this.explorer.fillItemsFromServerPath();
         }
+
     }
 }

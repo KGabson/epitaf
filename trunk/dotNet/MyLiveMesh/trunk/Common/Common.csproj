@@ -47,6 +47,8 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\ServiceResult.cs" />
+    <Compile Include="BusinessObjects\SharedFolder.cs" />
     <Compile Include="BusinessObjects\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

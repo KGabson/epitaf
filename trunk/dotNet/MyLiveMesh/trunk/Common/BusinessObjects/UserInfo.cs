@@ -14,5 +14,16 @@ namespace Common.BusinessObjects
         public String Login { get; set; }
         [DataMember]
         public String Email { get; set; }
+
+        public UserInfo()
+        {
+        }
+
+        public UserInfo(int id, String login, String email)
+        {
+            Id = id;
+            Login = login;
+            Email = email;
+        }
     }
 }

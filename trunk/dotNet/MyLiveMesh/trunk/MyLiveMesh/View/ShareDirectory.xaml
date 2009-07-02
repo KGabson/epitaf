@@ -7,7 +7,6 @@
 
     <Grid Background="White" Height="153">
     	<Grid Margin="8,65,8,61">
-       
     		<TextBox 
                 Margin="0,0,36,0" 
                 Text="{Binding Path=ShareLogin, Mode=TwoWay}" 
@@ -19,9 +18,28 @@
     			Input:CommandService.Command="SubmitSharingCommand"
             />
     	</Grid>
-    	<TextBlock Height="53" Margin="8,8,8,0" VerticalAlignment="Top" Text="Please give the user name which you want to share your folder with" TextWrapping="Wrap" TextAlignment="Center"/>
-    	<TextBlock Margin="8,114,8,0" Text="{Binding Mode=TwoWay, Path=ErrorMsg}" TextWrapping="Wrap" Foreground="#FF900000" TextAlignment="Center" VerticalAlignment="Top" Height="39"/>
-    	<CheckBox Margin="8,96,8,0" Content="Add as folder owner" VerticalAlignment="Top" Height="18"  IsChecked="{Binding Path=IsOwner}"/>
+    	<TextBlock 
+            Height="53" 
+            Margin="8,8,8,0" 
+            VerticalAlignment="Top" 
+            Text="Please give the user name which you want to share your folder with" 
+            TextWrapping="Wrap" 
+            TextAlignment="Center" 
+            Foreground="#FF000000"/>
+    	<TextBlock 
+            Margin="8,114,8,0" 
+            Text="{Binding Mode=TwoWay, Path=ErrorMsg}" 
+            TextWrapping="Wrap" 
+            Foreground="{Binding Path=ErrorMsgColor, Mode=TwoWay}" 
+            TextAlignment="Center" 
+            VerticalAlignment="Top" 
+            Height="39"/>
+    	<CheckBox 
+            Margin="8,96,8,0" 
+            Content="Add as folder owner" 
+            VerticalAlignment="Top" 
+            Height="18"  
+            IsChecked="{Binding Path=IsOwner, Mode=TwoWay}"/>
         
     </Grid>
 </UserControl>

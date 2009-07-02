@@ -45,22 +45,23 @@
         x:Name="LayoutRoot"
         Width="Auto"
         Height="Auto">
+        <!--ItemsSource="{Binding Path=Files, Mode=TwoWay}"
+        ItemTemplate="{StaticResource controlTemplate}"-->
         <Canvas
             Width="Auto"
             Height="Auto">
             <ListBox 
                 VerticalAlignment="Top"
-                ItemsSource="{Binding Files}"
-                ItemTemplate="{StaticResource controlTemplate}"
+                x:Name="FolderList"
                 Input:CommandService.Command="FileCommand" Canvas.Top="22" />
-            <Button 
-                Height="Auto"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Width="116" 
-                Content="Upload Files" 
-                x:Name="FileUploadBtn"
-                Input:CommandService.Command="FileUploaderCommand"/>
+                <Button 
+                    Height="Auto"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Width="116" 
+                    Content="Upload Files" 
+                    x:Name="FileUploadBtn"
+                    Input:CommandService.Command="FileUploaderCommand"/>
         </Canvas>
         <Canvas>
             <Canvas
