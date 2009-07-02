@@ -42,8 +42,8 @@ namespace MyLiveMesh.ViewModel
             Services.Services.AuthService.CreateAccountCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(AuthService_CreateAccountCompleted);
 
             Commands.LoginCommands.CreateAccountCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(CreateAccountCommand_Executed);
-            currentViewModel = desktopViewModel;
-            //currentViewModel = loginViewModel;
+            //currentViewModel = desktopViewModel;
+            currentViewModel = loginViewModel;
             //currentViewModel = videoPlayerViewModel;
         }
 
@@ -67,6 +67,7 @@ namespace MyLiveMesh.ViewModel
                 return;
             }
             Debug.WriteLine((e.Result as UserInfo).Email);
+            (desktopViewModel as DesktopViewModel).userInfo = (e.Result as UserInfo);
             CurrentViewModel = desktopViewModel;
         }
     }

@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using MyLiveMesh.View;
 using Liquid.Components;
+using Common.BusinessObjects;
 
 namespace MyLiveMesh.ViewModel
 {
@@ -22,7 +23,7 @@ namespace MyLiveMesh.ViewModel
         private FileUploaderViewModel fileUploader = new FileUploaderViewModel();
         private List<FileViewModel> files = new List<FileViewModel>();
         private ProgressDialogViewModel progressDialog = new ProgressDialogViewModel();
-
+        public UserInfo userInfo;
 
         public DesktopViewModel()
         {
