@@ -17,5 +17,12 @@ namespace Common.BusinessObjects
         public String FolderName { get; set; }
         public UserInfo Owner { get; set; }
         public bool IsOwner { get; set; }
+
+        public bool Equals(SharedFolder f)
+        {
+            return (f.RootPath == RootPath
+                && f.FolderName == FolderName
+                && f.IsOwner == IsOwner);
+        }
     }
 }

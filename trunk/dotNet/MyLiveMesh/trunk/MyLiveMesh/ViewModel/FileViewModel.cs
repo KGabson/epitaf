@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using Common.BusinessObjects;
 
 namespace MyLiveMesh.ViewModel
 {
@@ -26,15 +27,33 @@ namespace MyLiveMesh.ViewModel
             title = "Default Directory";
         }
 
-        public FileViewModel(string _title, string _type, string _path)
+        public FileViewModel(string _title, string _type, string _path, UserInfo _owner_info)
+        {
+            init(_title, _type, _path, _owner_info);
+        }
+
+        public FileViewModel(SharedFolder folder)
+        {
+            init(folder.FolderName, "shared", folder.RootPath, folder.Owner);
+        }
+
+        void init(string _title, string _type, string _path, UserInfo _owner_info)
         {
             this.title = _title;
             this.path = _path;
             this.type = _type;
             if (type == "dir")
                 imageUrl = "../Data/directory.png";
+            else if (type == "shared")
+                imageUrl = "../Data/shared_directory.png";
         }
 
+        public bool Equals(SharedFolder folder)
+        {
+            return (title == folder.FolderName 
+                && path == folder.RootPath
+                && type == "shared");
+        }
 
         public string ImageUrl
         {
@@ -65,5 +84,7 @@ namespace MyLiveMesh.ViewModel
                 InvokePropertyChanged("Path");
             }
         }
+
+        public UserInfo OwnerInfo { get; set; }
     }
 }
