@@ -27,6 +27,7 @@ namespace MyLiveMesh.View
             this.itemViewerPopup.IsEnabledChanged += new DependencyPropertyChangedEventHandler(itemViewerPopup_IsEnabledChanged);
             this.newFolder.Closed += new DialogEventHandler(newFolder_Closed);
             this.Loaded += new RoutedEventHandler(Explorer_Loaded);
+            this.fileItems.DoubleClick += new ItemViewerEventHandler(fileItems_DoubleClick);
         }
 
         void newFolder_Closed(object sender, DialogEventArgs e)
@@ -74,6 +75,13 @@ namespace MyLiveMesh.View
             //fileItems.Clear();
             //fileItems.Add((this.DataContext as ExplorerViewModel).items);
         }
+
+        void fileItems_DoubleClick(object sender, ItemViewerEventArgs e)
+        {
+            Debug.WriteLine("nihaaahoué " + sender.GetType());
+            Debug.WriteLine("title  " + e.Title);
+        }
+
 
         private FileItem CreateItem(string type, string filename, string desc)
         {
