@@ -35,7 +35,8 @@ namespace MyLiveMesh.ViewModel
         public ExplorerViewModel()
         {
             dirList = new ObservableCollection<Node>();
-            userId = "0";
+            userId = (((App.Current.RootVisual as Page).DataContext as PageViewModel).CurrentViewModel as DesktopViewModel).userInfo.Id.ToString();
+            userId = (userId == "") ? "0" : userId;
             serverRootPath = "/ClientDocs/" + userId + "/";
             newFolderName = "New Folder";
             selectedNode = new Node(serverRootPath, "My Files", true, "../Data/folder.png", "../Data/folderOpen.png");
