@@ -38,6 +38,12 @@
   <wsdl:message name="UserDirectory_GetSharedFolders_OutputMessage">
     <wsdl:part name="parameters" element="GetSharedFoldersResponse" />
   </wsdl:message>
+  <wsdl:message name="UserDirectory_deletePath_InputMessage">
+    <wsdl:part name="parameters" element="deletePath" />
+  </wsdl:message>
+  <wsdl:message name="UserDirectory_deletePath_OutputMessage">
+    <wsdl:part name="parameters" element="deletePathResponse" />
+  </wsdl:message>
   <wsdl:portType name="UserDirectory">
     <wsdl:operation name="CreateDirectoryOnServer">
       <wsdl:input wsaw:Action="urn:UserDirectory/CreateDirectoryOnServer" message="UserDirectory_CreateDirectoryOnServer_InputMessage" />
@@ -58,6 +64,10 @@
     <wsdl:operation name="GetSharedFolders">
       <wsdl:input wsaw:Action="urn:UserDirectory/GetSharedFolders" message="UserDirectory_GetSharedFolders_InputMessage" />
       <wsdl:output wsaw:Action="urn:UserDirectory/GetSharedFoldersResponse" message="UserDirectory_GetSharedFolders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="deletePath">
+      <wsdl:input wsaw:Action="urn:UserDirectory/deletePath" message="UserDirectory_deletePath_InputMessage" />
+      <wsdl:output wsaw:Action="urn:UserDirectory/deletePathResponse" message="UserDirectory_deletePath_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

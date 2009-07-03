@@ -112,12 +112,9 @@ namespace MyLiveMesh.ViewModel
                 else if (selectedFile.Path != explorer.DirList[0].Title)
                 {
                     Debug.WriteLine("nouveau explorer " + selectedFile.Path);
-                    explorer.serverRootPath = selectedFile.Path;
-                    explorer.DirList.Clear();
-                    explorer.selectedNode = new Node(selectedFile.Path, selectedFile.Title, true, "../Data/folder.png", "../Data/folderOpen.png");
-                    explorer.DirList.Add(explorer.selectedNode);
-                    explorer.itemViewer.Clear();
-                    explorer.updateDirListFromServer(selectedFile.Path);
+                    explorer.updateWithPath(selectedFile.Path, selectedFile.Title, selectedFile.IsOwner);
+                    explorer.IsEnabled = false;
+
                 }
                 explorer.IsEnabled = true;
                 InvokePropertyChanged("Explorer");
