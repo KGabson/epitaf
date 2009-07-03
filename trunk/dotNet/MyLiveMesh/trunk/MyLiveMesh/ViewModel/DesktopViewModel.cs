@@ -105,13 +105,16 @@ namespace MyLiveMesh.ViewModel
             if (selectedFile != null)
             {
                 Debug.WriteLine(selectedFile.Title + " clicked");
+                bool isShared = (selectedFile.OwnerName != "@" + userInfo.Login) ? false : true;
                 if (explorer == null)
                 {
                     explorer = new ExplorerViewModel(selectedFile.Path, selectedFile.Title);
+                    explorer.ShareEnabled = isShared;
                 }
                 else if (selectedFile.Path != explorer.DirList[0].Title)
                 {
                     Debug.WriteLine("nouveau explorer " + selectedFile.Path);
+                    explorer.ShareEnabled = isShared;
                     explorer.updateWithPath(selectedFile.Path, selectedFile.Title, selectedFile.IsOwner);
                     explorer.IsEnabled = false;
 

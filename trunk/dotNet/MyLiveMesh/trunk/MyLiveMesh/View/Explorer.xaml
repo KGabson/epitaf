@@ -68,6 +68,7 @@
                         <Button
                                 Content="Share"
                                 x:Name="share" Canvas.Left="188" Height="34" Width="92"
+                                IsEnabled="{Binding ShareEnabled}"
                                 Input:CommandService.Command="ShareFolderCommand"/>
                         <Button
                                 Content="New Folder"
