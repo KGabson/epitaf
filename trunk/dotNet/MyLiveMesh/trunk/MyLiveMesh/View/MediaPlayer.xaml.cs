@@ -30,6 +30,7 @@ namespace MyLiveMesh.View
             this.MediaElement.MediaOpened += new RoutedEventHandler(MediaElement_MediaOpened);
             this.Slider.MouseLeftButtonDown += new MouseButtonEventHandler(Slider_MouseLeftButtonDown);
             this.Slider.MouseLeftButtonUp += new MouseButtonEventHandler(Slider_MouseLeftButtonUp);
+            this.Loaded += new RoutedEventHandler(MediaPlayer_Loaded);
         }
 
         public void Stop()
@@ -42,8 +43,17 @@ namespace MyLiveMesh.View
         }
 
         #region Handlers
+        void MediaPlayer_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.btnPlayPause.Content = "Pause";
+            isPlaying = true;
+        }
+
         void MediaElement_MediaOpened(object sender, RoutedEventArgs e)
         {
+            btnPlayPause.Content = "Pause";
+            isPlaying = true;
+            timer.Start();
             Slider.Maximum = this.MediaElement.NaturalDuration.TimeSpan.TotalSeconds;
         }
 

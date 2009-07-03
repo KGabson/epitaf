@@ -33,8 +33,18 @@ namespace MyLiveMesh.Web.Services
         }
 
         [OperationContract]
-        public void CreateAccount(string login, string password, string email)
+        public ServiceResult CreateAccount(string login, string password, string email)
         {
+            ServiceResult res = new ServiceResult();
+
+            user existing = dbm.users.FirstOrDefault(f => f.login == login);
+            if (existing != null)
+            {
+                res.ErrorMsg = "This username already exists";
+                res.Success = false;
+                return res;
+            }
+
             user newUser = new user();
             //newUser.id 
             newUser.login = login;
@@ -43,6 +53,9 @@ namespace MyLiveMesh.Web.Services
 
             dbm.users.InsertOnSubmit(newUser);
             dbm.SubmitChanges();
+
+            res.Success = true;
+            return res;
         }
 
         // Add more operations here and mark them with [OperationContract]

@@ -13,6 +13,7 @@ using System.Diagnostics;
 using Liquid;
 using System.Collections.ObjectModel;
 using System.IO;
+using MyLiveMesh.View;
 
 namespace MyLiveMesh.ViewModel
 {
@@ -25,7 +26,7 @@ namespace MyLiveMesh.ViewModel
         private string              newFolderName = "New Folder";
         public Node                 selectedNode;
         public Dialog               newFolderPopup;
-		public Dialog               shareFolderPopup;
+		public ShareDirectoryPopup  shareFolderPopup;
         public string               userId;
         public string               serverRootPath;
         public ItemViewer           itemViewer = new ItemViewer();
@@ -108,7 +109,8 @@ namespace MyLiveMesh.ViewModel
 
         void ShareFolderCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
         {
-            shareFolderPopup.Show();
+            (shareFolderPopup.ShareDirectoryControl.DataContext as ShareFolderViewModel).Reset();
+            shareFolderPopup.Popup.Show();
         }
 
         void DeleteFolderCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)

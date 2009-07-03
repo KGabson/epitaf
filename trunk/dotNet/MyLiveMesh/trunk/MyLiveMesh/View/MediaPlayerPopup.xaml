@@ -9,7 +9,7 @@
 	mc:Ignorable="d"
     d:DesignWidth="640" d:DesignHeight="480">
 
-    <Grid Width="1024" Height="768">
+    <Grid Width="1280" Height="600">
         <liquidPopup:Dialog 
             x:Name="itemViewerPopup" 
             Width="550" 

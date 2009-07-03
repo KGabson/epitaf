@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="img\frame_bg.jpg" />
     <Content Include="Videos_test\Bear.wmv" />
     <Content Include="ClientBin\MyLiveMesh.xap" />
     <Content Include="Default.aspx" />

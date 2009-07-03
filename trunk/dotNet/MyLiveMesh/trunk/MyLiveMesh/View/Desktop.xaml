@@ -10,11 +10,13 @@
     xmlns:liquidPopup="clr-namespace:Liquid;assembly=Liquid.Popup"
     xmlns:liquid="clr-namespace:Liquid;assembly=Liquid" 
     
+    xmlns:local="clr-namespace:Blacklight.Controls;assembly=Blacklight.Controls"
+    
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tools="clr-namespace:MyLiveMesh.Tools"
 	mc:Ignorable="d"
 	x:Class="MyLiveMesh.View.Desktop"
-	d:DesignWidth="640" d:DesignHeight="480">
+	d:DesignWidth="1024" d:DesignHeight="768">
     <UserControl.Resources>
         <Data:ResourceSelector x:Key="resourceSelector">
             <Data:ResourceSelector.Resources>
@@ -50,6 +52,8 @@
         Height="Auto">
         <!--ItemsSource="{Binding Path=Files, Mode=TwoWay}"
         ItemTemplate="{StaticResource controlTemplate}"-->
+
+        <Image Source="../Data/LiveMeshBG.jpg" Width="1280" Height="600" />
         <Canvas
             Width="Auto"
             Height="Auto">
@@ -57,7 +61,7 @@
                 x:Name="FolderList"
                 VerticalAlignment="Top"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                Input:CommandService.Command="FileCommand" Canvas.Top="22" Width="1280" Height="600" />
+                Input:CommandService.Command="FileCommand" Width="auto" Height="600" Background="#3EFFFFFF" />
         </Canvas>
         <Canvas>
             <Canvas
@@ -70,16 +74,19 @@
                 ContentTemplate="{StaticResource controlTemplate}" />
             </Canvas>
 
-            <Canvas
+            <!--<Canvas
             x:Name="fileUploaderLayout"
             Height="480"
             Width="640"
             Margin="317,0,8,8"
-            VerticalAlignment="Bottom">
-                <ContentControl
+            VerticalAlignment="Bottom">-->
+            
+            <!--</Canvas>-->
+        </Canvas>
+        <Canvas>
+        <ContentControl
                 Content="{Binding ProgressDialog}"
                 ContentTemplate="{StaticResource controlTemplate}" />
-            </Canvas>
         </Canvas>
         <Canvas>
             <ContentControl

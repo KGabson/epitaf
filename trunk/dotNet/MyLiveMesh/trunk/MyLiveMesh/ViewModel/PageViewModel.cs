@@ -34,30 +34,38 @@ namespace MyLiveMesh.ViewModel
         public PageViewModel()
         {
             loginViewModel = new LoginViewModel();
-            //desktopViewModel = new DesktopViewModel();
             createAccountViewModel = new CreateAccountViewModel();
             videoPlayerViewModel = new VideoPlayerViewModel();
 
             Services.Services.AuthService.AuthentifyCompleted += new EventHandler<MyLiveMesh.AccountServiceReference.AuthentifyCompletedEventArgs>(AuthService_AuthentifyCompleted);
-            Services.Services.AuthService.CreateAccountCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(AuthService_CreateAccountCompleted);
+            Services.Services.AuthService.CreateAccountCompleted += new EventHandler<MyLiveMesh.AccountServiceReference.CreateAccountCompletedEventArgs>(AuthService_CreateAccountCompleted);
 
             Commands.LoginCommands.CreateAccountCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(CreateAccountCommand_Executed);
-            //currentViewModel = desktopViewModel;
+            Commands.LoginCommands.BackToLoginCommand.Executed += new EventHandler<SLExtensions.Input.ExecutedEventArgs>(BackToLoginCommand_Executed);
             currentViewModel = loginViewModel;
-            //currentViewModel = videoPlayerViewModel;
         }
 
-        void AuthService_CreateAccountCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        void AuthService_CreateAccountCompleted(object sender, MyLiveMesh.AccountServiceReference.CreateAccountCompletedEventArgs e)
         {
+            if (!e.Result.Success)
+            {
+                (createAccountViewModel as CreateAccountViewModel).ErrorMsg = e.Result.ErrorMsg;
+                return;
+            }
             (loginViewModel as LoginViewModel).ErrorMsg = "Account created successfully";
             CurrentViewModel = loginViewModel;
         }
 
         void CreateAccountCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
         {
-            Debug.WriteLine("Create Account !!!");
             CurrentViewModel = createAccountViewModel;
         }
+
+        void BackToLoginCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
+        {
+            CurrentViewModel = loginViewModel;
+        }
+
 
         void AuthService_AuthentifyCompleted(object sender, MyLiveMesh.AccountServiceReference.AuthentifyCompletedEventArgs e)
         {
@@ -68,7 +76,6 @@ namespace MyLiveMesh.ViewModel
             }
             Debug.WriteLine((e.Result as UserInfo).Email);
             desktopViewModel = new DesktopViewModel((e.Result as UserInfo));
-            //(desktopViewModel as DesktopViewModel).GetMySharedFolders();
             CurrentViewModel = desktopViewModel;
         }
     }

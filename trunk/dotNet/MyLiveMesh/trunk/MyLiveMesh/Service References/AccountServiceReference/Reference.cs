@@ -26,7 +26,7 @@ namespace MyLiveMesh.AccountServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:AccountService/CreateAccount", ReplyAction="urn:AccountService/CreateAccountResponse")]
         System.IAsyncResult BeginCreateAccount(string login, string password, string email, System.AsyncCallback callback, object asyncState);
         
-        void EndCreateAccount(System.IAsyncResult result);
+        Common.BusinessObjects.ServiceResult EndCreateAccount(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -48,6 +48,25 @@ namespace MyLiveMesh.AccountServiceReference {
             get {
                 base.RaiseExceptionIfNecessary();
                 return ((Common.BusinessObjects.UserInfo)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    public partial class CreateAccountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public CreateAccountCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public Common.BusinessObjects.ServiceResult Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((Common.BusinessObjects.ServiceResult)(this.results[0]));
             }
         }
     }
@@ -101,7 +120,7 @@ namespace MyLiveMesh.AccountServiceReference {
         
         public event System.EventHandler<AuthentifyCompletedEventArgs> AuthentifyCompleted;
         
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CreateAccountCompleted;
+        public event System.EventHandler<CreateAccountCompletedEventArgs> CreateAccountCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -161,8 +180,8 @@ namespace MyLiveMesh.AccountServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        void MyLiveMesh.AccountServiceReference.AccountService.EndCreateAccount(System.IAsyncResult result) {
-            base.Channel.EndCreateAccount(result);
+        Common.BusinessObjects.ServiceResult MyLiveMesh.AccountServiceReference.AccountService.EndCreateAccount(System.IAsyncResult result) {
+            return base.Channel.EndCreateAccount(result);
         }
         
         private System.IAsyncResult OnBeginCreateAccount(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -173,14 +192,15 @@ namespace MyLiveMesh.AccountServiceReference {
         }
         
         private object[] OnEndCreateAccount(System.IAsyncResult result) {
-            ((MyLiveMesh.AccountServiceReference.AccountService)(this)).EndCreateAccount(result);
-            return null;
+            Common.BusinessObjects.ServiceResult retVal = ((MyLiveMesh.AccountServiceReference.AccountService)(this)).EndCreateAccount(result);
+            return new object[] {
+                    retVal};
         }
         
         private void OnCreateAccountCompleted(object state) {
             if ((this.CreateAccountCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.CreateAccountCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+                this.CreateAccountCompleted(this, new CreateAccountCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         
@@ -303,9 +323,10 @@ namespace MyLiveMesh.AccountServiceReference {
                 return _result;
             }
             
-            public void EndCreateAccount(System.IAsyncResult result) {
+            public Common.BusinessObjects.ServiceResult EndCreateAccount(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                base.EndInvoke("CreateAccount", _args, result);
+                Common.BusinessObjects.ServiceResult _result = ((Common.BusinessObjects.ServiceResult)(base.EndInvoke("CreateAccount", _args, result)));
+                return _result;
             }
         }
     }
