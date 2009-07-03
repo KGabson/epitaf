@@ -109,6 +109,7 @@ namespace MyLiveMesh.ViewModel
                 if (explorer == null)
                 {
                     explorer = new ExplorerViewModel(selectedFile.Path, selectedFile.Title);
+                    explorer.Visibility = (selectedFile.IsOwner) ? Visibility.Visible : Visibility.Collapsed;
                     explorer.ShareEnabled = isShared;
                 }
                 else if (selectedFile.Path != explorer.DirList[0].Title)
@@ -126,19 +127,26 @@ namespace MyLiveMesh.ViewModel
 
         public void FileUploaderCommand_Executed(object sender, SLExtensions.Input.ExecutedEventArgs e)
         {
-            if (ProgressDialog.IsEnabled == false)
+            try
             {
-                OpenFileDialog dialog = new OpenFileDialog();
-
-                dialog.Multiselect = true;
-                if (dialog.ShowDialog() == true)
+                if (ProgressDialog.IsEnabled == false)
                 {
-                    progressDialog.Progress.Complete = 0;
-                    progressDialog.Progress.Text = "0 %";
-                    Debug.WriteLine("files to upload " + dialog.Files.ToString());
-                    progressDialog.uploader.UploadFiles(dialog.Files, this.explorer.selectedNode.ID + "/", true);
-                    progressDialog.IsEnabled = true;
+                    OpenFileDialog dialog = new OpenFileDialog();
+
+                    dialog.Multiselect = true;
+                    if (dialog.ShowDialog() == true)
+                    {
+                        progressDialog.Progress.Complete = 0;
+                        progressDialog.Progress.Text = "0 %";
+                        Debug.WriteLine("files to upload " + dialog.Files.ToString());
+                        progressDialog.uploader.UploadFiles(dialog.Files, this.explorer.selectedNode.ID + "/", true);
+                        progressDialog.IsEnabled = true;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
             }
         }
         #endregion
