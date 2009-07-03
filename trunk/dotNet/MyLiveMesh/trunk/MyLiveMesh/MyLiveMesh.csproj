@@ -262,6 +262,10 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Resource Include="Data\shared_directory.png" />
+    <Resource Include="Data\Large\wma.png" />
+    <Resource Include="Data\Large\wmv.png" />
+    <Resource Include="Data\Large\mpeg.png" />
+    <Resource Include="Data\Large\mpg.png" />
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
