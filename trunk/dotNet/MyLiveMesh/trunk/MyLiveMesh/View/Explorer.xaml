@@ -38,7 +38,6 @@
                         Height="Auto" 
                         EnableLines="True"
                         NodeClick="fileTree_NodeClick"
-                        NodeExpanded="fileTree_NodeExpanded"
                         Background="#99FFFFFF"/>
                     <extended:GridSplitter
                         x:Name="grsplSplitter" 

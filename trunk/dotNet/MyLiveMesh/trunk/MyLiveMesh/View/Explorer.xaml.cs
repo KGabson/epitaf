@@ -32,7 +32,7 @@ namespace MyLiveMesh.View
 
         void newFolder_Closed(object sender, DialogEventArgs e)
         {
-            if (e.Cancel == false)
+            if (e.Tag == "ok")
                 (this.DataContext as ExplorerViewModel).createDirectory(this.folderName.Text);
         }
 
@@ -43,9 +43,7 @@ namespace MyLiveMesh.View
                 this.fileTree.Nodes = ((ExplorerViewModel)this.DataContext).DirList;
                 this.fileTree.OnApplyTemplate();
                 (this.DataContext as ExplorerViewModel).newFolderPopup = this.newFolder;
-                //this.ShareDirectoryControl.DataContext = new ShareFolderViewModel(this.DataContext as ExplorerViewModel);
                 this.ShareDirectoryPopup.ShareDirectoryControl.DataContext = new ShareFolderViewModel(this.DataContext as ExplorerViewModel);
-                //(this.DataContext as ExplorerViewModel).shareFolderPopup = this.shareFolderPopup;
                 (this.DataContext as ExplorerViewModel).shareFolderPopup = this.ShareDirectoryPopup;
                 (this.DataContext as ExplorerViewModel).itemViewer = this.fileItems;
                 (this.DataContext as ExplorerViewModel).fileTree = fileTree;
@@ -87,17 +85,6 @@ namespace MyLiveMesh.View
         private FileItem CreateItem(string type, string filename, string desc)
         {
             return new FileItem() { Icon = "../Data/Large/" + type + ".png", Text = filename, OtherText = desc };
-        }
-
-        private void fileTree_NodeExpanded(object sender, TreeEventArgs e)
-        {
-             Node result = ((Node)sender);
-
-             if (result.ID != null)
-             {
-                 //(this.DataContext as ExplorerViewModel).expandedNode = result;
-                 //(this.DataContext as ExplorerViewModel).updateDirListFromServer(result.ID);
-             }
         }
             
 
