@@ -30,6 +30,14 @@ namespace MyLiveMesh.ViewModel
             errorMsgColor = Tools.Colors.Green;
         }
 
+        public void Reset()
+        {
+            ShareLogin = "";
+            IsOwner = false;
+            ErrorMsgColor = Tools.Colors.Green;
+            ErrorMsg = "";
+        }
+
         void UserDirectory_ShareFolderCompleted(object sender, MyLiveMesh.UserDirectoryServiceReference.ShareFolderCompletedEventArgs e)
         {
             if (!e.Result.Success)

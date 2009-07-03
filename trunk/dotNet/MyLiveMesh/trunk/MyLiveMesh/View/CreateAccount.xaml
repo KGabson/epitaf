@@ -14,8 +14,14 @@
 		<Rectangle Margin="50,50,50,50" Fill="#FFFFFFFF" Stroke="#FF474747" RadiusX="26" RadiusY="26" StrokeThickness="3"/>
 		<Grid Margin="65,65,65,65">
 			<TextBlock Height="31" Margin="20,0,27,0" VerticalAlignment="Top" Text="Register to MyLiveMesh" TextWrapping="Wrap" FontSize="18" TextAlignment="Center"/>
-			<Grid Height="55" Margin="20,35,27,0" VerticalAlignment="Top">
-				<TextBlock HorizontalAlignment="Left" Width="143" Text="Login :" TextAlignment="Right" TextWrapping="Wrap" Margin="0,0,0,2" Height="18.5" VerticalAlignment="Bottom" x:Name="LoginLabel"/>
+			<Grid Height="50" Margin="20,47,27,0" VerticalAlignment="Top">
+				<TextBlock 
+                    HorizontalAlignment="Left" 
+                    Width="143" Text="Login :" 
+                    TextAlignment="Right" 
+                    TextWrapping="Wrap" 
+                    Margin="0,0,0,2" 
+                    Height="18.5" VerticalAlignment="Bottom" x:Name="LoginLabel"/>
 				<TextBox
                     Margin="163,0,0,1.5"
                     Text="{Binding Path=Login, Mode=TwoWay}"
@@ -27,14 +33,14 @@
                 />
 				<TextBlock 
                     Height="17.5" 
-                    Margin="163,11,0,26" 
+                    Margin="163,6.5,0,0" 
                     Text="{Binding Path=LoginError, Mode=TwoWay}" 
                     TextWrapping="Wrap" 
                     Foreground="#FF9D0000" 
-                    x:Name="LoginError"
+                    x:Name="LoginError" VerticalAlignment="Top"
                 />
 			</Grid>
-			<Grid Height="52" Margin="20,94,27,0" VerticalAlignment="Top">
+			<Grid Height="52" Margin="20,101,27,0" VerticalAlignment="Top">
 				<TextBlock HorizontalAlignment="Left" Width="143" TextAlignment="Right" TextWrapping="Wrap" Margin="0,0,0,2" VerticalAlignment="Bottom" Height="18" x:Name="PasswordLabel"><Run Text="Password"/><Run Text=" :"/></TextBlock>
 				<PasswordBox
                     Margin="163,0,0,1"
@@ -54,7 +60,26 @@
                     x:Name="PasswordError"
                 />
 			</Grid>
-			<Grid Margin="20,205,27,0" VerticalAlignment="Top" Height="51">
+            <Grid Margin="20,157,27,142">
+                <TextBlock HorizontalAlignment="Left" Width="143" TextAlignment="Right" TextWrapping="Wrap" Margin="0,0,0,3.5" VerticalAlignment="Bottom" Height="18" x:Name="PasswordConfirmationLabel"><Run Text="Password confirmation"/><Run Text=":"/></TextBlock>
+                <PasswordBox 
+                    Margin="163,0,0,1.5" 
+                    Height="24" 
+                    d:LayoutOverrides="Height" 
+                    VerticalAlignment="Bottom" 
+                    x:Name="PasswordConfirmationField"
+                    tools:PasswordHelper.Text="{Binding Path=PasswordConfirmation, Mode=TwoWay}"
+                />
+                <TextBlock 
+                    Height="17.5" 
+                    Margin="163,8,0,25" 
+                    Foreground="#FF9D0000" 
+                    Text="{Binding Path=PasswordConfirmationError, Mode=TwoWay}" 
+                    TextWrapping="Wrap" 
+                    x:Name="PasswordConfirmationError"
+                />
+            </Grid>
+            <Grid Margin="20,212,27,0" VerticalAlignment="Top" Height="51">
 				<TextBlock HorizontalAlignment="Left" Width="143" TextAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="18" Margin="0,0,0,3" x:Name="EmailLabel"><Run Text="Email"/><Run Text=" :"/></TextBlock>
 				<TextBox 
                     Margin="163,0,0,1.5" 
@@ -74,33 +99,25 @@
                     x:Name="EmailError"
                 />
 			</Grid>
-			<Grid Margin="20,150,27,149">
-				<TextBlock HorizontalAlignment="Left" Width="143" TextAlignment="Right" TextWrapping="Wrap" Margin="0,0,0,3.5" VerticalAlignment="Bottom" Height="18" x:Name="PasswordConfirmationLabel"><Run Text="Password confirmation"/><Run Text=":"/></TextBlock>
-				<PasswordBox 
-                    Margin="163,0,0,1.5" 
-                    Height="24" 
-                    d:LayoutOverrides="Height" 
-                    VerticalAlignment="Bottom" 
-                    x:Name="PasswordConfirmationField"
-                    tools:PasswordHelper.Text="{Binding Path=PasswordConfirmation, Mode=TwoWay}"
-                />
-				<TextBlock 
-                    Height="17.5" 
-                    Margin="163,8,0,25" 
-                    Foreground="#FF9D0000" 
-                    Text="{Binding Path=PasswordConfirmationError, Mode=TwoWay}" 
-                    TextWrapping="Wrap" 
-                    x:Name="PasswordConfirmationError"
-                />
-			</Grid>
+			
 			<Button
                 Height="28"
-                Margin="174,296,174,0"
+                Margin="174,295,174,0"
                 VerticalAlignment="Top"
                 Content="Submit"
                 x:Name="SubmitBtn"
                 Input:CommandService.Command="SubmitCreateAccountCommand"
             />
+			<HyperlinkButton 
+                Height="13" 
+                HorizontalAlignment="Left" 
+                Margin="20,329,0,0" 
+                VerticalAlignment="Top" 
+                Width="67" 
+                Content="&lt;&lt; Back" 
+                x:Name="BackLink"
+                Input:CommandService.Command="BackToLoginCommand"/>
+			<TextBlock Height="18" Margin="8,35,8,0" VerticalAlignment="Top" Text="{Binding ErrorMsg}" TextWrapping="Wrap" Foreground="#FF5E0000" TextAlignment="Center"/>
 		</Grid>
 	</Grid>
 </UserControl>

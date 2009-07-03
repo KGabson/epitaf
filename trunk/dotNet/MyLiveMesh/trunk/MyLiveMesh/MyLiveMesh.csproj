@@ -189,6 +189,9 @@
     <Compile Include="View\ShareDirectory.xaml.cs">
       <DependentUpon>ShareDirectory.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ShareDirectoryPopup.xaml.cs">
+      <DependentUpon>ShareDirectoryPopup.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -212,6 +215,10 @@
       <Generator>MSBuild:MarkupCompilePass1</Generator>
     </Page>
     <Page Include="View\ShareDirectory.xaml">
+      <SubType>Page</SubType>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+    </Page>
+    <Page Include="View\ShareDirectoryPopup.xaml">
       <SubType>Page</SubType>
       <Generator>MSBuild:MarkupCompilePass1</Generator>
     </Page>
@@ -262,6 +269,8 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Resource Include="Data\shared_directory.png" />
+    <Resource Include="Data\LiveMeshBG.jpg" />
+    <Resource Include="Data\frame_bg.jpg" />
     <Resource Include="Data\Large\wma.png" />
     <Resource Include="Data\Large\wmv.png" />
     <Resource Include="Data\Large\mpeg.png" />

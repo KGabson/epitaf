@@ -9,8 +9,7 @@
 	x:Class="MyLiveMesh.View.ProgressDialog"
 	d:DesignWidth="640" d:DesignHeight="480">
 
-    
-    <Grid x:Name="LayoutRoot">
+    <Grid Width="1280" Height="600">
         <liquidPopup:Dialog 
             x:Name="progressPopup" 
             Canvas.Left="250" 
@@ -63,5 +62,5 @@
                     Height="24"
                     Visibility="Visible"/>
         </liquidPopup:Dialog>-->
-    </Grid>
+        </Grid>
 </UserControl>

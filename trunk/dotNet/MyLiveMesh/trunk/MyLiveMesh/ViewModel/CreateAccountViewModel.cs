@@ -87,6 +87,17 @@ namespace MyLiveMesh.ViewModel
                 InvokePropertyChanged("EmailError");
             }
         }
+
+        private String errorMsg;
+        public String ErrorMsg
+        {
+            get { return errorMsg; }
+            set
+            {
+                errorMsg = value;
+                InvokePropertyChanged("ErrorMsg");
+            }
+        }
         #endregion
 
         #region Commands management
@@ -171,6 +182,7 @@ namespace MyLiveMesh.ViewModel
         {
             if (!validationProcess())
                 return;
+            ErrorMsg = "Please wait...";
             Services.Services.AuthService.CreateAccountAsync(Login, Password, Email);
         }
         #endregion

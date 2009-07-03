@@ -25,7 +25,7 @@
             Text="{Binding Title}" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
-            Height="15.224" d:LayoutOverrides="Width" x:Name="FolderName"/>
+            Height="15.224" d:LayoutOverrides="Width" x:Name="FolderName" Foreground="#FFFFFFFF" FontWeight="Bold" FontFamily="Portable User Interface"/>
 		<TextBlock 
             Height="17" 
             HorizontalAlignment="Left" 
@@ -38,6 +38,6 @@
             FontSize="8" 
             FontWeight="Bold" 
             FontFamily="Portable User Interface" 
-            Foreground="#FF2C0000"/>
+            Foreground="#FFE0FF00"/>
 	</Grid>
 </UserControl>
