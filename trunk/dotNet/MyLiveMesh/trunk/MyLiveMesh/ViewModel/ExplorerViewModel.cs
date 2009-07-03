@@ -167,6 +167,7 @@ namespace MyLiveMesh.ViewModel
                     if (selectedNode.IndexOfChild(newNode.ID) == -1)
                     {
                         selectedNode.Nodes.Add(newNode);
+                        fillItemsFromServerPath();
                     }
                 }
             }
@@ -233,9 +234,10 @@ namespace MyLiveMesh.ViewModel
                 if (dirlist.Count > 0)
                 {
                     Debug.WriteLine("le selected Node " + selectedNode.ID + " == " + dirlist[0]);
-                    if (dirlist.Count > 1 && selectedNode.ID == dirlist[0])
+                    if (dirlist.Count >= 1 && selectedNode.ID == dirlist[0])
                     {
                         selectedNode.HasChildren = true;
+                        selectedNode.Nodes.Clear();
                         foreach (string dirname in dirlist)
                         {
                             if (nb != 0)
@@ -247,6 +249,14 @@ namespace MyLiveMesh.ViewModel
                             nb++;
                         }
                     }
+                    else
+                    {
+                        Debug.WriteLine("selectedNode change");
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("No suche File present");
                 }
             }
         }
@@ -267,9 +277,14 @@ namespace MyLiveMesh.ViewModel
 
         void UserDirectory_deletePathCompleted(object sender, MyLiveMesh.UserDirectoryServiceReference.deletePathCompletedEventArgs e)
         {
-            if (e.Result == true)
+            Debug.WriteLine("c koi le result " + e.Result);
+            if (e.Result != "ko")
             {
                 this.fillItemsFromServerPath();
+            }
+            if (e.Result == "dir")
+            {
+                Debug.WriteLine("#############################ben alors ???");
                 this.updateDirListFromServer(selectedNode.ID);
             }
         }

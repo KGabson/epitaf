@@ -46,7 +46,7 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="urn:UserDirectory/deletePath", ReplyAction="urn:UserDirectory/deletePathResponse")]
         System.IAsyncResult BegindeletePath(string path, System.AsyncCallback callback, object asyncState);
         
-        bool EnddeletePath(System.IAsyncResult result);
+        string EnddeletePath(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -159,10 +159,10 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
             this.results = results;
         }
         
-        public bool Result {
+        public string Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[0]));
+                return ((string)(this.results[0]));
             }
         }
     }
@@ -496,7 +496,7 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        bool MyLiveMesh.UserDirectoryServiceReference.UserDirectory.EnddeletePath(System.IAsyncResult result) {
+        string MyLiveMesh.UserDirectoryServiceReference.UserDirectory.EnddeletePath(System.IAsyncResult result) {
             return base.Channel.EnddeletePath(result);
         }
         
@@ -506,7 +506,7 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
         }
         
         private object[] OnEnddeletePath(System.IAsyncResult result) {
-            bool retVal = ((MyLiveMesh.UserDirectoryServiceReference.UserDirectory)(this)).EnddeletePath(result);
+            string retVal = ((MyLiveMesh.UserDirectoryServiceReference.UserDirectory)(this)).EnddeletePath(result);
             return new object[] {
                     retVal};
         }
@@ -687,9 +687,9 @@ namespace MyLiveMesh.UserDirectoryServiceReference {
                 return _result;
             }
             
-            public bool EnddeletePath(System.IAsyncResult result) {
+            public string EnddeletePath(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                bool _result = ((bool)(base.EndInvoke("deletePath", _args, result)));
+                string _result = ((string)(base.EndInvoke("deletePath", _args, result)));
                 return _result;
             }
         }
