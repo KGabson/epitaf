@@ -21,6 +21,7 @@ namespace MyLiveMesh.ViewModel
         private ObservableCollection<Node> dirList = new ObservableCollection<Node>();
         private Visibility          visibility;
         private bool                isEnabled = false;
+        private bool                shareEnabled = true;
         private string              newFolderName = "New Folder";
         public Node                 selectedNode;
         public Dialog               newFolderPopup;
@@ -87,6 +88,15 @@ namespace MyLiveMesh.ViewModel
             }
         }
 
+        public bool ShareEnabled
+        {
+            get { return shareEnabled; }
+            set
+            {
+                shareEnabled = value;
+                InvokePropertyChanged("ShareEnabled");
+            }
+        }
 #endregion
 
         #region Commands
