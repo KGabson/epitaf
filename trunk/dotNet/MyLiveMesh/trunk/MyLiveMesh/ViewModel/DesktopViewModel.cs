@@ -107,7 +107,7 @@ namespace MyLiveMesh.ViewModel
                 Debug.WriteLine(selectedFile.Title + " clicked");
                 if (explorer == null)
                 {
-                    explorer = new ExplorerViewModel(selectedFile.Path);
+                    explorer = new ExplorerViewModel(selectedFile.Path, selectedFile.Title);
                 }
                 else if (selectedFile.Path != explorer.DirList[0].Title)
                 {

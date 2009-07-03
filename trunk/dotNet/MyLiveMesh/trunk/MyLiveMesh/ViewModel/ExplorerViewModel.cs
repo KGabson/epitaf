@@ -31,15 +31,17 @@ namespace MyLiveMesh.ViewModel
         public DesktopViewModel     parentDestop;
         public List<string>         handleExtension = new List<string>();
         public Tree                 fileTree;
+        public string               rootTitle = "My Files";
 
         public ExplorerViewModel()
         {
             init();
         }
 
-        public ExplorerViewModel(string _rootPath)
+        public ExplorerViewModel(string _rootPath, string title)
         {
             serverRootPath = _rootPath;
+            rootTitle = title;
             init();
         }
 
@@ -119,7 +121,7 @@ namespace MyLiveMesh.ViewModel
             //serverRootPath = rootPath + userId;           
             if (serverRootPath != null)
             {
-                selectedNode = new Node(serverRootPath, "My Files", true, "../Data/folder.png", "../Data/folderOpen.png");
+                selectedNode = new Node(serverRootPath, rootTitle, true, "../Data/folder.png", "../Data/folderOpen.png");
                 updateDirListFromServer(serverRootPath);
                 dirList.Add(selectedNode);
             }
