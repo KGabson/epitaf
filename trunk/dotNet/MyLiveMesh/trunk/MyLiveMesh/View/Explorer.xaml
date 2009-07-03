@@ -56,14 +56,15 @@
                         Width="Auto" 
                         Height="Auto"
                         Background="White" />
-                    <Canvas VerticalAlignment="Bottom" Height="34" Grid.Column="2">
+                    <Canvas VerticalAlignment="Bottom" Height="34" Grid.Column="2" Visibility="{Binding Visibility}">
                         <Button
                                 Content="Upload Files"
                                 x:Name="upload" Height="34" Width="84"
                                 Input:CommandService.Command="FileUploaderCommand"/>
                         <Button
                                 Content="Delete"
-                                x:Name="delete" Canvas.Left="84" Height="34" Width="104" />
+                                x:Name="delete" Canvas.Left="84" Height="34" Width="104"
+                                Input:CommandService.Command="DeleteFolderCommand"/>
                         <Button
                                 Content="Share"
                                 x:Name="share" Canvas.Left="188" Height="34" Width="92"

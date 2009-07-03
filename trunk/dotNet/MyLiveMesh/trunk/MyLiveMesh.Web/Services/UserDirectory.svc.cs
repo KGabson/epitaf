@@ -149,6 +149,26 @@ namespace MyLiveMesh.Web.Services
             }
             return res;
         }
-        // Ajoutez des opérations supplémentaires ici et marquez-les avec [OperationContract]
+
+        [OperationContract]
+        public bool deletePath(string path)
+        {
+            string fullPath = Server.MapPath("~") + @"\" + path.Replace("/", @"\");
+            if (File.Exists(fullPath))
+            {
+                File.Delete(fullPath);
+                if (File.Exists(fullPath))
+                    return false;
+                return true;
+            }
+            else if (Directory.Exists(fullPath))
+            {
+                Directory.Delete(fullPath);
+                if (Directory.Exists(fullPath))
+                    return false;
+                return true;
+            }
+            return true;
+        }
     }
 }

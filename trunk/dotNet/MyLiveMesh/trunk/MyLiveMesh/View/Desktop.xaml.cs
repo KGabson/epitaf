@@ -15,8 +15,6 @@ using MyLiveMesh.ViewModel;
 using Common.BusinessObjects;
 using System.Windows.Threading;
 
-using Blacklight.Controls;
-
 namespace MyLiveMesh.View
 {
 	public partial class Desktop : UserControl
