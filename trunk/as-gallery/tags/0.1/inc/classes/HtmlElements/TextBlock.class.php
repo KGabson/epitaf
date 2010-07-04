@@ -1,12 +1,9 @@
 <?php
 class						TextBlock extends Tag
 {
-	public function			__construct($content, $format = false, $is_code = false)
+	public function			__construct($tagname, $content, $classname)
 	{
-		if ($format || $is_code)
-			$content = htmlentities($content);
-		$tagname = ($is_code) ? "span" : "pre";
-		parent::__construct($tagname);
+		parent::__construct($tagname, $classname);
 		$this->append($content);
 	}
 }
