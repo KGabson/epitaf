@@ -17,7 +17,7 @@ class 					ImageToolBlock extends Tag
 		 */
 		$this->title = new TagBlock(
 			"h4",
-			new LinkTag($image->getTitle(), $image->getLink(), "title")
+			new LinkTag($image->getTitle(), $image->getLink($this->category->getParentGallery()->getName(), $this->category->getName()), "title")
 		);
 		
 		/**
@@ -42,7 +42,7 @@ class 					ImageToolBlock extends Tag
 					$image->getImg(),
 					$image->getTitle()
 				),
-				$image->getLink()
+				$image->getLink($this->category->getParentGallery()->getName(), $this->category->getName())
 			)
 		);
 		

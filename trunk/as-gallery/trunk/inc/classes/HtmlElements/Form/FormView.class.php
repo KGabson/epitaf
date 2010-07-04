@@ -25,6 +25,7 @@ class 							FormView extends Tag
 	public function 			addInput(FormInput &$input, $title = "")
 	{
 		$field = new FormField($input, $title);
+		$field->setLegend($input->getLegend());
 		$this->addFormField($field);
 	}
 	

@@ -1,6 +1,8 @@
 <?php
+
 require_once("../inc/config.php");
 require_once("../inc/autoload.php");
+
 
 /*$a = array(
 	"toto" => "hoho",
@@ -94,4 +96,5 @@ Page::append($view);
 //Page::append($form);
 //var_dump(Page::instance());
 Page::render();
+Errors::Debug("MEMORY USAGE::".memory_get_usage());
 ?>

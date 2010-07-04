@@ -99,9 +99,10 @@ class					Tag
 		$str .= $this->tagname;
 		foreach ($this->attributes as $key => $value)
 		{
+			$value = htmlentities($value);
 			$str .= ' '.$key.'="'.$value.'"';
 		}
-		if ($this->inline || empty($this->children))
+		if ($this->inline)
 		{
 			$str .= ' />'.$newline;
 			return $str;
@@ -110,7 +111,7 @@ class					Tag
 		foreach ($this->children as $key => $child)
 		{
 			if (is_string($child))
-				$str .= $child;
+				$str .= htmlentities($child);
 			else
 				$str .= $newline.$child->toHTML($indent + 1).str_repeat($indent_str, ($key < $this->num_children - 1) ? $indent + 1 : $indent);
 		}

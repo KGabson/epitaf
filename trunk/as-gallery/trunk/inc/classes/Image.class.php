@@ -86,9 +86,10 @@ class 				Image extends Tag
 		$this->img = $img;
 	}
 	
-	public function 	getLink()
+	public function 	getLink($gallery_name, $category_name, $action = "")
 	{
-		$url = Page::getURL(array("image" => File::Basename($this->img, true)));
+		//$url = Page::getURL(array("image" => urlencode($this->img)));
+		$url = Page::getLink($gallery_name, $category_name, $this->img, $action);
 		return $url;
 	}
 	
