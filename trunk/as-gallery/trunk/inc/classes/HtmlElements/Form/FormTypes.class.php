@@ -4,6 +4,7 @@ class 							FormTypes
 	const 						STRING = 1;
 	const 						ESCAPED_STRING = 2;
 	const 						FILENAME = 3;
+	const						DATE = 4;
 	
 	const 						NUMBER = 10;
 	const 						BOOL = 11;
@@ -13,7 +14,8 @@ class 							FormTypes
 	private static 				$checkFunctions = array (
 		self::STRING => 		"checkString",
 		self::ESCAPED_STRING =>	"checkEscapedString",
-		self::BOOL =>			"checkBool"
+		self::BOOL =>			"checkBool",
+		self::DATE =>			"checkDate"
 	);
 	
 	/**
@@ -21,6 +23,7 @@ class 							FormTypes
 	 */
 	private static 				$checkRegexp = array (
 		self::NUMBER =>			"![0-9]+!",
+		self::DATE =>			"![0-9]{1,2}/[0-9]{1,2}/[0-9]{4}!"
 	);
 	
 	/**
@@ -38,7 +41,7 @@ class 							FormTypes
 	private static 				$replaceRegexp = array (
 		self::FILENAME =>		array(
 			//Search pattern
-			"!\s!",
+			"!\s\)\(\*\^\%\$\#\@\!!",
 			//Replace pattern
 			"_"
 		)
@@ -65,6 +68,39 @@ class 							FormTypes
 	private static function 	checkFile(&$value, &$error)
 	{
 		
+	}
+	
+	private static function		checkDate(&$value, &$error)
+	{
+		$a_date = explode('/', $value);
+		if (count($a_date) != 3)
+		{
+			$error = "Bad Format";
+			return false;
+		}
+		$month = intval($a_date[0]);
+		$day = intval($a_date[1]);
+		$year = intval($a_date[2]);
+		
+		$err = array();
+		if ($month < 1 || $month > 12)
+		{
+			$err[] = "month";
+		}
+		if ($day < 1 || $day > 31)
+		{
+			$err[] = "day";
+		}
+		if ($year < 0)
+		{
+			$err[] = "year";
+		}
+		if (count($err) != 0)
+		{
+			$error = "Bad format in ".implode(",", $err);
+			return false;
+		}
+		return true;
 	}
 	
 	public static function 		check($form_type, &$value, &$error)

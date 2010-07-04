@@ -2,6 +2,7 @@
 class 						FormInput extends Tag
 {
 	protected 				$name;
+	protected				$legend;
 	protected 				$mandatory;
 	protected 				$value;
 	protected 				$type;
@@ -14,8 +15,9 @@ class 						FormInput extends Tag
 		$this->type = $type;
 		$this->name = $name;
 		$this->mandatory = $mandatory;
-		$this->form_type = FormTypes::STRING;
-		$this->setAttribute("type", $this->type);
+		//$this->form_type = FormTypes::STRING;
+		if (!empty($type))
+			$this->setAttribute("type", $this->type);
 		$this->setAttribute("name", $name);
 	}
 	
@@ -32,6 +34,16 @@ class 						FormInput extends Tag
 	public function 		setValue($value)
 	{
 		$this->value = $value;
+	}
+	
+	public function 		getLegend()
+	{
+		return $this->legend;
+	}
+	
+	public function			setLegend($legend)
+	{
+		$this->legend = $legend;
 	}
 	
 	public function 		getValue()
@@ -82,7 +94,9 @@ class 						FormInput extends Tag
 			if ($this->inline)
 				$this->setAttribute("value", $this->value);
 			else
+			{
 				$this->append($this->value);
+			}
 		}
 		return parent::toHTML($indent);
 	}

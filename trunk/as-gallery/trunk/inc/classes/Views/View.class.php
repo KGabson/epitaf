@@ -84,7 +84,6 @@ class 							View extends Tag
 			else
 			{
 				$cat_name = urldecode($_GET['category']);
-				//echo "hop => $cat_name";
 				if (!$category = $gallery->getCategory($cat_name))
 					return ;
 				if (isset($_GET['edit']) && !isset($_GET["image"]))
@@ -92,7 +91,6 @@ class 							View extends Tag
 					/**
 					 * Category edition Form
 					 */
-					//echo "lalala";
 					$this->makeCategoryForm($gallery, $category);
 					return ;
 				}
@@ -102,13 +100,37 @@ class 							View extends Tag
 					$category->getName(),
 					$category->getLink()
 				);
-				$img_list = new Tag("ul", "list_images");
-				foreach ($category->getImages() as $image)
+				
+				/**
+				 * Display image
+				 */
+				if (isset($_GET['image']))
 				{
-					$img_toolblock = new ImageToolBlock($image, $category);
-					$img_list->append(new TagBlock("li", $img_toolblock));
+					if (!($image = $category->getImageNamed(urldecode($_GET['image']))))
+						return;
+					$this->addToolbarAction(new LinkTag("Edit this image", $image->getLink($gallery->getName(), $category->getName(), "edit")));
+					$this->nav[$this->nav_lvl++] = new LinkTag(
+						$image->getTitle(),
+						$image->getLink($gallery->getName(), $category->getName())
+					);
+					if (isset($_GET['edit']))
+					{
+						$this->makeImageForm($category, $image);
+						return;
+					}
+					$this->makeImageBlock($category, $image);
+					return;
 				}
-				$this->right->append($img_list);
+				else
+				{
+					$img_list = new Tag("ul", "list_images");
+					foreach ($category->getImages() as $image)
+					{
+						$img_toolblock = new ImageToolBlock($image, $category);
+						$img_list->append(new TagBlock("li", $img_toolblock));
+					}
+					$this->right->append($img_list);
+				}
 			}
 		}
 		/**
@@ -163,7 +185,6 @@ class 							View extends Tag
 				$c_form->addError("Category of the same name already exists");
 			else
 			{
-				//$gallery->updateCategory()
 				if ($new)
 					$gallery->addCategory($category);
 				else
@@ -173,6 +194,47 @@ class 							View extends Tag
 			}
 		}
 		$this->right->append($c_form);
+	}
+	
+	private function 			makeImageForm(Category &$category, Image &$image = null)
+	{
+		$new = ($image == null) ? true : false;
+		$image = ($image == null) ? new Image() : $image;
+		
+		$i_form = new FormBean("image", $image);
+		$i_form->bindValue(new FormString("Title", true), "title", "Title");
+		
+		$date = new FormString("date");
+		$date->setFormType(FormTypes::DATE);
+		$date->setLegend("MM/DD/YYYY");
+		$i_form->bindValue($date, "date", "Date");
+		$i_form->bindValue(new FormText("description"), "desc", "Description");
+		
+		if ($i_form->check())
+		{
+			echo "OK !";
+		}
+		$this->right->append($i_form);
+	}
+	
+	private function 			makeImageBlock(Category &$category, Image &$image)
+	{
+		$title = new TagBlock("div", $image->getTitle(), "title");
+		$date = new TagBlock("div", $image->getDate(), "date");
+		
+		$no_desc_str = "";
+		if (strlen($image->getDesc()) == 0)
+			$desc_obj = new TextBlock("i", "No Description");
+		else
+			$desc_obj = $image->getDesc();
+		$desc = new TagBlock("div", $desc_obj, "desc");
+		$image = new ImageTag($category->getDir()."/".$category->getImageDir()."/".$image->getImg(), $image->getTitle(), $image->getTitle());
+		$image_block = new Tag("div", "image_block");
+		$image_block->append($title);
+		$image_block->append($date);
+		$image_block->append($desc);
+		$image_block->append($image);
+		$this->right->append($image_block);
 	}
 	
 	private function 			addToolbarAction(LinkTag $link)

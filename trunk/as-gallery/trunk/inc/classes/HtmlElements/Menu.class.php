@@ -26,7 +26,6 @@ class					Menu extends Tag
 					"selected" : ""
 			)
 		);
-		$elm->getFirstChild("toto");
 		$this->galleries_tags[$name] = $elm;
 		$this->htmlroot->append($this->galleries_tags[$name]);
 	}

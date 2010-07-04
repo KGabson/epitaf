@@ -13,6 +13,12 @@ class 						Category extends Tag
 		$this->setName($name);
 		$this->gallery = ($gallery == null) ? new Gallery("none", "") : $gallery;
 		$this->images = array();
+		$this->nb_images = 0;
+	}
+	
+	public function 		getParentGallery()
+	{
+		return $this->gallery;
 	}
 	
 	public function 		getName()
@@ -57,14 +63,21 @@ class 						Category extends Tag
 		return ($this->images[$keys[$n]]);
 	}
 	
+	public function 		getImageNamed($image_file_name)
+	{
+		if (array_key_exists($image_file_name, $this->images))
+			return $this->images[$image_file_name];
+		return false;
+	}
+	
 	public function 		addImage(Image &$image)
 	{
 		if (!$image->getImg())
 			throw new ErrorException("Given image has not filename");
-		//$name = $image->getImg();
-		//var_dump($image->getImg())."<br />";
+		
+		if (!array_key_exists($image->getImg(), $this->images))
+			$this->nb_images++;
 		$this->images[$image->getImg()] = $image;
-		$this->nb_images++;
 	}
 	
 	public function 		updateImage($image_file, Image &$image)
