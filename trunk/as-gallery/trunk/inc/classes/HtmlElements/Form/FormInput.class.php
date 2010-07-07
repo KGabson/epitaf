@@ -61,6 +61,11 @@ class 						FormInput extends Tag
 		return $this->type;
 	}
 	
+	public function 		isFile()
+	{
+		return ($this->form_type == FormTypes::FILE);
+	}
+	
 	/**
 	 * Set a callback function that will be called by check()
 	 * Must be prototyped like this :
@@ -82,7 +87,7 @@ class 						FormInput extends Tag
 			$error = "Mandatory field";
 			return false;
 		}
-		if (FormTypes::check($this->form_type, $value, $error) === false)
+		if (!empty($value) && FormTypes::check($this->form_type, $value, $error) === false)
 			return false;
 		$this->value = $value;
 	}

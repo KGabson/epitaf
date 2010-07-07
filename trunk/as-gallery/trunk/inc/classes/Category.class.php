@@ -80,10 +80,10 @@ class 						Category extends Tag
 		$this->images[$image->getImg()] = $image;
 	}
 	
-	public function 		updateImage($image_file, Image &$image)
+	public function 		updateImage(Image &$image)
 	{
-		if (isset($this->images[$image_file]))
-			unset($this->images[$image_file]);
+		if (array_key_exists($image->getImg(), $this->images))
+			unset($this->images[$image->getImg()]);
 		//$this->images[] = $image;
 		$this->images[$image->getImg()] = $image;
 	}
@@ -113,6 +113,34 @@ class 						Category extends Tag
 			);
 		}
 		
+	}
+	
+	public function			save()
+	{
+		$this->gallery->save();
+	}
+	
+	public function 		delete()
+	{
+		$this->gallery->removeCategory($this->name);
+		foreach ($this->images as $img_file => $image)
+		{
+			unlink($this->gallery->getDir()."/".$this->gallery->getImageDir()."/".$img_file);
+		unlink($this->gallery->getDir()."/".$this->gallery->getThumbDir()."/".$img_file);
+		}
+		$this->gallery->save();
+	}
+	
+	public function  	deleteImage(Image &$image)
+	{
+		if (!array_key_exists($image->getImg(), $this->images))
+		{
+			return;
+		}
+		unlink($this->gallery->getDir()."/".$this->gallery->getImageDir()."/".$image->getImg());
+		unlink($this->gallery->getDir()."/".$this->gallery->getThumbDir()."/".$image->getImg());
+		unset($this->images[$image->getImg()]);
+		$this->save();
 	}
 	
 	public function 		toHTML($indent = 0)
