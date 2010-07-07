@@ -99,6 +99,10 @@ class					Tag
 		$str .= $this->tagname;
 		foreach ($this->attributes as $key => $value)
 		{
+			if (!is_string($value))
+			{
+				$value = strval($value);
+			}
 			$value = htmlentities($value);
 			$str .= ' '.$key.'="'.$value.'"';
 		}

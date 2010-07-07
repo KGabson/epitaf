@@ -27,7 +27,10 @@ class 					ImageToolBlock extends Tag
 		$this->toolbar->append(
 			new TagBlock(
 				"li", 
-				new LinkTag("Delete", $category->getLink("delete"))
+				new LinkTag("Delete",
+							$image->getLink($this->category->getParentGallery()->getName(), $this->category->getName(), "delete"),
+							"delete_image",
+							"return confirm('Do you really want to delete image \"".$image->getImg()."\"')")
 			)
 		);
 		

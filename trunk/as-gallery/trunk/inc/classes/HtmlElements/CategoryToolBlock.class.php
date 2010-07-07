@@ -26,13 +26,16 @@ class 					CategoryToolBlock extends Tag
 		$this->toolbar->append(
 			new TagBlock(
 				"li", 
-				new LinkTag("Edit", $category->getLink("edit"))
+				new LinkTag("Edit", $category->getLink("edit"), "edit_category")
 			)
 		);
 		$this->toolbar->append(
 			new TagBlock(
 				"li", 
-				new LinkTag("Delete", $category->getLink("delete"))
+				new LinkTag("Delete",
+							$category->getLink("delete"),
+							"delete_category",
+							"return confirm('Do you really want to delete the categoty \"".$category->getName()."\" ? (this will also delete all the images that it contains)')")
 			)
 		);
 		

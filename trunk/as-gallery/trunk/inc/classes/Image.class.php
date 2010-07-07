@@ -27,8 +27,6 @@ class 				Image extends Tag
 		if (!$img)
 			Errors::Warning("Missing img parameter for image $title");*/
 
-		if (!$title)
-			$title = "Untitled";
 		$this->date = $date;
 		$this->title = $title;
 		$this->desc = $desc;

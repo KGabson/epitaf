@@ -26,13 +26,16 @@ class 					GalleryToolBlock extends Tag
 		$this->toolbar->append(
 			new TagBlock(
 				"li", 
-				new LinkTag("Edit", $gallery->getLink("edit"))
+				new LinkTag("Edit", $gallery->getLink("edit"), "edit_gallery")
 			)
 		);
 		$this->toolbar->append(
 			new TagBlock(
 				"li", 
-				new LinkTag("Delete", $gallery->getLink("delete"))
+				new LinkTag("Delete",
+							$gallery->getLink("delete"),
+							"delete_gallery",
+							"return confirm('Do you really want to delete gallery \"".$gallery->getTitle()."\" ? (This will delete all categories and images that it contains)')")
 			)
 		);
 		

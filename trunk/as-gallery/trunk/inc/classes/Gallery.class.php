@@ -222,6 +222,16 @@ class					Gallery extends XMLRoot
 		File::PutContents($this->dir."/".$this->file, $str);
 	}
 	
+	public function		delete()
+	{
+		if (!$this->created)
+		{
+			return;
+		}
+		Dir::Remove($this->dir."/".$this->imageDir, true);
+		unlink($this->dir."/".$this->file);
+	}
+	
 	public function 	addCategory(Category $cat)
 	{
 		if (!$cat->getName())
@@ -233,6 +243,13 @@ class					Gallery extends XMLRoot
 		$this->categories[$cat->getName()] = $cat;
 		//$xmlcat = $root->addChild("category");
 		//$xmlcat->addAttribute("name", $cat->getName());
+	}
+	
+	public function 	removeCategory($category_name)
+	{
+		if (!array_key_exists($category_name, $this->categories))
+			return;
+		unset($this->categories[$category_name]);
 	}
 	
 	public function		updateCategory($category_name, Category &$category)

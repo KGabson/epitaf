@@ -23,7 +23,7 @@ class 							FormTypes
 	 */
 	private static 				$checkRegexp = array (
 		self::NUMBER =>			"![0-9]+!",
-		self::DATE =>			"![0-9]{1,2}/[0-9]{1,2}/[0-9]{4}!"
+		self::DATE =>			"!^[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}$!"
 	);
 	
 	/**

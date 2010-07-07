@@ -44,11 +44,16 @@ class 							View extends Tag
 			$gallery_name = urldecode($_GET["gallery"]);
 			if (!$gallery = $this->menu->getGallery($gallery_name))
 				return ;
-			//Errors::ShowCode($gallery->toXML());
 			$this->nav[$this->nav_lvl++] = new LinkTag($gallery->getTitle(), Page::getLink($gallery->getName()));
 			$this->addToolbarAction(new LinkTag("Edit this gallery", $gallery->getLink("edit")));
 			$this->addToolbarAction(new LinkTag("Add a Category", $gallery->getLink("add_category")));
 			
+			if (isset($_GET["delete"]) && !isset($_GET["category"]) && !isset($_GET["image"]))
+			{
+				$gallery->delete();
+				Page::redirect(Page::getLink());
+				return;
+			}
 			/**
 			 * Gallery edition Form
 			 */
@@ -78,14 +83,20 @@ class 							View extends Tag
 				}
 			}
 			
-			/**
-			 * Listing Images
-			 */
 			else
 			{
 				$cat_name = urldecode($_GET['category']);
 				if (!$category = $gallery->getCategory($cat_name))
 					return ;
+				
+				if (isset($_GET['delete']) && !isset($_GET['image']))
+				{
+					/**
+				 	* Deleting category
+				 	*/
+					$category->delete();
+					Page::redirect(Page::getLink($gallery->getName()));
+				}
 				if (isset($_GET['edit']) && !isset($_GET["image"]))
 				{
 					/**
@@ -100,6 +111,12 @@ class 							View extends Tag
 					$category->getName(),
 					$category->getLink()
 				);
+				
+				if (isset($_GET['add_image']))
+				{
+					$this->makeImageForm($category);
+					return;
+				}
 				
 				/**
 				 * Display image
@@ -118,9 +135,17 @@ class 							View extends Tag
 						$this->makeImageForm($category, $image);
 						return;
 					}
+					if (isset($_GET['delete']))
+					{
+						$category->deleteImage($image);
+						Page::redirect(Page::getLink($gallery->getName(), $category->getName()));
+					}
 					$this->makeImageBlock($category, $image);
 					return;
 				}
+				/**
+				 * Listing Images
+				 */
 				else
 				{
 					$img_list = new Tag("ul", "list_images");
@@ -210,9 +235,39 @@ class 							View extends Tag
 		$i_form->bindValue($date, "date", "Date");
 		$i_form->bindValue(new FormText("description"), "desc", "Description");
 		
+		$file = new FormFile("image", $category->getDir()."/".$category->getImageDir(), $new);
+		$file->setAllowedMimeTypes(array(
+			"image/jpeg",
+			"image/png",
+			"image/gif"
+		));
+		$i_form->bindValue($file, "img", "Image");
+		
+		$old_img = ($new) ? false : $image->getImg();
+		
 		if ($i_form->check())
 		{
-			echo "OK !";
+			if ($new)
+			{
+				$category->addImage($image);
+			}
+			else
+			{
+				$category->updateImage($image);
+			}
+			$category->save();
+			if (strcmp($old_img, $image->getImg()))
+			{
+				if (!$new)
+				{
+					unlink($category->getDir()."/".$category->getImageDir()."/".$old_img);
+					unlink($category->getDir()."/".$category->getThumbDir()."/".$old_img);
+				}
+				$gd_image = new GDImage($category->getDir()."/".$category->getImageDir()."/".$image->getImg());
+				$gd_image->resize(__IMAGE_MAX_WIDTH, __IMAGE_MAX_HEIGHT);
+				$gd_image->resize(__THUMB_MAX_WIDTH, __THUMB_MAX_HEIGHT, $category->getDir()."/".$category->getThumbDir()."/".$image->getImg());
+			}
+			Page::redirect(Page::getLink($category->getParentGallery()->getName(), $category->getName(), $image->getImg()));
 		}
 		$this->right->append($i_form);
 	}

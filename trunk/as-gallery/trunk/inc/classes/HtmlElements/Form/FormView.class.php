@@ -56,20 +56,52 @@ class 							FormView extends Tag
 			return false;
 		$this->submited = true;
 		$this->num_errors = 0;
+		$files_to_upload = array();
+		
 		foreach ($this->elements as $name => $field)
 		{
 			if ($field->getInput()->getAttribute("disabled") == "disabled")
 				continue;
 			$error = "";
-			if (isset ($_POST[$name]) && ($field->getInput()->check(trim($_POST[$name]), $error) === false))
+			if (!$field->getInput()->isFile() && isset($_POST[$name]) && ($field->getInput()->check(trim($_POST[$name]), $error) === false))
 			{
 				$field->setError($error);
 				$this->num_errors++;
 				continue;
 			}
+			else if ($field->getInput()->isFile() && isset($_FILES[$name]))
+			{
+				if ($field->getInput()->check($_FILES[$name], $error) === false)
+				{
+					$field->setError($error);
+					$this->num_errors++;
+					continue;
+				}
+				else
+				{
+					$final = $field->getInput()->getUploadDir()."/".$field->getInput()->getValue();
+					while (!empty($_FILES[$name]['name']) && file_exists($final))
+					{
+						$filename = basename($final);
+						$path = dirname($final);
+						$aFilename = explode('.', $filename);
+						$ext = (array_key_exists(1, $aFilename)) ? ".".$aFilename[count($aFilename) - 1] : "";
+						$filename = basename($final, $ext);
+						$final = $path."/".$filename."-".$ext;
+						$field->getInput()->setValue($filename."-".$ext);
+					}
+					$files_to_upload[$field->getInput()->getTmpName()] = $final;
+				}
+			}
 		}
 		if ($this->num_errors == 0)
+		{
+			foreach ($files_to_upload as $tmp_name => $final)
+			{
+				move_uploaded_file($tmp_name, $final);
+			}
 			return true;
+		}
 		return false;
 	}
 	
