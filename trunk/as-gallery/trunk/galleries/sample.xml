@@ -88,18 +88,6 @@
 		</image>
 		
 		<image>
-			<title>Togetherness</title>
-			
-			<date>06.14.06</date>
-			
-			<desc>Wedding ceremony in Hawaii</desc>
-			
-			<thumb>wedding7.jpg</thumb>
-			
-			<img>wedding7.jpg</img>
-		</image>
-		
-		<image>
 			<title>Wedding Time</title>
 			
 			<date>11/21/2005</date>
@@ -121,6 +109,18 @@
 			<thumb>wedding4.jpg</thumb>
 			
 			<img>wedding4.jpg</img>
+		</image>
+		
+		<image>
+			<title>Togetherness</title>
+			
+			<date>06/14/2006</date>
+			
+			<desc>Wedding ceremony in Hawaii</desc>
+			
+			<thumb>wedding7.jpg</thumb>
+			
+			<img>wedding7.jpg</img>
 		</image>
 	</category>
 	

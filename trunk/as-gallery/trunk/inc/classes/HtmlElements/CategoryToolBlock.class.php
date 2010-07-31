@@ -36,7 +36,7 @@ class 					CategoryToolBlock extends Tag
 				new LinkTag("Delete",
 							$category->getLink("delete"),
 							"delete_category",
-							"return confirm('Do you really want to delete the categoty \"".$category->getName()."\" ? (this will also delete all the images that it contains)')")
+							"return confirm('Do you really want to delete the categoty \"".$category->getName()."\" ? (this will also delete all the images it contains)')")
 			)
 		);
 		$this->toolbar->append($ul);

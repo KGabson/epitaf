@@ -20,8 +20,9 @@ class 					GalleryToolBlock extends Tag
 		);
 		
 		/**
-		 * Toolbar
+		 * Toolbar -- Disabled at this time
 		 */
+		/*
 		$this->toolbar = new Tag("div", "toolbar");
 		$ul = new tag('ul');
 		$ul->append(
@@ -41,6 +42,7 @@ class 					GalleryToolBlock extends Tag
 		);
 		$this->toolbar->append($ul);
 		$this->toolbar->append(new Tag('div', 'clear'));
+		*/
 		
 		/**
 		 * Images
