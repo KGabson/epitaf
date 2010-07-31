@@ -22,14 +22,15 @@ class 					GalleryToolBlock extends Tag
 		/**
 		 * Toolbar
 		 */
-		$this->toolbar = new Tag("ul", "toolbar");
-		$this->toolbar->append(
+		$this->toolbar = new Tag("div", "toolbar");
+		$ul = new tag('ul');
+		$ul->append(
 			new TagBlock(
 				"li", 
 				new LinkTag("Edit", $gallery->getLink("edit"), "edit_gallery")
 			)
 		);
-		$this->toolbar->append(
+		$ul->append(
 			new TagBlock(
 				"li", 
 				new LinkTag("Delete",
@@ -38,6 +39,8 @@ class 					GalleryToolBlock extends Tag
 							"return confirm('Do you really want to delete gallery \"".$gallery->getTitle()."\" ? (This will delete all categories and images that it contains)')")
 			)
 		);
+		$this->toolbar->append($ul);
+		$this->toolbar->append(new Tag('div', 'clear'));
 		
 		/**
 		 * Images
@@ -61,6 +64,7 @@ class 					GalleryToolBlock extends Tag
 		$this->append($this->title);
 		$this->append($this->toolbar);
 		$this->append($this->list_images);
+		$this->append(new Tag('div', 'clear'));
 	}
 }
 ?>

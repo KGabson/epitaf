@@ -16,15 +16,24 @@ class 					ImageToolBlock extends Tag
 		 * Title
 		 */
 		$this->title = new TagBlock(
-			"h4",
+			"h3",
 			new LinkTag($image->getTitle(), $image->getLink($this->category->getParentGallery()->getName(), $this->category->getName()), "title")
 		);
 		
 		/**
 		 * Toolbar
 		 */
-		$this->toolbar = new Tag("ul", "toolbar");
-		$this->toolbar->append(
+		$this->toolbar = new Tag("div", "toolbar");
+		$ul = new Tag('ul');
+		$ul->append(
+			new TagBlock(
+				"li", 
+				new LinkTag("Edit",
+							$image->getLink($this->category->getParentGallery()->getName(), $this->category->getName(), "edit"),
+							"edit_image")
+			)
+		);
+		$ul->append(
 			new TagBlock(
 				"li", 
 				new LinkTag("Delete",
@@ -33,6 +42,8 @@ class 					ImageToolBlock extends Tag
 							"return confirm('Do you really want to delete image \"".$image->getImg()."\"')")
 			)
 		);
+		$this->toolbar->append($ul);
+		$this->toolbar->append(new Tag('div', 'clear'));
 		
 		/**
 		 * Images

@@ -41,9 +41,15 @@ class 							FormTypes
 	private static 				$replaceRegexp = array (
 		self::FILENAME =>		array(
 			//Search pattern
-			"!\s\)\(\*\^\%\$\#\@\!!",
+			"![\s\)\(\*\^\%\$\#\@\!]!",
 			//Replace pattern
 			"_"
+		),
+		self::DATE =>			array(
+			//Search pattern
+			"!(\.|\s|\:|,)!",
+			//Replace
+			"/"
 		)
 	);
 	

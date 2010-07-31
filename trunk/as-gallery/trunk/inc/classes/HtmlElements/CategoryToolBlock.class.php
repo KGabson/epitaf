@@ -22,14 +22,15 @@ class 					CategoryToolBlock extends Tag
 		/**
 		 * Toolbar
 		 */
-		$this->toolbar = new Tag("ul", "toolbar");
-		$this->toolbar->append(
+		$this->toolbar = new Tag("div", "toolbar");
+		$ul = new Tag('ul');
+		$ul->append(
 			new TagBlock(
 				"li", 
 				new LinkTag("Edit", $category->getLink("edit"), "edit_category")
 			)
 		);
-		$this->toolbar->append(
+		$ul->append(
 			new TagBlock(
 				"li", 
 				new LinkTag("Delete",
@@ -38,6 +39,8 @@ class 					CategoryToolBlock extends Tag
 							"return confirm('Do you really want to delete the categoty \"".$category->getName()."\" ? (this will also delete all the images that it contains)')")
 			)
 		);
+		$this->toolbar->append($ul);
+		$this->toolbar->append(new Tag('div', 'clear'));
 		
 		/**
 		 * Images
@@ -47,10 +50,13 @@ class 					CategoryToolBlock extends Tag
 		if ($img)
 		{
 			$this->image_tag->append(
-				new ImageTag(
-					$category->getDir()."/".$category->getThumbDir()."/".$img->getImg(),
-					$img->getImg(),
-					$img->getTitle()
+				new LinkTag(
+					new ImageTag(
+						$category->getDir()."/".$category->getThumbDir()."/".$img->getImg(),
+						$img->getImg(),
+						$img->getTitle()
+					),
+					$category->getLink()
 				)
 			);
 		}

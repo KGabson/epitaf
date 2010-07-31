@@ -96,5 +96,4 @@ Page::append($view);
 //Page::append($form);
 //var_dump(Page::instance());
 Page::render();
-Errors::Debug("MEMORY USAGE::".memory_get_usage());
 ?>
