@@ -27,7 +27,7 @@ class 						FormBean extends FormView
 			throw new ErrorException("Missing setter method for property $obj_var ($setter) in class ".$this->bean_classname);
 		if (isset($this->binded_inputs[$obj_var]))
 			throw new ErrorException("Property $obj_var is already associated with a FormInput : ".$this->binded_inputs[$obj_var]->getName());
-		if ($val = $this->bean_object->$getter())
+		if (($val = $this->bean_object->$getter()))
 			$input->setValue($val);
 		$this->binded_inputs[$obj_var] = array();
 		$this->binded_inputs[$obj_var]["input"] = $input;

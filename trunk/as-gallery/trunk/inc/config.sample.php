@@ -7,4 +7,5 @@ define("__IMAGE_MAX_WIDTH", 700);
 define("__IMAGE_MAX_HEIGHT", 700);
 define("__THUMB_MAX_WIDTH", 200);
 define("__THUMB_MAX_HEIGHT", 150);
+define("__ADM_STYLE", "style1.css");
 ?>

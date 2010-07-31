@@ -21,10 +21,10 @@ class					Menu extends Tag
 			"li",
 			new LinkTag(
 				$title,
-				$href,
-				(isset($_GET['gallery']) && urldecode($_GET['gallery']) == $name) ?
+				$href
+			),
+			(isset($_GET['gallery']) && urldecode($_GET['gallery']) == $name) ?
 					"selected" : ""
-			)
 		);
 		$this->galleries_tags[$name] = $elm;
 		$this->htmlroot->append($this->galleries_tags[$name]);
@@ -47,10 +47,10 @@ class					Menu extends Tag
 			"li", 
 			new LinkTag(
 				$category->getName(),
-				$category->getLink(),
-				(isset($_GET["category"]) && urldecode($_GET["category"]) == $category->getName()) ?
+				$category->getLink()
+				),
+			(isset($_GET["category"]) && urldecode($_GET["category"]) == $category->getName()) ?
 					"selected" : ""
-				)
 			);
 		$catroot->append($elm);
 		return true;

@@ -12,7 +12,15 @@ class						Page
 	private function		__construct()
 	{
 		$this->root = new Tag("html");
+		$this->root->setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
 		$this->head = new Tag("head");
+		
+		$style = new Tag("link");
+		$style->setAttribute('rel', 'stylesheet');
+		$style->setAttribute('type', 'text/css');
+		$style->setAttribute('href', 'styles/'.__ADM_STYLE);
+		$this->head->append($style);
+		
 		$this->body = new Tag("body");
 		$this->file = basename($_SERVER['PHP_SELF']);
 		$this->doGet();
@@ -92,6 +100,10 @@ class						Page
 	public static function	render()
 	{
 		$me = self::instance();
+		/**
+		 * Adding XHTML headers
+		 */
+		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n";
 		print $me->root->toHTML();
 	}
 	

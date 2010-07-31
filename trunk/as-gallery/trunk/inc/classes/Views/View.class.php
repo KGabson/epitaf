@@ -21,7 +21,7 @@ class 							View extends Tag
 		$this->right->setAttribute("id", "right");
 		$this->foot = new Tag("div");
 		$this->foot->setAttribute("id", "foot");
-		$this->toolbar = new Tag("ul", "toolbar");
+		$this->toolbar = new Tag("div", "toolbar");
 		$this->toolbar->setAttribute("id", "mainToolbar");
 		$this->nav[$this->nav_lvl++] = new LinkTag($this->title, Page::getLink());
 		$this->init();
@@ -148,13 +148,13 @@ class 							View extends Tag
 				 */
 				else
 				{
-					$img_list = new Tag("ul", "list_images");
+					//$img_list = new Tag("ul", "list_images");
 					foreach ($category->getImages() as $image)
 					{
 						$img_toolblock = new ImageToolBlock($image, $category);
-						$img_list->append(new TagBlock("li", $img_toolblock));
+						$this->right->append($img_toolblock);
+						//$img_list->append(new TagBlock("li", $img_toolblock));
 					}
-					$this->right->append($img_list);
 				}
 			}
 		}
@@ -194,6 +194,8 @@ class 							View extends Tag
 				Page::redirect(Page::getLink($gallery->getName(), "", "", "edit"));
 			}
 		}
+		$title = 'Add a gallery';
+		$this->right->append(new TagBlock('h1', $title));
 		$this->right->append($g_form);
 	}
 	
@@ -215,9 +217,15 @@ class 							View extends Tag
 				else
 					$gallery->updateCategory($old_name, $category);
 				$gallery->save();
-				Page::redirect(Page::getLink($gallery->getName(), $category->getName(), "", "edit"));
+				Page::redirect(Page::getLink($gallery->getName(), $category->getName(), "", $new ? "" : "edit"));
 			}
 		}
+		//$title = 'Add a category to gallery <i>'.$gallery->getTitle().'</i>';
+		$title_str = "Add a category to ";
+		$title = new Tag('h1');
+		$title->append($title_str);
+		$title->append(new TagBlock('i', $gallery->getTitle()));
+		$this->right->append($title);
 		$this->right->append($c_form);
 	}
 	
@@ -269,24 +277,32 @@ class 							View extends Tag
 			}
 			Page::redirect(Page::getLink($category->getParentGallery()->getName(), $category->getName(), $image->getImg()));
 		}
+		$title_str = "Add an image to ";
+		$title = new Tag('h1');
+		$title->append($title_str);
+		$title->append(new TagBlock('i', $category->getName()));
+		$this->right->append($title);
 		$this->right->append($i_form);
 	}
 	
 	private function 			makeImageBlock(Category &$category, Image &$image)
 	{
-		$title = new TagBlock("div", $image->getTitle(), "title");
+		$title = new TagBlock("h1", $image->getTitle(), "title");
 		$date = new TagBlock("div", $image->getDate(), "date");
 		
 		$no_desc_str = "";
 		if (strlen($image->getDesc()) == 0)
 			$desc_obj = new TextBlock("i", "No Description");
 		else
+		{
 			$desc_obj = $image->getDesc();
+		}
 		$desc = new TagBlock("div", $desc_obj, "desc");
 		$image = new ImageTag($category->getDir()."/".$category->getImageDir()."/".$image->getImg(), $image->getTitle(), $image->getTitle());
 		$image_block = new Tag("div", "image_block");
 		$image_block->append($title);
 		$image_block->append($date);
+		
 		$image_block->append($desc);
 		$image_block->append($image);
 		$this->right->append($image_block);
@@ -299,12 +315,15 @@ class 							View extends Tag
 	
 	public function 			doToolbar()
 	{
+		$ul = new Tag('ul');
 		foreach ($this->toolbar_actions as $link_tag)
 		{
 			if (!($link_tag instanceof LinkTag))
 				continue;
-			$this->toolbar->append(new TagBlock("li", $link_tag));
+			$ul->append(new TagBlock("li", $link_tag));
 		}
+		$this->toolbar->append($ul);
+		$this->toolbar->append(new Tag('div', 'clear'));
 	}
 	
 	private function 			doHead()

@@ -38,6 +38,7 @@ class 							FormView extends Tag
 		}
 		$this->elements[$field->getInput()->getName()] = $field;
 		$this->append($this->elements[$field->getInput()->getName()]);
+		$this->append(new Tag('div', 'clear'));
 	}
 	
 	public function 			addError($msg)

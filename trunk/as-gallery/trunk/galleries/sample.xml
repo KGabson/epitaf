@@ -37,7 +37,7 @@
 			<img>seattle10.jpg</img>
 		</image>
 	</category>
-	Wedding hahahaha
+	
 	<category name="Wedding hahahaha">
 		<image>
 			<title>La Jolla Wedding</title>
@@ -61,30 +61,6 @@
 			<thumb>wedding2.jpg</thumb>
 			
 			<img>wedding2.jpg</img>
-		</image>
-		
-		<image>
-			<title>Wedding Time</title>
-			
-			<date>11.21.05</date>
-			
-			<desc>Bride smiling</desc>
-			
-			<thumb>wedding3.jpg</thumb>
-			
-			<img>wedding3.jpg</img>
-		</image>
-		
-		<image>
-			<title>10th anniversary</title>
-			
-			<date>02.44.04</date>
-			
-			<desc>Picture taken on our 10th anniversary.</desc>
-			
-			<thumb>wedding4.jpg</thumb>
-			
-			<img>wedding4.jpg</img>
 		</image>
 		
 		<image>
@@ -122,6 +98,30 @@
 			
 			<img>wedding7.jpg</img>
 		</image>
+		
+		<image>
+			<title>Wedding Time</title>
+			
+			<date>11/21/2005</date>
+			
+			<desc>Bride smiling</desc>
+			
+			<thumb>wedding3.jpg</thumb>
+			
+			<img>wedding3.jpg</img>
+		</image>
+		
+		<image>
+			<title>10th anniversary</title>
+			
+			<date>02/12/2004</date>
+			
+			<desc>Picture taken on our 10th anniversary.</desc>
+			
+			<thumb>wedding4.jpg</thumb>
+			
+			<img>wedding4.jpg</img>
+		</image>
 	</category>
 	
 	<category name="Trip to Montreal">
@@ -156,18 +156,6 @@
 			
 			<desc>**** Touring Old Montreal ****</desc>
 			
-			<thumb>tour10.jpg</thumb>
-			
-			<img>tour10.jpg</img>
-		</image>
-		
-		<image>
-			<title>Touring Old Montreal</title>
-			
-			<date>03.25.06</date>
-			
-			<desc>**** Touring Old Montreal ****</desc>
-			
 			<thumb>tour11.jpg</thumb>
 			
 			<img>tour11.jpg</img>
@@ -183,6 +171,18 @@
 			<thumb>tour13.jpg</thumb>
 			
 			<img>tour13.jpg</img>
+		</image>
+		
+		<image>
+			<title>Touring Old Montreal</title>
+			
+			<date>03/25/2006</date>
+			
+			<desc>**** Touring Old Montreal ****</desc>
+			
+			<thumb>tour10.jpg</thumb>
+			
+			<img>tour10.jpg</img>
 		</image>
 	</category>
 	
@@ -257,386 +257,6 @@
 			<thumb>korea1.jpg</thumb>
 			
 			<img>korea1.jpg</img>
-		</image>
-	</category>
-	
-	<category name="Wedding hahahaha">
-		<image>
-			<title>La Jolla Wedding</title>
-			
-			<date>02.44.04</date>
-			
-			<desc>La Jolla Wedding</desc>
-			
-			<thumb>wedding1.jpg</thumb>
-			
-			<img>wedding1.jpg</img>
-			
-			<title>La Jolla Wedding</title>
-			
-			<date>02.44.04</date>
-			
-			<desc>La Jolla Wedding</desc>
-			
-			<thumb>wedding1.jpg</thumb>
-			
-			<img>wedding1.jpg</img>
-		</image>
-		
-		<image>
-			<title>Amazing Kiss</title>
-			
-			<date>05.13.05</date>
-			
-			<desc>Amazing Kiss</desc>
-			
-			<thumb>wedding2.jpg</thumb>
-			
-			<img>wedding2.jpg</img>
-			
-			<title>Amazing Kiss</title>
-			
-			<date>05.13.05</date>
-			
-			<desc>Amazing Kiss</desc>
-			
-			<thumb>wedding2.jpg</thumb>
-			
-			<img>wedding2.jpg</img>
-		</image>
-		
-		<image>
-			<title>Wedding Time</title>
-			
-			<date>11.21.05</date>
-			
-			<desc>Bride smiling</desc>
-			
-			<thumb>wedding3.jpg</thumb>
-			
-			<img>wedding3.jpg</img>
-			
-			<title>Wedding Time</title>
-			
-			<date>11.21.05</date>
-			
-			<desc>Bride smiling</desc>
-			
-			<thumb>wedding3.jpg</thumb>
-			
-			<img>wedding3.jpg</img>
-		</image>
-		
-		<image>
-			<title>10th anniversary</title>
-			
-			<date>02.44.04</date>
-			
-			<desc>Picture taken on our 10th anniversary.</desc>
-			
-			<thumb>wedding4.jpg</thumb>
-			
-			<img>wedding4.jpg</img>
-			
-			<title>10th anniversary</title>
-			
-			<date>02.44.04</date>
-			
-			<desc>Picture taken on our 10th anniversary.</desc>
-			
-			<thumb>wedding4.jpg</thumb>
-			
-			<img>wedding4.jpg</img>
-		</image>
-		
-		<image>
-			<title>SD wedding</title>
-			
-			<date>05.13.05</date>
-			
-			<desc>Wedding at SD convention center</desc>
-			
-			<thumb>wedding5.jpg</thumb>
-			
-			<img>wedding5.jpg</img>
-			
-			<title>SD wedding</title>
-			
-			<date>05.13.05</date>
-			
-			<desc>Wedding at SD convention center</desc>
-			
-			<thumb>wedding5.jpg</thumb>
-			
-			<img>wedding5.jpg</img>
-		</image>
-		
-		<image>
-			<title>Wedding Time</title>
-			
-			<date>11.21.05</date>
-			
-			<desc>Wedding photo</desc>
-			
-			<thumb>wedding6.jpg</thumb>
-			
-			<img>wedding6.jpg</img>
-			
-			<title>Wedding Time</title>
-			
-			<date>11.21.05</date>
-			
-			<desc>Wedding photo</desc>
-			
-			<thumb>wedding6.jpg</thumb>
-			
-			<img>wedding6.jpg</img>
-		</image>
-		
-		<image>
-			<title>Togetherness</title>
-			
-			<date>06.14.06</date>
-			
-			<desc>Wedding ceremony in Hawaii</desc>
-			
-			<thumb>wedding7.jpg</thumb>
-			
-			<img>wedding7.jpg</img>
-			
-			<title>Togetherness</title>
-			
-			<date>06.14.06</date>
-			
-			<desc>Wedding ceremony in Hawaii</desc>
-			
-			<thumb>wedding7.jpg</thumb>
-			
-			<img>wedding7.jpg</img>
-		</image>
-		
-		<image>
-			<title>La Jolla Wedding</title>
-			
-			<date>02.44.04</date>
-			
-			<desc>La Jolla Wedding</desc>
-			
-			<thumb>wedding1.jpg</thumb>
-			
-			<img>wedding1.jpg</img>
-			
-			<title>La Jolla Wedding</title>
-			
-			<date>02.44.04</date>
-			
-			<desc>La Jolla Wedding</desc>
-			
-			<thumb>wedding1.jpg</thumb>
-			
-			<img>wedding1.jpg</img>
-			
-			<title>La Jolla Wedding</title>
-			
-			<date>02.44.04</date>
-			
-			<desc>La Jolla Wedding</desc>
-			
-			<thumb>wedding1.jpg</thumb>
-			
-			<img>wedding1.jpg</img>
-		</image>
-		
-		<image>
-			<title>Amazing Kiss</title>
-			
-			<date>05.13.05</date>
-			
-			<desc>Amazing Kiss</desc>
-			
-			<thumb>wedding2.jpg</thumb>
-			
-			<img>wedding2.jpg</img>
-			
-			<title>Amazing Kiss</title>
-			
-			<date>05.13.05</date>
-			
-			<desc>Amazing Kiss</desc>
-			
-			<thumb>wedding2.jpg</thumb>
-			
-			<img>wedding2.jpg</img>
-			
-			<title>Amazing Kiss</title>
-			
-			<date>05.13.05</date>
-			
-			<desc>Amazing Kiss</desc>
-			
-			<thumb>wedding2.jpg</thumb>
-			
-			<img>wedding2.jpg</img>
-		</image>
-		
-		<image>
-			<title>Wedding Time</title>
-			
-			<date>11.21.05</date>
-			
-			<desc>Bride smiling</desc>
-			
-			<thumb>wedding3.jpg</thumb>
-			
-			<img>wedding3.jpg</img>
-			
-			<title>Wedding Time</title>
-			
-			<date>11.21.05</date>
-			
-			<desc>Bride smiling</desc>
-			
-			<thumb>wedding3.jpg</thumb>
-			
-			<img>wedding3.jpg</img>
-			
-			<title>Wedding Time</title>
-			
-			<date>11.21.05</date>
-			
-			<desc>Bride smiling</desc>
-			
-			<thumb>wedding3.jpg</thumb>
-			
-			<img>wedding3.jpg</img>
-		</image>
-		
-		<image>
-			<title>10th anniversary</title>
-			
-			<date>02.44.04</date>
-			
-			<desc>Picture taken on our 10th anniversary.</desc>
-			
-			<thumb>wedding4.jpg</thumb>
-			
-			<img>wedding4.jpg</img>
-			
-			<title>10th anniversary</title>
-			
-			<date>02.44.04</date>
-			
-			<desc>Picture taken on our 10th anniversary.</desc>
-			
-			<thumb>wedding4.jpg</thumb>
-			
-			<img>wedding4.jpg</img>
-			
-			<title>10th anniversary</title>
-			
-			<date>02.44.04</date>
-			
-			<desc>Picture taken on our 10th anniversary.</desc>
-			
-			<thumb>wedding4.jpg</thumb>
-			
-			<img>wedding4.jpg</img>
-		</image>
-		
-		<image>
-			<title>SD wedding</title>
-			
-			<date>05.13.05</date>
-			
-			<desc>Wedding at SD convention center</desc>
-			
-			<thumb>wedding5.jpg</thumb>
-			
-			<img>wedding5.jpg</img>
-			
-			<title>SD wedding</title>
-			
-			<date>05.13.05</date>
-			
-			<desc>Wedding at SD convention center</desc>
-			
-			<thumb>wedding5.jpg</thumb>
-			
-			<img>wedding5.jpg</img>
-			
-			<title>SD wedding</title>
-			
-			<date>05.13.05</date>
-			
-			<desc>Wedding at SD convention center</desc>
-			
-			<thumb>wedding5.jpg</thumb>
-			
-			<img>wedding5.jpg</img>
-		</image>
-		
-		<image>
-			<title>Wedding Time</title>
-			
-			<date>11.21.05</date>
-			
-			<desc>Wedding photo</desc>
-			
-			<thumb>wedding6.jpg</thumb>
-			
-			<img>wedding6.jpg</img>
-			
-			<title>Wedding Time</title>
-			
-			<date>11.21.05</date>
-			
-			<desc>Wedding photo</desc>
-			
-			<thumb>wedding6.jpg</thumb>
-			
-			<img>wedding6.jpg</img>
-			
-			<title>Wedding Time</title>
-			
-			<date>11.21.05</date>
-			
-			<desc>Wedding photo</desc>
-			
-			<thumb>wedding6.jpg</thumb>
-			
-			<img>wedding6.jpg</img>
-		</image>
-		
-		<image>
-			<title>Togetherness</title>
-			
-			<date>06.14.06</date>
-			
-			<desc>Wedding ceremony in Hawaii</desc>
-			
-			<thumb>wedding7.jpg</thumb>
-			
-			<img>wedding7.jpg</img>
-			
-			<title>Togetherness</title>
-			
-			<date>06.14.06</date>
-			
-			<desc>Wedding ceremony in Hawaii</desc>
-			
-			<thumb>wedding7.jpg</thumb>
-			
-			<img>wedding7.jpg</img>
-			
-			<title>Togetherness</title>
-			
-			<date>06.14.06</date>
-			
-			<desc>Wedding ceremony in Hawaii</desc>
-			
-			<thumb>wedding7.jpg</thumb>
-			
-			<img>wedding7.jpg</img>
 		</image>
 	</category>
 </gallery>
