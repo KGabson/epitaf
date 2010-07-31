@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<gallery title="Tony's Photo Album" thumbDir="./images/thumbs/" imageDir="./images/" random="true">
+<gallery title="Tony's Photo Album" thumbDir="./gallery/thumbs/" imageDir="./gallery" random="true">
 	<category name="Introducing Seattle">
 		<image>
 			<date>03.31.06</date>

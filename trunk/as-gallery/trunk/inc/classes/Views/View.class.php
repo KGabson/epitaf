@@ -50,9 +50,14 @@ class 							View extends Tag
 			
 			if (isset($_GET["delete"]) && !isset($_GET["category"]) && !isset($_GET["image"]))
 			{
+				/**
+				 * Disabled for the moment
+				 */
+				/*
 				$gallery->delete();
 				Page::redirect(Page::getLink());
 				return;
+				*/
 			}
 			/**
 			 * Gallery edition Form
