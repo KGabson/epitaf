@@ -26,11 +26,15 @@ class 							View extends Tag
 		$this->nav[$this->nav_lvl++] = new LinkTag($this->title, Page::getLink());
 		$this->init();
 		parent::__construct("div");
+		$this->setAttribute('id', 'main');
 	}
 	
 	private function 			init()
 	{
-		$this->addToolbarAction(new LinkTag("Add a Gallery", Page::getURL(array("add_gallery"))));
+		/**
+		 * Adding gallery disabled for the moment
+		 */
+		//$this->addToolbarAction(new LinkTag("Add a Gallery", Page::getURL(array("add_gallery"))));
 		if (isset($_GET['add_gallery']))
 		{
 			/**
@@ -199,8 +203,20 @@ class 							View extends Tag
 				Page::redirect(Page::getLink($gallery->getName(), "", "", "edit"));
 			}
 		}
-		$title = 'Add a gallery';
-		$this->right->append(new TagBlock('h1', $title));
+		if ($new)
+		{
+			$title_str = 'Add a gallery';
+			$title = new Tag('h1');
+			$title->append($title_str);
+		}
+		else
+		{
+			$title_str = 'Edit gallery ';
+			$title = new Tag('h1');
+			$title->append($title_str);
+			$title->append(new TagBlock('i', $gallery->getTitle()));
+		}
+		$this->right->append($title);
 		$this->right->append($g_form);
 	}
 	
@@ -225,11 +241,20 @@ class 							View extends Tag
 				Page::redirect(Page::getLink($gallery->getName(), $category->getName(), "", $new ? "" : "edit"));
 			}
 		}
-		//$title = 'Add a category to gallery <i>'.$gallery->getTitle().'</i>';
-		$title_str = "Add a category to ";
-		$title = new Tag('h1');
-		$title->append($title_str);
-		$title->append(new TagBlock('i', $gallery->getTitle()));
+		if ($new)
+		{
+			$title_str = "Add a category to ";
+			$title = new Tag('h1');
+			$title->append($title_str);
+			$title->append(new TagBlock('i', $gallery->getTitle()));
+		}
+		else
+		{
+			$title_str = "Edit category ";
+			$title = new Tag('h1');
+			$title->append($title_str);
+			$title->append(new TagBlock('i', $category->getName()));
+		}
 		$this->right->append($title);
 		$this->right->append($c_form);
 	}
@@ -262,6 +287,7 @@ class 							View extends Tag
 		{
 			if ($new)
 			{
+				$image->setThumb($image->getImg());
 				$category->addImage($image);
 			}
 			else
@@ -282,10 +308,20 @@ class 							View extends Tag
 			}
 			Page::redirect(Page::getLink($category->getParentGallery()->getName(), $category->getName(), $image->getImg()));
 		}
-		$title_str = "Add an image to ";
-		$title = new Tag('h1');
-		$title->append($title_str);
-		$title->append(new TagBlock('i', $category->getName()));
+		if ($new)
+		{
+			$title_str = "Add an image to ";
+			$title = new Tag('h1');
+			$title->append($title_str);
+			$title->append(new TagBlock('i', $category->getName()));
+		}
+		else
+		{
+			$title_str = "Edit image ";
+			$title = new Tag('h1');
+			$title->append($title_str);
+			$title->append(new TagBlock('i', $image->getTitle()));
+		}
 		$this->right->append($title);
 		$this->right->append($i_form);
 	}

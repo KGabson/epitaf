@@ -159,9 +159,9 @@ class					Gallery extends XMLRoot
 		if (!$this->title)
 			Errors::Warning("Gallery named '".$this->name."' has no title");
 		if (!$this->imageDir)
-			$this->imageDir = $this->name;
+			$this->imageDir = $this->name."/";
 		if (!$this->thumbDir)
-			$this->thumbDir = $this->imageDir."/thumbs";
+			$this->thumbDir = $this->imageDir."/thumbs/";
 		$this->init($this->title, $this->imageDir, $this->thumbDir, $this->random);
 		if (file_exists($this->dir."/".$this->file))
 			throw new ErrorException("Could not create gallery named ".$this->file.". Gallery of the same name already exists.");
