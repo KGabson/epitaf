@@ -33,6 +33,23 @@ h2
 	clear:both;		
 }
 
+#main
+{
+	min-width:800px;
+}
+
+#right
+{
+	float:left;
+	margin-left:10px;
+	width:85%;
+}
+
+#foot
+{
+	clear:both;
+}
+
 /******************************************************************
  * Head 
  ******************************************************************/
@@ -103,6 +120,7 @@ h2
 	height:600px;
 	padding-right:15px;
 	border-right:1px solid #ccc;
+	width:10%;
 }
 
 #mainMenu a, #mainMenu a:visited
@@ -189,23 +207,22 @@ form .error span
 	color:red;
 }
 
-#right
+/******************************************************************
+ * Toolblocks
+ ******************************************************************/
+
+.toolblock_container
 {
 	float:left;
-	margin-left:10px;
-}
-
-#foot
-{
-	clear:both;
+	height:265px;
 }
 
 .toolblock
 {
-	float:left;
-	max-width: 420px;
+	max-width: 100%;
 	border:2px solid #aaa;
 	margin-right:10px;
+	margin-bottom:10px;
 }
 
 .toolblock > h2, h3
@@ -328,5 +345,4 @@ a.edit_gallery, a.edit_category, a.edit_image
 	color:#555;
 	border:1px dashed #555;
 	padding:10px;
-	max-width:700px;
 }

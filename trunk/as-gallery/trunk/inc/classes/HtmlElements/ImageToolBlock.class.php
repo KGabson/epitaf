@@ -10,7 +10,9 @@ class 					ImageToolBlock extends Tag
 	public function		__construct(Image &$image, Category &$category)
 	{
 		$this->category = $category;
-		parent::__construct("div", "toolblock");
+		parent::__construct("div", "toolblock_container");
+		
+		$toolblock = new Tag('div', 'toolblock');
 		
 		/**
 		 * Title
@@ -60,9 +62,10 @@ class 					ImageToolBlock extends Tag
 			)
 		);
 		
-		$this->append($this->title);
-		$this->append($this->toolbar);
-		$this->append($this->image_tag);
+		$toolblock->append($this->title);
+		$toolblock->append($this->toolbar);
+		$toolblock->append($this->image_tag);
+		$this->append($toolblock);
 	}
 }
 ?>
