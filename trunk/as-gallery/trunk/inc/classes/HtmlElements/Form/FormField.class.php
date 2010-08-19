@@ -35,7 +35,7 @@ class 					FormField extends Tag
 		return $this->input;
 	}
 	
-	public function 	toHTML($indent = 0)
+	public function 	toHTML($indent = 0, $html_entities = true)
 	{
 		if (!empty($this->legend))
 			$this->append(new TagBlock("div", $this->legend, "legend"));
@@ -44,7 +44,7 @@ class 					FormField extends Tag
 			$this->label_tag->setClassName("error");
 			$this->label_tag->insert(new TagBlock("span", $this->error));
 		}
-		return parent::toHTML($indent);
+		return parent::toHTML($indent, $html_entities);
 	}
 }
 ?>

@@ -12,7 +12,7 @@ class 					XMLRoot extends Tag
 	{
 		$str = $this->xml_head."\n";
 		
-		$str .= $this->toHTML(0, true);
+		$str .= $this->toHTML(0, false);
 		return $str;
 	}
 }

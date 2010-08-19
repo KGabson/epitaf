@@ -88,11 +88,19 @@ class					Tag
 		return false;
 	}
 	
-	public function		toHTML($indent = 0)
+	public function		toHTML($indent = 0, $html_entities = true)
 	{
 		$str = '';
 		$indent_str = (__COMPRESS_CODE === true) ? "" : "\t";
 		$newline = (__COMPRESS_CODE === true) ? "" : "\n";
+		
+		/*
+		var_dump($this);
+		if ($html_entities === false)
+			Errors::Debug("I am XML");
+		else
+			Errors::Debug("I am HTML");
+		exit (0);*/
 		
 		$str .= str_repeat($indent_str, $indent);
 		$str .= '<';
@@ -103,7 +111,10 @@ class					Tag
 			{
 				$value = strval($value);
 			}
-			$value = htmlentities($value);
+			if ($html_entities)
+				$value = htmlentities($value);
+			else
+				$value = utf8_encode($value);
 			$str .= ' '.$key.'="'.$value.'"';
 		}
 		if ($this->inline)
@@ -115,9 +126,14 @@ class					Tag
 		foreach ($this->children as $key => $child)
 		{
 			if (is_string($child))
-				$str .= htmlentities($child);
+			{
+				if ($html_entities)
+					$str .= htmlentities($child);
+				else
+					$str .= utf8_encode($child);
+			}
 			else
-				$str .= $newline.$child->toHTML($indent + 1).str_repeat($indent_str, ($key < $this->num_children - 1) ? $indent + 1 : $indent);
+				$str .= $newline.$child->toHTML($indent + 1, $html_entities).str_repeat($indent_str, ($key < $this->num_children - 1) ? $indent + 1 : $indent);
 		}
 		$str .= '</'.$this->tagname.'>'.$newline;
 		return $str;

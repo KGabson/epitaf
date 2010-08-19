@@ -92,7 +92,7 @@ class 						FormInput extends Tag
 		$this->value = $value;
 	}
 	
-	public function 		toHtml($indent = 0)
+	public function 		toHtml($indent = 0, $html_entities = true)
 	{
 		if (!empty($this->value))
 		{
@@ -103,7 +103,7 @@ class 						FormInput extends Tag
 				$this->append($this->value);
 			}
 		}
-		return parent::toHTML($indent);
+		return parent::toHTML($indent, $html_entities);
 	}
 }
 ?>

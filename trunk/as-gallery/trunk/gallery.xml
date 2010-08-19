@@ -2,30 +2,6 @@
 <gallery name="gallery" title="Tony's Photo Album" imageDir="./gallery/" thumbDir="./gallery/thumbs/" random="1">
 	<category name="Introducing Seattle">
 		<image>
-			<title>View of Seattle</title>
-			
-			<date>03.31.06</date>
-			
-			<desc>View of Seattle</desc>
-			
-			<thumb>seattle5.jpg</thumb>
-			
-			<img>seattle5.jpg</img>
-		</image>
-		
-		<image>
-			<title>View of Seattle</title>
-			
-			<date>03.31.06</date>
-			
-			<desc>View of Seattle</desc>
-			
-			<thumb>seattle7.jpg</thumb>
-			
-			<img>seattle7.jpg</img>
-		</image>
-		
-		<image>
 			<title>My Town</title>
 			
 			<date>03.31.06</date>
@@ -35,6 +11,30 @@
 			<thumb>seattle10.jpg</thumb>
 			
 			<img>seattle10.jpg</img>
+		</image>
+		
+		<image>
+			<title>View of Seattlé</title>
+			
+			<date>03.31.06</date>
+			
+			<desc>View of Seattlééé ççç ?dsg</desc>
+			
+			<thumb>seattle7.jpg</thumb>
+			
+			<img>seattle7.jpg</img>
+		</image>
+		
+		<image>
+			<title>View of Seattle</title>
+			
+			<date>12/31/1984</date>
+			
+			<desc>View of Seattle</desc>
+			
+			<thumb>seattle5.jpg</thumb>
+			
+			<img>seattle5.jpg</img>
 		</image>
 	</category>
 	
@@ -195,6 +195,18 @@
 			<thumb>korea1.jpg</thumb>
 			
 			<img>korea1.jpg</img>
+		</image>
+		
+		<image>
+			<title>dfsfds</title>
+			
+			<date>dfsfds</date>
+			
+			<desc>fdsdfs</desc>
+			
+			<thumb>fast_abstract_backround_by_Dannieboj.test.jpg</thumb>
+			
+			<img>fast_abstract_backround_by_Dannieboj.test.jpg</img>
 		</image>
 	</category>
 	
