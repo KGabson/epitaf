@@ -91,14 +91,14 @@ class 				Image extends Tag
 		return $url;
 	}
 	
-	public function 	toHTML($indent = 0)
+	public function 	toHTML($indent = 0, $html_entities = true)
 	{
 		$this->append(new TagBlock("title", $this->title));
 		$this->append(new TagBlock("date", $this->date));
 		$this->append(new TagBlock("desc", $this->desc));
 		$this->append(new TagBlock("thumb", $this->thumb));
 		$this->append(new TagBlock("img", $this->img));
-		return parent::toHTML($indent);
+		return parent::toHTML($indent, $html_entities);
 	}
 	
 }

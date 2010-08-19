@@ -268,8 +268,8 @@ class 							View extends Tag
 		$i_form->bindValue(new FormString("Title", true), "title", "Title");
 		
 		$date = new FormString("date");
-		$date->setFormType(FormTypes::DATE);
-		$date->setLegend("MM/DD/YYYY");
+		//$date->setFormType(FormTypes::DATE);
+		//$date->setLegend("MM/DD/YYYY");
 		$i_form->bindValue($date, "date", "Date");
 		$i_form->bindValue(new FormText("description"), "desc", "Description");
 		

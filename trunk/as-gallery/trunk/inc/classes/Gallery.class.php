@@ -184,7 +184,7 @@ class					Gallery extends XMLRoot
 			$random = false;
 		else
 			$this->random = $root["random"];
-		$this->init(strval($root["title"]), strval($root["imageDir"]), strval($root["thumbDir"]), $random);
+		$this->init(strval(utf8_decode($root["title"])), strval(utf8_decode($root["imageDir"])), strval(utf8_decode($root["thumbDir"])), $random);
 		foreach ($root->category as $category)
 		{
 			if (!$category["name"])
@@ -193,7 +193,7 @@ class					Gallery extends XMLRoot
 				continue;
 			}
 			//Errors::Debug("Found category: ".$category["name"]);
-			$cat_name = strval($category["name"]);
+			$cat_name = strval(utf8_decode($category["name"]));
 			$this->categories[$cat_name] = new Category($cat_name, $this);
 			$this->categories[$cat_name]->loadFromXML($category);
 		}

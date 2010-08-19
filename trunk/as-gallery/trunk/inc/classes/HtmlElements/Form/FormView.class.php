@@ -106,7 +106,7 @@ class 							FormView extends Tag
 		return false;
 	}
 	
-	public function 			toHTML($indent = 0)
+	public function 			toHTML($indent = 0, $html_entities = true)
 	{
 		$this->append(new FormSubmit($this->name, "Submit"));
 		if (!empty($this->form_errors))
@@ -116,7 +116,7 @@ class 							FormView extends Tag
 				$errorTag->append(new TagBlock("p", $msg));
 			$this->insert($errorTag);
 		}
-		return parent::toHTML($indent);
+		return parent::toHTML($indent, $html_entities);
 	}
 }
 ?>

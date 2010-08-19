@@ -99,16 +99,16 @@ class 						Category extends Tag
 		//$root = $category;
 		if (!$category["name"])
 			throw new ErrorException("Given Category XML has no name attribute");
-		$this->setName(strval($category["name"]));
+		$this->setName(strval(utf8_decode($category["name"])));
 		foreach ($category->image as $image)
 		{
 			$this->addImage(
 				new Image(
-					strval($image->date),
-					strval($image->title),
-					strval($image->desc),
-					strval($image->thumb),
-					strval($image->img)
+					strval(utf8_decode($image->date)),
+					strval(utf8_decode($image->title)),
+					strval(utf8_decode($image->desc)),
+					strval(utf8_decode($image->thumb)),
+					strval(utf8_decode($image->img))
 				)
 			);
 		}
@@ -126,7 +126,7 @@ class 						Category extends Tag
 		foreach ($this->images as $img_file => $image)
 		{
 			unlink($this->gallery->getDir()."/".$this->gallery->getImageDir()."/".$img_file);
-		unlink($this->gallery->getDir()."/".$this->gallery->getThumbDir()."/".$img_file);
+			unlink($this->gallery->getDir()."/".$this->gallery->getThumbDir()."/".$img_file);
 		}
 		$this->gallery->save();
 	}
@@ -143,11 +143,11 @@ class 						Category extends Tag
 		$this->save();
 	}
 	
-	public function 		toHTML($indent = 0)
+	public function 		toHTML($indent = 0, $html_entities = true)
 	{
 		foreach ($this->images as $image)
 			$this->append($image);
-		return parent::toHTML($indent);
+		return parent::toHTML($indent, $html_entities);
 	}
 }
 ?>
